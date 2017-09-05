@@ -355,7 +355,7 @@
                                 <span class="menu-text"> 用户管理 </span>
                             </a>
                         </li>
-                        <li class="active">
+                        <li class="">
                             <a href="acs-role.html">
                                 <i class="icon-male"></i>
                                 <span class="menu-text"> 角色管理 </span>
@@ -367,7 +367,7 @@
                                 <span class="menu-text"> 机构管理 </span>
                             </a>
                         </li>
-                        <li class="">
+                        <li class="active">
                             <a href="acs-authority.html">
                                 <i class="icon-gear"></i>
                                 <span class="menu-text"> 权限管理 </span>
@@ -410,7 +410,7 @@
                     <li>
                         系统管理
                     </li>
-                    <li class="active">角色管理</li>
+                    <li class="active">权限管理</li>
                 </ul><!-- .breadcrumb -->
 
             </div>
@@ -429,7 +429,7 @@
                                                 <div style="width: 500px;">
                                                     <div class="input-group">
                                                         <input type="text" class="form-control search-query"
-                                                               placeholder="角色名称"/>
+                                                               placeholder="权限名称"/>
                                                         <span class="input-group-btn">
                                                     				<button type="button" class="btn btn-purple btn-sm"
                                                                             onclick="search()">
@@ -443,12 +443,12 @@
                                         </form>
                                     </td>
                                     <td align="right" style="padding-right: 3px;" id="f_user_more">
-                                        <button class="btn btn-sm btn-primary">分配权限</button>
+                                        <!--<button class="btn btn-sm btn-primary">分配权限</button>-->
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                 data-target="#modal-add-product">添加
                                         </button>
-                                        <button class="btn btn-sm btn-primary">修改</button>
-                                        <button class="btn btn-sm btn-danger">删除</button>
+                                        <button class="btn btn-sm btn-primary">启用</button>
+                                        <button class="btn btn-sm btn-danger">停用</button>
                                     </td>
                                 </tr>
                             </table>
@@ -457,12 +457,12 @@
                             <table id="userTable" class="nowrap dataTable hover">
                                 <!--<thead>-->
                                 <!--<tr>-->
-                                    <!--<td style="text-align: center;">id</td>-->
-                                    <!--<td style="text-align: center;">角色名称</td>-->
-                                    <!--<td style="text-align: center;">所属机构</td>-->
-                                    <!--<td style="text-align: center;">备注信息</td>-->
-                                    <!--<td style="text-align: center;">状态</td>-->
-                                    <!--<td style="text-align: center;">创建日期</td>-->
+                                <!--<td style="text-align: center;">id</td>-->
+                                <!--<td style="text-align: center;">角色名称</td>-->
+                                <!--<td style="text-align: center;">所属机构</td>-->
+                                <!--<td style="text-align: center;">备注信息</td>-->
+                                <!--<td style="text-align: center;">状态</td>-->
+                                <!--<td style="text-align: center;">创建日期</td>-->
                                 <!--</tr>-->
                                 <!--</thead>-->
                             </table>
@@ -488,23 +488,23 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h5 class="modal-title">添加角色</h5>
+                <h5 class="modal-title">添加权限</h5>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="frm-add-product">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">角色名称</label>
+                        <label class="col-sm-3 control-label no-padding-right">权限名称</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control focus" name="name" placeholder="角色名称"
+                            <input type="text" class="form-control focus" name="name" placeholder="权限名称"
                                    required="required">
                         </div>
                     </div>
                     <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label no-padding-right">所属社区</label>-->
-                        <!--<div class="col-sm-9">-->
-                            <!--<input type="url" class="form-control" name="buyLink"-->
-                                   <!--placeholder="例如：社区">-->
-                        <!--</div>-->
+                    <!--<label class="col-sm-3 control-label no-padding-right">所属社区</label>-->
+                    <!--<div class="col-sm-9">-->
+                    <!--<input type="url" class="form-control" name="buyLink"-->
+                    <!--placeholder="例如：社区">-->
+                    <!--</div>-->
                     <!--</div>-->
 
                     <div class="form-group">
@@ -515,13 +515,13 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">所属机构类型</label>
+                        <label class="col-sm-3 control-label no-padding-right">父权限</label>
                         <div class="col-sm-9">
                             <select style="height: 40px;">
-                                <option value ="volvo">机构1</option>
-                                <option value ="saab">机构2</option>
-                                <option value="opel">机构3</option>
-                                <option value="audi">机构4</option>
+                                <option value ="volvo">父权限1</option>
+                                <option value ="saab">父权限2</option>
+                                <option value="opel">父权限3</option>
+                                <option value="audi">父权限4</option>
                             </select>
                         </div>
                     </div>
@@ -674,9 +674,9 @@
                     return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
                 }
                 },
-                {title: '角色名称', data: "userName",className: "dt-center",},
-                {title: '所属机构', data: "unitsName",className: "dt-center",},
-                {title: '备注信息', data: "email",className: "dt-center",},
+                {title: '权限名称', data: "userName",className: "dt-center",},
+                {title: '父权限名称', data: "unitsName",className: "dt-center",},
+                {title: '访问路径', data: "email",className: "dt-center",},
 //                {title: '联系电话', data: "tel"},
 //                {title: '邮箱', data: "email"},
                 {

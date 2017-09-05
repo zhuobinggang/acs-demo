@@ -359,15 +359,15 @@
 									</a>
 								</li>
 								<li class="">
-									<a href="acs-authority">
+									<a href="acs-authority.html">
 										<i class="icon-gear"></i>
 										<span class="menu-text"> 权限管理 </span>
 									</a>
 								</li>
 								<li class="">
-									<a href="acs-resourceGroup">
+									<a href="acs-resourceGroup.html">
 										<i class="icon-sitemap"></i>
-										<span class="menu-text"> 族群管理 </span>
+										<span class="menu-text"> 群组管理 </span>
 									</a>
 								</li>
 							</ul>
@@ -409,7 +409,8 @@
 											<td style="padding:3px;" id="f_user_s">
 												<form class="form-search">
 													<div class="row">
-														<div class="col-xs-12 col-sm-8">
+														<!--<div class="col-xs-12 col-sm-8">-->
+														<div style="width: 500px;">
 															<div class="input-group">
 																<input type="text" class="form-control search-query" placeholder="用户名/姓名/证件号码" />
 																<span class="input-group-btn">
@@ -618,19 +619,19 @@
                         {data: 'uuid', render: function(data, type,row) {
                             return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
                         }},
-                        {title: '用户账号', data: "userName"},
-                        {title: '所属公司', data: "unitsName"},
-                        {title: '真实姓名', data: "fullName"},
-                        {title: '联系电话', data: "tel"},
-                        {title: '邮箱', data: "email"},
-                        {title: '状态', data: "isvalid", render:function(data,type,row){
+                        {title: '用户账号', data: "userName",className: "dt-center",},
+                        {title: '所属公司', data: "unitsName",className: "dt-center",},
+                        {title: '真实姓名', data: "fullName",className: "dt-center",},
+                        {title: '联系电话', data: "tel",className: "dt-center",},
+                        {title: '邮箱', data: "email",className: "dt-center",},
+                        {title: '状态', data: "isvalid",className: "dt-center", render:function(data,type,row){
                             if(data=='1') {
                                 return '已启用';
                             } else {
                                 return '未启用';
                             }
                         }},
-                        {title: '创建日期', data: "ctime", render:function(data, type, row) {return new Date(data).toString("yyyy-MM-dd");}},
+                        {title: '创建日期', data: "ctime",className: "dt-center", render:function(data, type, row) {return new Date(data).toString("yyyy-MM-dd");}},
                     ],
                     "order": [[1, "asc"]]
                 });
