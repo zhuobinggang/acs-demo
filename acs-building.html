@@ -20,7 +20,9 @@
 
 		<!-- fonts -->
 
+        <!--
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+		-->
 
 		<!-- ace styles -->
 
@@ -30,6 +32,8 @@
 
 		<!-- jquery plugin styles -->
 		<link rel="stylesheet" href="assets/css/jquery.dataTables.css" />
+        <!-- jquery plugin select2 styles -->
+        <link rel="stylesheet" href="assets/css/select2.min.css"/>
 
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
@@ -47,6 +51,33 @@
 		<script src="assets/js/html5shiv.js"></script>
 		<script src="assets/js/respond.min.js"></script>
 		<![endif]-->
+
+        <!--css style begins-->
+        <style type="text/css">
+            /* 社区列表标题居中 */
+            #communityTable th {
+                text-align: center;
+            }
+            /* 建筑列表获取 */
+            #buildingTable th {
+                text-align: center;
+            }
+            /* 修改模态对话框的字体大小 */
+            .modal {
+                font-size: 12px;
+            }
+            .modal label, input {
+                font-size: 12px !important;
+            }
+            #communityTable, #buildingTable input {
+                height: 28px;
+            }
+            /* dataTable的页数提示信息的字体大小 */
+            .dataTables_info {
+                font-size: 12px;
+            }
+        </style>
+        <!--css style ends-->
 	</head>
 
 	<body>
@@ -409,9 +440,9 @@
 											<td style="padding:3px;" id="f_building_s">
 												<form class="form-search">
 													<div class="row">
-														<div class="col-xs-12 col-sm-8">
+														<div class="col-xs-8 col-sm-6">
 															<div class="input-group">
-																<input type="text" class="form-control search-query" placeholder="建筑编号/建筑地址/所属社区" />
+																<input id="inputBuildingName" type="text" class="form-control search-query" placeholder="建筑编号/建筑地址/所属社区" />
 																<span class="input-group-btn">
                                                     				<button type="button" class="btn btn-purple btn-sm" onclick="search()">
                                                         				查询
@@ -424,16 +455,15 @@
 												</form>
 											</td>
 											<td align="right" style="padding-right: 3px;" id="f_building_more">
-												<button class="btn btn-sm btn-primary">添加</button>
-												<button class="btn btn-sm btn-primary">修改</button>
+												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-add-building">添加</button>
+												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-add-building-select2">修改</button>
 												<button class="btn btn-sm btn-danger">删除</button>
 											</td>
 										</tr>
 									</table>
 								</div>
 								<div style="margin-top: 20px; font-size: 12px;" >
-									<table id="buildingTable" class="nowrap dataTable hover">
-
+									<table id="buildingTable" class="nowrap dataTable hover display cell-border">
 									</table>
 								</div>
 								<!-- PAGE CONTENT ENDS -->
@@ -449,106 +479,170 @@
 			</a>
 		</div><!-- /.main-container -->
 
-		<!--add-product modal start-->
-		<div class="modal fade" id="modal-add-product" tabindex="-1" role="dialog">
+		<!--add-building modal start-->
+		<div class="modal fade" id="modal-add-building" tabindex="-1" role="dialog">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
+                    <!--modal header begins-->
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h5 class="modal-title">添加产品</h5>
+						<h5 class="modal-title">添加建筑</h5>
 					</div>
+					<!--modal header ends-->
+					<!--modal body begins-->
 					<div class="modal-body">
 						<form class="form-horizontal" id="frm-add-product">
-							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"> 请输入产品名称：</label>
-								<div class="col-sm-9">
-									<input type="text" class="form-control focus" name="name" placeholder="一定要输入产品名称"
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label no-padding-right"> 所在社区：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="buildingCommunity"
+                                           placeholder="请输入建筑所在社区:">
+                                </div>
+                                <div class="col-sm-2" style="vertical-align: center">
+                                    <a href="#modal-select-community" data-toggle="modal" onclick="getCommunityList()">选择社区</a>
+                                </div>
+                            </div>
+                            <!--
+                            <div class="form-group">
+								<label class="col-sm-2 control-label no-padding-right"> 建筑编号：</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control focus" name="buildingId" placeholder="请输入建筑编号"
 										   required="required">
 								</div>
 							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"> 请输入购买链接：</label>
-								<div class="col-sm-9">
-									<input type="url" class="form-control" name="buyLink"
-										   placeholder="例如：http://www.goodhelper.com/">
+							-->
+							<div class="form-group" align="left">
+								<label class="col-sm-2 control-label no-padding-right"> 建筑名称：</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="buildingName"
+										   placeholder="请输入建筑名称:">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"> 请选择产品图片：</label>
-								<div class="col-sm-9">
-									<input type="file" id="file-image" name="image" accept="image/jpeg,image/png"
-										   class="tooltip-info" data-rel="tooltip" title="只支持.jpg或.png的说明书格式"/>
-									<div class="progress hidden">
-										<div id="progress-bar-image" class="progress-bar" role="progressbar" aria-valuenow="0"
-											 aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;"> 0%
-										</div>
-									</div>
+								<label class="col-sm-2 control-label no-padding-right"> 备注：</label>
+								<div class="col-sm-8">
+									<textarea class="form-control" name="buildingRemark"
+										   placeholder="请输入备注:"></textarea>
 								</div>
 							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"> 请选择产品说明书：</label>
-								<div class="col-sm-9">
-									<input type="file" id="file-document" name="document"
-										   accept="application/pdf,application/msword" class="tooltip-info" data-rel="tooltip"
-										   title="只支持.doc或.pdf的说明书格式"/>
-									<div class="progress hidden">
-										<div id="progress-bar-document" class="progress-bar" role="progressbar"
-											 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;"> 0%
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"> 请选择产品视频：</label>
-								<div class="col-sm-9">
-									<input type="file" id="file-video" name="video" accept="video/*" class="tooltip-info"
-										   data-rel="tooltip" title="支持常见的视频格式"/>
-									<div class="progress hidden">
-										<div id="progress-bar-video" class="progress-bar" role="progressbar" aria-valuenow="0"
-											 aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;"> 0%
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-10">
-									<button type="button" class="btn btn-primary btn-sm" id="btn-save-product">保存</button>
-									<img class="hidden processing" src="img/processing.gif"/>
-								</div>
-							</div>
+                            <div class="form-group" align="right">
+                                <input type="submit" class="btn btn-sm btn-primary" value="提交" />
+                                <input type="reset" class="btn btn-sm btn-warning" value="重置" />
+                            </div>
 						</form>
-					</div>
+					</div><!--modal body ends-->
 				</div>
 			</div>
 		</div><!--add-product modal end-->
 
+        <!--select add community modal start-->
+        <div class="modal fade" id="modal-select-community" tabindex="-2" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <!--modal header begins-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 class="modal-title">选择社区</h5>
+                    </div>
+                    <!--modal header ends-->
+                    <!--modal body begins-->
+                    <div class="modal-body" style="font-size: 12px;">
+                            <div>
+                            <input id="searchCommunity" type="text" class="form-control search-query"
+                                   style="margin-left: 70px; width: 160px; float: left;" placeholder="社区编号/社区名称/社区地址" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-purple btn-sm" onclick="searchCommunity()">
+                                    查询
+                                    <i class="icon-search icon-on-right bigger-110"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div>
+                            <table id="communityTable" class="nowrap dataTable hover display cell-border">
+                            </table>
+                        </div>
+                    </div><!--modal body ends-->
+                    <div class="modal-footer" style="background-color: white;">
+                        <button class="btn btn-primary btn-sm" onclick="selectCommunity()">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div><!--select community modal end-->
+
+        <!--add-building modal use select2 start-->
+        <div class="modal fade" id="modal-add-building-select2" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <!--modal header begins-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 class="modal-title">添加建筑</h5>
+                    </div>
+                    <!--modal header ends-->
+                    <!--modal body begins-->
+                    <div class="modal-body">
+                        <form class="form-horizontal" id="frm-add-product-select2">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label no-padding-right"> 所在社区：</label>
+                                <div class="col-sm-8">
+                                    <select name="buildingCommunity" class="community-select2 form-control select2-hidden-accessible"
+                                            tabindex="-1" aria-hidden="true" style="width: 100%;">
+                                        <option value="AL" selected="selected">Alabama</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--
+                            <div class="form-group">
+								<label class="col-sm-2 control-label no-padding-right"> 建筑编号：</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control focus" name="buildingId" placeholder="请输入建筑编号"
+										   required="required">
+								</div>
+							</div>
+							-->
+                            <div class="form-group" align="left">
+                                <label class="col-sm-2 control-label no-padding-right"> 建筑名称：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="buildingName"
+                                           placeholder="请输入建筑名称:">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label no-padding-right"> 备注：</label>
+                                <div class="col-sm-8">
+									<textarea class="form-control" name="buildingRemark"
+                                              placeholder="请输入备注:"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group" align="right">
+                                <input type="submit" class="btn btn-sm btn-primary" value="提交" />
+                                <input type="reset" class="btn btn-sm btn-warning" value="重置" />
+                            </div>
+                        </form>
+                    </div><!--modal body ends-->
+                </div>
+            </div>
+        </div><!--add-product modal end-->
+
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->
-
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-		<!-- <![endif]-->
-
-		<!--[if IE]>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<![endif]-->
-
-		<!--[if !IE]> -->
-
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
 		</script>
-
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
+        <script type="text/javascript">
+         window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+        </script>
+        <![endif]-->
 
 		<script type="text/javascript">
 			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
@@ -565,6 +659,8 @@
 
 		<!-- other jquery scripts -->
 		<script src="assets/js/jquery.dataTables.min.js"></script>
+        <!-- jquery plugin select2 -->
+        <script src="assets/js/select2.full.min.js"></script>
 
 		<!-- custom scripts -->
 		<script src="js/acs-util.js"></script>
@@ -577,6 +673,7 @@
 
             $(function() {
                 getBuildingList();
+                initCommunitySelect2();
             });
 
             /**
@@ -612,8 +709,13 @@
                         "url":"assets/js/jquery-dataTables-zh.json"
                     },
                     "columns": [
-                        {data: 'uuid', render: function(data, type,row) {
-                            return '<input id="ckb_' + data + '" name="buildingCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'buildingCkb\',\'all-building-checkbox\')">';
+                        {
+                            title: '<div style="text-align:center;">'
+                                + '<input type="checkbox" id="all-building-checkbox" name="radios" />'
+                                + '</div>',
+                            data: 'uuid', render: function(data, type,row) {
+                            return '<input id="ckb_' + data + '" name="buildingCkb" value="'
+                                + data + '" type="checkbox" onclick="checkBoxClick(\'buildingCkb\',\'all-building-checkbox\')">';
                         }},
                         {title: '建筑编号', data: "buildingId"},
                         {title: '建筑地址', data: "buildingAddress"},
@@ -634,6 +736,111 @@
                 console.log(buildingTable);
                 buildingTable.search(keyword);
             }
+
+            <!--select community table script begins-->
+            /**
+             * 获取社区列表数据
+             */
+            function getCommunityList() {
+                var param = {
+                    type : "get",
+                    url : "data/communityList.json",
+                    successCall : initCommunityTable,
+                    errorCall : function() {
+                        showCommonTip("加载用户列表失败！");
+                    }
+                };
+                ajax(param);
+            }
+
+            /**
+             * 初始化社区列表
+             * @param data
+             */
+            function initCommunityTable(data) {
+                communityTable = $('#communityTable').DataTable({
+                    "data": data,
+                    "deferRender": true,
+                    "bProcessing": true,
+                    "lengthChange": false,
+                    "ordering":false,
+                    "bRetrieve": true,
+                    "createdRow": function( row, data, dataIndex ) {
+                        $('td', row).attr("class","text-center");
+                        $(row).css("cursor","pointer");
+                    },
+                    "language": {
+                        "url":"assets/js/jquery-dataTables-zh.json"
+                    },
+                    "columns": [
+                        {
+                            data: 'uuid', render: function(data, type, row) {
+                            return '<input id="radio_' + data + '" name="communityRadio" value="'
+                                + data + '" type="radio">';
+                        }},
+                        {title: "社区编号", data: "communityCode"},
+                        {title: '社区名称', data: "communityName"},
+                        {title: '社区地址', data: "communityAddress"},
+                    ],
+                    "order": [[1, "asc"]]
+                });
+            }
+
+            /**
+             * 选择社区
+             */
+            function selectCommunity() {
+                $('input[name="communityRadio"]:checked').each(function(i, item) {
+                    var parent = $(item).parents("tr")[0];
+                    var child = $(parent).children("td")[2];
+                    var text = $(child).text();
+                    $('#modal-add-building input[name="buildingCommunity"]').val(text);
+                    $('#modal-select-community').modal("hide");
+                });
+            }
+            <!--select community table script ends-->
+
+            <!-- community select2 script begins -->
+            /**
+             * jquery select2 的控制脚本
+             */
+            function formatRepo(repo) {
+                return repo.text;       //jquery select2 必须返回text
+            }
+            function formatRepoSelection(repo) {
+                return repo.text;
+            }
+            function initCommunitySelect2() {
+                $(".community-select2").select2({
+                    ajax: {
+                        url: "data/communityList.json",
+                        type: "get",
+                        delay: 250,
+                        data: function(params) {
+                            return {}
+                        },
+                        processResults: function(data, params) {
+                            //jquery select2 必须返回text，此处将community转换为text
+                            for(var index in data) {
+                                data[index].id = data[index].uuid;
+                                data[index].text = data[index].communityName;
+                            }
+                            return {
+                                results: data,
+                                pagination: {
+                                    more: true
+                                }
+                            };
+                        },
+                        cache: true,
+                    },
+                    escapeMarkup: function(markup) { return markup; },
+                    minimumInputLength: 1,
+                    templateResult: formatRepo, //返回数据的显示格式
+                    templateSelection: formatRepoSelection  //被选择的数据的显示格式
+                });
+            }
+            <!-- community select2 script ends -->
 
 		</script>
 </body>
