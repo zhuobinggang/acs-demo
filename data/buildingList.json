@@ -1,5 +1,6 @@
 [
   {
+    "uuid": "9f2b0646-aae3-447b-ba06-3a1e93fbca75",
     "buildingId": "000000000010000000000000000007",
     "buildingAddress": "广东省中山市五桂山长命水康乐大街6号",
     "communityAddress": "康乐大街六号",
@@ -11,6 +12,7 @@
     "remark": ""
   },
   {
+    "uuid": "8997ef8c-1d95-4d88-a53c-13ec95b0f551",
     "buildingId": "000000000010000000000000000008",
     "buildingAddress": "广东省中山市五桂山长命水康乐大街8号",
     "communityAddress": "康乐大街八号",
@@ -22,6 +24,7 @@
     "remark": ""
   },
   {
+    "uuid": "365a59b1-e735-40dc-a9e2-d77d7e56443d",
     "buildingId": "000000000010000000000000000009",
     "buildingAddress": "广东省中山市五桂山长命水康乐大街11号",
     "communityAddress": "康乐大街十一号",
@@ -33,6 +36,7 @@
     "remark": ""
   },
   {
+    "uuid": "365a59b1-e735-40dc-a9e2-d77d7e56443d",
     "buildingId": "000000000010000000000000000010",
     "buildingAddress": "广东省中山市东升镇东升村惠东路82号",
     "communityAddress": "东升镇",
@@ -44,6 +48,7 @@
     "remark": ""
   },
   {
+    "uuid": "60a78104-6712-495c-90d4-d84a3a0b8797",
     "buildingId": "000000000010000000000000000011",
     "buildingAddress": "广东省中山市东升镇裕民村民乐路3号",
     "communityAddress": "东升镇",
@@ -55,6 +60,7 @@
     "remark": "test"
   },
   {
+    "uuid": "361bf723-d059-4595-b588-0731366d0ac4",
     "buildingId": "000000000000442055201000004133",
     "buildingAddress": "广东省中山市黄圃镇雁南路28号",
     "communityAddress": "黄圃镇",
@@ -66,6 +72,7 @@
     "remark": ""
   },
   {
+    "uuid": "13d50d68-92e5-477a-95c8-eac59e7bc585",
     "buildingId": "000000000000442055201300003708",
     "buildingAddress": "广东省中山市黄圃镇兴雁村28号之三",
     "communityAddress": "黄圃镇",
@@ -77,6 +84,7 @@
     "remark": ""
   },
   {
+    "uuid": "78fc29b6-1d18-481d-bf5d-6a7f4d8ddeba",
     "buildingId": "000000000000000044202010006080",
     "buildingAddress": "广东省中山市古镇冈东村安富街27号",
     "communityAddress": "古镇",
@@ -88,6 +96,7 @@
     "remark": ""
   },
   {
+    "uuid": "d7116bde-2c04-4dd3-9b25-a91e5bdaf1ce",
     "buildingId": "000000000000000044202014002202",
     "buildingAddress": "广东省中山市古镇冈东村联心路29号",
     "communityAddress": "古镇",
@@ -99,6 +108,7 @@
     "remark": ""
   },
   {
+    "uuid": "82d9b058-1b76-411d-812d-4a1119d2e2cb",
     "buildingId": "000000000000000044200172429925",
     "buildingAddress": "广东省中山市古镇曹步曹一村新丰中路10号",
     "communityAddress": "古镇曹步曹一村新丰中路10号",
@@ -110,6 +120,7 @@
     "remark": ""
   },
   {
+    "uuid": "428f0678-6255-4396-a2e7-52071191e829",
     "buildingId": "000000000000000044200000000000",
     "buildingAddress": "广东省中山市古镇同益工业园平和路107号家外家公寓",
     "communityAddress": "家外家公寓",

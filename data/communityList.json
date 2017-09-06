@@ -1,0 +1,69 @@
+[
+  {
+    "uuid": "9f2b0646-aae3-447b-ba06-3a1e93fbca75",
+    "communityCode": "44012324343",
+    "communityName": "桃园社区",
+    "communityAddress": "康乐大街六号",
+    "text": "test"
+  },
+  {
+    "uuid": "8997ef8c-1d95-4d88-a53c-13ec95b0f551",
+    "communityCode": "44012332542",
+    "communityName": "无",
+    "communityAddress": "康乐大街八号"
+  },
+  {
+    "uuid": "365a59b1-e735-40dc-a9e2-d77d7e56443d",
+    "communityCode": "44054636563",
+    "communityName": "test",
+    "communityAddress": "康乐大街十一号"
+  },
+  {
+    "uuid": "365a59b1-e735-40dc-a9e2-d77d7e56443d",
+    "communityCode": "44045665314",
+    "communityName": "123",
+    "communityAddress": "东升镇"
+  },
+  {
+    "uuid": "60a78104-6712-495c-90d4-d84a3a0b8797",
+    "communityCode": "44015830259",
+    "communityName": "321",
+    "communityAddress": "东升镇"
+  },
+  {
+    "uuid": "361bf723-d059-4595-b588-0731366d0ac4",
+    "communityCode": "44087953849",
+    "communityName": "abcdefg",
+    "communityAddress": "黄圃镇"
+  },
+  {
+    "uuid": "13d50d68-92e5-477a-95c8-eac59e7bc585",
+    "communityCode": "44018953421",
+    "communityName": "0000000",
+    "communityAddress": "黄圃镇"
+  },
+  {
+    "uuid": "78fc29b6-1d18-481d-bf5d-6a7f4d8ddeba",
+    "communityCode": "44018943438",
+    "communityName": "zzzzzzzzzz",
+    "communityAddress": "古镇"
+  },
+  {
+    "uuid": "d7116bde-2c04-4dd3-9b25-a91e5bdaf1ce",
+    "communityCode": "44048952349",
+    "communityName": "桃园社区",
+    "communityAddress": "古镇"
+  },
+  {
+    "uuid": "82d9b058-1b76-411d-812d-4a1119d2e2cb",
+    "communityCode": "44018953451",
+    "communityName": "桃园社区",
+    "communityAddress": "古镇曹步曹一村新丰中路10号"
+  },
+  {
+    "uuid": "428f0678-6255-4396-a2e7-52071191e829",
+    "communityCode": "44012489455",
+    "communityName": "桃园社区",
+    "communityAddress": "家外家公寓"
+  }
+]

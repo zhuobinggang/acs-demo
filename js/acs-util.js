@@ -401,6 +401,7 @@ function initUniform() {
 
 function removeAllCheckBoxChecked(id) {
     $("#" + id).parents("span").removeClass('checked');
+    var test = $("#" + id);
     $("#" + id)[0].checked = false;
 }
 
