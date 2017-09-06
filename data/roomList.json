@@ -1,0 +1,123 @@
+[
+  {
+    "uuid": "9f2b0646-aae3-447b-ba06-3a1e93fbca75",
+    "roomId": "303",
+    "buildingAddress": "广东省中山市五桂山长命水康乐大街6号",
+    "resident": "1, 2, 3",
+    "createUser": "超级管理员",
+    "createTime": "2014/9/29 15:40:25",
+    "updateUser": "",
+    "updateTime": "",
+    "remark": ""
+  },
+  {
+    "uuid": "8997ef8c-1d95-4d88-a53c-13ec95b0f551",
+    "roomId": "103",
+    "buildingAddress": "广东省中山市五桂山长命水康乐大街8号",
+    "resident": "test1, test2, test3",
+    "createUser": "超级管理员",
+    "createTime": "2014/9/29 15:49:54",
+    "updateUser": "",
+    "updateTime": "",
+    "remark": ""
+  },
+  {
+    "uuid": "365a59b1-e735-40dc-a9e2-d77d7e56443d",
+    "roomId": "208",
+    "buildingAddress": "广东省中山市五桂山长命水康乐大街11号",
+    "resident": "abc1, abc2, abc3",
+    "createUser": "超级管理员",
+    "createTime": "2014/9/29 16:03:05",
+    "updateUser": "",
+    "updateTime": "",
+    "remark": ""
+  },
+  {
+    "uuid": "365a59b1-e735-40dc-a9e2-d77d7e56443d",
+    "roomId": "513",
+    "buildingAddress": "广东省中山市东升镇东升村惠东路82号",
+    "resident": "111, 222, 333",
+    "createUser": "数据录入员",
+    "createTime": "2014/12/4 13:21:09",
+    "updateUser": "",
+    "updateTime": "",
+    "remark": ""
+  },
+  {
+    "uuid": "60a78104-6712-495c-90d4-d84a3a0b8797",
+    "roomId": "501",
+    "buildingAddress": "广东省中山市东升镇裕民村民乐路3号",
+    "resident": "张三, 李四, 王五",
+    "createUser": "数据录入员",
+    "createTime": "2014/12/4 13:34:55",
+    "updateUser": "数据录入员",
+    "updateTime": "2014/12/4 13:49:02",
+    "remark": "test"
+  },
+  {
+    "uuid": "361bf723-d059-4595-b588-0731366d0ac4",
+    "roomId": "808",
+    "buildingAddress": "广东省中山市黄圃镇雁南路28号",
+    "resident": "aaa, bbb, ccc",
+    "createUser": "数据录入员",
+    "createTime": "2014/12/5 9:47:01",
+    "updateUser": "",
+    "updateTime": "",
+    "remark": ""
+  },
+  {
+    "uuid": "13d50d68-92e5-477a-95c8-eac59e7bc585",
+    "roomId": "603",
+    "buildingAddress": "广东省中山市黄圃镇兴雁村28号之三",
+    "resident": "321, 654, 876",
+    "createUser": "数据录入员",
+    "createTime": "2014/12/5 10:00:29",
+    "updateUser": "",
+    "updateTime": "",
+    "remark": ""
+  },
+  {
+    "uuid": "78fc29b6-1d18-481d-bf5d-6a7f4d8ddeba",
+    "roomId": "805",
+    "buildingAddress": "广东省中山市古镇冈东村安富街27号",
+    "resident": "000, 888, 999",
+    "createUser": "数据录入员",
+    "createTime": "2015/4/7 14:26:59",
+    "updateUser": "数据录入员",
+    "updateTime": "2015/4/8 9:15:57",
+    "remark": ""
+  },
+  {
+    "uuid": "d7116bde-2c04-4dd3-9b25-a91e5bdaf1ce",
+    "roomId": "906",
+    "buildingAddress": "广东省中山市古镇冈东村联心路29号",
+    "resident": "qwe, rty, uio",
+    "createUser": "数据录入员",
+    "createTime": "2015/4/7 14:36:37",
+    "updateUser": "数据录入员",
+    "updateTime": "2015/4/8 9:15:39",
+    "remark": ""
+  },
+  {
+    "uuid": "82d9b058-1b76-411d-812d-4a1119d2e2cb",
+    "roomId": "608",
+    "buildingAddress": "广东省中山市古镇曹步曹一村新丰中路10号",
+    "resident": "asd, fgh, jkl",
+    "createUser": "数据录入员",
+    "createTime": "2015/4/13 15:09:34",
+    "updateUser": "数据录入员",
+    "updateTime": "2015/4/13 15:21:56",
+    "remark": ""
+  },
+  {
+    "uuid": "428f0678-6255-4396-a2e7-52071191e829",
+    "roomId": "809",
+    "buildingAddress": "广东省中山市古镇同益工业园平和路107号家外家公寓",
+    "resident": "zxc, vbn, plm",
+    "createUser": "数据录入员",
+    "createTime": "2015/4/13 15:26:37",
+    "updateUser": "韦美锋",
+    "updateTime": "2015/9/18 17:13:24",
+    "remark": ""
+  }
+]
