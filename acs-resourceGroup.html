@@ -19,7 +19,6 @@
     <!-- page specific plugin styles -->
 
     <!-- fonts -->
-
     <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300"/>-->
 
     <!-- ace styles -->
@@ -355,7 +354,7 @@
                                 <span class="menu-text"> 用户管理 </span>
                             </a>
                         </li>
-                        <li class="active">
+                        <li class="">
                             <a href="acs-role.html">
                                 <i class="icon-male"></i>
                                 <span class="menu-text"> 角色管理 </span>
@@ -373,7 +372,7 @@
                                 <span class="menu-text"> 权限管理 </span>
                             </a>
                         </li>
-                        <li class="">
+                        <li class="active">
                             <a href="acs-resourceGroup.html">
                                 <i class="icon-sitemap"></i>
                                 <span class="menu-text"> 群组管理 </span>
@@ -410,7 +409,7 @@
                     <li>
                         系统管理
                     </li>
-                    <li class="active">角色管理</li>
+                    <li class="active">群组管理</li>
                 </ul><!-- .breadcrumb -->
 
             </div>
@@ -429,7 +428,7 @@
                                                 <div style="width: 300px;">
                                                     <div class="input-group">
                                                         <input type="text" class="form-control search-query"
-                                                               placeholder="角色名称"/>
+                                                               placeholder="群组名称"/>
                                                         <span class="input-group-btn">
                                                     				<button type="button" class="btn btn-purple btn-sm"
                                                                             onclick="search()">
@@ -443,7 +442,7 @@
                                         </form>
                                     </td>
                                     <td align="right" style="padding-right: 3px;" id="f_user_more">
-                                        <button class="btn btn-sm btn-primary">分配权限</button>
+                                        <!--<button class="btn btn-sm btn-primary">分配权限</button>-->
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                 data-target="#modal-add-product">添加
                                         </button>
@@ -457,12 +456,12 @@
                             <table id="userTable" class="nowrap dataTable hover">
                                 <!--<thead>-->
                                 <!--<tr>-->
-                                    <!--<td style="text-align: center;">id</td>-->
-                                    <!--<td style="text-align: center;">角色名称</td>-->
-                                    <!--<td style="text-align: center;">所属机构</td>-->
-                                    <!--<td style="text-align: center;">备注信息</td>-->
-                                    <!--<td style="text-align: center;">状态</td>-->
-                                    <!--<td style="text-align: center;">创建日期</td>-->
+                                <!--<td style="text-align: center;">id</td>-->
+                                <!--<td style="text-align: center;">角色名称</td>-->
+                                <!--<td style="text-align: center;">所属机构</td>-->
+                                <!--<td style="text-align: center;">备注信息</td>-->
+                                <!--<td style="text-align: center;">状态</td>-->
+                                <!--<td style="text-align: center;">创建日期</td>-->
                                 <!--</tr>-->
                                 <!--</thead>-->
                             </table>
@@ -481,30 +480,30 @@
 </div><!-- /.main-container -->
 
 <!--add-product modal start-->
-<div class="modal fade"  id="modal-add-product" tabindex="-1" role="dialog">
+<div class="modal fade" id="modal-add-product" tabindex="-1" role="dialog">
     <div class="modal-dialog" style="width: 700px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h5 class="modal-title">添加角色</h5>
+                <h5 class="modal-title">添加群组</h5>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="frm-add-product">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">角色名称</label>
+                        <label class="col-sm-3 control-label no-padding-right">群组名称</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control focus" name="name" placeholder="角色名称"
+                            <input type="text" class="form-control focus" name="name" placeholder="群组名称"
                                    required="required">
                         </div>
                     </div>
                     <!--<div class="form-group">-->
-                        <!--<label class="col-sm-3 control-label no-padding-right">所属社区</label>-->
-                        <!--<div class="col-sm-9">-->
-                            <!--<input type="url" class="form-control" name="buyLink"-->
-                                   <!--placeholder="例如：社区">-->
-                        <!--</div>-->
+                    <!--<label class="col-sm-3 control-label no-padding-right">所属社区</label>-->
+                    <!--<div class="col-sm-9">-->
+                    <!--<input type="url" class="form-control" name="buyLink"-->
+                    <!--placeholder="例如：社区">-->
+                    <!--</div>-->
                     <!--</div>-->
 
                     <div class="form-group">
@@ -515,13 +514,20 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">所属机构类型</label>
+                        <label class="col-sm-3 control-label no-padding-right">群组编码</label>
+                        <div class="col-sm-9">
+                            <input type="url" class="form-control" name="buyLink"
+                                   placeholder="0000000">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">选择管辖区域</label>
                         <div class="col-sm-9">
                             <select  >
-                                <option value ="volvo">机构1</option>
-                                <option value ="saab">机构2</option>
-                                <option value="opel">机构3</option>
-                                <option value="audi">机构4</option>
+                                <option value="volvo">区域1</option>
+                                <option value="saab">区域2</option>
+                                <option value="opel">区域3</option>
+                                <option value="audi">区域4</option>
                             </select>
                         </div>
                     </div>
@@ -674,13 +680,13 @@
                     return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
                 }
                 },
-                {title: '角色名称', data: "userName",className: "dt-center",},
-                {title: '所属机构', data: "unitsName",className: "dt-center",},
-                {title: '备注信息', data: "email",className: "dt-center",},
+                {title: '群组编码', data: "userName", className: "dt-center",},
+                {title: '群组名称', data: "unitsName", className: "dt-center",},
+                {title: '备注信息', data: "email", className: "dt-center",},
 //                {title: '联系电话', data: "tel"},
 //                {title: '邮箱', data: "email"},
                 {
-                    title: '状态', data: "isvalid",className: "dt-center", render: function (data, type, row) {
+                    title: '状态', data: "isvalid", className: "dt-center", render: function (data, type, row) {
                     if (data == '1') {
                         return '已启用';
                     } else {
@@ -689,7 +695,7 @@
                 }
                 },
                 {
-                    title: '创建日期', data: "ctime",className: "dt-center", render: function (data, type, row) {
+                    title: '创建日期', data: "ctime", className: "dt-center", render: function (data, type, row) {
                     return new Date(data).toString("yyyy-MM-dd");
                 }
                 },

@@ -1,148 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>数聚智能门禁信息管理系统-用户管理</title>
-		<meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap教程,Bootstrap中文" />
-		<meta name="description" content="站长素材提供Bootstrap模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="utf-8"/>
+    <title>数聚智能门禁信息管理系统-用户管理</title>
+    <meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap教程,Bootstrap中文"/>
+    <meta name="description" content="站长素材提供Bootstrap模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-		<!-- basic styles -->
+    <!-- basic styles -->
 
-		<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-		<link rel="stylesheet" href="assets/css/font-awesome.min.css" />
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"/>
 
-		<!--[if IE 7]>
-		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
-		<![endif]-->
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css"/>
+    <![endif]-->
 
-		<!-- page specific plugin styles -->
+    <!-- page specific plugin styles -->
 
-		<!-- fonts -->
+    <!-- fonts -->
 
-		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />
+    <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300" />-->
 
-		<!-- ace styles -->
+    <!-- ace styles -->
 
-		<link rel="stylesheet" href="assets/css/ace.min.css" />
-		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
-		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+    <link rel="stylesheet" href="assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace-rtl.min.css"/>
+    <link rel="stylesheet" href="assets/css/ace-skins.min.css"/>
 
-		<!-- jquery plugin styles -->
-		<link rel="stylesheet" href="assets/css/jquery.dataTables.css" />
+    <!-- jquery plugin styles -->
+    <link rel="stylesheet" href="assets/css/jquery.dataTables.css"/>
 
-		<!--[if lte IE 8]>
-		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
-		<![endif]-->
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
+    <![endif]-->
 
-		<!-- inline styles related to this page -->
+    <!-- inline styles related to this page -->
 
-		<!-- ace settings handler -->
+    <!-- ace settings handler -->
 
-		<script src="assets/js/ace-extra.min.js"></script>
+    <script src="assets/js/ace-extra.min.js"></script>
 
-		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
-		<!--[if lt IE 9]>
-		<script src="assets/js/html5shiv.js"></script>
-		<script src="assets/js/respond.min.js"></script>
-		<![endif]-->
-	</head>
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+</head>
 
-	<body>
-		<div class="navbar navbar-default" id="navbar">
-			<script type="text/javascript">
-				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
-			</script>
+<body>
+<div class="navbar navbar-default" id="navbar">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('navbar', 'fixed')
+        } catch (e) {
+        }
+    </script>
 
-			<div class="navbar-container" id="navbar-container">
-				<div class="navbar-header pull-left">
-					<a href="#" class="navbar-brand">
-						<small>Accudata 数聚智能门禁信息管理系统</small>
-					</a><!-- /.brand -->
-				</div><!-- /.navbar-header -->
+    <div class="navbar-container" id="navbar-container">
+        <div class="navbar-header pull-left">
+            <a href="#" class="navbar-brand">
+                <small>Accudata 数聚智能门禁信息管理系统</small>
+            </a><!-- /.brand -->
+        </div><!-- /.navbar-header -->
 
-				<div class="navbar-header pull-right" role="navigation">
-					<ul class="nav ace-nav">
-						<li class="purple">
-							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-								<i class="icon-bell-alt icon-animated-bell"></i>
-								<span class="badge badge-important">8</span>
-							</a>
+        <div class="navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav">
+                <li class="purple">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <i class="icon-bell-alt icon-animated-bell"></i>
+                        <span class="badge badge-important">8</span>
+                    </a>
 
-							<ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
-								<li class="dropdown-header">
-									<i class="icon-warning-sign"></i>
-									8条报警信息
-								</li>
-								<li>
-									<a href="#">
-										<div class="clearfix">
+                    <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+                        <li class="dropdown-header">
+                            <i class="icon-warning-sign"></i>
+                            8条报警信息
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="clearfix">
                                 			<span class="pull-left">
                                     			<i class="btn btn-xs no-hover btn-pink icon-comment"></i>
                                     			超时未关闭..
 											</span>
-											<span class="pull-right badge badge-info">2</span>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<div class="clearfix">
+                                    <span class="pull-right badge badge-info">2</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="clearfix">
                                 			<span class="pull-left">
                                     			<i class="btn btn-xs no-hover btn-pink icon-user"></i>
                                     				消防报警
 											</span>
-											<span class="pull-right badge badge-info">2</span>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<div class="clearfix">
+                                    <span class="pull-right badge badge-info">2</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="clearfix">
                                 			<span class="pull-left">
                                     			<i class="btn btn-xs no-hover btn-success icon-shopping-cart"></i>
                                   				  红外报警
                                				 </span>
-											<span class="pull-right badge badge-success">2</span>
-										</div>
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<div class="clearfix">
+                                    <span class="pull-right badge badge-success">2</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div class="clearfix">
                                				<span class="pull-left">
                                   				 <i class="btn btn-xs no-hover btn-info icon-twitter"></i>
                                     			门磁报警
                               				</span>
-											<span class="pull-right badge badge-info">2</span>
-										</div>
-									</a>
-								</li>
+                                    <span class="pull-right badge badge-info">2</span>
+                                </div>
+                            </a>
+                        </li>
 
-								<li>
-									<a href="#">
-										查看所有报警信息
-										<i class="icon-arrow-right"></i>
-									</a>
-								</li>
-							</ul>
-						</li>
+                        <li>
+                            <a href="#">
+                                查看所有报警信息
+                                <i class="icon-arrow-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
-						<li class="green">
-							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-								<i class="icon-envelope icon-animated-vertical"></i>
-								<span class="badge badge-success">5</span>
-							</a>
+                <li class="green">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <i class="icon-envelope icon-animated-vertical"></i>
+                        <span class="badge badge-success">5</span>
+                    </a>
 
-							<ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
-								<li class="dropdown-header">
-									<i class="icon-envelope-alt"></i>
-									5 条消息
-								</li>
+                    <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                        <li class="dropdown-header">
+                            <i class="icon-envelope-alt"></i>
+                            5 条消息
+                        </li>
 
-								<li>
-									<a href="#">
+                        <li>
+                            <a href="#">
 										<span class="msg-body">
 											<span class="msg-title">
 												<span class="blue">系统通知:</span>
@@ -153,11 +156,11 @@
 												<span>2017-8-31 17:30:30</span>
 											</span>
 										</span>
-									</a>
-								</li>
+                            </a>
+                        </li>
 
-								<li>
-									<a href="#">
+                        <li>
+                            <a href="#">
 										<span class="msg-body">
 											<span class="msg-title">
 												<span class="blue">系统通知:</span>
@@ -168,11 +171,11 @@
 												<span>2017-8-30 17:30:30</span>
 											</span>
 										</span>
-									</a>
-								</li>
+                            </a>
+                        </li>
 
-								<li>
-									<a href="#">
+                        <li>
+                            <a href="#">
 										<span class="msg-body">
 											<span class="msg-title">
 												<span class="blue">系统通知:</span>
@@ -183,465 +186,923 @@
 												<span>2017-8-29 17:30:30</span>
 											</span>
 										</span>
-									</a>
-								</li>
+                            </a>
+                        </li>
 
-								<li>
-									<a href="inbox.html">
-										查看所有消息
-										<i class="icon-arrow-right"></i>
-									</a>
-								</li>
-							</ul>
-						</li>
+                        <li>
+                            <a href="inbox.html">
+                                查看所有消息
+                                <i class="icon-arrow-right"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
-						<li class="light-blue">
-							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                <li class="light-blue">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
 								<span class="user-info">
 									<small>欢迎,</small>
 									用户名
 								</span>
 
-								<i class="icon-caret-down"></i>
-							</a>
+                        <i class="icon-caret-down"></i>
+                    </a>
 
-							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-								<li>
-									<a href="#">
-										<i class="icon-cog"></i>
-										修改密码
-									</a>
-								</li>
+                    <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a href="#">
+                                <i class="icon-cog"></i>
+                                修改密码
+                            </a>
+                        </li>
 
-								<li>
-									<a href="#">
-										<i class="icon-user"></i>
-										个人信息
-									</a>
-								</li>
+                        <li>
+                            <a href="#">
+                                <i class="icon-user"></i>
+                                个人信息
+                            </a>
+                        </li>
 
-								<li class="divider"></li>
+                        <li class="divider"></li>
 
-								<li>
-									<a href="#">
-										<i class="icon-off"></i>
-										退出
-									</a>
-								</li>
-							</ul>
-						</li>
-					</ul><!-- /.ace-nav -->
-				</div><!-- /.navbar-header -->
-			</div><!-- /.container -->
-		</div>
+                        <li>
+                            <a href="#">
+                                <i class="icon-off"></i>
+                                退出
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul><!-- /.ace-nav -->
+        </div><!-- /.navbar-header -->
+    </div><!-- /.container -->
+</div>
 
-		<div class="main-container" id="main-container">
-			<script type="text/javascript">
-				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
-			</script>
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
 
-			<div class="main-container-inner">
-				<a class="menu-toggler" id="menu-toggler" href="#">
-					<span class="menu-text"></span>
-				</a>
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
+        </a>
 
-				<div class="sidebar" id="sidebar">
-					<script type="text/javascript">
-						try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
-					</script>
+        <div class="sidebar" id="sidebar">
+            <script type="text/javascript">
+                try {
+                    ace.settings.check('sidebar', 'fixed')
+                } catch (e) {
+                }
+            </script>
 
-					<ul class="nav nav-list">
-						<!-- terminal monitor begin -->
-						<li class="">
-							<a href="#" class="dropdown-toggle">
-								<i class="icon-dashboard"></i>
-								<span class="menu-text"> 门禁监控 </span>
-								<b class="arrow icon-angle-down"></b>
-							</a>
-							<ul class="submenu">
-								<li class="">
-									<a href="acs-map.html">
-										<i class="icon-map-marker"></i>
-										<span class="menu-text"> 电子地图 </span>
-									</a>
-								</li>
-								<li class="">
-									<a href="acs-monitor.html">
-										<i class="icon-tags"></i>
-										<span class="menu-text"> 监控视图 </span>
-									</a>
-								</li>
-							</ul>
-						</li>
-						<!-- terminal monitor end -->
-						<!-- terminal admin begin -->
-						<li class="">
-							<a href="#" class="dropdown-toggle">
-								<i class="icon-lock"></i>
-								<span class="menu-text"> 门禁管理 </span>
-								<b class="arrow icon-angle-down"></b>
-							</a>
-							<ul class="submenu">
-								<li class="">
-									<a href="acs-terminalType.html">
-										<i class="icon-th-list"></i>
-										<span class="menu-text"> 型号管理 </span>
-									</a>
-								</li>
-								<li class="">
-									<a href="acs-terminal.html">
-										<i class="icon-tags"></i>
-										<span class="menu-text">  终端管理 </span>
-									</a>
-								</li>
-							</ul>
-						</li>
-						<!-- terminal admin end -->
-						<!-- community admin begin -->
-						<li class="">
-							<a href="#" class="dropdown-toggle">
-								<i class="icon-cloud"></i>
-								<span class="menu-text"> 社区管理 </span>
-								<b class="arrow icon-angle-down"></b>
-							</a>
-							<ul class="submenu">
-								<li class="">
-									<a href="acs-building.html">
-										<i class="icon-building"></i>
-										<span class="menu-text"> 楼宇管理 </span>
-									</a>
-								</li>
-								<li class="">
-									<a href="acs-room.html">
-										<i class="icon-home"></i>
-										<span class="menu-text">  房间管理 </span>
-									</a>
-								</li>
-								<li class="">
-									<a href="acs-resident.html">
-										<i class="icon-user"></i>
-										<span class="menu-text"> 住户管理 </span>
-									</a>
-								</li>
-								<li class="">
-									<a href="acs-card.html">
-										<i class="icon-credit-card"></i>
-										<span class="menu-text"> 卡片管理 </span>
-									</a>
-								</li>
-							</ul>
-						</li>
-						<!-- community admin end -->
-						<!-- system admin begin -->
-						<li class="active open">
-							<a href="#" class="dropdown-toggle">
-								<i class="icon-cogs"></i>
-								<span class="menu-text"> 系统管理 </span>
-								<b class="arrow icon-angle-down"></b>
-							</a>
-							<ul class="submenu">
-								<li class="active">
-									<a href="acs-user.html">
-										<i class="icon-user"></i>
-										<span class="menu-text"> 用户管理 </span>
-									</a>
-								</li>
-								<li class="">
-									<a href="acs-role.html">
-										<i class="icon-male"></i>
-										<span class="menu-text"> 角色管理 </span>
-									</a>
-								</li>
-								<li class="">
-									<a href="acs-organization.html">
-										<i class="icon-group"></i>
-										<span class="menu-text"> 机构管理 </span>
-									</a>
-								</li>
-								<li class="">
-									<a href="acs-authority">
-										<i class="icon-gear"></i>
-										<span class="menu-text"> 权限管理 </span>
-									</a>
-								</li>
-								<li class="">
-									<a href="acs-resourceGroup">
-										<i class="icon-sitemap"></i>
-										<span class="menu-text"> 族群管理 </span>
-									</a>
-								</li>
-							</ul>
-						</li>
-						<!-- system admin end -->
-					</ul><!-- /.nav-list -->
+            <ul class="nav nav-list">
+                <!-- terminal monitor begin -->
+                <li class="">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="icon-dashboard"></i>
+                        <span class="menu-text"> 门禁监控 </span>
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+                    <ul class="submenu">
+                        <li class="">
+                            <a href="acs-map.html">
+                                <i class="icon-map-marker"></i>
+                                <span class="menu-text"> 电子地图 </span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="acs-monitor.html">
+                                <i class="icon-tags"></i>
+                                <span class="menu-text"> 监控视图 </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- terminal monitor end -->
+                <!-- terminal admin begin -->
+                <li class="">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="icon-lock"></i>
+                        <span class="menu-text"> 门禁管理 </span>
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+                    <ul class="submenu">
+                        <li class="">
+                            <a href="acs-terminalType.html">
+                                <i class="icon-th-list"></i>
+                                <span class="menu-text"> 型号管理 </span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="acs-terminal.html">
+                                <i class="icon-tags"></i>
+                                <span class="menu-text">  终端管理 </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- terminal admin end -->
+                <!-- community admin begin -->
+                <li class="">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="icon-cloud"></i>
+                        <span class="menu-text"> 社区管理 </span>
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+                    <ul class="submenu">
+                        <li class="">
+                            <a href="acs-building.html">
+                                <i class="icon-building"></i>
+                                <span class="menu-text"> 楼宇管理 </span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="acs-room.html">
+                                <i class="icon-home"></i>
+                                <span class="menu-text">  房间管理 </span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="acs-resident.html">
+                                <i class="icon-user"></i>
+                                <span class="menu-text"> 住户管理 </span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="acs-card.html">
+                                <i class="icon-credit-card"></i>
+                                <span class="menu-text"> 卡片管理 </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- community admin end -->
+                <!-- system admin begin -->
+                <li class="active open">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="icon-cogs"></i>
+                        <span class="menu-text"> 系统管理 </span>
+                        <b class="arrow icon-angle-down"></b>
+                    </a>
+                    <ul class="submenu">
+                        <li class="active">
+                            <a href="acs-user.html">
+                                <i class="icon-user"></i>
+                                <span class="menu-text"> 用户管理 </span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="acs-role.html">
+                                <i class="icon-male"></i>
+                                <span class="menu-text"> 角色管理 </span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="acs-organization.html">
+                                <i class="icon-group"></i>
+                                <span class="menu-text"> 机构管理 </span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="acs-authority.html">
+                                <i class="icon-gear"></i>
+                                <span class="menu-text"> 权限管理 </span>
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="acs-resourceGroup.html">
+                                <i class="icon-sitemap"></i>
+                                <span class="menu-text"> 群组管理 </span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- system admin end -->
+            </ul><!-- /.nav-list -->
 
-					<div class="sidebar-collapse" id="sidebar-collapse">
-						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
-					</div>
+            <div class="sidebar-collapse" id="sidebar-collapse">
+                <i class="icon-double-angle-left" data-icon1="icon-double-angle-left"
+                   data-icon2="icon-double-angle-right"></i>
+            </div>
 
-					<script type="text/javascript">
-						try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
-					</script>
-				</div>
+            <script type="text/javascript">
+                try {
+                    ace.settings.check('sidebar', 'collapsed')
+                } catch (e) {
+                }
+            </script>
+        </div>
 
-				<div class="main-content">
-					<div class="breadcrumbs" id="breadcrumbs">
-						<script type="text/javascript">
-							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-						</script>
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <script type="text/javascript">
+                    try {
+                        ace.settings.check('breadcrumbs', 'fixed')
+                    } catch (e) {
+                    }
+                </script>
 
-						<ul class="breadcrumb">
-							<li>
-								系统管理
-							</li>
-							<li class="active">用户管理</li>
-						</ul><!-- .breadcrumb -->
+                <ul class="breadcrumb">
+                    <li>
+                        系统管理
+                    </li>
+                    <li class="active">用户管理</li>
+                </ul><!-- .breadcrumb -->
 
-					</div>
+            </div>
 
-					<div class="page-content">
-						<div class="row">
-							<div class="col-xs-12">
-								<!-- PAGE CONTENT BEGINS -->
-								<div style="margin-top: 20px; font-size: 12px;">
-									<table style="width:100%">
-										<tr>
-											<td style="padding:3px;" id="f_user_s">
-												<form class="form-search">
-													<div class="row">
-														<div class="col-xs-12 col-sm-8">
-															<div class="input-group">
-																<input type="text" class="form-control search-query" placeholder="用户名/姓名/证件号码" />
-																<span class="input-group-btn">
-                                                    				<button type="button" class="btn btn-purple btn-sm" onclick="search()">
+            <div class="page-content">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- PAGE CONTENT BEGINS -->
+                        <div style="margin-top: 20px; font-size: 12px;">
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="padding:3px;" id="f_user_s">
+                                        <form class="form-search">
+                                            <div class="row">
+                                                <!--<div class="col-xs-12 col-sm-8">-->
+                                                <div style="width: 300px;">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control search-query"
+                                                               placeholder="用户名/姓名/证件号码"/>
+                                                        <span class="input-group-btn">
+                                                    				<button type="button" class="btn btn-purple btn-sm"
+                                                                            onclick="search()">
                                                         				查询
                                                        					<i class="icon-search icon-on-right bigger-110"></i>
                                                     				</button>
                                                					</span>
-															</div>
-														</div>
-													</div>
-												</form>
-											</td>
-											<td align="right" style="padding-right: 3px;" id="f_user_more">
-												<button class="btn btn-sm btn-primary">设置角色</button>
-												<button class="btn btn-sm btn-primary">设置机构</button>
-												<button class="btn btn-sm btn-primary">密码重置</button>
-												<button class="btn btn-sm btn-primary">添加</button>
-												<button class="btn btn-sm btn-primary">修改</button>
-												<button class="btn btn-sm btn-danger">删除</button>
-											</td>
-										</tr>
-									</table>
-								</div>
-								<div style="margin-top: 20px; font-size: 12px;" >
-									<table id="userTable" class="nowrap dataTable hover">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </td>
+                                    <td align="right" style="padding-right: 3px;" id="f_user_more">
+                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
+                                                data-target="#modal-set-role">设置角色</button>
+                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
+                                                data-target="#modal-set-organization">设置机构</button>
+                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
+                                                data-target="#modal-set-pass">密码重置</button>
+                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
+                                                data-target="#modal-add-product">添加
+                                        </button>
+                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
+                                                data-target="#modal-modify">修改</button>
+                                        <button class="btn btn-sm btn-danger">删除</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="margin-top: 20px; font-size: 12px;">
+                            <table id="userTable" class="nowrap dataTable hover">
 
-									</table>
-								</div>
-								<!-- PAGE CONTENT ENDS -->
-							</div><!-- /.col -->
-						</div><!-- /.row -->
-					</div><!-- /.page-content -->
-				</div><!-- /.main-content -->
+                            </table>
+                        </div>
+                        <!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.page-content -->
+        </div><!-- /.main-content -->
 
-			</div><!-- /.main-container-inner -->
+    </div><!-- /.main-container-inner -->
 
-			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-				<i class="icon-double-angle-up icon-only bigger-110"></i>
-			</a>
-		</div><!-- /.main-container -->
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+        <i class="icon-double-angle-up icon-only bigger-110"></i>
+    </a>
+</div><!-- /.main-container -->
 
-		<!--add-product modal start-->
-		<div class="modal fade" id="modal-add-product" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-						<h5 class="modal-title">添加产品</h5>
-					</div>
-					<div class="modal-body">
-						<form class="form-horizontal" id="frm-add-product">
-							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"> 请输入产品名称：</label>
-								<div class="col-sm-9">
-									<input type="text" class="form-control focus" name="name" placeholder="一定要输入产品名称"
-										   required="required">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"> 请输入购买链接：</label>
-								<div class="col-sm-9">
-									<input type="url" class="form-control" name="buyLink"
-										   placeholder="例如：http://www.goodhelper.com/">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"> 请选择产品图片：</label>
-								<div class="col-sm-9">
-									<input type="file" id="file-image" name="image" accept="image/jpeg,image/png"
-										   class="tooltip-info" data-rel="tooltip" title="只支持.jpg或.png的说明书格式"/>
-									<div class="progress hidden">
-										<div id="progress-bar-image" class="progress-bar" role="progressbar" aria-valuenow="0"
-											 aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;"> 0%
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"> 请选择产品说明书：</label>
-								<div class="col-sm-9">
-									<input type="file" id="file-document" name="document"
-										   accept="application/pdf,application/msword" class="tooltip-info" data-rel="tooltip"
-										   title="只支持.doc或.pdf的说明书格式"/>
-									<div class="progress hidden">
-										<div id="progress-bar-document" class="progress-bar" role="progressbar"
-											 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;"> 0%
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"> 请选择产品视频：</label>
-								<div class="col-sm-9">
-									<input type="file" id="file-video" name="video" accept="video/*" class="tooltip-info"
-										   data-rel="tooltip" title="支持常见的视频格式"/>
-									<div class="progress hidden">
-										<div id="progress-bar-video" class="progress-bar" role="progressbar" aria-valuenow="0"
-											 aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;"> 0%
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-10">
-									<button type="button" class="btn btn-primary btn-sm" id="btn-save-product">保存</button>
-									<img class="hidden processing" src="img/processing.gif"/>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div><!--add-product modal end-->
+<!--add-user modal start-->
+<div class="modal fade" id="modal-add-product" tabindex="-1" role="dialog">
+    <div class="modal-dialog" style="width: 700px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">添加用户</h5>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="frm-add-product">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">用户名称</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control focus" name="name" placeholder="用户名称"
+                                   required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">用户密码</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control focus" name="pass" placeholder="用户密码"
+                                   required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">证件号码</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control focus" name="name" placeholder="证件号码"
+                                   required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">证件种类</label>
+                        <div class="col-sm-9">
+                            <select>
+                                <option value="volvo">身份证</option>
+                                <option value="saab">护照</option>
+                                <option value="opel">其他</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">真实姓名</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control focus" name="name" placeholder="真实姓名"
+                                   required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">性别</label>
+                        <div class="col-sm-9">
+                            <select>
+                                <option value="volvo">男</option>
+                                <option value="saab">女</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">民族</label>
+                        <div class="col-sm-9">
+                            <select name="ctl00$CPH_Content$DDT_Folk$DropDownList_Type"
+                                    id="CPH_Content_DDT_Folk_DropDownList_Type">
+                                <option selected="selected" value="01">汉族</option>
+                                <option value="02">蒙古族</option>
+                                <option value="03">回族</option>
+                                <option value="04">藏族</option>
+                                <option value="05">维吾尔族</option>
+                                <option value="06">苗族</option>
+                                <option value="07">彝族</option>
+                                <option value="08">壮族</option>
+                                <option value="09">布依族</option>
+                                <option value="10">朝鲜族</option>
+                                <option value="11">满族</option>
+                                <option value="12">侗族</option>
+                                <option value="13">瑶族</option>
+                                <option value="14">白族</option>
+                                <option value="15">土家族</option>
+                                <option value="16">哈尼族</option>
+                                <option value="17">哈萨克族</option>
+                                <option value="18">傣族</option>
+                                <option value="19">黎族</option>
+                                <option value="20">傈僳族</option>
+                                <option value="21">佤族</option>
+                                <option value="22">畲族</option>
+                                <option value="23">高山族</option>
+                                <option value="24">拉祜族</option>
+                                <option value="25">水族</option>
+                                <option value="26">东乡族</option>
+                                <option value="27">纳西族</option>
+                                <option value="28">景颇族</option>
+                                <option value="29">柯尔克孜族</option>
+                                <option value="30">土族</option>
+                                <option value="31">达斡尔族</option>
+                                <option value="32">仫佬族</option>
+                                <option value="33">羌族</option>
+                                <option value="34">布朗族</option>
+                                <option value="35">撒拉族</option>
+                                <option value="36">毛难族</option>
+                                <option value="37">仡佬族</option>
+                                <option value="38">锡伯族</option>
+                                <option value="39">阿昌族</option>
+                                <option value="40">普米族</option>
+                                <option value="41">塔吉克族</option>
+                                <option value="42">怒族</option>
+                                <option value="43">乌孜别克族</option>
+                                <option value="44">俄罗斯族</option>
+                                <option value="45">鄂温克族</option>
+                                <option value="46">崩龙族</option>
+                                <option value="47">保安族</option>
+                                <option value="48">裕固族</option>
+                                <option value="49">京族</option>
+                                <option value="50">塔塔尔族</option>
+                                <option value="51">独龙族</option>
+                                <option value="52">鄂伦春族</option>
+                                <option value="53">赫哲族</option>
+                                <option value="54">门巴族</option>
+                                <option value="55">珞巴族</option>
+                                <option value="56">基诺族</option>
+                                <option value="97">其他</option>
+                                <option value="98">外国血统中国籍人士</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">户籍行政区划代码</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control focus" name="name" placeholder="户籍行政区划代码"
+                                   required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">户籍详细地址</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control focus" name="name" placeholder="户籍详细地址"
+                                   required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">联系电话</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control focus" name="name" placeholder="联系电话"
+                                   required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">工作单位</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control focus" name="name" placeholder="工作单位"
+                                   required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">用户状态</label>
+                        <div class="col-sm-9">
+                            <select>
+                                <option value="volvo">正常</option>
+                                <option value="saab">禁用</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--设置机构-->
+                    <!--<div class="form-group">-->
+                    <!--<label class="col-sm-3 control-label no-padding-right">所属机构类型</label>-->
+                    <!--<div class="col-sm-9">-->
+                    <!--<select  >-->
+                    <!--<option value ="volvo">中交西筑</option>-->
+                    <!--<option value ="saab">中交三公局总承包公司</option>-->
+                    <!--<option value="opel">浙江顺畅丽水基地</option>-->
+                    <!--<option value="audi">广西路桥</option>-->
+                    <!--</select>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">备注信息</label>
+                        <div class="col-sm-9">
+                            <input type="url" class="form-control" name="buyLink"
+                                   placeholder="">
+                        </div>
+                    </div>
 
-		<!-- basic scripts -->
+                    <!--confirm button-->
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
+                                    id="btn-save-product">确认
+                            </button>
+                            <img class="hidden processing" src="img/processing.gif"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><!--add-product modal end-->
 
-		<!--[if !IE]> -->
+<!--set-role modal start-->
+<div class="modal fade" id="modal-set-role" tabindex="-1" role="dialog">
+    <div class="modal-dialog" style="width: 700px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">设置角色</h5>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">选择角色</label>
+                        <div class="col-sm-9">
+                            <select  >
+                                <option value ="volvo">小区管理员</option>
+                                <option value ="saab">物业安保人员</option>
+                                <option value="opel">物业管理人员</option>
+                                <option value="audi">保安</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">所属群组</label>
+                        <div class="col-sm-9">
+                            <select  >
+                                <option value ="volvo">中山市五桂山1号</option>
+                                <option value ="saab">中山市五桂山2号</option>
+                                <option value="opel">中山市五桂山3号</option>
+                                <option value="audi">中山市五桂山4号</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
+                            >确认
+                            </button>
+                            <img class="hidden processing" src="img/processing.gif"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><!--add-product modal end-->
 
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<div class="modal fade" id="modal-set-organization" tabindex="-1" role="dialog">
+    <div class="modal-dialog" style="width: 700px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">设置机构</h5>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">选择机构</label>
+                        <div class="col-sm-9">
+                            <select  >
+                                <option value ="volvo">中交西筑</option>
+                                <option value ="saab">贵州省公路工程集团有限公司机化分公司租赁JD4000</option>
+                                <option value="opel">广西路桥</option>
+                                <option value="audi">陕西通达建设集团公司</option>
+                            </select>
+                        </div>
+                    </div>
 
-		<!-- <![endif]-->
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
+                            >确认
+                            </button>
+                            <img class="hidden processing" src="img/processing.gif"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><!--add-product modal end-->
 
-		<!--[if IE]>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<![endif]-->
+<div class="modal fade" id="modal-set-pass" tabindex="-1" role="dialog">
+    <div class="modal-dialog" style="width: 700px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">修改密码</h5>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">新密码</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control focus" name="name" placeholder="新密码"
+                                   required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">再次输入新密码</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control focus" name="name" placeholder="再次输入新密码"
+                                   required="required">
+                        </div>
+                    </div>
 
-		<!--[if !IE]> -->
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
+                            >确认
+                            </button>
+                            <img class="hidden processing" src="img/processing.gif"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><!--add-product modal end-->
 
-		<script type="text/javascript">
-			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
-		</script>
+<div class="modal fade" id="modal-modify" tabindex="-1" role="dialog">
+    <div class="modal-dialog" style="width: 700px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">修改用户</h5>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">用户名称</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control focus" name="name" placeholder="用户名称"
+                                   required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">用户密码</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control focus" name="pass" placeholder="用户密码"
+                                   required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">证件号码</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control focus" name="name" placeholder="证件号码"
+                                   required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">证件种类</label>
+                        <div class="col-sm-9">
+                            <select>
+                                <option value="volvo">身份证</option>
+                                <option value="saab">护照</option>
+                                <option value="opel">其他</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">真实姓名</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control focus" name="name" placeholder="真实姓名"
+                                   required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">性别</label>
+                        <div class="col-sm-9">
+                            <select>
+                                <option value="volvo">男</option>
+                                <option value="saab">女</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">民族</label>
+                        <div class="col-sm-9">
+                            <select name="ctl00$CPH_Content$DDT_Folk$DropDownList_Type">
+                                <option selected="selected" value="01">汉族</option>
+                                <option value="02">蒙古族</option>
+                                <option value="03">回族</option>
+                                <option value="04">藏族</option>
+                                <option value="05">维吾尔族</option>
+                                <option value="06">苗族</option>
+                                <option value="07">彝族</option>
+                                <option value="08">壮族</option>
+                                <option value="09">布依族</option>
+                                <option value="10">朝鲜族</option>
+                                <option value="11">满族</option>
+                                <option value="12">侗族</option>
+                                <option value="13">瑶族</option>
+                                <option value="14">白族</option>
+                                <option value="15">土家族</option>
+                                <option value="16">哈尼族</option>
+                                <option value="17">哈萨克族</option>
+                                <option value="18">傣族</option>
+                                <option value="19">黎族</option>
+                                <option value="20">傈僳族</option>
+                                <option value="21">佤族</option>
+                                <option value="22">畲族</option>
+                                <option value="23">高山族</option>
+                                <option value="24">拉祜族</option>
+                                <option value="25">水族</option>
+                                <option value="26">东乡族</option>
+                                <option value="27">纳西族</option>
+                                <option value="28">景颇族</option>
+                                <option value="29">柯尔克孜族</option>
+                                <option value="30">土族</option>
+                                <option value="31">达斡尔族</option>
+                                <option value="32">仫佬族</option>
+                                <option value="33">羌族</option>
+                                <option value="34">布朗族</option>
+                                <option value="35">撒拉族</option>
+                                <option value="36">毛难族</option>
+                                <option value="37">仡佬族</option>
+                                <option value="38">锡伯族</option>
+                                <option value="39">阿昌族</option>
+                                <option value="40">普米族</option>
+                                <option value="41">塔吉克族</option>
+                                <option value="42">怒族</option>
+                                <option value="43">乌孜别克族</option>
+                                <option value="44">俄罗斯族</option>
+                                <option value="45">鄂温克族</option>
+                                <option value="46">崩龙族</option>
+                                <option value="47">保安族</option>
+                                <option value="48">裕固族</option>
+                                <option value="49">京族</option>
+                                <option value="50">塔塔尔族</option>
+                                <option value="51">独龙族</option>
+                                <option value="52">鄂伦春族</option>
+                                <option value="53">赫哲族</option>
+                                <option value="54">门巴族</option>
+                                <option value="55">珞巴族</option>
+                                <option value="56">基诺族</option>
+                                <option value="97">其他</option>
+                                <option value="98">外国血统中国籍人士</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">户籍行政区划代码</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control focus" name="name" placeholder="户籍行政区划代码"
+                                   required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">户籍详细地址</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control focus" name="name" placeholder="户籍详细地址"
+                                   required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">联系电话</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control focus" name="name" placeholder="联系电话"
+                                   required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">工作单位</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control focus" name="name" placeholder="工作单位"
+                                   required="required">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">用户状态</label>
+                        <div class="col-sm-9">
+                            <select>
+                                <option value="volvo">正常</option>
+                                <option value="saab">禁用</option>
+                            </select>
+                        </div>
+                    </div>
 
-		<!-- <![endif]-->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">备注信息</label>
+                        <div class="col-sm-9">
+                            <input type="url" class="form-control" name="buyLink"
+                                   placeholder="">
+                        </div>
+                    </div>
 
-		<!--[if IE]>
+                    <!--confirm button-->
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">确认
+                            </button>
+                            <img class="hidden processing" src="img/processing.gif"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><!--add-product modal end-->
+
+
+
+<!-- basic scripts -->
+<!--jQuery-->
+<script src="https://cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
+
+
 <script type="text/javascript">
- window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+    window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+</script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
 </script>
 <![endif]-->
 
-		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-		</script>
-		<script src="assets/js/bootstrap.min.js"></script>
-		<script src="assets/js/typeahead-bs2.min.js"></script>
+<script type="text/javascript">
+    if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+</script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/typeahead-bs2.min.js"></script>
 
-		<!-- page specific plugin scripts -->
+<!-- page specific plugin scripts -->
 
-		<!-- ace scripts -->
+<!-- ace scripts -->
 
-		<script src="assets/js/ace-elements.min.js"></script>
-		<script src="assets/js/ace.min.js"></script>
+<script src="assets/js/ace-elements.min.js"></script>
+<script src="assets/js/ace.min.js"></script>
 
-		<!-- other jquery scripts -->
-		<script src="assets/js/jquery.dataTables.min.js"></script>
+<!-- other jquery scripts -->
+<script src="assets/js/jquery.dataTables.min.js"></script>
 
-		<!-- custom scripts -->
-		<script src="js/acs-util.js"></script>
+<!-- custom scripts -->
+<script src="js/acs-util.js"></script>
 
-		<!-- inline scripts related to this page -->
-		<script type="text/javascript">
-            try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
-            var userList;
-            var userTable;
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    try {
+        ace.settings.check('sidebar', 'collapsed')
+    } catch (e) {
+    }
+    var userList;
+    var userTable;
 
-            $(function() {
-                getUserList();
-            });
+    $(function () {
+        getUserList();
+    });
 
-            /**
-             * 获取用户列表
-             */
-            function getUserList() {
-                var param = {
-                    type : "get",
-                    url : "data/userList.json",
-                    successCall : initUserTable,
-                    errorCall : function() {
-                        showCommonTip("加载用户列表失败！");
+    /**
+     * 获取用户列表
+     */
+    function getUserList() {
+        var param = {
+            type: "get",
+            url: "data/userList.json",
+            successCall: initUserTable,
+            errorCall: function () {
+                showCommonTip("加载用户列表失败！");
+            }
+        };
+        ajax(param);
+    }
+
+    /**
+     * 初始化用户列表表格
+     */
+    function initUserTable(data) {
+        userTable = $('#userTable').DataTable({
+            "data": data,
+            "deferRender": true,
+            "bProcessing": true,
+            "lengthChange": false,
+            "ordering": false,
+            "createdRow": function (row, data, dataIndex) {
+                $('td', row).attr("class", "text-center");
+                $(row).css("cursor", "pointer");
+            },
+            "language": {
+                "url": "assets/js/jquery-dataTables-zh.json"
+            },
+            "columns": [
+                {
+                    title: '<input id="all-user-checkbox" type="checkbox" name="radios" />',
+                    data: 'uuid', render: function (data, type, row) {
+                    return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
+                }, className: "dt-center",
+                },
+                {title: '用户账号', data: "userName", className: "dt-center",},
+                {title: '所属公司', data: "unitsName", className: "dt-center",},
+                {title: '真实姓名', data: "fullName", className: "dt-center",},
+                {title: '联系电话', data: "tel", className: "dt-center",},
+                {title: '邮箱', data: "email", className: "dt-center",},
+                {
+                    title: '状态', data: "isvalid", className: "dt-center", render: function (data, type, row) {
+                    if (data == '1') {
+                        return '已启用';
+                    } else {
+                        return '未启用';
                     }
-                };
-                ajax(param);
-            }
+                }
+                },
+                {
+                    title: '创建日期', data: "ctime", className: "dt-center", render: function (data, type, row) {
+                    return new Date(data).toString("yyyy-MM-dd");
+                }
+                },
+            ],
+            "order": [[1, "asc"]]
+        });
+    }
 
-            /**
-             * 初始化用户列表表格
-             */
-            function initUserTable(data) {
-                userTable = $('#userTable').DataTable({
-                    "data": data,
-                    "deferRender": true,
-                    "bProcessing": true,
-                    "lengthChange": false,
-                    "ordering":false,
-                    "createdRow": function( row, data, dataIndex ) {
-                        $('td', row).attr("class","text-center");
-                        $(row).css("cursor","pointer");
-                    },
-                    "language": {
-                        "url":"assets/js/jquery-dataTables-zh.json"
-                    },
-                    "columns": [
-                        {data: 'uuid', render: function(data, type,row) {
-                            return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
-                        }},
-                        {title: '用户账号', data: "userName"},
-                        {title: '所属公司', data: "unitsName"},
-                        {title: '真实姓名', data: "fullName"},
-                        {title: '联系电话', data: "tel"},
-                        {title: '邮箱', data: "email"},
-                        {title: '状态', data: "isvalid", render:function(data,type,row){
-                            if(data=='1') {
-                                return '已启用';
-                            } else {
-                                return '未启用';
-                            }
-                        }},
-                        {title: '创建日期', data: "ctime", render:function(data, type, row) {return new Date(data).toString("yyyy-MM-dd");}},
-                    ],
-                    "order": [[1, "asc"]]
-                });
-            }
+    function search() {
+        var keyword = $('#inputUserName').val();
+        console.log(userTable);
+        userTable.search(keyword);
+    }
 
-            function search() {
-                var keyword = $('#inputUserName').val();
-                console.log(userTable);
-                userTable.search(keyword);
-            }
-
-		</script>
+</script>
 </body>
 </html>
