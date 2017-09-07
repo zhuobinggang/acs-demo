@@ -444,12 +444,14 @@
                                     </td>
                                     <td align="right" style="padding-right: 3px;" id="f_user_more">
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                                data-target="#modal-assign-authority">分配权限</button>
+                                                data-target="#modal-assign-authority">分配权限
+                                        </button>
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                 data-target="#modal-add-product">添加
                                         </button>
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                                data-target="#modal-modify">修改</button>
+                                                data-target="#modal-modify">修改
+                                        </button>
                                         <button class="btn btn-sm btn-danger">删除</button>
                                     </td>
                                 </tr>
@@ -459,12 +461,12 @@
                             <table id="userTable" class="nowrap dataTable hover">
                                 <!--<thead>-->
                                 <!--<tr>-->
-                                    <!--<td style="text-align: center;">id</td>-->
-                                    <!--<td style="text-align: center;">角色名称</td>-->
-                                    <!--<td style="text-align: center;">所属机构</td>-->
-                                    <!--<td style="text-align: center;">备注信息</td>-->
-                                    <!--<td style="text-align: center;">状态</td>-->
-                                    <!--<td style="text-align: center;">创建日期</td>-->
+                                <!--<td style="text-align: center;">id</td>-->
+                                <!--<td style="text-align: center;">角色名称</td>-->
+                                <!--<td style="text-align: center;">所属机构</td>-->
+                                <!--<td style="text-align: center;">备注信息</td>-->
+                                <!--<td style="text-align: center;">状态</td>-->
+                                <!--<td style="text-align: center;">创建日期</td>-->
                                 <!--</tr>-->
                                 <!--</thead>-->
                             </table>
@@ -483,7 +485,7 @@
 </div><!-- /.main-container -->
 
 <!--add-product modal start-->
-<div class="modal fade"  id="modal-add-product" tabindex="-1" role="dialog">
+<div class="modal fade" id="modal-add-product" tabindex="-1" role="dialog">
     <div class="modal-dialog" style="width: 700px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -495,44 +497,52 @@
             <div class="modal-body">
                 <form class="form-horizontal" id="frm-add-product">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">角色名称</label>
-                        <div class="col-sm-9">
+                        <label class="col-sm-2 control-label no-padding-right">角色名称</label>
+                        <div class="col-sm-8">
                             <input type="text" class="form-control focus" name="name" placeholder="角色名称"
                                    required="required">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">权限URL</label>
-                        <div class="col-sm-9">
+                        <label class="col-sm-2 control-label no-padding-right">权限URL</label>
+                        <div class="col-sm-8">
                             <input type="text" class="form-control focus" name="name" placeholder="权限URL"
                                    required="required">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">所属机构</label>
-                        <div class="col-sm-9">
-                            <select  >
-                                <option value ="volvo">中交西筑</option>
-                                <option value ="saab">东明恒通路桥</option>
+                        <label class="col-sm-2 control-label no-padding-right">所属机构</label>
+                        <div class="col-sm-8">
+                            <select>
+                                <option value="volvo">中交西筑</option>
+                                <option value="saab">东明恒通路桥</option>
                                 <option value="opel">中交三公局总承包公司用户</option>
                                 <option value="audi">辽宁盘锦顺程</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">所属群组</label>
-                        <div class="col-sm-9">
-                            <select  >
-                                <option value ="volvo">康乐大街六号</option>
-                                <option value ="saab">康乐大街八号</option>
-                                <option value="opel">古镇曹步曹一村新丰中路10号</option>
-                                <option value="audi">东升镇</option>
-                            </select>
+                        <!--<label class="col-sm-3 control-label no-padding-right">所属群组</label>-->
+                        <!--<div class="col-sm-9">-->
+                        <!--<select>-->
+                        <!--<option value="volvo">康乐大街六号</option>-->
+                        <!--<option value="saab">康乐大街八号</option>-->
+                        <!--<option value="opel">古镇曹步曹一村新丰中路10号</option>-->
+                        <!--<option value="audi">东升镇</option>-->
+                        <!--</select>-->
+                        <!--</div>-->
+                        <label class="col-sm-2 control-label no-padding-right"> 所在社区</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="buildingCommunity"
+                                   placeholder="请输入建筑所在社区:">
+                        </div>
+                        <div class="col-sm-2" style="vertical-align: center">
+                            <a href="#modal-select-community" data-toggle="modal" onclick="getCommunityList()">选择社区</a>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">备注信息</label>
-                        <div class="col-sm-9">
+                        <label class="col-sm-2 control-label no-padding-right">备注信息</label>
+                        <div class="col-sm-8">
                             <input type="url" class="form-control" name="buyLink"
                                    placeholder="">
                         </div>
@@ -553,7 +563,7 @@
     </div>
 </div><!--add-product modal end-->
 <!--modify modal start-->
-<div class="modal fade"  id="modal-modify" tabindex="-1" role="dialog">
+<div class="modal fade" id="modal-modify" tabindex="-1" role="dialog">
     <div class="modal-dialog" style="width: 700px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -565,44 +575,43 @@
             <div class="modal-body">
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">角色名称</label>
-                        <div class="col-sm-9">
+                        <label class="col-sm-2 control-label no-padding-right">角色名称</label>
+                        <div class="col-sm-8">
                             <input type="text" class="form-control focus" name="name" placeholder="角色名称"
                                    required="required">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">权限URL</label>
-                        <div class="col-sm-9">
+                        <label class="col-sm-2 control-label no-padding-right">权限URL</label>
+                        <div class="col-sm-8">
                             <input type="text" class="form-control focus" name="name" placeholder="权限URL"
                                    required="required">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">所属机构</label>
-                        <div class="col-sm-9">
-                            <select  >
-                                <option value ="volvo">中交西筑</option>
-                                <option value ="saab">东明恒通路桥</option>
+                        <label class="col-sm-2 control-label no-padding-right">所属机构</label>
+                        <div class="col-sm-8">
+                            <select>
+                                <option value="volvo">中交西筑</option>
+                                <option value="saab">东明恒通路桥</option>
                                 <option value="opel">中交三公局总承包公司用户</option>
                                 <option value="audi">辽宁盘锦顺程</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">所属群组</label>
-                        <div class="col-sm-9">
-                            <select  >
-                                <option value ="volvo">康乐大街六号</option>
-                                <option value ="saab">康乐大街八号</option>
-                                <option value="opel">古镇曹步曹一村新丰中路10号</option>
-                                <option value="audi">东升镇</option>
-                            </select>
+                        <label class="col-sm-2 control-label no-padding-right"> 所在社区：</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="buildingCommunity"
+                                   placeholder="请输入建筑所在社区:">
+                        </div>
+                        <div class="col-sm-2" style="vertical-align: center">
+                            <a href="#modal-select-community" data-toggle="modal" onclick="getCommunityList()">选择社区</a>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">备注信息</label>
-                        <div class="col-sm-9">
+                        <label class="col-sm-2 control-label no-padding-right">备注信息</label>
+                        <div class="col-sm-8">
                             <input type="url" class="form-control" name="buyLink"
                                    placeholder="">
                         </div>
@@ -622,8 +631,8 @@
     </div>
 </div><!--add-product modal end-->
 <!--modify modal start-->
-<div class="modal fade bs-example-modal-sm"  id="modal-assign-authority" tabindex="-1" role="dialog">
-    <div class="modal-dialog"  role="document">
+<div class="modal fade bs-example-modal-sm" id="modal-assign-authority" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -644,20 +653,20 @@
                         <label for="subscribeNews4">权限管理</label>
                     </div>
                     <!--<div class="form-group">-->
-                        <!--<input type="checkbox" id="subscribeNews2" name="subscribe" value="newsletter">-->
-                        <!--<label for="subscribeNews2">角色管理</label>-->
+                    <!--<input type="checkbox" id="subscribeNews2" name="subscribe" value="newsletter">-->
+                    <!--<label for="subscribeNews2">角色管理</label>-->
                     <!--</div>-->
                     <!--<div class="form-group">-->
-                        <!--<input type="checkbox" id="subscribeNews3" name="subscribe" value="newsletter">-->
-                        <!--<label for="subscribeNews3">机构管理</label>-->
+                    <!--<input type="checkbox" id="subscribeNews3" name="subscribe" value="newsletter">-->
+                    <!--<label for="subscribeNews3">机构管理</label>-->
                     <!--</div>-->
                     <!--<div class="form-group">-->
-                        <!--<input type="checkbox" id="subscribeNews4" name="subscribe" value="newsletter">-->
-                        <!--<label for="subscribeNews4">权限管理</label>-->
+                    <!--<input type="checkbox" id="subscribeNews4" name="subscribe" value="newsletter">-->
+                    <!--<label for="subscribeNews4">权限管理</label>-->
                     <!--</div>-->
                     <!--<div class="form-group">-->
-                        <!--<input type="checkbox" id="subscribeNews5" name="subscribe" value="newsletter">-->
-                        <!--<label for="subscribeNews5">群组管理</label>-->
+                    <!--<input type="checkbox" id="subscribeNews5" name="subscribe" value="newsletter">-->
+                    <!--<label for="subscribeNews5">群组管理</label>-->
                     <!--</div>-->
                     <!--system manage end-->
 
@@ -672,16 +681,16 @@
                         <label for="subscribeNews9">卡片管理</label>
                     </div>
                     <!--<div class="form-group">-->
-                        <!--<input type="checkbox" id="subscribeNews7" name="subscribe" value="newsletter">-->
-                        <!--<label for="subscribeNews7">房间管理</label>-->
+                    <!--<input type="checkbox" id="subscribeNews7" name="subscribe" value="newsletter">-->
+                    <!--<label for="subscribeNews7">房间管理</label>-->
                     <!--</div>-->
                     <!--<div class="form-group">-->
-                        <!--<input type="checkbox" id="subscribeNews8" name="subscribe" value="newsletter">-->
-                        <!--<label for="subscribeNews8">住户管理</label>-->
+                    <!--<input type="checkbox" id="subscribeNews8" name="subscribe" value="newsletter">-->
+                    <!--<label for="subscribeNews8">住户管理</label>-->
                     <!--</div>-->
                     <!--<div class="form-group">-->
-                        <!--<input type="checkbox" id="subscribeNews9" name="subscribe" value="newsletter">-->
-                        <!--<label for="subscribeNews9">卡片管理</label>-->
+                    <!--<input type="checkbox" id="subscribeNews9" name="subscribe" value="newsletter">-->
+                    <!--<label for="subscribeNews9">卡片管理</label>-->
                     <!--</div>-->
                     <!--resource group manage end-->
 
@@ -694,14 +703,14 @@
                         <label for="subscribeNews12">门禁监控</label>
                     </div>
                     <!--<div class="form-group">-->
-                        <!--<input type="checkbox" id="subscribeNews11" name="subscribe" value="newsletter">-->
-                        <!--<label for="subscribeNews11">终端管理</label>-->
+                    <!--<input type="checkbox" id="subscribeNews11" name="subscribe" value="newsletter">-->
+                    <!--<label for="subscribeNews11">终端管理</label>-->
                     <!--</div>-->
                     <!--<div class="form-group">-->
-                        <!--<input type="checkbox" id="subscribeNews12" name="subscribe" value="newsletter">-->
-                        <!--<label for="subscribeNews12">门禁监控</label>-->
+                    <!--<input type="checkbox" id="subscribeNews12" name="subscribe" value="newsletter">-->
+                    <!--<label for="subscribeNews12">门禁监控</label>-->
                     <!--</div>-->
-                    
+
                     <!--confirm button-->
                     <div class="form-group">
                         <div class="col-sm-10">
@@ -715,6 +724,42 @@
         </div>
     </div>
 </div><!--add-product modal end-->
+
+<!--select add community modal start-->
+<div class="modal fade" id="modal-select-community" tabindex="-2" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!--modal header begins-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">选择社区</h5>
+            </div>
+            <!--modal header ends-->
+            <!--modal body begins-->
+            <div class="modal-body" style="font-size: 12px;">
+                <div>
+                    <input id="searchCommunity" type="text" class="form-control search-query"
+                           style="margin-left: 70px; width: 160px; float: left;" placeholder="社区编号/社区名称/社区地址"/>
+                    <span class="input-group-btn">
+                                <button type="button" class="btn btn-purple btn-sm" onclick="searchCommunity()">
+                                    查询
+                                    <i class="icon-search icon-on-right bigger-110"></i>
+                                </button>
+                            </span>
+                </div>
+                <div>
+                    <table id="communityTable" class="nowrap dataTable hover display cell-border">
+                    </table>
+                </div>
+            </div><!--modal body ends-->
+            <div class="modal-footer" style="background-color: white;">
+                <button class="btn btn-primary btn-sm" onclick="selectCommunity()">提交</button>
+            </div>
+        </div>
+    </div>
+</div><!--select community modal end-->
 
 
 <!-- basic scripts -->
@@ -795,13 +840,13 @@
                     return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
                 }
                 },
-                {title: '角色名称', data: "name",className: "dt-center",},
-                {title: '所属机构', data: "organization",className: "dt-center",},
-                {title: '所属群组', data: "resourceGroup",className: "dt-center",},
-                {title: '权限列表', data: "url",className: "dt-center",},
-                {title: '备注信息', data: "remark",className: "dt-center",},
+                {title: '角色名称', data: "name", className: "dt-center",},
+                {title: '所属机构', data: "organization", className: "dt-center",},
+                {title: '所属群组', data: "resourceGroup", className: "dt-center",},
+                {title: '权限列表', data: "url", className: "dt-center",},
+                {title: '备注信息', data: "remark", className: "dt-center",},
                 {
-                    title: '创建日期', data: "ctime",className: "dt-center", render: function (data, type, row) {
+                    title: '创建日期', data: "ctime", className: "dt-center", render: function (data, type, row) {
                     return new Date(data).toString("yyyy-MM-dd");
                 }
                 },
@@ -815,6 +860,63 @@
         console.log(userTable);
         userTable.search(keyword);
     }
+
+    //select community begin
+    function getCommunityList() {
+        var param = {
+            type : "get",
+            url : "data/communityList.json",
+            successCall : initCommunityTable,
+            errorCall : function() {
+                showCommonTip("加载用户列表失败！");
+            }
+        };
+        ajax(param);
+    }
+
+    /**
+     * 初始化社区列表
+     * @param data
+     */
+    function initCommunityTable(data) {
+        var communityTable = $('#communityTable').DataTable({
+            "data": data,
+            "deferRender": true,
+            "bProcessing": true,
+            "lengthChange": false,
+            "ordering":false,
+            "bRetrieve": true,
+            "createdRow": function( row, data, dataIndex ) {
+                $('td', row).attr("class","text-center");
+                $(row).css("cursor","pointer");
+            },
+            "language": {
+                "url":"assets/js/jquery-dataTables-zh.json"
+            },
+            "columns": [
+                {
+                    data: 'uuid', render: function(data, type, row) {
+                    return '<input id="radio_' + data + '" name="communityRadio" value="'
+                        + data + '" type="radio">';
+                }},
+                {title: "社区编号", data: "communityCode"},
+                {title: '社区名称', data: "communityName"},
+                {title: '社区地址', data: "communityAddress",className: "dt-center",},
+            ],
+            "order": [[1, "asc"]]
+        });
+    }
+
+    function selectCommunity() {
+        $('input[name="communityRadio"]:checked').each(function(i, item) {
+//            var parent = $(item).parents("tr")[0];
+//            var child = $(parent).children("td")[2];
+//            var text = $(child).text();
+//            $('#modal-add-building input[name="buildingCommunity"]').val(text);
+            $('#modal-select-community').modal("hide");
+        });
+    }
+    //select community end
 
 </script>
 </body>
