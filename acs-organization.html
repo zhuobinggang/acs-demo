@@ -444,11 +444,13 @@
                                     </td>
                                     <td align="right" style="padding-right: 3px;" id="f_user_more">
                                         <!--<button class="btn btn-sm btn-primary">分配权限</button>-->
-                                        <button class="btn btn-sm btn-primary">分配管辖群组</button>
+                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
+                                                data-target="#modal-select-community" onclick="getCommunityList()">分配管辖群组</button>
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                 data-target="#modal-add-product">添加
                                         </button>
-                                        <button class="btn btn-sm btn-primary">修改</button>
+                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
+                                                data-target="#modal-modify">修改</button>
                                         <button class="btn btn-sm btn-danger">删除</button>
                                     </td>
                                 </tr>
@@ -494,30 +496,30 @@
             <div class="modal-body">
                 <form class="form-horizontal" id="frm-add-product">
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">机构名称</label>
-                        <div class="col-sm-9">
+                        <label class="col-sm-2 control-label no-padding-right">机构名称</label>
+                        <div class="col-sm-8">
                             <input type="text" class="form-control focus" name="name" placeholder="机构名称"
                                    required="required">
                         </div>
                     </div>
                     <!--<div class="form-group">-->
-                    <!--<label class="col-sm-3 control-label no-padding-right">所属社区</label>-->
-                    <!--<div class="col-sm-9">-->
+                    <!--<label class="col-sm-2 control-label no-padding-right">所属社区</label>-->
+                    <!--<div class="col-sm-8">-->
                     <!--<input type="url" class="form-control" name="buyLink"-->
                     <!--placeholder="例如：社区">-->
                     <!--</div>-->
                     <!--</div>-->
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">备注信息</label>
-                        <div class="col-sm-9">
+                        <label class="col-sm-2 control-label no-padding-right">备注信息</label>
+                        <div class="col-sm-8">
                             <input type="url" class="form-control" name="buyLink"
                                    placeholder="">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right">父机构</label>
-                        <div class="col-sm-9">
+                        <label class="col-sm-2 control-label no-padding-right">父机构</label>
+                        <div class="col-sm-8">
                             <select  >
                                 <option value ="volvo">父机构1</option>
                                 <option value ="saab">父机构2</option>
@@ -527,8 +529,8 @@
                         </div>
                     </div>
                     <!--<div class="form-group">-->
-                    <!--<label class="col-sm-3 control-label no-padding-right">备注信息</label>-->
-                    <!--<div class="col-sm-9">-->
+                    <!--<label class="col-sm-2 control-label no-padding-right">备注信息</label>-->
+                    <!--<div class="col-sm-8">-->
                     <!--<input type="file" id="file-image" name="image" accept="image/jpeg,image/png"-->
                     <!--class="tooltip-info" data-rel="tooltip" title="只支持.jpg或.png的说明书格式"/>-->
                     <!--<div class="progress hidden">-->
@@ -539,8 +541,8 @@
                     <!--</div>-->
                     <!--</div>-->
                     <!--<div class="form-group">-->
-                    <!--<label class="col-sm-3 control-label no-padding-right"> 请选择产品说明书：</label>-->
-                    <!--<div class="col-sm-9">-->
+                    <!--<label class="col-sm-2 control-label no-padding-right"> 请选择产品说明书：</label>-->
+                    <!--<div class="col-sm-8">-->
                     <!--<input type="file" id="file-document" name="document"-->
                     <!--accept="application/pdf,application/msword" class="tooltip-info" data-rel="tooltip"-->
                     <!--title="只支持.doc或.pdf的说明书格式"/>-->
@@ -552,8 +554,8 @@
                     <!--</div>-->
                     <!--</div>-->
                     <!--<div class="form-group">-->
-                    <!--<label class="col-sm-3 control-label no-padding-right"> 请选择产品视频：</label>-->
-                    <!--<div class="col-sm-9">-->
+                    <!--<label class="col-sm-2 control-label no-padding-right"> 请选择产品视频：</label>-->
+                    <!--<div class="col-sm-8">-->
                     <!--<input type="file" id="file-video" name="video" accept="video/*" class="tooltip-info"-->
                     <!--data-rel="tooltip" title="支持常见的视频格式"/>-->
                     <!--<div class="progress hidden">-->
@@ -576,6 +578,93 @@
         </div>
     </div>
 </div><!--add-product modal end-->
+<div class="modal fade"  id="modal-modify" tabindex="-1" role="dialog">
+    <div class="modal-dialog" style="width: 700px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">修改机构</h5>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right">机构名称</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control focus" name="name" placeholder="机构名称"
+                                   required="required">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right">备注信息</label>
+                        <div class="col-sm-8">
+                            <input type="url" class="form-control" name="buyLink"
+                                   placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right">父机构</label>
+                        <div class="col-sm-8">
+                            <select  >
+                                <option value ="volvo">父机构1</option>
+                                <option value ="saab">父机构2</option>
+                                <option value="opel">父机构3</option>
+                                <option value="audi">父机构4</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">确认
+                            </button>
+                            <img class="hidden processing" src="img/processing.gif"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><!--add-product modal end-->
+
+
+<!--select add community modal start-->
+<div class="modal fade" id="modal-select-community" tabindex="-2" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!--modal header begins-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">分配管辖群组</h5>
+            </div>
+            <!--modal header ends-->
+            <!--modal body begins-->
+            <div class="modal-body" style="font-size: 12px;">
+                <div>
+                    <input id="searchCommunity" type="text" class="form-control search-query"
+                           style="margin-left: 70px; width: 160px; float: left;" placeholder="社区编号/社区名称/社区地址"/>
+                    <span class="input-group-btn">
+                                <button type="button" class="btn btn-purple btn-sm" onclick="searchCommunity()">
+                                    查询
+                                    <i class="icon-search icon-on-right bigger-110"></i>
+                                </button>
+                            </span>
+                </div>
+                <div>
+                    <table id="communityTable" class="nowrap dataTable hover display cell-border">
+                    </table>
+                </div>
+            </div><!--modal body ends-->
+            <div class="modal-footer" style="background-color: white;">
+                <button class="btn btn-primary btn-sm" onclick="selectCommunity()">提交</button>
+            </div>
+        </div>
+    </div>
+</div><!--select community modal end-->
 
 <!-- basic scripts -->
 <script src="https://cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
@@ -623,7 +712,7 @@
     function getUserList() {
         var param = {
             type: "get",
-            url: "data/userList.json",
+            url: "data/organizationList.json",
             successCall: initUserTable,
             errorCall: function () {
                 showCommonTip("加载用户列表失败！");
@@ -655,20 +744,21 @@
                     return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
                 }
                 },
-                {title: '机构名称', data: "userName",className: "dt-center",},
-                {title: '备注信息', data: "unitsName",className: "dt-center",},
+                {title: '机构名称', data: "organization",className: "dt-center",},
+                {title: '管辖群组', data: "communities",className: "dt-center",},
+                {title: '备注信息', data: "remark",className: "dt-center",},
 //                {title: '备注信息', data: "email",className: "dt-center",},
 //                {title: '联系电话', data: "tel"},
 //                {title: '邮箱', data: "email"},
-                {
-                    title: '状态', data: "isvalid",className: "dt-center", render: function (data, type, row) {
-                    if (data == '1') {
-                        return '已启用';
-                    } else {
-                        return '未启用';
-                    }
-                }
-                },
+//                {
+//                    title: '状态', data: "isvalid",className: "dt-center", render: function (data, type, row) {
+//                    if (data == '1') {
+//                        return '已启用';
+//                    } else {
+//                        return '未启用';
+//                    }
+//                }
+//                },
                 {
                     title: '创建日期', data: "ctime",className: "dt-center", render: function (data, type, row) {
                     return new Date(data).toString("yyyy-MM-dd");
@@ -684,6 +774,123 @@
         console.log(userTable);
         userTable.search(keyword);
     }
+
+    /**
+     * 获取用户列表
+     */
+    function getUserList() {
+        var param = {
+            type: "get",
+            url: "data/organizationList.json",
+            successCall: initUserTable,
+            errorCall: function () {
+                showCommonTip("加载角色列表失败！");
+            }
+        };
+        ajax(param);
+    }
+
+    /**
+     * 初始化用户列表表格
+     */
+    function initUserTable(data) {
+        userTable = $('#userTable').DataTable({
+            "data": data,
+            "deferRender": true,
+            "bProcessing": true,
+            "lengthChange": false,
+            "ordering": false,
+            "createdRow": function (row, data, dataIndex) {
+                $('td', row).attr("class", "text-center");
+                $(row).css("cursor", "pointer");
+            },
+            "language": {
+                "url": "assets/js/jquery-dataTables-zh.json"
+            },
+            "columns": [
+                {
+                    title: '<input id="all-user-checkbox" type="checkbox" name="radios" />',
+                    data: 'uuid', render: function (data, type, row) {
+                    return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
+                }
+                },
+                {title: '机构名称', data: "organization", className: "dt-center",},
+//                {title: '所属机构', data: "organization", className: "dt-center",},
+                {title: '管辖群组', data: "resourceGroup", className: "dt-center",},
+//                {title: '权限列表', data: "url", className: "dt-center",},
+                {title: '备注信息', data: "remark", className: "dt-center",},
+                {
+                    title: '创建日期', data: "ctime", className: "dt-center", render: function (data, type, row) {
+                    return new Date(data).toString("yyyy-MM-dd");
+                }
+                },
+            ],
+            "order": [[1, "asc"]]
+        });
+    }
+
+    function search() {
+        var keyword = $('#inputUserName').val();
+        console.log(userTable);
+        userTable.search(keyword);
+    }
+
+    //select community begin
+    function getCommunityList() {
+        var param = {
+            type : "get",
+            url : "data/communityList.json",
+            successCall : initCommunityTable,
+            errorCall : function() {
+                showCommonTip("加载用户列表失败！");
+            }
+        };
+        ajax(param);
+    }
+
+    /**
+     * 初始化社区列表
+     * @param data
+     */
+    function initCommunityTable(data) {
+        var communityTable = $('#communityTable').DataTable({
+            "data": data,
+            "deferRender": true,
+            "bProcessing": true,
+            "lengthChange": false,
+            "ordering":false,
+            "bRetrieve": true,
+            "createdRow": function( row, data, dataIndex ) {
+                $('td', row).attr("class","text-center");
+                $(row).css("cursor","pointer");
+            },
+            "language": {
+                "url":"assets/js/jquery-dataTables-zh.json"
+            },
+            "columns": [
+                {
+                    data: 'uuid', render: function(data, type, row) {
+                    return '<input id="radio_' + data + '" name="communityRadio" value="'
+                        + data + '" type="radio">';
+                }},
+                {title: "社区编号", data: "communityCode"},
+                {title: '社区名称', data: "communityName"},
+                {title: '社区地址', data: "communityAddress",className: "dt-center",},
+            ],
+            "order": [[1, "asc"]]
+        });
+    }
+
+    function selectCommunity() {
+        $('input[name="communityRadio"]:checked').each(function(i, item) {
+//            var parent = $(item).parents("tr")[0];
+//            var child = $(parent).children("td")[2];
+//            var text = $(child).text();
+//            $('#modal-add-building input[name="buildingCommunity"]').val(text);
+            $('#modal-select-community').modal("hide");
+        });
+    }
+    //select community end
 
 </script>
 </body>

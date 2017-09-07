@@ -1,0 +1,101 @@
+[
+  {
+    "uuid":"1",
+    "name": "小区管理员",
+    "organization": "五桂山分局石鼓派出所",
+    "resourceGroup": "广东省中山市五桂山长命水康乐大街6号",
+    "communities": "石岐区社区",
+    "ctime": 1501837059487,
+    "remark": "派出所"
+  },
+  {
+    "uuid":"2",
+    "name": "物业安保人员",
+    "organization": "东升分局荣兴派出所",
+    "resourceGroup": "广东省中山市东升镇裕民村民乐路3号",
+    "communities": "东升社区",
+    "ctime": 1501837059487,
+    "remark": "派出所"
+  },
+  {
+    "uuid":"3",
+    "name": "小区管理员",
+    "organization": "黄圃分局岭栏派出所",
+    "resourceGroup": "广东省中山市五桂山长命水康乐大街11号",
+    "communities": "黄圃社区",
+    "ctime": 1501837059487,
+    "remark": "派出所"
+  },
+  {
+    "uuid":"4",
+    "name": "警察",
+    "organization": "东升镇",
+    "resourceGroup": "广东省中山市五桂山长命水康乐大街6号",
+    "communities": "东升社区",
+    "ctime": 1501837059487,
+    "remark": "城镇"
+  },
+  {
+    "uuid":"5",
+    "name": "物业管理人员",
+    "organization": "古镇",
+    "resourceGroup": "广东省中山市古镇冈东村联心路29号",
+    "communities": "古镇社区",
+    "ctime": 1501837059487,
+    "remark": "城镇"
+  },
+  {
+    "uuid":"6",
+    "name": "小区管理员",
+    "organization": "古镇",
+    "resourceGroup": "广东省中山市古镇冈东村安富街27号",
+    "communities": "古镇社区",
+    "ctime": 1501837059487,
+    "remark": "城镇"
+  },
+  {
+    "uuid":"7",
+    "name": "物业管理人员",
+    "organization": "东升镇",
+    "resourceGroup": "广东省中山市东升镇裕民村民乐路3号",
+    "communities": "东升镇社区;",
+    "ctime": 1501837059487,
+    "remark": "城镇"
+  },
+  {
+    "uuid":"8",
+    "name": "小区管理员",
+    "organization": "五桂山分局石鼓派出所",
+    "resourceGroup": "广东省中山市五桂山长命水康乐大街6号",
+    "communities": "五桂山社区",
+    "ctime": 1501837059487,
+    "remark": "派出所"
+  },
+  {
+    "uuid":"9",
+    "name": "小区管理员",
+    "organization": "五桂山分局石鼓派出所",
+    "resourceGroup": "广东省中山市五桂山长命水康乐大街6号",
+    "communities": "五桂山石鼓社区",
+    "ctime": 1501837059487,
+    "remark": "派出所"
+  },
+  {
+    "uuid":"10",
+    "name": "警察",
+    "organization": "五桂山分局石鼓派出所",
+    "resourceGroup": "广东省中山市五桂山长命水康乐大街6号",
+    "communities": "石鼓社区",
+    "ctime": 1501837059487,
+    "remark": "派出所"
+  },
+  {
+    "uuid":"11",
+    "name": "小区管理员",
+    "organization": "五桂山分局石鼓派出所",
+    "resourceGroup": "广东省中山市五桂山长命水康乐大街6号",
+    "communities": "石鼓社区",
+    "ctime": 1501837059487,
+    "remark": "派出所"
+  }
+]

@@ -1,0 +1,15 @@
+.modal-header {
+    color: #FFF;
+    background: #438eb9;
+    border-color: #438eb9;
+    padding: 10px 10px 5px;
+}
+
+.modal-header .close {
+    font-size: 150%;
+    color: #ffffff;
+}
+
+.modal-body {
+    padding: 10px 20px 0px 20px;
+}
