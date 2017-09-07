@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>数聚智能门禁信息管理系统-楼宇管理</title>
+		<title>数聚智能门禁信息管理系统-房间管理</title>
 		<meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap教程,Bootstrap中文" />
 		<meta name="description" content="站长素材提供Bootstrap模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -55,11 +55,11 @@
         <!--css style begins-->
         <style type="text/css">
             /* 社区列表标题居中 */
-            #communityTable th {
+            #buildingTable th {
                 text-align: center;
             }
             /* 建筑列表获取 */
-            #buildingTable th {
+            #roomTable th {
                 text-align: center;
             }
             /* 修改模态对话框的字体大小 */
@@ -69,7 +69,7 @@
             .modal label, input, textarea {
                 font-size: 12px !important;
             }
-            #communityTable, #buildingTable input {
+            #buildingTable, #roomTable input {
                 height: 28px;
             }
             /* dataTable的页数提示信息的字体大小 */
@@ -336,13 +336,13 @@
 								<b class="arrow icon-angle-down"></b>
 							</a>
 							<ul class="submenu">
-								<li class="active">
+								<li class="">
 									<a href="acs-building.html">
 										<i class="icon-building"></i>
 										<span class="menu-text"> 楼宇管理 </span>
 									</a>
 								</li>
-								<li class="">
+								<li class="active">
 									<a href="acs-room.html">
 										<i class="icon-home"></i>
 										<span class="menu-text">  房间管理 </span>
@@ -415,6 +415,7 @@
 					</script>
 				</div>
 
+                <!-- .main-content -->
 				<div class="main-content">
 					<div class="breadcrumbs" id="breadcrumbs">
 						<script type="text/javascript">
@@ -425,11 +426,12 @@
 							<li>
 								社区管理
 							</li>
-							<li class="active">楼宇管理</li>
+							<li class="active">房间管理</li>
 						</ul><!-- .breadcrumb -->
 
 					</div>
 
+                    <!-- .page-content -->
 					<div class="page-content">
 						<div class="row">
 							<div class="col-xs-12">
@@ -437,12 +439,12 @@
 								<div style="margin-top: 20px; font-size: 12px;">
 									<table style="width:100%">
 										<tr>
-											<td style="padding:3px;" id="f_building_s">
+											<td style="padding:3px;" id="f_room_s">
 												<form class="form-search">
 													<div class="row">
 														<div class="col-xs-8 col-sm-6">
 															<div class="input-group">
-																<input id="inputBuildingName" type="text" class="form-control search-query" placeholder="建筑编号/建筑地址/所属社区" />
+																<input id="inputRoomName" type="text" class="form-control search-query" placeholder="房间编号/所属建筑地址/住户姓名" />
 																<span class="input-group-btn">
                                                     				<button type="button" class="btn btn-purple btn-sm" onclick="search()">
                                                         				查询
@@ -454,16 +456,16 @@
 													</div>
 												</form>
 											</td>
-											<td align="right" style="padding-right: 3px;" id="f_building_more">
-												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-add-building">添加</button>
-												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-update-building-select2">修改</button>
+											<td align="right" style="padding-right: 3px;" id="f_room_more">
+												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-add-room">添加</button>
+												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-update-room-select2">修改</button>
 												<button class="btn btn-sm btn-danger">删除</button>
 											</td>
 										</tr>
 									</table>
 								</div>
 								<div style="margin-top: 20px; font-size: 12px;" >
-									<table id="buildingTable" class="nowrap dataTable hover display cell-border">
+									<table id="roomTable" class="nowrap dataTable hover display cell-border">
 									</table>
 								</div>
 								<!-- PAGE CONTENT ENDS -->
@@ -479,8 +481,8 @@
 			</a>
 		</div><!-- /.main-container -->
 
-		<!--add-building modal start-->
-		<div class="modal fade" id="modal-add-building" tabindex="-1" role="dialog">
+		<!--add-room modal start-->
+		<div class="modal fade" id="modal-add-room" tabindex="-1" role="dialog">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
                     <!--modal header begins-->
@@ -488,47 +490,57 @@
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h5 class="modal-title">添加建筑</h5>
+						<h5 class="modal-title">添加房间</h5>
 					</div>
 					<!--modal header ends-->
 					<!--modal body begins-->
 					<div class="modal-body">
 						<form class="form-horizontal" id="frm-add-product">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label no-padding-right"> 所在社区：</label>
+                                <label class="col-sm-2 control-label no-padding-right"> 所在建筑：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="buildingCommunity"
-                                           placeholder="请输入建筑所在社区:">
+                                    <input type="text" class="form-control" name="roomBuilding"
+                                           placeholder="请输入建筑地址:">
                                 </div>
                                 <div class="col-sm-2" style="vertical-align: center">
-                                    <a href="#modal-select-community" data-toggle="modal" onclick="getCommunityList()">选择社区</a>
+                                    <a href="#modal-select-building" data-toggle="modal" onclick="getBuildingList()">选择建筑</a>
                                 </div>
                             </div>
                             <!--
                             <div class="form-group">
 								<label class="col-sm-2 control-label no-padding-right"> 建筑编号：</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control focus" name="buildingId" placeholder="请输入建筑编号"
+									<input type="text" class="form-control focus" name="roomId" placeholder="请输入建筑编号"
 										   required="required">
 								</div>
 							</div>
 							-->
 							<div class="form-group" align="left">
-								<label class="col-sm-2 control-label no-padding-right"> 建筑名称：</label>
+								<label class="col-sm-2 control-label no-padding-right"> 房间号：</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" name="buildingName"
-										   placeholder="请输入建筑名称:">
+									<input type="text" class="form-control" name="roomName"
+										   placeholder="请输入房间号:">
 								</div>
 							</div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-2 control-label no-padding-right"> 住户姓名：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="roomResident"
+                                           placeholder="请输入住户姓名:">
+                                </div>
+                                <div class="col-sm-2" style="vertical-align: center">
+                                    <a href="#modal-select-resident" data-toggle="modal" onclick="getResidentList()">选择住户</a>
+                                </div>
+                            </div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label no-padding-right"> 备注：</label>
 								<div class="col-sm-8">
-									<textarea class="form-control" name="buildingRemark" rows="4"
+									<textarea class="form-control" name="roomRemark" rows="4"
 										   placeholder="请输入备注:"></textarea>
 								</div>
 							</div>
                             <div class="form-group" align="right">
-                                <input type="submit" class="btn btn-sm btn-primary" onclick="addBuilding()" value="提交" />
+                                <input type="submit" class="btn btn-sm btn-primary" value="提交" />
                                 <input type="reset" class="btn btn-sm btn-warning" value="重置" />
                             </div>
 						</form>
@@ -537,8 +549,8 @@
 			</div>
 		</div><!--add-product modal end-->
 
-        <!--select add community modal start-->
-        <div class="modal fade" id="modal-select-community" tabindex="-2" role="dialog">
+        <!--update-room modal use select2 start-->
+        <div class="modal fade" id="modal-update-room-select2" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <!--modal header begins-->
@@ -546,54 +558,18 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h5 class="modal-title">选择社区</h5>
-                    </div>
-                    <!--modal header ends-->
-                    <!--modal body begins-->
-                    <div class="modal-body" style="font-size: 12px;">
-                            <div>
-                            <input id="searchCommunity" type="text" class="form-control search-query"
-                                   style="margin-left: 70px; width: 160px; float: left;" placeholder="社区编号/社区名称/社区地址" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-purple btn-sm" onclick="searchCommunity()">
-                                    查询
-                                    <i class="icon-search icon-on-right bigger-110"></i>
-                                </button>
-                            </span>
-                        </div>
-                        <div>
-                            <table id="communityTable" class="nowrap dataTable hover display cell-border">
-                            </table>
-                        </div>
-                    </div><!--modal body ends-->
-                    <div class="modal-footer" style="background-color: white;">
-                        <button class="btn btn-primary btn-sm" onclick="selectCommunity()">提交</button>
-                    </div>
-                </div>
-            </div>
-        </div><!--select community modal end-->
-
-        <!--update-building modal use select2 start-->
-        <div class="modal fade" id="modal-update-building-select2" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <!--modal header begins-->
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h5 class="modal-title">修改建筑信息</h5>
+                        <h5 class="modal-title">修改房间信息</h5>
                     </div>
                     <!--modal header ends-->
                     <!--modal body begins-->
                     <div class="modal-body">
                         <form class="form-horizontal" id="frm-add-product-select2">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label no-padding-right"> 所在社区：</label>
+                                <label class="col-sm-2 control-label no-padding-right"> 所在建筑：</label>
                                 <div class="col-sm-8">
-                                    <select name="buildingCommunity" class="community-select2 form-control select2-hidden-accessible"
+                                    <select name="roomBuilding" class="building-select2 form-control select2-hidden-accessible"
                                             tabindex="-1" aria-hidden="true" style="width: 100%;">
-                                        <option value="-1" selected="selected">请输入社区编号/社区名称/社区地址</option>
+                                        <option value="-1" selected="selected">请输入建筑编号/建筑地址/所在社区</option>
                                     </select>
                                 </div>
                             </div>
@@ -601,22 +577,32 @@
                             <div class="form-group">
 								<label class="col-sm-2 control-label no-padding-right"> 建筑编号：</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control focus" name="buildingId" placeholder="请输入建筑编号"
+									<input type="text" class="form-control focus" name="roomId" placeholder="请输入建筑编号"
 										   required="required">
 								</div>
 							</div>
 							-->
                             <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> 建筑名称：</label>
+                                <label class="col-sm-2 control-label no-padding-right"> 房间号：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="buildingName"
+                                    <input type="text" class="form-control" name="roomName"
                                            placeholder="请输入建筑名称:">
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-2 control-label no-padding-right"> 住户姓名：</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="roomResident"
+                                           placeholder="请输入住户姓名:">
+                                </div>
+                                <div class="col-sm-2" style="vertical-align: center">
+                                    <a href="#modal-select-resident" data-toggle="modal" onclick="getResidentList()">选择住户</a>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label no-padding-right"> 备注：</label>
                                 <div class="col-sm-8">
-									<textarea class="form-control" name="buildingRemark" rows="4"
+									<textarea class="form-control" name="roomRemark" rows="4"
                                               placeholder="请输入备注:"></textarea>
                                 </div>
                             </div>
@@ -628,7 +614,82 @@
                     </div><!--modal body ends-->
                 </div>
             </div>
-        </div><!--update-product modal use select2 end-->
+        </div><!--update-product modal end-->
+
+        <!--select building modal start-->
+        <div class="modal fade" id="modal-select-building" tabindex="-2" role="dialog" >
+            <div class="modal-dialog" role="document" style="width: 950px;">
+                <div class="modal-content">
+                    <!--modal header begins-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 class="modal-title">选择建筑</h5>
+                    </div>
+                    <!--modal header ends-->
+                    <!--modal body begins-->
+                    <div class="modal-body" style="font-size: 12px;">
+                        <div>
+                            <input id="searchBuilding" type="text" class="form-control search-query"
+                                   style="margin-left: 10px; width: 160px; float: left;" placeholder="建筑编号/建筑地址/所属社区" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-purple btn-sm" onclick="searchBuilding()">
+                                    查询
+                                    <i class="icon-search icon-on-right bigger-110"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div>
+                            <table id="buildingTable" class="nowrap dataTable hover display cell-border">
+                            </table>
+                        </div>
+                    </div><!--modal body ends-->
+                    <div class="modal-footer" style="background-color: white;">
+                        <button class="btn btn-primary btn-sm" onclick="selectBuilding()">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div><!--select building modal end-->
+
+        <!--select resident modal start-->
+        <div class="modal fade" id="modal-select-resident" tabindex="-2" role="dialog" >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <!--modal header begins-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 class="modal-title">选择住户</h5>
+                    </div>
+                    <!--modal header ends-->
+                    <!--modal body begins-->
+                    <div class="modal-body" style="font-size: 12px;">
+                        <div>
+                            <input id="searchResident" type="text" class="form-control search-query"
+                                   style="margin-left: 4px; width: 160px; float: left;" placeholder="身份证号/姓名/住户类型" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-purple btn-sm" onclick="searchResident()">
+                                    查询
+                                    <i class="icon-search icon-on-right bigger-110"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div>
+                            <!--
+                            <table id="residentTable" class="nowrap dataTable hover display cell-border">
+                            -->
+                            <table class="residentTable nowrap dataTable hover display cell-border">
+                            </table>
+                        </div>
+                    </div><!--modal body ends-->
+                    <div class="modal-footer" style="background-color: white;">
+                        <button class="btn btn-primary btn-sm" onclick="selectResident()">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div><!--select resident modal end-->
 
 		<!-- basic scripts -->
 
@@ -640,7 +701,7 @@
 
 		<!--[if IE]>
         <script type="text/javascript">
-         window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+             window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
         </script>
         <![endif]-->
 
@@ -668,34 +729,35 @@
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
             try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+            var roomTable;
             var buildingTable;
-            var communityTable;
+            var residentTable;
 
             $(function() {
-                getBuildingList();
-                initCommunitySelect2();
+                getRoomList();
+                initBuildingSelect2();
             });
 
             /**
-             * 获取用户列表
+             * 获取房间列表
              */
-            function getBuildingList() {
+            function getRoomList() {
                 var param = {
                     type : "get",
-                    url : "data/buildingList.json",
-                    successCall : initBuildingTable,
+                    url : "data/roomList.json",
+                    successCall : initRoomTable,
                     errorCall : function() {
-                        showCommonTip("加载用户列表失败！");
+                        showCommonTip("加载房间列表失败！");
                     }
                 };
                 ajax(param);
             }
 
             /**
-             * 初始化用户列表表格
+             * 初始化房间列表表格
              */
-            function initBuildingTable(data) {
-                buildingTable = $('#buildingTable').DataTable({
+            function initRoomTable(data) {
+                roomTable = $('#roomTable').DataTable({
                     "data": data,
                     "deferRender": true,
                     "bProcessing": true,
@@ -711,16 +773,16 @@
                     "columns": [
                         {
                             title: '<div style="text-align:center;">'
-                                + '<input type="checkbox" id="all-building-checkbox" name="radios" />'
+                                + '<input type="checkbox" id="all-room-checkbox" name="radios" />'
                                 + '</div>',
                             data: 'uuid', render: function(data, type,row) {
-                            return '<input id="ckb_' + data + '" name="buildingCkb" value="'
-                                + data + '" type="checkbox" onclick="checkBoxClick(\'buildingCkb\',\'all-building-checkbox\')">';
+                            return '<input id="ckb_' + data + '" name="roomCkb" value="'
+                                + data + '" type="checkbox" onclick="checkBoxClick(\'roomCkb\',\'all-room-checkbox\')">';
                         }},
-                        {title: '建筑编号', data: "buildingId"},
-                        {title: '建筑地址', data: "buildingAddress"},
-                        {title: '所在社区', data: "communityAddress"},
-                        {title: '所在警务区', data: "policeArea"},
+                        {title: '房间编号', data: "roomId"},
+                        {title: '所属建筑', data: "buildingAddress"},
+						{title: '房间号', data: 'roomId'},
+                        {title: '住户', data: 'resident'},
                         {title: '创建人', data: "createUser"},
                         {title: '创建时间', data: "createTime"},
                         {title: '修改人', data: "updateUser"},
@@ -732,27 +794,20 @@
             }
 
             function search() {
-                var keyword = $('#inputBuildingName').val();
-                console.log(buildingTable);
-                buildingTable.search(keyword);
+                var keyword = $('#inputRoomName').val();
+                console.log(roomTable);
+                roomTable.search(keyword);
             }
 
+            <!--select building table script begins-->
             /**
-             *  添加建筑
+             * 获取建筑列表数据
              */
-            function addBuilding() {
-                $("#modal-add-building").modal('hide');
-            }
-
-            <!--select community table script begins-->
-            /**
-             * 获取社区列表数据
-             */
-            function getCommunityList() {
+            function getBuildingList() {
                 var param = {
                     type : "get",
-                    url : "data/communityList.json",
-                    successCall : initCommunityTable,
+                    url : "data/buildingList.json",
+                    successCall : initBuildingTable,
                     errorCall : function() {
                         showCommonTip("加载用户列表失败！");
                     }
@@ -761,11 +816,11 @@
             }
 
             /**
-             * 初始化社区列表
+             * 初始化建筑列表
              * @param data
              */
-            function initCommunityTable(data) {
-                communityTable = $('#communityTable').DataTable({
+            function initBuildingTable(data) {
+                buildingTable = $('#buildingTable').DataTable({
                     "data": data,
                     "deferRender": true,
                     "bProcessing": true,
@@ -782,32 +837,107 @@
                     "columns": [
                         {
                             data: 'uuid', render: function(data, type, row) {
-                            return '<input id="radio_' + data + '" name="communityRadio" value="'
+                            return '<input id="radio_' + data + '" name="buildingRadio" value="'
                                 + data + '" type="radio">';
                         }},
-                        {title: "社区编号", data: "communityCode"},
-                        {title: '社区名称', data: "communityName"},
-                        {title: '社区地址', data: "communityAddress"},
+                        {title: '建筑编号', data: "buildingId"},
+                        {title: '建筑地址', data: "buildingAddress"},
+                        {title: '所在社区', data: "communityAddress"},
+                        {title: '所在警务区', data: "policeArea"},
+                        {title: '备注', data: "remark"}
                     ],
                     "order": [[1, "asc"]]
                 });
             }
 
             /**
-             * 选择社区
+             * 选择建筑
              */
-            function selectCommunity() {
-                $('input[name="communityRadio"]:checked').each(function(i, item) {
+            function selectBuilding() {
+                $('input[name="buildingRadio"]:checked').each(function(i, item) {
                     var parent = $(item).parents("tr")[0];
                     var child = $(parent).children("td")[2];
                     var text = $(child).text();
-                    $('#modal-add-building input[name="buildingCommunity"]').val(text);
-                    $('#modal-select-community').modal("hide");
+                    $('#modal-add-room input[name="roomBuilding"]').val(text);
+                    $('#modal-select-building').modal("hide");
                 });
             }
-            <!--select community table script ends-->
+            <!--select building table script ends-->
 
-            <!-- community select2 script begins -->
+            <!--select resident table script begins-->
+            /**
+             * 获取建筑列表数据
+             */
+            function getResidentList() {
+                var param = {
+                    type : "get",
+                    url : "data/residentList.json",
+                    successCall : initResidentTable,
+                    errorCall : function() {
+                        showCommonTip("加载用户列表失败！");
+                    }
+                };
+                ajax(param);
+            }
+
+            /**
+             * 初始化建筑列表
+             * @param data
+             */
+            function initResidentTable(data) {
+                residentTable = $('.residentTable').DataTable({
+                    "data": data,
+                    "deferRender": true,
+                    "bProcessing": true,
+                    "lengthChange": false,
+                    "ordering":false,
+                    "bRetrieve": true,
+                    "createdRow": function( row, data, dataIndex ) {
+                        $('td', row).attr("class","text-center");
+                        $(row).css("cursor","pointer");
+                    },
+                    "language": {
+                        "url":"assets/js/jquery-dataTables-zh.json"
+                    },
+                    "columns": [
+                        {
+                            title: '<div style="text-align:center;">'
+                                + '<input type="checkbox" id="all-resident-checkbox" name="radios" />'
+                                + '</div>',
+                            data: 'userId', render: function(data, type,row) {
+                            return '<input id="ckb_' + data + '" name="residentCkb" value="'
+                                + data + '" type="checkbox" onclick="checkBoxClick(\'residentCkb\',\'all-resident-checkbox\')">';
+                        }},
+                        {title: "住户姓名", data: "name"},
+                        {title: "证件号码", data: "IDCard"},
+                        {title: "性别", data: "sex"},
+                        {title: "住户类型", data: "type"},
+                        {title: "状态", data: "status"},
+                        {title: "备注", data: "remark"}
+                    ],
+                    "order": [[1, "asc"]]
+                });
+            }
+
+            /**
+             * 选择建筑
+             */
+            function selectResident() {
+                var residents = "";
+                $('input[name="residentCkb"]:checked').each(function(i, item) {
+                    var parent = $(item).parents("tr")[0];
+                    var child = $(parent).children("td")[1];
+                    var text = $(child).text();
+                    if(residents != "")
+                        residents += ",";
+                    residents += text;
+                });
+                $('#modal-add-room,#modal-update-room-select2 input[name="roomResident"]').val(residents);
+                $('#modal-select-resident').modal("hide");
+            }
+            <!--select resident table script ends-->
+
+            <!-- building select2 script begins -->
             /**
              * jquery select2 的控制脚本
              */
@@ -817,20 +947,20 @@
             function formatRepoSelection(repo) {
                 return repo.text;
             }
-            function initCommunitySelect2() {
-                $(".community-select2").select2({
+            function initBuildingSelect2() {
+                $(".building-select2").select2({
                     ajax: {
-                        url: "data/communityList.json",
+                        url: "data/buildingList.json",
                         type: "get",
                         delay: 250,
                         data: function(params) {
                             return {}
                         },
                         processResults: function(data, params) {
-                            //jquery select2 必须返回text，此处将community转换为text
+                            //jquery select2 必须返回text，此处将buildingAddress转换为text
                             for(var index in data) {
                                 data[index].id = data[index].uuid;
-                                data[index].text = data[index].communityName;
+                                data[index].text = data[index].buildingAddress;
                             }
                             return {
                                 results: data,
@@ -847,7 +977,7 @@
                     templateSelection: formatRepoSelection  //被选择的数据的显示格式
                 });
             }
-            <!-- community select2 script ends -->
+            <!-- building select2 script ends -->
 
 		</script>
 </body>
