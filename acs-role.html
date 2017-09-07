@@ -787,6 +787,7 @@
 
 <!-- custom scripts -->
 <script src="js/acs-util.js"></script>
+<script src="js/communityTreeData.js"></script>
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
@@ -799,6 +800,7 @@
 
     $(function () {
         getUserList();
+        community_assign_tree();
     });
 
     /**
@@ -838,18 +840,20 @@
                     title: '<input id="all-user-checkbox" type="checkbox" name="radios" />',
                     data: 'uuid', render: function (data, type, row) {
                     return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
-                }
+                },className:"dt-center"
                 },
                 {title: '角色名称', data: "name", className: "dt-center",},
-                {title: '所属机构', data: "organization", className: "dt-center",},
-                {title: '所属群组', data: "resourceGroup", className: "dt-center",},
-                {title: '权限列表', data: "url", className: "dt-center",},
+                {title: '所属机构类型', data: "organization", className: "dt-center",},
+//                {title: '所属群组', data: "resourceGroup", className: "dt-center",},
+//                {title: '权限列表', data: "url", className: "dt-center",},
+                {title: '创建人', data: "createUser", className: "dt-center",},
+                {title: '创建时间', data: "createTime", className: "dt-center",},
                 {title: '备注信息', data: "remark", className: "dt-center",},
-                {
-                    title: '创建日期', data: "ctime", className: "dt-center", render: function (data, type, row) {
-                    return new Date(data).toString("yyyy-MM-dd");
-                }
-                },
+//                {
+//                    title: '创建日期', data: "ctime", className: "dt-center", render: function (data, type, row) {
+//                    return new Date(data).toString("yyyy-MM-dd");
+//                }
+//                },
             ],
             "order": [[1, "asc"]]
         });
@@ -918,6 +922,22 @@
     }
     //select community end
 
+    //community modal init start
+    function community_assign_tree() {
+        $('#community_tree').ace_tree({
+            dataSource: community_tree_data ,
+            multiSelect:true,
+            loadingHTML:'<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
+            'open-icon' : 'icon-minus',
+            'close-icon' : 'icon-plus',
+            'selectable' : true,
+            'selected-icon' : 'icon-ok',
+            'unselected-icon' : 'icon-remove'
+        });
+    }
+    //community modal init end
+
 </script>
+
 </body>
 </html>

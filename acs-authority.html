@@ -620,7 +620,7 @@
     function getUserList() {
         var param = {
             type: "get",
-            url: "data/userList.json",
+            url: "data/authorityList.json",
             successCall: initUserTable,
             errorCall: function () {
                 showCommonTip("加载用户列表失败！");
@@ -648,29 +648,20 @@
             },
             "columns": [
                 {
+                    title: '<input id="all-user-checkbox" type="checkbox" name="radios" />',
                     data: 'uuid', render: function (data, type, row) {
                     return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
-                }
+                },className:"dt-center"
                 },
-                {title: '权限名称', data: "userName",className: "dt-center",},
-                {title: '父权限名称', data: "unitsName",className: "dt-center",},
-                {title: '访问路径', data: "email",className: "dt-center",},
+                {title: '权限名称', data: "name",className: "dt-center",},
+                {title: '父权限名称', data: "parentName",className: "dt-center",},
+                {title: '权限描述', data: "desc",className: "dt-center",},
+//                {title: '父权限名称', data: "unitsName",className: "dt-center",},
+                {title: '访问路径', data: "url",className: "dt-center",},
+//                {title: '创建时间', data: "createTime",className: "dt-center",},
 //                {title: '联系电话', data: "tel"},
 //                {title: '邮箱', data: "email"},
-                {
-                    title: '状态', data: "isvalid",className: "dt-center", render: function (data, type, row) {
-                    if (data == '1') {
-                        return '已启用';
-                    } else {
-                        return '未启用';
-                    }
-                }
-                },
-                {
-                    title: '创建日期', data: "ctime",className: "dt-center", render: function (data, type, row) {
-                    return new Date(data).toString("yyyy-MM-dd");
-                }
-                },
+
             ],
             "order": [[1, "asc"]]
         });

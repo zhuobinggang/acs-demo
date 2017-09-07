@@ -34,6 +34,7 @@
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
     <![endif]-->
+    <link rel="stylesheet" href="css/acs.css" />
 
     <!-- inline styles related to this page -->
 
@@ -644,19 +645,30 @@
             <!--modal header ends-->
             <!--modal body begins-->
             <div class="modal-body" style="font-size: 12px;">
-                <div>
-                    <input id="searchCommunity" type="text" class="form-control search-query"
-                           style="margin-left: 70px; width: 160px; float: left;" placeholder="社区编号/社区名称/社区地址"/>
-                    <span class="input-group-btn">
-                                <button type="button" class="btn btn-purple btn-sm" onclick="searchCommunity()">
-                                    查询
-                                    <i class="icon-search icon-on-right bigger-110"></i>
-                                </button>
-                            </span>
-                </div>
-                <div>
-                    <table id="communityTable" class="nowrap dataTable hover display cell-border">
-                    </table>
+                <!--<div>-->
+                    <!--<input id="searchCommunity" type="text" class="form-control search-query"-->
+                           <!--style="margin-left: 70px; width: 160px; float: left;" placeholder="社区编号/社区名称/社区地址"/>-->
+                    <!--<span class="input-group-btn">-->
+                                <!--<button type="button" class="btn btn-purple btn-sm" onclick="searchCommunity()">-->
+                                    <!--查询-->
+                                    <!--<i class="icon-search icon-on-right bigger-110"></i>-->
+                                <!--</button>-->
+                            <!--</span>-->
+                <!--</div>-->
+                <!--<div>-->
+                    <!--<table id="communityTable" class="nowrap dataTable hover display cell-border">-->
+                    <!--</table>-->
+                <!--</div>-->
+                <div class="widget-box">
+                    <!--<div class="widget-header header-color-blue2">-->
+                        <!--<h4 class="lighter smaller">选择社区</h4>-->
+                    <!--</div>-->
+
+                    <div class="widget-body">
+                        <div class="widget-main padding-8">
+                            <div id="community_tree" class="tree"></div>
+                        </div>
+                    </div>
                 </div>
             </div><!--modal body ends-->
             <div class="modal-footer" style="background-color: white;">
@@ -684,8 +696,11 @@
 
 <!-- ace scripts -->
 
-<script src="assets/js/ace-elements.min.js"></script>
-<script src="assets/js/ace.min.js"></script>
+<!--<script src="assets/js/fuelux/data/fuelux.tree-sampledata.js"></script>-->
+<!--<script src="assets/js/fuelux/fuelux.tree.min.js"></script>-->
+
+<script src="assets/js/fuelux/data/fuelux.tree-sampledata.js"></script>
+<script src="assets/js/fuelux/fuelux.tree.min.js"></script>
 
 <!-- other jquery scripts -->
 <script src="assets/js/jquery.dataTables.min.js"></script>
@@ -693,6 +708,10 @@
 <!-- custom scripts -->
 <script src="js/acs-util.js"></script>
 
+<script src="assets/js/ace-elements.min.js"></script>
+<script src="assets/js/ace.min.js"></script>
+
+<script src="js/communityTreeData.js"></script>
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
     try {
@@ -704,6 +723,7 @@
 
     $(function () {
         getUserList();
+        community_assign_tree();
     });
 
     /**
@@ -746,24 +766,13 @@
                 },
                 {title: '机构名称', data: "organization",className: "dt-center",},
                 {title: '管辖群组', data: "communities",className: "dt-center",},
-                {title: '备注信息', data: "remark",className: "dt-center",},
-//                {title: '备注信息', data: "email",className: "dt-center",},
-//                {title: '联系电话', data: "tel"},
-//                {title: '邮箱', data: "email"},
+                {title: '机构类型', data: "remark",className: "dt-center",},
+                {title: '创建日期', data: "ctime",className: "dt-center",},
 //                {
-//                    title: '状态', data: "isvalid",className: "dt-center", render: function (data, type, row) {
-//                    if (data == '1') {
-//                        return '已启用';
-//                    } else {
-//                        return '未启用';
-//                    }
+//                    title: '创建日期', data: "ctime",className: "dt-center", render: function (data, type, row) {
+//                    return new Date(data).toString("yyyy-MM-dd");
 //                }
 //                },
-                {
-                    title: '创建日期', data: "ctime",className: "dt-center", render: function (data, type, row) {
-                    return new Date(data).toString("yyyy-MM-dd");
-                }
-                },
             ],
             "order": [[1, "asc"]]
         });
@@ -815,15 +824,10 @@
                 }
                 },
                 {title: '机构名称', data: "organization", className: "dt-center",},
-//                {title: '所属机构', data: "organization", className: "dt-center",},
                 {title: '管辖群组', data: "resourceGroup", className: "dt-center",},
-//                {title: '权限列表', data: "url", className: "dt-center",},
-                {title: '备注信息', data: "remark", className: "dt-center",},
-                {
-                    title: '创建日期', data: "ctime", className: "dt-center", render: function (data, type, row) {
-                    return new Date(data).toString("yyyy-MM-dd");
-                }
-                },
+                {title: '机构类型', data: "remark", className: "dt-center",},
+                {title: '创建人', data: "createUser", className: "dt-center",},
+                {title: '创建日期', data: "createTime", className: "dt-center",},
             ],
             "order": [[1, "asc"]]
         });
@@ -891,6 +895,20 @@
         });
     }
     //select community end
+    //community modal init start
+    function community_assign_tree() {
+        $('#community_tree').ace_tree({
+            dataSource: community_tree_data ,
+            multiSelect:true,
+            loadingHTML:'<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
+            'open-icon' : 'icon-minus',
+            'close-icon' : 'icon-plus',
+            'selectable' : true,
+            'selected-icon' : 'icon-ok',
+            'unselected-icon' : 'icon-remove'
+        });
+    }
+    //community modal init end
 
 </script>
 </body>

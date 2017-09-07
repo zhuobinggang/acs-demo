@@ -6,6 +6,8 @@
     "resourceGroup": "广东省中山市五桂山长命水康乐大街6号",
     "communities": "石岐区社区",
     "ctime": 1501837059487,
+    "createUser": "超级管理员",
+    "createTime": "2015/4/13 15:21:56",
     "remark": "派出所"
   },
   {
@@ -15,6 +17,8 @@
     "resourceGroup": "广东省中山市东升镇裕民村民乐路3号",
     "communities": "东升社区",
     "ctime": 1501837059487,
+    "createUser": "超级管理员",
+    "createTime": "2014/12/4 13:21:09",
     "remark": "派出所"
   },
   {
@@ -23,7 +27,9 @@
     "organization": "黄圃分局岭栏派出所",
     "resourceGroup": "广东省中山市五桂山长命水康乐大街11号",
     "communities": "黄圃社区",
+    "createUser": "超级管理员",
     "ctime": 1501837059487,
+    "createTime": "2014/9/29 15:40:25",
     "remark": "派出所"
   },
   {
@@ -33,6 +39,8 @@
     "resourceGroup": "广东省中山市五桂山长命水康乐大街6号",
     "communities": "东升社区",
     "ctime": 1501837059487,
+    "createUser": "数据录入员",
+    "createTime": "2014/9/29 16:03:05",
     "remark": "城镇"
   },
   {
@@ -41,7 +49,9 @@
     "organization": "古镇",
     "resourceGroup": "广东省中山市古镇冈东村联心路29号",
     "communities": "古镇社区",
+    "createUser": "数据录入员",
     "ctime": 1501837059487,
+    "createTime": "2014/9/29 15:49:54",
     "remark": "城镇"
   },
   {
@@ -50,7 +60,9 @@
     "organization": "古镇",
     "resourceGroup": "广东省中山市古镇冈东村安富街27号",
     "communities": "古镇社区",
+    "createUser": "数据录入员",
     "ctime": 1501837059487,
+    "createTime": "2014/9/29 16:03:05",
     "remark": "城镇"
   },
   {
@@ -60,6 +72,8 @@
     "resourceGroup": "广东省中山市东升镇裕民村民乐路3号",
     "communities": "东升镇社区;",
     "ctime": 1501837059487,
+    "createUser": "数据录入员",
+    "createTime": "2014/12/4 13:21:09",
     "remark": "城镇"
   },
   {
@@ -69,6 +83,8 @@
     "resourceGroup": "广东省中山市五桂山长命水康乐大街6号",
     "communities": "五桂山社区",
     "ctime": 1501837059487,
+    "createUser": "数据录入员",
+    "createTime": "2014/9/29 15:40:25",
     "remark": "派出所"
   },
   {
@@ -78,6 +94,8 @@
     "resourceGroup": "广东省中山市五桂山长命水康乐大街6号",
     "communities": "五桂山石鼓社区",
     "ctime": 1501837059487,
+    "createUser": "数据录入员",
+    "createTime": "2014/9/29 16:03:05",
     "remark": "派出所"
   },
   {
@@ -87,6 +105,8 @@
     "resourceGroup": "广东省中山市五桂山长命水康乐大街6号",
     "communities": "石鼓社区",
     "ctime": 1501837059487,
+    "createUser": "数据录入员",
+    "createTime": "2014/12/4 13:21:09",
     "remark": "派出所"
   },
   {
@@ -96,6 +116,8 @@
     "resourceGroup": "广东省中山市五桂山长命水康乐大街6号",
     "communities": "石鼓社区",
     "ctime": 1501837059487,
+    "createUser": "数据录入员",
+    "createTime": "2014/12/4 13:21:09",
     "remark": "派出所"
   }
 ]
