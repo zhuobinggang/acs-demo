@@ -59,7 +59,7 @@
                 text-align: center;
             }
             /* 建筑列表获取 */
-            #roomTable th {
+            #residentTable th {
                 text-align: center;
             }
             /* 修改模态对话框的字体大小 */
@@ -69,7 +69,7 @@
             .modal label, input, textarea {
                 font-size: 12px !important;
             }
-            #buildingTable, #roomTable input {
+            #buildingTable, #residentTable input {
                 height: 28px;
             }
             /* dataTable的页数提示信息的字体大小 */
@@ -342,13 +342,13 @@
 										<span class="menu-text"> 楼宇管理 </span>
 									</a>
 								</li>
-								<li class="active">
+								<li class="">
 									<a href="acs-room.html">
 										<i class="icon-home"></i>
 										<span class="menu-text">  房间管理 </span>
 									</a>
 								</li>
-								<li class="">
+								<li class="active">
 									<a href="acs-resident.html">
 										<i class="icon-user"></i>
 										<span class="menu-text"> 住户管理 </span>
@@ -426,7 +426,7 @@
 							<li>
 								社区管理
 							</li>
-							<li class="active">房间管理</li>
+							<li class="active">住户管理</li>
 						</ul><!-- .breadcrumb -->
 
 					</div>
@@ -439,12 +439,12 @@
 								<div style="margin-top: 20px; font-size: 12px;">
 									<table style="width:100%">
 										<tr>
-											<td style="padding:3px;" id="f_room_s">
+											<td style="padding:3px;" id="f_resident_s">
 												<form class="form-search">
 													<div class="row">
 														<div class="col-xs-8 col-sm-6">
 															<div class="input-group">
-																<input id="inputRoomName" type="text" class="form-control search-query" placeholder="房间编号/所属建筑地址/住户姓名" />
+																<input id="inputResidentName" type="text" class="form-control search-query" placeholder="住户姓名/证件号码/住户类型" />
 																<span class="input-group-btn">
                                                     				<button type="button" class="btn btn-purple btn-sm" onclick="search()">
                                                         				查询
@@ -456,16 +456,16 @@
 													</div>
 												</form>
 											</td>
-											<td align="right" style="padding-right: 3px;" id="f_room_more">
-												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-add-room">添加</button>
-												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-update-room-select2">修改</button>
+											<td align="right" style="padding-right: 3px;" id="f_resident_more">
+												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-add-resident">添加</button>
+												<button class="btn btn-sm btn-primary" data-toggle="modal" onclick="updateResidentModal()">修改</button>
 												<button class="btn btn-sm btn-danger">删除</button>
 											</td>
 										</tr>
 									</table>
 								</div>
 								<div style="margin-top: 20px; font-size: 12px;" >
-									<table id="roomTable" class="nowrap dataTable hover display cell-border">
+									<table id="residentTable" class="nowrap dataTable hover display cell-border">
 									</table>
 								</div>
 								<!-- PAGE CONTENT ENDS -->
@@ -481,8 +481,8 @@
 			</a>
 		</div><!-- /.main-container -->
 
-		<!--add-room modal start-->
-		<div class="modal fade" id="modal-add-room" tabindex="-1" role="dialog">
+		<!--add-resident modal start-->
+		<div class="modal fade" id="modal-add-resident" tabindex="-1" role="dialog">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
                     <!--modal header begins-->
@@ -490,52 +490,61 @@
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h5 class="modal-title">添加房间</h5>
+						<h5 class="modal-title">添加住户</h5>
 					</div>
 					<!--modal header ends-->
 					<!--modal body begins-->
 					<div class="modal-body">
 						<form class="form-horizontal" id="frm-add-product">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label no-padding-right"> 所在建筑：</label>
+                                <label class="col-sm-2 control-label no-padding-right"> 住户姓名：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="roomBuilding"
-                                           placeholder="请输入建筑地址:">
-                                </div>
-                                <div class="col-sm-2" style="vertical-align: center">
-                                    <a href="#modal-select-building" data-toggle="modal" onclick="getBuildingList()">选择建筑</a>
+                                    <input type="text" class="form-control" name="residentName"
+                                           placeholder="请输入住户姓名:">
                                 </div>
                             </div>
-                            <!--
-                            <div class="form-group">
-								<label class="col-sm-2 control-label no-padding-right"> 建筑编号：</label>
-								<div class="col-sm-8">
-									<input type="text" class="form-control focus" name="roomId" placeholder="请输入建筑编号"
-										   required="required">
-								</div>
-							</div>
-							-->
 							<div class="form-group" align="left">
-								<label class="col-sm-2 control-label no-padding-right"> 房间号：</label>
+								<label class="col-sm-2 control-label no-padding-right"> 证件号码：</label>
 								<div class="col-sm-8">
-									<input type="text" class="form-control" name="roomName"
-										   placeholder="请输入房间号:">
+									<input type="text" class="form-control" name="residentIDCard"
+										   placeholder="请输入证件号码:">
 								</div>
 							</div>
                             <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> 住户姓名：</label>
+                                <label class="col-sm-2 control-label no-padding-right"> 性别：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="roomResident"
-                                           placeholder="请输入住户姓名:">
+                                    <select name="residentSex" class="form-control">
+                                        <option value="-1" selected="selected">请选择住户性别:</option>
+                                        <option value="1">男</option>
+                                        <option value="2">女</option>
+                                    </select>
                                 </div>
-                                <div class="col-sm-2" style="vertical-align: center">
-                                    <a href="#modal-select-resident" data-toggle="modal" onclick="getResidentList()">选择住户</a>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-2 control-label no-padding-right"> 住户类型: </label>
+                                <div class="col-sm-8">
+                                    <select name="residentType" class="form-control">
+                                        <option value="-1" selected="selected">请选择住户类型:</option>
+                                        <option value="1">住户</option>
+                                        <option value="2">租客</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-2 control-label no-padding-right"> 住户属性: </label>
+                                <div class="col-sm-8">
+                                    <select name="residentAttribute" class="form-control">
+                                        <option value="-1" selected="selected">请选择住户属性:</option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                    </select>
                                 </div>
                             </div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label no-padding-right"> 备注：</label>
 								<div class="col-sm-8">
-									<textarea class="form-control" name="roomRemark" rows="4"
+									<textarea class="form-control" name="residentRemark" rows="4"
 										   placeholder="请输入备注:"></textarea>
 								</div>
 							</div>
@@ -548,148 +557,6 @@
 				</div>
 			</div>
 		</div><!--add-product modal end-->
-
-        <!--update-room modal use select2 start-->
-        <div class="modal fade" id="modal-update-room-select2" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <!--modal header begins-->
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h5 class="modal-title">修改房间信息</h5>
-                    </div>
-                    <!--modal header ends-->
-                    <!--modal body begins-->
-                    <div class="modal-body">
-                        <form class="form-horizontal" id="frm-add-product-select2">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label no-padding-right"> 所在建筑：</label>
-                                <div class="col-sm-8">
-                                    <select name="roomBuilding" class="building-select2 form-control select2-hidden-accessible"
-                                            tabindex="-1" aria-hidden="true" style="width: 100%;">
-                                        <option value="-1" selected="selected">请输入建筑编号/建筑地址/所在社区</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <!--
-                            <div class="form-group">
-								<label class="col-sm-2 control-label no-padding-right"> 建筑编号：</label>
-								<div class="col-sm-8">
-									<input type="text" class="form-control focus" name="roomId" placeholder="请输入建筑编号"
-										   required="required">
-								</div>
-							</div>
-							-->
-                            <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> 房间号：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="roomName"
-                                           placeholder="请输入建筑名称:">
-                                </div>
-                            </div>
-                            <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> 住户姓名：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="roomResident"
-                                           placeholder="请输入住户姓名:">
-                                </div>
-                                <div class="col-sm-2" style="vertical-align: center">
-                                    <a href="#modal-select-resident" data-toggle="modal" onclick="getResidentList()">选择住户</a>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label no-padding-right"> 备注：</label>
-                                <div class="col-sm-8">
-									<textarea class="form-control" name="roomRemark" rows="4"
-                                              placeholder="请输入备注:"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group" align="right">
-                                <input type="submit" class="btn btn-sm btn-primary" value="提交" />
-                                <input type="reset" class="btn btn-sm btn-warning" value="重置" />
-                            </div>
-                        </form>
-                    </div><!--modal body ends-->
-                </div>
-            </div>
-        </div><!--update-product modal end-->
-
-        <!--select building modal start-->
-        <div class="modal fade" id="modal-select-building" tabindex="-2" role="dialog" >
-            <div class="modal-dialog" role="document" style="width: 950px;">
-                <div class="modal-content">
-                    <!--modal header begins-->
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h5 class="modal-title">选择建筑</h5>
-                    </div>
-                    <!--modal header ends-->
-                    <!--modal body begins-->
-                    <div class="modal-body" style="font-size: 12px;">
-                        <div>
-                            <input id="searchBuilding" type="text" class="form-control search-query"
-                                   style="margin-left: 10px; width: 160px; float: left;" placeholder="建筑编号/建筑地址/所属社区" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-purple btn-sm" onclick="searchBuilding()">
-                                    查询
-                                    <i class="icon-search icon-on-right bigger-110"></i>
-                                </button>
-                            </span>
-                        </div>
-                        <div>
-                            <table id="buildingTable" class="nowrap dataTable hover display cell-border">
-                            </table>
-                        </div>
-                    </div><!--modal body ends-->
-                    <div class="modal-footer" style="background-color: white;">
-                        <button class="btn btn-primary btn-sm" onclick="selectBuilding()">提交</button>
-                    </div>
-                </div>
-            </div>
-        </div><!--select building modal end-->
-
-        <!--select resident modal start-->
-        <div class="modal fade" id="modal-select-resident" tabindex="-2" role="dialog" >
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <!--modal header begins-->
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h5 class="modal-title">选择住户</h5>
-                    </div>
-                    <!--modal header ends-->
-                    <!--modal body begins-->
-                    <div class="modal-body" style="font-size: 12px;">
-                        <div>
-                            <input id="searchResident" type="text" class="form-control search-query"
-                                   style="margin-left: 4px; width: 160px; float: left;" placeholder="身份证号/姓名/住户类型" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-purple btn-sm" onclick="searchResident()">
-                                    查询
-                                    <i class="icon-search icon-on-right bigger-110"></i>
-                                </button>
-                            </span>
-                        </div>
-                        <div>
-                            <!--
-                            <table id="residentTable" class="nowrap dataTable hover display cell-border">
-                            -->
-                            <table class="residentTable nowrap dataTable hover display cell-border">
-                            </table>
-                        </div>
-                    </div><!--modal body ends-->
-                    <div class="modal-footer" style="background-color: white;">
-                        <button class="btn btn-primary btn-sm" onclick="selectResident()">提交</button>
-                    </div>
-                </div>
-            </div>
-        </div><!--select resident modal end-->
 
 		<!-- basic scripts -->
 
@@ -729,144 +596,15 @@
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
             try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
-            var roomTable;
-            var buildingTable;
             var residentTable;
+            var buildingTable;
 
             $(function() {
-                getRoomList();
-                initBuildingSelect2();
+                getResidentList();
             });
 
             /**
-             * 获取房间列表
-             */
-            function getRoomList() {
-                var param = {
-                    type : "get",
-                    url : "data/roomList.json",
-                    successCall : initRoomTable,
-                    errorCall : function() {
-                        showCommonTip("加载房间列表失败！");
-                    }
-                };
-                ajax(param);
-            }
-
-            /**
-             * 初始化房间列表表格
-             */
-            function initRoomTable(data) {
-                roomTable = $('#roomTable').DataTable({
-                    "data": data,
-                    "deferRender": true,
-                    "bProcessing": true,
-                    "lengthChange": false,
-                    "ordering":false,
-                    "createdRow": function( row, data, dataIndex ) {
-                        $('td', row).attr("class","text-center");
-                        $(row).css("cursor","pointer");
-                    },
-                    "language": {
-                        "url":"assets/js/jquery-dataTables-zh.json"
-                    },
-                    "columns": [
-                        {
-                            title: '<div style="text-align:center;">'
-                                + '<input type="checkbox" id="all-room-checkbox" name="radios" />'
-                                + '</div>',
-                            data: 'uuid', render: function(data, type,row) {
-                            return '<input id="ckb_' + data + '" name="roomCkb" value="'
-                                + data + '" type="checkbox" onclick="checkBoxClick(\'roomCkb\',\'all-room-checkbox\')">';
-                        }},
-                        {title: '房间编号', data: "roomId"},
-                        {title: '所属建筑', data: "buildingAddress"},
-						{title: '房间号', data: 'roomId'},
-                        {title: '住户', data: 'resident'},
-                        {title: '创建人', data: "createUser"},
-                        {title: '创建时间', data: "createTime"},
-                        {title: '修改人', data: "updateUser"},
-                        {title: '修改时间', data: "updateTime"},
-                        {title: '备注', data: "remark"}
-                    ],
-                    "order": [[1, "asc"]]
-                });
-            }
-
-            function search() {
-                var keyword = $('#inputRoomName').val();
-                console.log(roomTable);
-                roomTable.search(keyword);
-            }
-
-            <!--select building table script begins-->
-            /**
-             * 获取建筑列表数据
-             */
-            function getBuildingList() {
-                var param = {
-                    type : "get",
-                    url : "data/buildingList.json",
-                    successCall : initBuildingTable,
-                    errorCall : function() {
-                        showCommonTip("加载用户列表失败！");
-                    }
-                };
-                ajax(param);
-            }
-
-            /**
-             * 初始化建筑列表
-             * @param data
-             */
-            function initBuildingTable(data) {
-                buildingTable = $('#buildingTable').DataTable({
-                    "data": data,
-                    "deferRender": true,
-                    "bProcessing": true,
-                    "lengthChange": false,
-                    "ordering":false,
-                    "bRetrieve": true,
-                    "createdRow": function( row, data, dataIndex ) {
-                        $('td', row).attr("class","text-center");
-                        $(row).css("cursor","pointer");
-                    },
-                    "language": {
-                        "url":"assets/js/jquery-dataTables-zh.json"
-                    },
-                    "columns": [
-                        {
-                            data: 'uuid', render: function(data, type, row) {
-                            return '<input id="radio_' + data + '" name="buildingRadio" value="'
-                                + data + '" type="radio">';
-                        }},
-                        {title: '建筑编号', data: "buildingId"},
-                        {title: '建筑地址', data: "buildingAddress"},
-                        {title: '所在社区', data: "communityAddress"},
-                        {title: '所在警务区', data: "policeArea"},
-                        {title: '备注', data: "remark"}
-                    ],
-                    "order": [[1, "asc"]]
-                });
-            }
-
-            /**
-             * 选择建筑
-             */
-            function selectBuilding() {
-                $('input[name="buildingRadio"]:checked').each(function(i, item) {
-                    var parent = $(item).parents("tr")[0];
-                    var child = $(parent).children("td")[2];
-                    var text = $(child).text();
-                    $('#modal-add-room input[name="roomBuilding"]').val(text);
-                    $('#modal-select-building').modal("hide");
-                });
-            }
-            <!--select building table script ends-->
-
-            <!--select resident table script begins-->
-            /**
-             * 获取住户列表数据
+             * 获取住户列表
              */
             function getResidentList() {
                 var param = {
@@ -881,17 +619,15 @@
             }
 
             /**
-             * 初始化住户列表
-             * @param data
+             * 初始化住户列表表格
              */
             function initResidentTable(data) {
-                residentTable = $('.residentTable').DataTable({
+                residentTable = $('#residentTable').DataTable({
                     "data": data,
                     "deferRender": true,
                     "bProcessing": true,
                     "lengthChange": false,
                     "ordering":false,
-                    "bRetrieve": true,
                     "createdRow": function( row, data, dataIndex ) {
                         $('td', row).attr("class","text-center");
                         $(row).css("cursor","pointer");
@@ -912,72 +648,62 @@
                         {title: "证件号码", data: "IDCard"},
                         {title: "性别", data: "sex"},
                         {title: "住户类型", data: "type"},
-                        {title: "状态", data: "status"},
-                        {title: "备注", data: "remark"}
+						{title: "住户属性", data: "attribute"},
+                        {title: '创建人', data: "createUser"},
+                        {title: '创建时间', data: "createTime"},
+                        {title: '修改人', data: "updateUser"},
+                        {title: '修改时间', data: "updateTime"},
+                        {title: '备注', data: "remark"}
                     ],
                     "order": [[1, "asc"]]
                 });
             }
 
-            /**
-             * 选择住户
-             */
-            function selectResident() {
-                var residents = "";
-                $('input[name="residentCkb"]:checked').each(function(i, item) {
-                    var parent = $(item).parents("tr")[0];
-                    var child = $(parent).children("td")[1];
-                    var text = $(child).text();
-                    if(residents != "")
-                        residents += ",";
-                    residents += text;
-                });
-                $('#modal-add-room,#modal-update-room-select2 input[name="roomResident"]').val(residents);
-                $('#modal-select-resident').modal("hide");
+            function updateResidentModal() {
+                //showCommonTip("tset");
+                var ids = getCheckedBox("residentCkb");
+                if(ids.length < 1)
+                    alert("未勾选住户");
+                else if(ids.length > 1)
+                    alert("当前勾选了多个住户");
+                else {
+                    var checkBox = $("#ckb_" + ids[0]);
+                    var parent = $(checkBox).parents("tr")[0];
+                    var residentName = $($(parent).children("td")[1]).text();
+                    var residentIDCard = $($(parent).children("td")[2]).text();
+                    var residentSex = $($(parent).children("td")[3]).text();
+                    var residentType = $($(parent).children("td")[4]).text();
+                    var residentAttribute = $($(parent).children("td")[5]).text();
+                    var residentRemark = $($(parent).children("td")[10]).text();
+                    $("#modal-add-resident input[name='residentName']").val(residentName);
+                    $("#modal-add-resident input[name='residentIDCard']").val(residentIDCard);
+                    switch(residentSex){
+                    case "男":
+                        residentSex = 1;
+                        break;
+                    case "女":
+                        residentSex = 2;
+                    }
+                    $("#modal-add-resident select[name='residentSex']").val(residentSex);
+                    switch (residentType) {
+                    case "住户":
+                        residentType = 1;
+                        break;
+                    case "租客":
+                        residentType = 2;
+                    }
+                    $("#modal-add-resident select[name='residentType']").val(residentType );
+                    $("#modal-add-resident select[name='residentAttribute']").val(residentAttribute);
+                    $("#modal-add-resident textarea[name='residentRemark']").val(residentRemark);
+                    $("#modal-add-resident").modal('show');
+                }
             }
-            <!--select resident table script ends-->
 
-            <!-- building select2 script begins -->
-            /**
-             * jquery select2 的控制脚本
-             */
-            function formatRepo(repo) {
-                return repo.text;       //jquery select2 必须返回text
+            function search() {
+                var keyword = $('#inputResidentName').val();
+                console.log(residentTable);
+                residentTable.search(keyword);
             }
-            function formatRepoSelection(repo) {
-                return repo.text;
-            }
-            function initBuildingSelect2() {
-                $(".building-select2").select2({
-                    ajax: {
-                        url: "data/buildingList.json",
-                        type: "get",
-                        delay: 250,
-                        data: function(params) {
-                            return {}
-                        },
-                        processResults: function(data, params) {
-                            //jquery select2 必须返回text，此处将buildingAddress转换为text
-                            for(var index in data) {
-                                data[index].id = data[index].uuid;
-                                data[index].text = data[index].buildingAddress;
-                            }
-                            return {
-                                results: data,
-                                pagination: {
-                                    more: true
-                                }
-                            };
-                        },
-                        cache: true,
-                    },
-                    escapeMarkup: function(markup) { return markup; },
-                    minimumInputLength: 1,
-                    templateResult: formatRepo, //返回数据的显示格式
-                    templateSelection: formatRepoSelection  //被选择的数据的显示格式
-                });
-            }
-            <!-- building select2 script ends -->
 
 		</script>
 </body>
