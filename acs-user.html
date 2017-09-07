@@ -35,6 +35,8 @@
     <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
     <![endif]-->
 
+    <link rel="stylesheet" href="css/acs.css" />
+
     <!-- inline styles related to this page -->
 
     <!-- ace settings handler -->
@@ -1040,7 +1042,7 @@
     function getUserList() {
         var param = {
             type: "get",
-            url: "data/userList.json",
+            url: "data/userListNew.json",
             successCall: initUserTable,
             errorCall: function () {
                 showCommonTip("加载用户列表失败！");
@@ -1073,13 +1075,12 @@
                     return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
                 }, className: "dt-center",
                 },
-                {title: '用户账号', data: "userName", className: "dt-center",},
-                {title: '所属公司', data: "unitsName", className: "dt-center",},
-                {title: '真实姓名', data: "fullName", className: "dt-center",},
-                {title: '联系电话', data: "tel", className: "dt-center",},
-                {title: '邮箱', data: "email", className: "dt-center",},
+                {title: '用户账号', data: "name", className: "dt-center",},
+                {title: '姓名', data: "username", className: "dt-center",},
+                {title: '性别', data: "sex", className: "dt-center",},
+                {title: '出生日期', data: "birth", className: "dt-center",},
                 {
-                    title: '状态', data: "isvalid", className: "dt-center", render: function (data, type, row) {
+                    title: '状态', data: "status", className: "dt-center", render: function (data, type, row) {
                     if (data == '1') {
                         return '已启用';
                     } else {
@@ -1087,11 +1088,11 @@
                     }
                 }
                 },
-                {
-                    title: '创建日期', data: "ctime", className: "dt-center", render: function (data, type, row) {
-                    return new Date(data).toString("yyyy-MM-dd");
-                }
-                },
+                {title: '证件号码', data: "idNum", className: "dt-center",},
+                {title: '权限角色', data: "role", className: "dt-center",},
+                {title: '权限范围', data: "resourceGroup", className: "dt-center",},
+                {title: '创建人', data: "createUser", className: "dt-center",},
+                {title: '创建时间', data: "createTime", className: "dt-center",},
             ],
             "order": [[1, "asc"]]
         });
