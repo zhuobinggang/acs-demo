@@ -47,6 +47,7 @@
     <script src="assets/js/html5shiv.js"></script>
     <script src="assets/js/respond.min.js"></script>
     <![endif]-->
+    <link rel="stylesheet" href="css/acs.css"/>
 </head>
 
 <body>
@@ -374,10 +375,10 @@
                             </a>
                         </li>
                         <!--<li class="">-->
-                            <!--<a href="acs-resourceGroup.html">-->
-                                <!--<i class="icon-sitemap"></i>-->
-                                <!--<span class="menu-text"> 群组管理 </span>-->
-                            <!--</a>-->
+                        <!--<a href="acs-resourceGroup.html">-->
+                        <!--<i class="icon-sitemap"></i>-->
+                        <!--<span class="menu-text"> 群组管理 </span>-->
+                        <!--</a>-->
                         <!--</li>-->
                     </ul>
                 </li>
@@ -504,46 +505,19 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label no-padding-right">权限URL</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control focus" name="name" placeholder="权限URL"
-                                   required="required">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label no-padding-right">所属机构</label>
+                        <label class="col-sm-2 control-label no-padding-right">所属机构类型</label>
                         <div class="col-sm-8">
                             <select>
-                                <option value="volvo">中交西筑</option>
-                                <option value="saab">东明恒通路桥</option>
-                                <option value="opel">中交三公局总承包公司用户</option>
-                                <option value="audi">辽宁盘锦顺程</option>
+                                <option value="volvo">社区</option>
+                                <option value="saab">派出所</option>
+                                <option value="opel">海辰</option>
                             </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <!--<label class="col-sm-3 control-label no-padding-right">所属群组</label>-->
-                        <!--<div class="col-sm-9">-->
-                        <!--<select>-->
-                        <!--<option value="volvo">康乐大街六号</option>-->
-                        <!--<option value="saab">康乐大街八号</option>-->
-                        <!--<option value="opel">古镇曹步曹一村新丰中路10号</option>-->
-                        <!--<option value="audi">东升镇</option>-->
-                        <!--</select>-->
-                        <!--</div>-->
-                        <label class="col-sm-2 control-label no-padding-right"> 所在社区</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="buildingCommunity"
-                                   placeholder="请输入建筑所在社区:">
-                        </div>
-                        <div class="col-sm-2" style="vertical-align: center">
-                            <a href="#modal-select-community" data-toggle="modal" onclick="getCommunityList()">选择社区</a>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">备注信息</label>
                         <div class="col-sm-8">
-                            <input type="url" class="form-control" name="buyLink"
+                            <input type="text" class="form-control" name="buildingCommunity"
                                    placeholder="">
                         </div>
                     </div>
@@ -561,7 +535,9 @@
             </div>
         </div>
     </div>
+
 </div><!--add-product modal end-->
+
 <!--modify modal start-->
 <div class="modal fade" id="modal-modify" tabindex="-1" role="dialog">
     <div class="modal-dialog" style="width: 700px;" role="document">
@@ -582,37 +558,19 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label no-padding-right">权限URL</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control focus" name="name" placeholder="权限URL"
-                                   required="required">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label no-padding-right">所属机构</label>
+                        <label class="col-sm-2 control-label no-padding-right">所属机构类型</label>
                         <div class="col-sm-8">
                             <select>
-                                <option value="volvo">中交西筑</option>
-                                <option value="saab">东明恒通路桥</option>
-                                <option value="opel">中交三公局总承包公司用户</option>
-                                <option value="audi">辽宁盘锦顺程</option>
+                                <option value="volvo">社区</option>
+                                <option value="saab">派出所</option>
+                                <option value="opel">海辰</option>
                             </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label no-padding-right"> 所在社区：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" name="buildingCommunity"
-                                   placeholder="请输入建筑所在社区:">
-                        </div>
-                        <div class="col-sm-2" style="vertical-align: center">
-                            <a href="#modal-select-community" data-toggle="modal" onclick="getCommunityList()">选择社区</a>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">备注信息</label>
                         <div class="col-sm-8">
-                            <input type="url" class="form-control" name="buyLink"
+                            <input type="text" class="form-control" name="buildingCommunity"
                                    placeholder="">
                         </div>
                     </div>
@@ -640,78 +598,19 @@
                 </button>
                 <h5 class="modal-title">分配权限</h5>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="font-size: 12px;">
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <input type="checkbox" id="subscribeNews1" name="subscribe" value="newsletter">
-                        <label for="subscribeNews1">用户管理</label>
-                        <input type="checkbox" id="subscribeNews2" name="subscribe" value="newsletter">
-                        <label for="subscribeNews2">角色管理</label>
-                        <input type="checkbox" id="subscribeNews3" name="subscribe" value="newsletter">
-                        <label for="subscribeNews3">机构管理</label>
-                        <input type="checkbox" id="subscribeNews4" name="subscribe" value="newsletter">
-                        <label for="subscribeNews4">权限管理</label>
-                    </div>
-                    <!--<div class="form-group">-->
-                    <!--<input type="checkbox" id="subscribeNews2" name="subscribe" value="newsletter">-->
-                    <!--<label for="subscribeNews2">角色管理</label>-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                    <!--<input type="checkbox" id="subscribeNews3" name="subscribe" value="newsletter">-->
-                    <!--<label for="subscribeNews3">机构管理</label>-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                    <!--<input type="checkbox" id="subscribeNews4" name="subscribe" value="newsletter">-->
-                    <!--<label for="subscribeNews4">权限管理</label>-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                    <!--<input type="checkbox" id="subscribeNews5" name="subscribe" value="newsletter">-->
-                    <!--<label for="subscribeNews5">群组管理</label>-->
-                    <!--</div>-->
-                    <!--system manage end-->
+                        <div class="widget-box">
 
-                    <div class="form-group">
-                        <input type="checkbox" id="subscribeNews6" name="subscribe" value="newsletter">
-                        <label for="subscribeNews6">楼宇管理</label>
-                        <input type="checkbox" id="subscribeNews7" name="subscribe" value="newsletter">
-                        <label for="subscribeNews7">房间管理</label>
-                        <input type="checkbox" id="subscribeNews8" name="subscribe" value="newsletter">
-                        <label for="subscribeNews8">住户管理</label>
-                        <input type="checkbox" id="subscribeNews9" name="subscribe" value="newsletter">
-                        <label for="subscribeNews9">卡片管理</label>
-                    </div>
-                    <!--<div class="form-group">-->
-                    <!--<input type="checkbox" id="subscribeNews7" name="subscribe" value="newsletter">-->
-                    <!--<label for="subscribeNews7">房间管理</label>-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                    <!--<input type="checkbox" id="subscribeNews8" name="subscribe" value="newsletter">-->
-                    <!--<label for="subscribeNews8">住户管理</label>-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                    <!--<input type="checkbox" id="subscribeNews9" name="subscribe" value="newsletter">-->
-                    <!--<label for="subscribeNews9">卡片管理</label>-->
-                    <!--</div>-->
-                    <!--resource group manage end-->
+                            <div class="widget-body">
+                                <div class="widget-main padding-8">
+                                    <div id="community_tree" class="tree"></div>
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <input type="checkbox" id="subscribeNews10" name="subscribe" value="newsletter">
-                        <label for="subscribeNews10">型号管理</label>
-                        <input type="checkbox" id="subscribeNews11" name="subscribe" value="newsletter">
-                        <label for="subscribeNews11">终端管理</label>
-                        <input type="checkbox" id="subscribeNews12" name="subscribe" value="newsletter">
-                        <label for="subscribeNews12">门禁监控</label>
                     </div>
-                    <!--<div class="form-group">-->
-                    <!--<input type="checkbox" id="subscribeNews11" name="subscribe" value="newsletter">-->
-                    <!--<label for="subscribeNews11">终端管理</label>-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                    <!--<input type="checkbox" id="subscribeNews12" name="subscribe" value="newsletter">-->
-                    <!--<label for="subscribeNews12">门禁监控</label>-->
-                    <!--</div>-->
-
-                    <!--confirm button-->
                     <div class="form-group">
                         <div class="col-sm-10">
                             <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">确认
@@ -720,7 +619,7 @@
                         </div>
                     </div>
                 </form>
-            </div>
+            </div><!--modal body ends-->
         </div>
     </div>
 </div><!--add-product modal end-->
@@ -785,9 +684,13 @@
 <!-- other jquery scripts -->
 <script src="assets/js/jquery.dataTables.min.js"></script>
 
+<script src="assets/js/fuelux/data/fuelux.tree-sampledata.js"></script>
+<script src="assets/js/fuelux/fuelux.tree.min.js"></script>
+
 <!-- custom scripts -->
 <script src="js/acs-util.js"></script>
 <script src="js/communityTreeData.js"></script>
+
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
@@ -840,7 +743,7 @@
                     title: '<input id="all-user-checkbox" type="checkbox" name="radios" />',
                     data: 'uuid', render: function (data, type, row) {
                     return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
-                },className:"dt-center"
+                }, className: "dt-center"
                 },
                 {title: '角色名称', data: "name", className: "dt-center",},
                 {title: '所属机构类型', data: "organization", className: "dt-center",},
@@ -868,10 +771,10 @@
     //select community begin
     function getCommunityList() {
         var param = {
-            type : "get",
-            url : "data/communityList.json",
-            successCall : initCommunityTable,
-            errorCall : function() {
+            type: "get",
+            url: "data/communityList.json",
+            successCall: initCommunityTable,
+            errorCall: function () {
                 showCommonTip("加载用户列表失败！");
             }
         };
@@ -888,31 +791,32 @@
             "deferRender": true,
             "bProcessing": true,
             "lengthChange": false,
-            "ordering":false,
+            "ordering": false,
             "bRetrieve": true,
-            "createdRow": function( row, data, dataIndex ) {
-                $('td', row).attr("class","text-center");
-                $(row).css("cursor","pointer");
+            "createdRow": function (row, data, dataIndex) {
+                $('td', row).attr("class", "text-center");
+                $(row).css("cursor", "pointer");
             },
             "language": {
-                "url":"assets/js/jquery-dataTables-zh.json"
+                "url": "assets/js/jquery-dataTables-zh.json"
             },
             "columns": [
                 {
-                    data: 'uuid', render: function(data, type, row) {
+                    data: 'uuid', render: function (data, type, row) {
                     return '<input id="radio_' + data + '" name="communityRadio" value="'
                         + data + '" type="radio">';
-                }},
+                }
+                },
                 {title: "社区编号", data: "communityCode"},
                 {title: '社区名称', data: "communityName"},
-                {title: '社区地址', data: "communityAddress",className: "dt-center",},
+                {title: '社区地址', data: "communityAddress", className: "dt-center",},
             ],
             "order": [[1, "asc"]]
         });
     }
 
     function selectCommunity() {
-        $('input[name="communityRadio"]:checked').each(function(i, item) {
+        $('input[name="communityRadio"]:checked').each(function (i, item) {
 //            var parent = $(item).parents("tr")[0];
 //            var child = $(parent).children("td")[2];
 //            var text = $(child).text();
@@ -925,14 +829,14 @@
     //community modal init start
     function community_assign_tree() {
         $('#community_tree').ace_tree({
-            dataSource: community_tree_data ,
-            multiSelect:true,
-            loadingHTML:'<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
-            'open-icon' : 'icon-minus',
-            'close-icon' : 'icon-plus',
-            'selectable' : true,
-            'selected-icon' : 'icon-ok',
-            'unselected-icon' : 'icon-remove'
+            dataSource: role_authority_tree,
+            multiSelect: true,
+            loadingHTML: '<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
+            'open-icon': 'icon-minus',
+            'close-icon': 'icon-plus',
+            'selectable': true,
+            'selected-icon': 'icon-ok',
+            'unselected-icon': 'icon-remove'
         });
     }
     //community modal init end

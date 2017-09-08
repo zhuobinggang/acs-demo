@@ -47,6 +47,8 @@
     <script src="assets/js/html5shiv.js"></script>
     <script src="assets/js/respond.min.js"></script>
     <![endif]-->
+
+    <link rel="stylesheet" href="css/acs.css"/>
 </head>
 
 <body>
@@ -374,10 +376,10 @@
                             </a>
                         </li>
                         <!--<li class="">-->
-                            <!--<a href="acs-resourceGroup.html">-->
-                                <!--<i class="icon-sitemap"></i>-->
-                                <!--<span class="menu-text"> 群组管理 </span>-->
-                            <!--</a>-->
+                        <!--<a href="acs-resourceGroup.html">-->
+                        <!--<i class="icon-sitemap"></i>-->
+                        <!--<span class="menu-text"> 群组管理 </span>-->
+                        <!--</a>-->
                         <!--</li>-->
                     </ul>
                 </li>
@@ -481,7 +483,7 @@
 </div><!-- /.main-container -->
 
 <!--add-product modal start-->
-<div class="modal fade"  id="modal-add-product" tabindex="-1" role="dialog">
+<div class="modal fade" id="modal-add-product" tabindex="-1" role="dialog">
     <div class="modal-dialog" style="width: 700px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -515,13 +517,18 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-sm-3 control-label no-padding-right">权限URL</label>
+                        <div class="col-sm-9">
+                            <input type="url" class="form-control" name="buyLink"
+                                   placeholder="例: system/user/create">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">父权限</label>
                         <div class="col-sm-9">
-                            <select  >
-                                <option value ="volvo">父权限1</option>
-                                <option value ="saab">父权限2</option>
-                                <option value="opel">父权限3</option>
-                                <option value="audi">父权限4</option>
+                            <select>
+                                <option value="volvo">系统管理</option>
+                                <option value="saab">社区管理</option>
                             </select>
                         </div>
                     </div>
@@ -651,13 +658,22 @@
                     title: '<input id="all-user-checkbox" type="checkbox" name="radios" />',
                     data: 'uuid', render: function (data, type, row) {
                     return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
-                },className:"dt-center"
+                }, className: "dt-center"
                 },
-                {title: '权限名称', data: "name",className: "dt-center",},
-                {title: '父权限名称', data: "parentName",className: "dt-center",},
-                {title: '权限描述', data: "desc",className: "dt-center",},
+                {title: '权限名称', data: "name", className: "dt-center",},
+                {title: '父权限名称', data: "parentName", className: "dt-center",},
+                {title: '权限描述', data: "desc", className: "dt-center",},
+                {
+                    title: '状态', data: "status", className: "dt-center", render: function (data, type, row) {
+                    if (data == '1') {
+                        return '已启用';
+                    } else {
+                        return '未启用';
+                    }
+                }
+                },
 //                {title: '父权限名称', data: "unitsName",className: "dt-center",},
-                {title: '访问路径', data: "url",className: "dt-center",},
+                {title: '访问路径', data: "url", className: "dt-center",},
 //                {title: '创建时间', data: "createTime",className: "dt-center",},
 //                {title: '联系电话', data: "tel"},
 //                {title: '邮箱', data: "email"},

@@ -446,7 +446,7 @@
                                     <td align="right" style="padding-right: 3px;" id="f_user_more">
                                         <!--<button class="btn btn-sm btn-primary">分配权限</button>-->
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                                data-target="#modal-select-community" onclick="getCommunityList()">分配管辖群组</button>
+                                                data-target="#modal-select-community" >分配管辖群组</button>
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                 data-target="#modal-add-product">添加
                                         </button>
@@ -821,7 +821,7 @@
                     title: '<input id="all-user-checkbox" type="checkbox" name="radios" />',
                     data: 'uuid', render: function (data, type, row) {
                     return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
-                }
+                }, className: "dt-center",
                 },
                 {title: '机构名称', data: "organization", className: "dt-center",},
                 {title: '管辖群组', data: "resourceGroup", className: "dt-center",},
