@@ -1,0 +1,56 @@
+[
+  {
+    "uuid": "9f2b0646-aae3-447b-ba06-3a1e93fbca75",
+    "addressCode": "442000001000",
+    "terminalAlias": "长命水康乐大街6号东门",
+    "doorAlias": "1通道(进)"
+  },
+  {
+    "uuid": "9f2b0646-aae3-447b-ba06-3h3u43h4i345",
+    "addressCode": "442000001000",
+    "terminalAlias": "长命水康乐大街6号东门",
+    "doorAlias": "1通道(出)"
+  },
+  {
+    "uuid": "9f2b0646-aae3-447b-ba06-892388743925",
+    "addressCode": "442000001001",
+    "terminalAlias": "长命水康乐大街6号西门",
+    "doorAlias": "2通道(进)"
+  },
+  {
+    "uuid": "9f2b0646-aae3-447b-ba06-8y8y37347ry5",
+    "addressCode": "442000001001",
+    "terminalAlias": "长命水康乐大街6号西门",
+    "doorAlias": "2通道(出)"
+  },
+  {
+    "uuid": "9f2b0646-aae3-447b-ba06-8843y43y4375",
+    "addressCode": "442000001002",
+    "terminalAlias": "长命水康乐大街6号南门",
+    "doorAlias": "3通道(进)"
+  },
+  {
+    "uuid": "9f2b0646-aae3-447b-ba06-7987a7f98ba5",
+    "addressCode": "442000001002",
+    "terminalAlias": "长命水康乐大街6号南门",
+    "doorAlias": "3通道(出)"
+  },
+  {
+    "uuid": "9f2b0646-aae3-447b-ba06-7987a7f98ba5",
+    "addressCode": "442000001002",
+    "terminalAlias": "长命水康乐大街6号南门",
+    "doorAlias": "3通道(出)"
+  },
+  {
+    "uuid": "9f2b0646-aae3-447b-ba06-33hu3434iu38",
+    "addressCode": "442000001003",
+    "terminalAlias": "长命水康乐大街6号北门",
+    "doorAlias": "4通道(进)"
+  },
+  {
+    "uuid": "9f2b0646-aae3-447b-ba06-343u4gb3q438",
+    "addressCode": "442000001003",
+    "terminalAlias": "长命水康乐大街6号北门",
+    "doorAlias": "4通道(出)"
+  }
+]
