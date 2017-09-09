@@ -431,7 +431,7 @@
                                                 <div style="width: 300px;">
                                                     <div class="input-group">
                                                         <input type="text" class="form-control search-query"
-                                                               placeholder="权限名称"/>
+                                                               placeholder="权限名称" id="search_bar"/>
                                                         <span class="input-group-btn">
                                                     				<button type="button" class="btn btn-purple btn-sm"
                                                                             onclick="search()">
@@ -456,7 +456,7 @@
                             </table>
                         </div>
                         <div style="margin-top: 20px; font-size: 12px;">
-                            <table id="userTable" class="nowrap dataTable hover">
+                            <table id="userTable"  class="nowrap dataTable hover">
                                 <!--<thead>-->
                                 <!--<tr>-->
                                 <!--<td style="text-align: center;">id</td>-->
@@ -684,9 +684,9 @@
     }
 
     function search() {
-        var keyword = $('#inputUserName').val();
-        console.log(userTable);
-        userTable.search(keyword);
+        var keyword = $('#search_bar').val();
+//        console.log(userTable);
+        userTable.search(keyword).draw();
     }
 
 </script>
