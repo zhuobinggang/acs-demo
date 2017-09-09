@@ -430,7 +430,7 @@
                                                 <div style="width: 300px;">
                                                     <div class="input-group">
                                                         <input type="text" class="form-control search-query"
-                                                               placeholder="机构名称"/>
+                                                               placeholder="机构名称" id="search_bar"/>
                                                         <span class="input-group-btn">
                                                     				<button type="button" class="btn btn-purple btn-sm"
                                                                             onclick="search()">
@@ -503,13 +503,35 @@
                                    required="required">
                         </div>
                     </div>
-                    <!--<div class="form-group">-->
-                    <!--<label class="col-sm-2 control-label no-padding-right">所属社区</label>-->
-                    <!--<div class="col-sm-8">-->
-                    <!--<input type="url" class="form-control" name="buyLink"-->
-                    <!--placeholder="例如：社区">-->
-                    <!--</div>-->
-                    <!--</div>-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right">机构类型</label>
+                        <div class="col-sm-8">
+                            <select  >
+                                <option value ="volvo">社区</option>
+                                <option value ="saab">派出所</option>
+                                <option value="opel">居委会</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right">户籍行政区划代码</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control focus" name="name" placeholder="户籍行政区划代码"
+                                   required="required">
+                        </div>
+                        <div class="col-sm-2">
+                            <a href="#modal-select-community" data-toggle="modal">选择行政区划</a>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right">详细地址</label>
+                        <div class="col-sm-8">
+                            <input type="url" class="form-control" name="buyLink"
+                                   placeholder="">
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">备注信息</label>
@@ -518,54 +540,7 @@
                                    placeholder="">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label no-padding-right">父机构</label>
-                        <div class="col-sm-8">
-                            <select  >
-                                <option value ="volvo">父机构1</option>
-                                <option value ="saab">父机构2</option>
-                                <option value="opel">父机构3</option>
-                                <option value="audi">父机构4</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!--<div class="form-group">-->
-                    <!--<label class="col-sm-2 control-label no-padding-right">备注信息</label>-->
-                    <!--<div class="col-sm-8">-->
-                    <!--<input type="file" id="file-image" name="image" accept="image/jpeg,image/png"-->
-                    <!--class="tooltip-info" data-rel="tooltip" title="只支持.jpg或.png的说明书格式"/>-->
-                    <!--<div class="progress hidden">-->
-                    <!--<div id="progress-bar-image" class="progress-bar" role="progressbar" aria-valuenow="0"-->
-                    <!--aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;"> 0%-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                    <!--<label class="col-sm-2 control-label no-padding-right"> 请选择产品说明书：</label>-->
-                    <!--<div class="col-sm-8">-->
-                    <!--<input type="file" id="file-document" name="document"-->
-                    <!--accept="application/pdf,application/msword" class="tooltip-info" data-rel="tooltip"-->
-                    <!--title="只支持.doc或.pdf的说明书格式"/>-->
-                    <!--<div class="progress hidden">-->
-                    <!--<div id="progress-bar-document" class="progress-bar" role="progressbar"-->
-                    <!--aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;"> 0%-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                    <!--<label class="col-sm-2 control-label no-padding-right"> 请选择产品视频：</label>-->
-                    <!--<div class="col-sm-8">-->
-                    <!--<input type="file" id="file-video" name="video" accept="video/*" class="tooltip-info"-->
-                    <!--data-rel="tooltip" title="支持常见的视频格式"/>-->
-                    <!--<div class="progress hidden">-->
-                    <!--<div id="progress-bar-video" class="progress-bar" role="progressbar" aria-valuenow="0"-->
-                    <!--aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;"> 0%-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
+
                     <div class="form-group">
                         <div class="col-sm-10">
                             <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
@@ -834,9 +809,9 @@
     }
 
     function search() {
-        var keyword = $('#inputUserName').val();
+        var keyword = $('#search_bar').val();
         console.log(userTable);
-        userTable.search(keyword);
+        userTable.search(keyword).draw();
     }
 
     //select community begin
