@@ -715,7 +715,7 @@
                     "columns": [
                         {
                             title: '<div style="text-align:center;">'
-                                + '<input type="checkbox" id="all-building-checkbox" name="radios" />'
+                                + '<input type="checkbox" id="all-building-checkbox" onclick="selectAllCheckBox(\'buildingCkb\')" name="allBuildingCheckBox" />'
                                 + '</div>',
                             data: 'uuid', render: function(data, type,row) {
                             return '<input id="ckb_' + data + '" name="buildingCkb" value="'

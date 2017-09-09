@@ -949,7 +949,7 @@
                     "columns": [
                         {
                             title: '<div style="text-align:center;">'
-                                + '<input type="checkbox" id="all-card-checkbox" name="radios" />'
+                                + '<input type="checkbox" id="all-card-checkbox" onclick="selectAllCheckBox(\'cardCkb\')" name="allCardCheckBox" />'
                                 + '</div>',
                             data: 'uuid', render: function(data, type,row) {
                             return '<input id="ckb_' + data + '" name="cardCkb" value="'

@@ -889,7 +889,7 @@
                     "columns": [
                         {
                             title: '<div style="text-align:center;">'
-                                + '<input type="checkbox" id="all-room-checkbox" name="radios" />'
+                                + '<input type="checkbox" id="all-room-checkbox" onclick="selectAllCheckBox(\'roomCkb\')" name="allRoomCheckBox" />'
                                 + '</div>',
                             data: 'uuid', render: function(data, type,row) {
                             return '<input id="ckb_' + data + '" name="roomCkb" value="'
@@ -1020,7 +1020,7 @@
                     "columns": [
                         {
                             title: '<div style="text-align:center;">'
-                                + '<input type="checkbox" id="all-resident-checkbox" name="radios" />'
+                                + '<input type="checkbox" id="all-resident-checkbox" onclick="selectAllCheckBox(\'residentCkb\')" name="allResidentCheckBox" />'
                                 + '</div>',
                             data: 'residentId', render: function(data, type,row) {
                             return '<input id="ckb_' + data + '" name="residentCkb" value="'

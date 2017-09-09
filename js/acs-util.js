@@ -515,6 +515,18 @@ function commonCloudMethod(successTip, url, requestType, timer, isCloseByClickCo
     }
 }
 
+function selectAllCheckBox(checkBox) {
+    var allCkBoxs = $("input[name='" + checkBox + "']:checkbox");
+    var checkedCkBoxs = $("input[name='" + checkBox + "']:checkbox:checked");
+    //console.log(checkedCkBoxs);
+    if (allCkBoxs.length != checkedCkBoxs.length) {
+        $("input[name='" + checkBox + "']:checkbox").prop("checked", true);
+        console.log($("input[name='" + checkBox + "']:checkbox"));
+    } else {
+        $("input[name='" + checkBox + "']:checkbox").prop("checked", false);
+    }
+}
+
 /**
  * 控制全选checkbox是否选中
  */
