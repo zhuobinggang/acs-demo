@@ -287,10 +287,33 @@
 
 					<ul class="nav nav-list">
 						<!-- terminal monitor begin -->
+						<!--<li class="active open">-->
+						<!--<a href="#" class="dropdown-toggle">-->
+						<!--<i class="icon-dashboard"></i>-->
+						<!--<span class="menu-text"> 门禁监控 </span>-->
+						<!--<b class="arrow icon-angle-down"></b>-->
+						<!--</a>-->
+						<!--<ul class="submenu">-->
+						<!--<li class="">-->
+						<!--<a href="acs-map.html">-->
+						<!--<i class="icon-map-marker"></i>-->
+						<!--<span class="menu-text"> 电子地图 </span>-->
+						<!--</a>-->
+						<!--</li>-->
+						<!--<li class="active">-->
+						<!--<a href="acs-monitor.html">-->
+						<!--<i class="icon-tags"></i>-->
+						<!--<span class="menu-text"> 监控视图 </span>-->
+						<!--</a>-->
+						<!--</li>-->
+						<!--</ul>-->
+						<!--</li>-->
+						<!-- terminal monitor end -->
+						<!-- terminal admin begin -->
 						<li class="">
 							<a href="#" class="dropdown-toggle">
-								<i class="icon-dashboard"></i>
-								<span class="menu-text"> 门禁监控 </span>
+								<i class="icon-lock"></i>
+								<span class="menu-text"> 门禁管理 </span>
 								<b class="arrow icon-angle-down"></b>
 							</a>
 							<ul class="submenu">
@@ -306,26 +329,9 @@
 										<span class="menu-text"> 监控视图 </span>
 									</a>
 								</li>
-							</ul>
-						</li>
-						<!-- terminal monitor end -->
-						<!-- terminal admin begin -->
-						<li class="">
-							<a href="#" class="dropdown-toggle">
-								<i class="icon-lock"></i>
-								<span class="menu-text"> 门禁管理 </span>
-								<b class="arrow icon-angle-down"></b>
-							</a>
-							<ul class="submenu">
-								<li class="">
-									<a href="acs-terminalType.html">
-										<i class="icon-th-list"></i>
-										<span class="menu-text"> 型号管理 </span>
-									</a>
-								</li>
 								<li class="">
 									<a href="acs-terminal.html">
-										<i class="icon-tags"></i>
+										<i class="icon-th-list"></i>
 										<span class="menu-text">  终端管理 </span>
 									</a>
 								</li>
@@ -399,12 +405,6 @@
 										<span class="menu-text"> 权限管理 </span>
 									</a>
 								</li>
-								<li class="">
-									<a href="acs-resourceGroup">
-										<i class="icon-sitemap"></i>
-										<span class="menu-text"> 族群管理 </span>
-									</a>
-								</li>
 							</ul>
 						</li>
 						<!-- system admin end -->
@@ -444,7 +444,7 @@
 											<td style="padding:3px;" id="f_building_s">
 												<form class="form-search">
 													<div class="row">
-														<div class="col-xs-8 col-sm-6">
+														<div style="width: 300px; margin-left: 9px;">
 															<div class="input-group">
 																<input id="inputBuildingName" type="text" class="form-control search-query" placeholder="建筑编号/建筑地址/所属社区" />
 																<span class="input-group-btn">
@@ -460,7 +460,7 @@
 											</td>
 											<td align="right" style="padding-right: 3px;" id="f_building_more">
 												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-add-building">添加</button>
-												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-update-building-select2">修改</button>
+												<button class="btn btn-sm btn-primary" data-toggle="modal" onclick="updateBuildingModal()" >修改</button>
 												<button class="btn btn-sm btn-danger">删除</button>
 											</td>
 										</tr>
@@ -740,7 +740,7 @@
             function search() {
                 var keyword = $('#inputBuildingName').val();
                 console.log(buildingTable);
-                buildingTable.search(keyword);
+                buildingTable.search(keyword).draw();
             }
 
             /**
@@ -855,6 +855,27 @@
             }
             <!-- community select2 script ends -->
 
+            <!-- updaate building script starts -->
+            function updateBuildingModal() {
+                //showCommonTip("tset");
+                var ids = getCheckedBox("buildingCkb");
+                if(ids.length < 1)
+                    alert("未勾选建筑");
+                else if(ids.length > 1)
+                    alert("当前勾选了多个建筑");
+                else {
+                    var checkBox = $("#ckb_" + ids[0]);
+                    var parent = $(checkBox).parents("tr")[0];
+                    var buildingAddress = $($(parent).children("td")[2]).text();
+                    var communityAddress = $($(parent).children("td")[3]).text();
+                    var buildingRemark = $($(parent).children("td")[7]).text();
+                    $("#modal-update-building-select2 span[id^=select2-buildingCommunity]").html(communityAddress);
+                    $("#modal-update-building-select2 input[name='buildingName']").val(buildingAddress);
+                    $("#modal-update-building-select2 textarea[name='buildingRemark']").val(buildingRemark);
+                    $("#modal-update-building-select2").modal('show');
+                }
+            }
+            <!-- updaate building script ends -->
 		</script>
 </body>
 </html>
