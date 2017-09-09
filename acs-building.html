@@ -586,7 +586,7 @@
         </div><!--select community modal end-->
 
         <!--update-building modal use select2 start-->
-        <div class="modal fade" id="modal-update-building-select2" tabindex="-1" role="dialog">
+        <div class="modal fade" id="modal-update-building-select2" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <!--modal header begins-->
@@ -832,6 +832,7 @@
                 return repo.text;
             }
             function initCommunitySelect2() {
+                $(document).off("focusin.modal");
                 $(".community-select2").select2({
                     ajax: {
                         url: "data/communityList.json",
