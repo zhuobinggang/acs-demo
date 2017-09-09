@@ -498,22 +498,59 @@
 					<div class="modal-body">
 						<form class="form-horizontal" id="frm-add-product">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label no-padding-right"> 住户姓名：</label>
-                                <div class="col-sm-8">
+                                <label class="col-sm-3 control-label no-padding-right"> 证件号码：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="residentIDCardNum"
+                                           placeholder="请输入证件号码:">
+                                </div>
+                                <div class="col-sm-2" style="vertical-align: center">
+                                    <a href="#">读取</a>
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 证件种类：</label>
+                                <div class="col-sm-7">
+                                    <select name="residentType" class="form-control">
+                                        <option value="-1" selected="selected">请选择证件种类:</option>
+                                        <option value="1">身份证</option>
+                                        <option value="2">外交护照</option>
+                                        <option value="3">公务护照</option>
+                                        <option value="4">因公普通护照</option>
+                                        <option value="5">护照</option>
+                                        <option value="6">其它</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 发证机关：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="department"
+                                           placeholder="请输入发证机关:">
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 证件有效期：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="IDCardValidDate"
+                                           placeholder="请输入证件有效期:">
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 姓名：</label>
+                                <div class="col-sm-7">
                                     <input type="text" class="form-control" name="residentName"
                                            placeholder="请输入住户姓名:">
                                 </div>
                             </div>
-							<div class="form-group" align="left">
-								<label class="col-sm-2 control-label no-padding-right"> 证件号码：</label>
-								<div class="col-sm-8">
-									<input type="text" class="form-control" name="residentIDCard"
-										   placeholder="请输入证件号码:">
-								</div>
-							</div>
                             <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> 性别：</label>
-                                <div class="col-sm-8">
+                                <label class="col-sm-3 control-label no-padding-right"> 照片：</label>
+                                <div class="col-sm-7">
+                                    <input type="file" class="form-control" name="residentPhoto" />
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 性别：</label>
+                                <div class="col-sm-7">
                                     <select name="residentSex" class="form-control">
                                         <option value="-1" selected="selected">请选择住户性别:</option>
                                         <option value="1">男</option>
@@ -522,29 +559,97 @@
                                 </div>
                             </div>
                             <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> 住户类型: </label>
-                                <div class="col-sm-8">
-                                    <select name="residentType" class="form-control">
-                                        <option value="-1" selected="selected">请选择住户类型:</option>
-                                        <option value="1">住户</option>
-                                        <option value="2">租客</option>
+                                <label class="col-sm-3 control-label no-padding-right"> 出生日期：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="residentBirthday"
+                                           placeholder="请输入出生日期:">
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 民族：</label>
+                                <div class="col-sm-7">
+                                    <select name="residentNation" class="form-control">
+                                        <option value="-1" selected="selected">请选择国籍地区:</option>
+                                        <option value="1">中国</option>
+                                        <option value="2">香港</option>
+                                        <option value="3">澳门</option>
+                                        <option value="4">台湾</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> 住户属性: </label>
-                                <div class="col-sm-8">
-                                    <select name="residentAttribute" class="form-control">
-                                        <option value="-1" selected="selected">请选择住户属性:</option>
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
+                                <label class="col-sm-3 control-label no-padding-right"> 户籍地行政区划代码：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="adminDivisionCode"
+                                           placeholder="请选择户籍地行政区划代码:">
+                                </div>
+                                <div class="col-sm-2" style="vertical-align: center">
+                                    <a href="#">&nbsp;选择<br />行政区划</a>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right"> 户籍详细地址：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="domicilePlace"
+                                           placeholder="请输入户籍详细地址:">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right"> 工作单位/学校：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="companyOrSchool"
+                                           placeholder="请输入工作单位/学校:">
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 状态: </label>
+                                <div class="col-sm-7">
+                                    <select name="status" class="form-control">
+                                        <option value="-1" selected="selected">请选择状态:</option>
+                                        <option value="1">正常</option>
+                                        <option value="2">禁用</option>
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 类别: </label>
+                                <div class="col-sm-7">
+                                    <select name="residentType" class="form-control">
+                                        <option value="-1" selected="selected">请选择类别:</option>
+                                        <option value="1">住户</option>
+                                        <option value="2">租客</option>
+                                        <option value="3">其他</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 属性: </label>
+                                <div class="col-sm-7">
+                                    <select name="residentAttribute" class="form-control">
+                                        <option value="-1" selected="selected">请选择属性:</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 联系电话：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="residentPhone"
+                                           placeholder="请输入联系电话:">
+                                </div>
+                            </div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label no-padding-right"> 备注：</label>
-								<div class="col-sm-8">
+								<label class="col-sm-3 control-label no-padding-right"> 备注：</label>
+								<div class="col-sm-7">
 									<textarea class="form-control" name="residentRemark" rows="4"
 										   placeholder="请输入备注:"></textarea>
 								</div>
