@@ -29,6 +29,7 @@
 		<link rel="stylesheet" href="assets/css/ace.min.css" />
 		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
 		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+        <link rel="stylesheet" href="css/acs.css"/>
 
 		<!-- jquery plugin styles -->
 		<link rel="stylesheet" href="assets/css/jquery.dataTables.css" />
@@ -75,6 +76,11 @@
             /* dataTable的页数提示信息的字体大小 */
             .dataTables_info {
                 font-size: 12px;
+            }
+            #modal-select-terminal .modal-content {
+                width: 543px;
+                margin-left: auto;
+                margin-right: auto;
             }
         </style>
         <!--css style ends-->
@@ -844,7 +850,7 @@
                     <div class="modal-body" style="font-size: 12px;">
                         <div>
                             <input id="searchTerminal" type="text" class="form-control search-query"
-                                   style="margin-left: 4px; width: 160px; float: left;" placeholder="地址码/终端别名/联机状态" />
+                                   style="width: 160px; float: left;" placeholder="地址码/终端别名/联机状态" />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-purple btn-sm" onclick="searchTerminal()">
                                     查询

@@ -29,6 +29,7 @@
 		<link rel="stylesheet" href="assets/css/ace.min.css" />
 		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
 		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+		<link rel="stylesheet" href="css/acs.css"/>
 
 		<!-- jquery plugin styles -->
 		<link rel="stylesheet" href="assets/css/jquery.dataTables.css" />
@@ -80,6 +81,11 @@
             .dataTables_info {
                 font-size: 12px;
             }
+            #modal-select-community .modal-content {
+                width: 430px;
+                margin-left: auto;
+				margin-right: auto;
+			}
         </style>
         <!--css style ends-->
 	</head>
@@ -497,7 +503,7 @@
 					<!--modal header ends-->
 					<!--modal body begins-->
 					<div class="modal-body">
-						<form class="form-horizontal" id="frm-add-product">
+						<form class="form-horizontal" id="frm-add-building">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label no-padding-right"> 所在社区：</label>
                                 <div class="col-sm-8">
@@ -555,20 +561,22 @@
                     <!--modal header ends-->
                     <!--modal body begins-->
                     <div class="modal-body" style="font-size: 12px;">
+						<form class="form-horizontal" id="frm-select-community">
                             <div>
-                            <input id="searchCommunity" type="text" class="form-control search-query"
-                                   style="margin-left: 70px; width: 160px; float: left;" placeholder="社区编号/社区名称/社区地址" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-purple btn-sm" onclick="searchCommunity()">
-                                    查询
-                                    <i class="icon-search icon-on-right bigger-110"></i>
-                                </button>
-                            </span>
-                        </div>
-                        <div>
-                            <table id="communityTable" class="nowrap dataTable hover display cell-border">
-                            </table>
-                        </div>
+                                <input id="searchCommunity" type="text" class="form-control search-query"
+                                       style="width: 160px; float: left;" placeholder="社区编号/社区名称/社区地址" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-purple btn-sm" onclick="searchCommunity()">
+                                        查询
+                                        <i class="icon-search icon-on-right bigger-110"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <div>
+                                <table id="communityTable" class="nowrap dataTable hover display cell-border">
+                                </table>
+                            </div>
+						</form>
                     </div><!--modal body ends-->
                     <div class="modal-footer" style="background-color: white;">
                         <button class="btn btn-primary btn-sm" onclick="selectCommunity()">提交</button>
