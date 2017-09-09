@@ -29,6 +29,7 @@
 		<link rel="stylesheet" href="assets/css/ace.min.css" />
 		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
 		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
+        <link rel="stylesheet" href="css/acs.css"/>
 
 		<!-- jquery plugin styles -->
 		<link rel="stylesheet" href="assets/css/jquery.dataTables.css" />
@@ -75,6 +76,11 @@
             /* dataTable的页数提示信息的字体大小 */
             .dataTables_info {
                 font-size: 12px;
+            }
+            #modal-select-building .modal-content {
+                width: 830px;
+                margin-left: auto;
+                margin-right: auto;
             }
         </style>
         <!--css style ends-->
@@ -748,7 +754,7 @@
                     <div class="modal-body" style="font-size: 12px;">
                         <div>
                             <input id="searchBuilding" type="text" class="form-control search-query"
-                                   style="margin-left: 10px; width: 160px; float: left;" placeholder="建筑编号/建筑地址/所属社区" />
+                                   style="width: 160px; float: left;" placeholder="建筑编号/建筑地址/所属社区" />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-purple btn-sm" onclick="searchBuilding()">
                                     查询
