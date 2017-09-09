@@ -1,0 +1,22 @@
+[
+  {
+    "uuid": "655bdd7b-2dab-4131-af40-86f25ed85690",
+    "community": "宏珠公寓",
+    "name": "宏珠公寓东门",
+    "code": "4404020010010010101",
+    "status": true,
+    "terminal": "01234567890001",
+    "longitude": 113.606669,
+    "latitude": 22.365022
+  },
+  {
+    "uuid": "655bdd7b-2dab-4131-af40-86f25ed85690",
+    "community": "宏珠公寓",
+    "name": "宏珠公寓北门",
+    "code": "4404020010010010102",
+    "status": false,
+    "terminal": "01234567890002",
+    "longitude": 113.606669,
+    "latitude": 22.365122
+  }
+]
