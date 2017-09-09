@@ -86,6 +86,11 @@
                 margin-left: auto;
                 margin-right: auto;
             }
+            #modal-select-user .modal-content {
+                width: 518px;
+                margin-left: auto;
+                margin-right: auto;
+            }
         </style>
         <!--css style ends-->
 	</head>
@@ -555,18 +560,16 @@
                                            placeholder="请输入房屋编码:">
                                 </div>
                             </div>
-                            <!--
                             <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> 住户姓名：</label>
+                                <label class="col-sm-2 control-label no-padding-right"> 业主：</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="roomResident"
                                            placeholder="请输入住户姓名:">
                                 </div>
                                 <div class="col-sm-2" style="vertical-align: center">
-                                    <a href="#modal-select-resident" data-toggle="modal" onclick="getResidentList()">选择住户</a>
+                                    <a href="#modal-select-user" data-toggle="modal" onclick="getUserList()">选择用户</a>
                                 </div>
                             </div>
-                            -->
                             <div class="form-group" align="left">
                                 <label class="col-sm-2 control-label no-padding-right"> 状态：</label>
                                 <div class="col-sm-8">
@@ -660,30 +663,30 @@
                             <div class="form-group" align="left">
                                 <label class="col-sm-2 control-label no-padding-right"> 添加方式：</label>
                                 <div class="col-sm-8">
-                                    <input type="radio" name="addType" value="1">
+                                    <input type="radio" name="addWay" value="1">
                                     <span>按楼层和每层房间数量</span>
-                                    <input type="radio" name="addType" value="2">
+                                    <input type="radio" name="addWay" value="2">
                                     <span>按指定房号添加</span>
                                 </div>
                             </div>
                             <div class="form-group" align="left">
                                 <label class="col-sm-2 control-label no-padding-right"> 楼层数：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="roomName"
+                                    <input type="text" class="form-control" name="floorNum"
                                            placeholder="请输入楼层数:">
                                 </div>
                             </div>
                             <div class="form-group" align="left">
                                 <label class="col-sm-2 control-label no-padding-right"> 每层房间数：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="houseId"
+                                    <input type="text" class="form-control" name="roomNumPeerFloor"
                                            placeholder="请输入每层房间数:">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label no-padding-right"> 房间号：</label>
                                 <div class="col-sm-8">
-									<textarea class="form-control" name="roomRemark" rows="4"
+									<textarea class="form-control" name="roomNumber" rows="4"
                                               placeholder="请输入房间号:"></textarea>
                                 </div>
                             </div>
@@ -900,6 +903,45 @@
             </div>
         </div><!--select resident modal end-->
 
+        <!--select user modal start-->
+        <div class="modal fade" id="modal-select-user" tabindex="-2" role="dialog" >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <!--modal header begins-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 class="modal-title">选择用户</h5>
+                    </div>
+                    <!--modal header ends-->
+                    <!--modal body begins-->
+                    <div class="modal-body" style="font-size: 12px;">
+                        <div>
+                            <input id="searchUser" type="text" class="form-control search-query"
+                                   style="margin-left: 4px; width: 160px; float: left;" placeholder="用户账号/姓名/证件号码" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-purple btn-sm" onclick="searchResident()">
+                                    查询
+                                    <i class="icon-search icon-on-right bigger-110"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div>
+                            <!--
+                            <table id="residentTable" class="nowrap dataTable hover display cell-border">
+                            -->
+                            <table id="userTable" class="nowrap dataTable hover display cell-border">
+                            </table>
+                        </div>
+                    </div><!--modal body ends-->
+                    <div class="modal-footer" style="background-color: white;">
+                        <button class="btn btn-primary btn-sm" onclick="selectResident()">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div><!--select user modal end-->
+
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->
@@ -1074,6 +1116,65 @@
                 });
             }
             <!--select building table script ends-->
+
+            <!-- select user table script starts -->
+            /**
+             * 获取用户列表
+             */
+            function getUserList() {
+                var param = {
+                    type: "get",
+                    url: "data/userListNew.json",
+                    successCall: initUserTable,
+                    errorCall: function () {
+                        showCommonTip("加载用户列表失败！");
+                    }
+                };
+                ajax(param);
+            }
+
+            /**
+             * 初始化用户列表表格
+             */
+            function initUserTable(data) {
+                userTable = $('#userTable').DataTable({
+                    "data": data,
+                    "deferRender": true,
+                    "bProcessing": true,
+                    "lengthChange": false,
+                    "ordering": false,
+                    "createdRow": function (row, data, dataIndex) {
+                        $('td', row).attr("class", "text-center");
+                        $(row).css("cursor", "pointer");
+                    },
+                    "language": {
+                        "url": "assets/js/jquery-dataTables-zh.json"
+                    },
+                    "columns": [
+                        {
+                            title: '<input id="all-user-checkbox" type="checkbox" name="radios" />',
+                            data: 'uuid', render: function (data, type, row) {
+                            return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
+                        }, className: "dt-center",
+                        },
+                        {title: '用户账号', data: "name", className: "dt-center",},
+                        {title: '姓名', data: "username", className: "dt-center",},
+                        {
+                            title: '状态', data: "status", className: "dt-center", render: function (data, type, row) {
+                            if (data == '1') {
+                                return '已启用';
+                            } else {
+                                return '未启用';
+                            }
+                        }
+                        },
+                        {title: '证件号码', data: "idNum", className: "dt-center",},
+                        {title: '权限角色', data: "role", className: "dt-center",},
+                    ],
+                    "order": [[1, "asc"]]
+                });
+            }
+            <!-- select user table script ends -->
 
             <!--select resident table script begins-->
             /**
