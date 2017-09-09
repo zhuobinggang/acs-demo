@@ -77,6 +77,11 @@
             .dataTables_info {
                 font-size: 12px;
             }
+            #modal-select-adminArea .modal-content {
+                width: 283px;
+                margin-left: auto;
+                margin-right: auto;
+            }
         </style>
         <!--css style ends-->
 	</head>
@@ -584,7 +589,7 @@
                                            placeholder="请选择户籍地行政区划代码:">
                                 </div>
                                 <div class="col-sm-2" style="vertical-align: center">
-                                    <a href="#">&nbsp;选择<br />行政区划</a>
+                                    <a href="#modal-select-adminArea" data-toggle="modal" onclick="getAdminAreaList()">&nbsp;选择<br />行政区划</a>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -663,6 +668,42 @@
 				</div>
 			</div>
 		</div><!--add-product modal end-->
+
+        <!-- select administrative area modal start -->
+        <div class="modal fade" id="modal-select-adminArea" tabindex="-2" role="dialog" >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <!--modal header begins-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 class="modal-title">选择行政划区</h5>
+                    </div>
+                    <!--modal header ends-->
+                    <!--modal body begins-->
+                    <div class="modal-body" style="font-size: 12px;">
+                        <div>
+                            <input id="searchResident" type="text" class="form-control search-query"
+                                   style="width: 160px; float: left;" placeholder="行政区划代码/名称" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-purple btn-sm" onclick="searchAdminArea()">
+                                    查询
+                                    <i class="icon-search icon-on-right bigger-110"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div>
+                            <table id="adminAreaTable" class="nowrap dataTable hover display cell-border">
+                            </table>
+                        </div>
+                    </div><!--modal body ends-->
+                    <div class="modal-footer" style="background-color: white;">
+                        <button class="btn btn-primary btn-sm" onclick="selectResident()">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div><!-- select administrative area modal end -->
 
 		<!-- basic scripts -->
 
@@ -813,6 +854,52 @@
                 residentTable.search(keyword).draw();
             }
 
+            <!-- select admin place modal starts -->
+            /**
+             * 获取行政划区列表
+             */
+            function getAdminAreaList() {
+                var param = {
+                    type : "get",
+                    url : "data/adminAreaList.json",
+                    successCall : initAdminAreaTable,
+                    errorCall : function() {
+                        showCommonTip("加载住户列表失败！");
+                    }
+                };
+                ajax(param);
+            }
+
+            /**
+             * 初始化住户列表表格
+             */
+            function initAdminAreaTable(data) {
+                residentTable = $('#adminAreaTable').DataTable({
+                    "data": data,
+                    "deferRender": true,
+                    "bProcessing": true,
+                    "lengthChange": false,
+                    "ordering":false,
+                    "createdRow": function( row, data, dataIndex ) {
+                        $('td', row).attr("class","text-center");
+                        $(row).css("cursor","pointer");
+                    },
+                    "language": {
+                        "url":"assets/js/jquery-dataTables-zh.json"
+                    },
+                    "columns": [
+                        {
+                            data: 'code', render: function(data, type,row) {
+                            return '<input id="radio_' + data + '" name="adminAreaRadio" value="'
+                                + data + '" type="radio">';
+                        }},
+                        {title: "行政区划代码", data: "code"},
+                        {title: "名称", data: "address"},
+                    ],
+                    "order": [[1, "asc"]]
+                });
+            }
+            <!-- select admin place modal ends -->
 		</script>
 </body>
 </html>
