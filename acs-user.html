@@ -431,7 +431,7 @@
                                                 <div style="width: 300px;">
                                                     <div class="input-group">
                                                         <input type="text" class="form-control search-query"
-                                                               placeholder="用户名/姓名/证件号码"/>
+                                                               placeholder="用户名/姓名/证件号码" id="search_bar"/>
                                                         <span class="input-group-btn">
                                                     				<button type="button" class="btn btn-purple btn-sm"
                                                                             onclick="search()">
@@ -1685,9 +1685,9 @@
     }
 
     function search() {
-        var keyword = $('#inputUserName').val();
-        console.log(userTable);
-        userTable.search(keyword);
+        var keyword = $('#search_bar').val();
+//        console.log(keyword);
+        userTable.search(keyword).draw();
     }
 
     function community_assign_tree() {
