@@ -29,12 +29,14 @@
 		<link rel="stylesheet" href="assets/css/ace-skins.min.css" />
 
 		<!-- jquery plugin styles -->
+		<link rel="stylesheet" href="assets/js/My97DatePicker/skin/default/datepicker.css" />
 
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
 		<![endif]-->
 
 		<!-- inline styles related to this page -->
+		<link rel="stylesheet" href="css/acs.css"/>
 
 		<!-- ace settings handler -->
 
@@ -449,12 +451,12 @@
 												注册终端
 											</button>
 
-											<button class="btn btn-app btn-white radius-4">
+											<button class="btn btn-app btn-white radius-4" id="btn-terminal-location">
 												<i class="icon-map-marker bigger-230"></i>
 												定位终端
 											</button>
 
-											<button class="btn btn-app btn-grey radius-4">
+											<button class="btn btn-app btn-grey radius-4" id="btn-monitor-video">
 												<i class="icon-facetime-video bigger-230"></i>
 												查阅监控
 											</button>
@@ -855,7 +857,7 @@
 
 														<div id="profile2" class="tab-pane">
 															<div class="slim-scroll" data-height="180">
-																<img src="img/echat4.png" height="180"/>
+																<img src="img/echart4.png" height="180"/>
 															</div>
 														</div>
 
@@ -941,80 +943,247 @@
 			</a>
 		</div><!-- /.main-container -->
 
-		<!--send-card modal start-->
-		<div class="modal fade" id="modal-send-card" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document">
+		<!-- monitor video start-->
+		<div class="modal fade" id="modal-monitor-video" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document" style="width: 80%">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h5 class="modal-title"></h5>
+						<h5 class="modal-title">查阅监控</h5>
 					</div>
 					<div class="modal-body">
-						<form class="form-horizontal" id="frm-add-product">
-							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"> 请输入产品名称：</label>
-								<div class="col-sm-9">
-									<input type="text" class="form-control focus" name="name" placeholder="一定要输入产品名称"
-										   required="required">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"> 请输入购买链接：</label>
-								<div class="col-sm-9">
-									<input type="url" class="form-control" name="buyLink"
-										   placeholder="例如：http://www.goodhelper.com/">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"> 请选择产品图片：</label>
-								<div class="col-sm-9">
-									<input type="file" id="file-image" name="image" accept="image/jpeg,image/png"
-										   class="tooltip-info" data-rel="tooltip" title="只支持.jpg或.png的说明书格式"/>
-									<div class="progress hidden">
-										<div id="progress-bar-image" class="progress-bar" role="progressbar" aria-valuenow="0"
-											 aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;"> 0%
+						<div id="monitor-canvas" style="height: 500px; width:100%;">
+							<div style="font-size: 12px;width:35%; float:left" >
+								<table class="sel_table">
+									<tr>
+										<td style="padding:3px;">
+											<input type="text" id="monitor_start_date" placeholder="开始时间"  onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'monitor_end_date\')}',readOnly:true})" />
+											  至
+											<input type="text" id="monitor_end_date" placeholder="结束时间"  onFocus="WdatePicker({minDate:'#F{$dp.$D(\'monitor_start_date\')}',dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'%y-%M-%d',readOnly:true})" />
+										</td>
+										<td align="right" style="padding-right: 3px;padding-left: 15px;" id="f_report">
+											<a class="btn btn-primary btn-sm" onclick="searchMonitorVideo()">查询</a>
+										</td>
+									</tr>
+								</table>
+								<div class="space-4"></div>
+								<div class="widget-box">
+									<div class="widget-header header-color-grey">
+										<h5 class="bigger lighter">
+											<i class="icon-file"></i>
+											监控文件
+										</h5>
+									</div>
+
+									<div class="widget-body">
+										<div class="widget-main no-padding">
+											<div id="" class="slim-scroll" data-height="400">
+												<table class="table table-striped table-bordered table-hover">
+													<tbody>
+													<tr>
+														<td class="">
+															<i class="icon-time"></i>
+															2017-08-20 16:20:40
+														</td>
+														<td>
+															<i class="icon-camera"></i>
+															图片
+														</td>
+														<td>
+															<a class="btn btn-xs btn-grey">下载</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="">
+															<i class="icon-time"></i>
+															2017-08-20 16:10:40
+														</td>
+														<td>
+															<i class="icon-film"></i>
+															视频
+														</td>
+														<td>
+															<a class="btn btn-xs btn-success">查阅</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="">
+															<i class="icon-time"></i>
+															2017-08-20 16:20:40
+														</td>
+														<td>
+															<i class="icon-camera"></i>
+															图片
+														</td>
+														<td>
+															<a class="btn btn-xs btn-grey">下载</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="">
+															<i class="icon-time"></i>
+															2017-08-20 16:10:40
+														</td>
+														<td>
+															<i class="icon-film"></i>
+															视频
+														</td>
+														<td>
+															<a class="btn btn-xs btn-success">查阅</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="">
+															<i class="icon-time"></i>
+															2017-08-20 16:20:40
+														</td>
+														<td>
+															<i class="icon-camera"></i>
+															图片
+														</td>
+														<td>
+															<a class="btn btn-xs btn-grey">下载</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="">
+															<i class="icon-time"></i>
+															2017-08-20 16:10:40
+														</td>
+														<td>
+															<i class="icon-film"></i>
+															视频
+														</td>
+														<td>
+															<a class="btn btn-xs btn-success">查阅</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="">
+															<i class="icon-time"></i>
+															2017-08-20 16:20:40
+														</td>
+														<td>
+															<i class="icon-camera"></i>
+															图片
+														</td>
+														<td>
+															<a class="btn btn-xs btn-grey">下载</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="">
+															<i class="icon-time"></i>
+															2017-08-20 16:10:40
+														</td>
+														<td>
+															<i class="icon-film"></i>
+															视频
+														</td>
+														<td>
+															<a class="btn btn-xs btn-success">查阅</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="">
+															<i class="icon-time"></i>
+															2017-08-20 16:20:40
+														</td>
+														<td>
+															<i class="icon-camera"></i>
+															图片
+														</td>
+														<td>
+															<a class="btn btn-xs btn-grey">下载</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="">
+															<i class="icon-time"></i>
+															2017-08-20 16:10:40
+														</td>
+														<td>
+															<i class="icon-film"></i>
+															视频
+														</td>
+														<td>
+															<a class="btn btn-xs btn-success">查阅</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="">
+															<i class="icon-time"></i>
+															2017-08-20 16:20:40
+														</td>
+														<td>
+															<i class="icon-camera"></i>
+															图片
+														</td>
+														<td>
+															<a class="btn btn-xs btn-grey">下载</a>
+														</td>
+													</tr>
+													<tr>
+														<td class="">
+															<i class="icon-time"></i>
+															2017-08-20 16:10:40
+														</td>
+														<td>
+															<i class="icon-film"></i>
+															视频
+														</td>
+														<td>
+															<a class="btn btn-xs btn-success">查阅</a>
+														</td>
+													</tr>
+													</tbody>
+												</table>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"> 请选择产品说明书：</label>
-								<div class="col-sm-9">
-									<input type="file" id="file-document" name="document"
-										   accept="application/pdf,application/msword" class="tooltip-info" data-rel="tooltip"
-										   title="只支持.doc或.pdf的说明书格式"/>
-									<div class="progress hidden">
-										<div id="progress-bar-document" class="progress-bar" role="progressbar"
-											 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;"> 0%
-										</div>
-									</div>
-								</div>
+							<div style="width:60%;float:right; border: 1px;">
+
 							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"> 请选择产品视频：</label>
-								<div class="col-sm-9">
-									<input type="file" id="file-video" name="video" accept="video/*" class="tooltip-info"
-										   data-rel="tooltip" title="支持常见的视频格式"/>
-									<div class="progress hidden">
-										<div id="progress-bar-video" class="progress-bar" role="progressbar" aria-valuenow="0"
-											 aria-valuemin="0" aria-valuemax="100" style="min-width: 2em;"> 0%
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-10">
-									<button type="button" class="btn btn-primary btn-sm" id="btn-save-product">保存</button>
-									<img class="hidden processing" src="img/processing.gif"/>
-								</div>
-							</div>
-						</form>
+							<div style="clear:both;"></div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div><!--add-product modal end-->
+		</div>
+		<!-- monitor video end-->
+
+		<!-- baidu map modal start -->
+		<div class="modal fade" id="modal-map-marker" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document" style="width:80%">
+				<div class="modal-content">
+					<!--modal header begins-->
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h5 class="modal-title">终端定位</h5>
+					</div>
+					<!--modal header ends-->
+					<!--modal body begins-->
+					<div class="modal-body">
+						<div id="map-canvas" style="min-height: 500px; width:100%;"> </div>
+
+					</div><!--modal body ends-->
+					<div class="form-group" style="min-height: 30px; margin-top:10px">
+						<div class="col-sm-10">
+							<button type="button" class="btn btn-primary btn-sm" id="btn-marker-reset">重新定位</button>
+							<button type="button" class="btn btn-primary btn-sm disabled" id="btn-marker-confirm">确认</button>
+							<img class="hidden processing" src="img/processing.gif"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- baidu map modal end -->
 
 		<!-- basic scripts -->
 
@@ -1051,8 +1220,10 @@
 		<script src="assets/js/jquery.slimscroll.min.js"></script>
 		<script src="assets/js/bootstrap-confirmation.min.js"></script>
 
+		<script src="assets/js/My97DatePicker/WdatePicker.js"></script>
+
 		<!-- baidu map api -->
-		<!--<script src="http://api.map.baidu.com/api?v=2.0&ak=zSrwwQpoWFZFa9Rk03iyzT2O"></script>-->
+		<script src="http://api.map.baidu.com/api?v=2.0&ak=zSrwwQpoWFZFa9Rk03iyzT2O"></script>
 
 		<!-- custom scripts -->
 		<script src="js/acs-util.js"></script>
@@ -1185,7 +1356,112 @@
                     }
                 });
 
+                $('#btn-terminal-location').click(function() {
+                    console.log('ok');
+                    $("#modal-map-marker").modal('show');
+                    setTimeout(function() {
+                        showMap();
+                    }, 200);
+				});
+
+                var newMapPoint;
+
+                $('#btn-marker-reset').click(function(){
+                    $('#btn-marker-confirm').removeClass('disabled');
+                    map.addEventListener("click",function(e){
+                        var allOverlay = map.getOverlays();
+                        for(var i = 0;i<allOverlay.length;i++) {
+                            map.removeOverlay(allOverlay[i]);
+                        }
+                        newMapPoint = new BMap.Point(e.point.lng, e.point.lat);
+                        var marker = new BMap.Marker(newMapPoint);
+                        map.addOverlay(marker);
+					});
+				});
+
+                $('#btn-marker-confirm').confirmation({
+                    title: "请确认",
+                    animation: true,
+                    placement: 'top',
+                    singleton: true,
+                    btnOkIcon: 'icon-ok',
+                    btnOkLabel: '重新定位',
+                    btnCancelIcon: 'icon-remove',
+                    btnCancelLabel: '取消',
+                    onConfirm: function() {
+                        map.removeEventListener("click");
+                        //修改门禁坐标
+                        door.latitude = newMapPoint.latitude;
+                        door.longitude = newMapPoint.longitude;
+                        $('#btn-marker-confirm').addClass('disabled');
+                        $('#modal-map-marker').modal('hide');
+                    },
+                    onCancel: function() {
+                        //TODO: marker回到原来的位置
+                        console.log('取消');
+                    }
+                });
+
+                $('#btn-monitor-video').click(function(){
+					$('#modal-monitor-video').modal('show');
+				});
             });
+
+            var map;
+            var opts = {
+                width : 250,     // 信息窗口宽度
+                height: 120,     // 信息窗口高度
+                title : "信息窗口" , // 信息窗口标题
+                enableMessage:true//设置允许信息窗发送短息
+            };
+
+            var door = {
+                "uuid": "655bdd7b-2dab-4131-af40-86f25ed85690",
+                "community": "宏珠公寓",
+                "name": "宏珠公寓东门",
+                "code": "4404020010010010101",
+                "status": true,
+                "terminal": "01234567890001",
+                "longitude": 113.606669,
+                "latitude": 22.365022
+			};
+
+            function showMap() {
+                // 百度地图API功能
+                map = new BMap.Map("map-canvas");  // 创建Map实例
+                map.enableScrollWheelZoom(); // 启用滚轮放大缩小
+                map.addControl(new BMap.NavigationControl()); // 左上角，添加默认缩放平移控件
+                var point = new BMap.Point(door.longitude, door.latitude);
+                map.centerAndZoom(point,20);
+                var marker = new BMap.Marker(point);
+                var content = "门禁别名：" + door.name;
+                if(door.status) {
+                    content += "<br/>网络状态: 在线" ;
+                } else {
+                    content += "<br/>网络状态: 离线";
+                    var myIcon = new BMap.Icon("img/grey.png", new BMap.Size(39, 25));
+                    marker = new BMap.Marker(point, {
+                        icon : myIcon
+                    });
+                }
+                map.addOverlay(marker);
+                content += "<br/>经度: " + door.longitude;
+                content += "<br/>纬度：" + door.latitude;
+                addClickHandler(content, marker);
+
+			}
+
+            function addClickHandler(content,marker){
+                marker.addEventListener("click",function(e){
+                    openInfo(content,e)}
+                );
+            }
+            function openInfo(content,e){
+                var p = e.target;
+                var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+                var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象
+                map.openInfoWindow(infoWindow,point); //开启信息窗口
+            }
 
 		</script>
 </body>
