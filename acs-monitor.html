@@ -982,7 +982,7 @@
 											<div id="" class="slim-scroll" data-height="400">
 												<table class="table table-striped table-bordered table-hover">
 													<tbody>
-													<tr style="cursor: pointer;">
+													<tr style="cursor: pointer;" onclick="showImage()">
 														<td class="">
 															<i class="icon-time"></i>
 															2017-08-20 16:20:40
@@ -995,7 +995,7 @@
 															<a class="btn btn-xs btn-grey">下载</a>
 														</td>
 													</tr>
-													<tr style="cursor: pointer;">
+													<tr style="cursor: pointer;" onclick="showVideo()">
 														<td class="">
 															<i class="icon-time"></i>
 															2017-08-20 16:10:40
@@ -1008,7 +1008,7 @@
 															<a class="btn btn-xs btn-success">查阅</a>
 														</td>
 													</tr>
-													<tr style="cursor: pointer;">
+													<tr style="cursor: pointer;" onclick="showImage()">
 														<td class="">
 															<i class="icon-time"></i>
 															2017-08-20 16:20:40
@@ -1021,7 +1021,7 @@
 															<a class="btn btn-xs btn-grey">下载</a>
 														</td>
 													</tr>
-													<tr style="cursor: pointer;">
+													<tr style="cursor: pointer;" onclick="showVideo()">
 														<td class="">
 															<i class="icon-time"></i>
 															2017-08-20 16:10:40
@@ -1034,7 +1034,7 @@
 															<a class="btn btn-xs btn-success">查阅</a>
 														</td>
 													</tr>
-													<tr style="cursor: pointer;">
+													<tr style="cursor: pointer;" onclick="showImage()">
 														<td class="">
 															<i class="icon-time"></i>
 															2017-08-20 16:20:40
@@ -1047,7 +1047,7 @@
 															<a class="btn btn-xs btn-grey">下载</a>
 														</td>
 													</tr>
-													<tr style="cursor: pointer;">
+													<tr style="cursor: pointer;" onclick="showVideo()">
 														<td class="">
 															<i class="icon-time"></i>
 															2017-08-20 16:10:40
@@ -1060,7 +1060,7 @@
 															<a class="btn btn-xs btn-success">查阅</a>
 														</td>
 													</tr>
-													<tr style="cursor: pointer;">
+													<tr style="cursor: pointer;" onclick="showImage()">
 														<td class="">
 															<i class="icon-time"></i>
 															2017-08-20 16:20:40
@@ -1073,7 +1073,7 @@
 															<a class="btn btn-xs btn-grey">下载</a>
 														</td>
 													</tr>
-													<tr style="cursor: pointer;">
+													<tr style="cursor: pointer;" onclick="showVideo()">
 														<td class="">
 															<i class="icon-time"></i>
 															2017-08-20 16:10:40
@@ -1086,7 +1086,7 @@
 															<a class="btn btn-xs btn-success">查阅</a>
 														</td>
 													</tr>
-													<tr style="cursor: pointer;">
+													<tr style="cursor: pointer;" onclick="showImage()">
 														<td class="">
 															<i class="icon-time"></i>
 															2017-08-20 16:20:40
@@ -1099,7 +1099,7 @@
 															<a class="btn btn-xs btn-grey">下载</a>
 														</td>
 													</tr>
-													<tr style="cursor: pointer;">
+													<tr style="cursor: pointer;" onclick="showVideo()">
 														<td class="">
 															<i class="icon-time"></i>
 															2017-08-20 16:10:40
@@ -1112,7 +1112,7 @@
 															<a class="btn btn-xs btn-success">查阅</a>
 														</td>
 													</tr>
-													<tr style="cursor: pointer;">
+													<tr style="cursor: pointer;" onclick="showImage()">
 														<td class="">
 															<i class="icon-time"></i>
 															2017-08-20 16:20:40
@@ -1125,7 +1125,7 @@
 															<a class="btn btn-xs btn-grey">下载</a>
 														</td>
 													</tr>
-													<tr style="cursor: pointer;">
+													<tr style="cursor: pointer;" onclick="showVideo()">
 														<td class="">
 															<i class="icon-time"></i>
 															2017-08-20 16:10:40
@@ -1145,7 +1145,7 @@
 									</div>
 								</div>
 							</div>
-							<div style="width:60%;float:right;">
+							<div class="hidden" style="width:60%;float:right" id="div-img">
 								<!--<ul class="ace-thumbnails">-->
 								<!--<li>-->
 									<!--<a href="img/monitor/2017-08-20 16-20-40.jpg" data-rel="colorbox">-->
@@ -1164,6 +1164,12 @@
 								</div>
 								<div class="text">
 									<div> 拍摄时间：2017-09-08 20:08:08</div>
+								</div>
+							</div>
+							<div class="hidden" style="width:60%;float:right" id="div-video">
+								<video src="img/monitor/2017-08-20 16-20-40.mp4" controls="controls" style="width: 100%">您的浏览器不支持 video 标签。</video>
+								<div class="text">
+									<div> 录像时间：2017-09-08 20:08:08</div>
 								</div>
 							</div>
 							<div style="clear:both;"></div>
@@ -1481,6 +1487,15 @@
                 map.openInfoWindow(infoWindow,point); //开启信息窗口
             }
 
+            function showVideo(){
+                $('#div-img').addClass("hidden");
+                $('#div-video').removeClass("hidden");
+			}
+
+			function showImage() {
+                $('#div-img').removeClass("hidden");
+                $('#div-video').addClass("hidden");
+			}
 		</script>
 </body>
 </html>
