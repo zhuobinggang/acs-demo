@@ -1278,7 +1278,7 @@
 
 				function addCardReadingInfo() {
 				    var tr = '<tr><td><i class="icon-time"></i>2017-9-9 16:20:40</td><td><i class="icon-user"></i> <a href="#">张三</a></td></tr>';
-//                    $('#card-reading-info-table').insertRow() // 插入到表格第一行,并有向下滚动的效果
+                    $('#card-reading-info-table').insertRow() // 插入到表格第一行,并有向下滚动的效果
 				}
 
 //                setInterval(addCardReadingInfo,500);
@@ -1429,6 +1429,10 @@
                 $('#btn-monitor-video').click(function(){
 					$('#modal-monitor-video').modal('show');
 				});
+
+
+                /**实时更新**/
+                start_update_realtile();
             });
 
             var map;
@@ -1496,6 +1500,35 @@
                 $('#div-img').removeClass("hidden");
                 $('#div-video').addClass("hidden");
 			}
+
+			/**实时更新动画效果**/
+			function start_update_realtile() {
+			    function render(zhang) {
+			        var new_item = $('<tr><td class=""><i class="icon-time"></i> '+zhang.time+'</td>'+
+					'<td><i class="icon-user"></i> <a href="#">'+zhang.name+'</a></td></tr>');
+                    new_item.hide();
+
+			        var tbody = $('#card-reading-info-table').children('tbody');
+			        tbody.prepend(new_item);
+			        new_item.fadeIn(1000);
+
+			        //删除最后一个元素,如果不需要就去掉
+			        tbody.children().eq(-1).remove();
+            	}
+
+                var counter = 0;
+			    window.setInterval(function () {
+                    var zhang;
+			        counter++;
+			        if(counter % 2 == 0){
+                        zhang = {time:'2017-9-9 16:20:43',name:'张三'};
+					}else{
+                        zhang = {time:'2017-9-9 16:20:40',name:'林锦兴'};
+					}
+
+			        render(zhang);
+                },3000);
+            }
 		</script>
 </body>
 </html>
