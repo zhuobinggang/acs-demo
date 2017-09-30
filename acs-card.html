@@ -440,6 +440,7 @@
 												</form>
 											</td>
 											<td align="right" style="padding-right: 3px;" id="f_card_more">
+                                                <button class="btn btn-sm btn-warning" data-toggle="modal" data-target="#modal-quick-add">快速发卡</button>
                                                 <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-auth-card">授权</button>
                                                 <button class="btn btn-sm btn-success" data-toggle="modal" onclick="renewCardValidDate()" >续期</button>
 												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-add-card">添加</button>
@@ -466,7 +467,102 @@
 			</a>
 		</div><!-- /.main-container -->
 
-		<!--add-card modal start-->
+        <!--quick add modal start-->
+        <div class="modal fade" id="modal-quick-add" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <!--modal header begins-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 class="modal-title">添加卡片</h5>
+                    </div>
+                    <!--modal header ends-->
+                    <!--modal body begins-->
+                    <div class="modal-body">
+                        <form class="form-horizontal" id="frm-quick-add">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right"> 卡号：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="cardBuilding"
+                                           placeholder="请输入卡号:">
+                                </div>
+                                <div class="col-sm-2" style="vertical-align: center">
+                                    <a href="#">读取</a>
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 类型：</label>
+                                <div class="col-sm-7">
+                                    <select name="residentSex" class="form-control">
+                                        <option value="-1" selected="selected">请选择类型:</option>
+                                        <option value="1">身份证</option>
+                                        <option value="2">IC卡</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 状态：</label>
+                                <div class="col-sm-7">
+                                    <select name="residentSex" class="form-control">
+                                        <option value="-1" selected="selected">请选择状态:</option>
+                                        <option value="1">正常</option>
+                                        <option value="2">禁用</option>
+                                        <option value="3">停用</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 持卡人：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="OwnerIDCardNum" disabled>
+                                </div>
+                                <div class="col-sm-2" style="vertical-align: center">
+                                    <a href="#modal-select-resident" data-toggle="modal" >选择持卡人</a>
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 终端：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="OwnerIDCardNum" disabled>
+                                </div>
+                                <div class="col-sm-2" style="vertical-align: center">
+                                    <!--
+                                    <a href="#modal-quick-add-terminal" data-toggle="modal" onclick="getTerminalList('wallMachine')" >选择终端</a>
+                                    -->
+									<a href="#modal-auth-card" data-toggle="modal" >选择终端</a>
+                                </div>
+                            </div>
+                            <!--
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 房间号：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="OwnerIDCardNum" disabled>
+                                </div>
+                                <div class="col-sm-2" style="vertical-align: center">
+                                    <a href="#modal-select-room" data-toggle="modal" >选择房间号</a>
+                                </div>
+                            </div>
+                            -->
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right"> 备注：</label>
+                                <div class="col-sm-7">
+									<textarea class="form-control" name="cardRemark" rows="4"
+                                              placeholder="请输入备注:"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group" align="right">
+                                <input type="submit" class="btn btn-sm btn-primary" value="提交" />
+                                <input type="reset" class="btn btn-sm btn-warning" value="重置" />
+                            </div>
+                        </form>
+                    </div><!--modal body ends-->
+                </div>
+            </div>
+        </div><!--quick add modal end-->
+
+        <!--add-card modal start-->
 		<div class="modal fade" id="modal-add-card" tabindex="-1" role="dialog">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -482,8 +578,8 @@
 					<div class="modal-body">
 						<form class="form-horizontal" id="frm-add-product">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label no-padding-right"> 卡号：</label>
-                                <div class="col-sm-8">
+                                <label class="col-sm-3 control-label no-padding-right"> 卡号：</label>
+                                <div class="col-sm-7">
                                     <input type="text" class="form-control" name="cardBuilding"
                                            placeholder="请输入卡号:">
                                 </div>
@@ -492,8 +588,8 @@
                                 </div>
                             </div>
 							<div class="form-group" align="left">
-								<label class="col-sm-2 control-label no-padding-right"> 类型：</label>
-								<div class="col-sm-8">
+								<label class="col-sm-3 control-label no-padding-right"> 类型：</label>
+								<div class="col-sm-7">
 									<select name="residentSex" class="form-control">
 										<option value="-1" selected="selected">请选择类型:</option>
 										<option value="1">身份证</option>
@@ -502,8 +598,8 @@
 								</div>
 							</div>
                             <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> 状态：</label>
-                                <div class="col-sm-8">
+                                <label class="col-sm-3 control-label no-padding-right"> 状态：</label>
+                                <div class="col-sm-7">
                                     <select name="residentSex" class="form-control">
                                         <option value="-1" selected="selected">请选择状态:</option>
                                         <option value="1">正常</option>
@@ -513,18 +609,28 @@
                                 </div>
                             </div>
                             <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> 持卡人：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="cardOwner"
-                                           placeholder="请输入持卡人:">
+                                <label class="col-sm-3 control-label no-padding-right"> 持卡人：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="OwnerIDCardNum" disabled>
                                 </div>
                                 <div class="col-sm-2" style="vertical-align: center">
-                                    <a href="#modal-select-resident" data-toggle="modal" onclick="getResidentList()">选择持卡人</a>
+                                    <a href="#modal-select-resident" data-toggle="modal" >选择持卡人</a>
                                 </div>
                             </div>
+                            <!--
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 房间号：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="OwnerIDCardNum" disabled>
+                                </div>
+                                <div class="col-sm-2" style="vertical-align: center">
+                                    <a href="#modal-select-room" data-toggle="modal" >选择房间号</a>
+                                </div>
+                            </div>
+                            -->
 							<div class="form-group">
-								<label class="col-sm-2 control-label no-padding-right"> 备注：</label>
-								<div class="col-sm-8">
+								<label class="col-sm-3 control-label no-padding-right"> 备注：</label>
+								<div class="col-sm-7">
 									<textarea class="form-control" name="cardRemark" rows="4"
 										   placeholder="请输入备注:"></textarea>
 								</div>
@@ -548,7 +654,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h5 class="modal-title">修改房间信息</h5>
+                        <h5 class="modal-title">修改卡片信息</h5>
                     </div>
                     <!--modal header ends-->
                     <!--modal body begins-->
@@ -662,7 +768,10 @@
                                            placeholder="请输入围墙机:">
                                 </div>
                                 <div class="col-sm-2" style="vertical-align: center">
+                                    <!--
                                     <a href="#modal-select-terminal" data-toggle="modal" onclick="getTerminalList('wallMachine')">选择终端</a>
+                                    -->
+									<a href="#modal-quick-add-terminal" data-toggle="modal" onclick="getTerminalList('wallMachine')">选择终端</a>
                                 </div>
                             </div>
                             <div class="form-group" align="left">
@@ -672,7 +781,10 @@
                                            placeholder="请输入单元机:">
                                 </div>
                                 <div class="col-sm-2" style="vertical-align: center">
+                                    <!--
                                     <a href="#modal-select-terminal" data-toggle="modal" onclick="getTerminalList('unitMachine')">选择终端</a>
+                                    -->
+									<a href="#modal-quick-add-terminal" data-toggle="modal" onclick="getTerminalList('unitMachine')">选择终端</a>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -690,11 +802,14 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-2 control-label no-padding-right"> 房号：</label>
+                                <label class="col-sm-2 control-label no-padding-right"> 房间号：</label>
                                 <div class="col-sm-8">
                                     <input type="text" class="form-control" name="roomNumber"
-                                           placeholder="请输入房号:">
+                                           placeholder="请输入房间号:">
                                 </div>
+								<div class="col-sm-2" style="vertical-align: center">
+									<a href="#modal-quick-add-room" data-toggle="modal">选择房间号</a>
+								</div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label no-padding-right"></label>
@@ -781,12 +896,186 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h5 class="modal-title">选择住户</h5>
+                        <h5 class="modal-title">输入住户信息</h5>
                     </div>
                     <!--modal header ends-->
                     <!--modal body begins-->
                     <div class="modal-body" style="font-size: 12px;">
                         <div>
+                            <form class="form-horizontal" id="frm-select-resident">
+                                <!--
+                                <div class="form-group" align="left">
+                                    <label class="col-sm-2 control-label no-padding-right"> 住户姓名：</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control" name="residentName"
+                                               placeholder="请输入住户姓名:">
+                                    </div>
+                                </div>
+                                -->
+                                <div class="form-group" align="left">
+                                    <label class="col-sm-3 control-label no-padding-right"> 证件号码：</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="IDCardNum"
+                                               placeholder="请输入证件号码:">
+                                    </div>
+                                    <input type="button" onclick="searchResident()" id="watchResident"
+                                           class="col-sm-1 control-label btn btn-success btn-sm" value="查看" />
+                                </div>
+                                <div>
+                                    <hr />
+                                    <table class="residentTable nowrap dataTable hover display cell-border">
+                                    </table>
+                                    <hr />
+                                </div>
+                                <div class="form-group" align="left">
+                                    <label class="col-sm-3 control-label no-padding-right"> 证件种类：</label>
+                                    <div class="col-sm-7">
+                                        <select name="certType" class="form-control">
+                                            <option value="-1" selected="selected">请选择证件种类:</option>
+                                            <option value="1">身份证</option>
+                                            <option value="2">外交护照</option>
+                                            <option value="3">公务护照</option>
+                                            <option value="4">因公普通护照</option>
+                                            <option value="5">护照</option>
+                                            <option value="6">其它</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" align="left">
+                                    <label class="col-sm-3 control-label no-padding-right"> 发证机关：</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="department"
+                                               placeholder="请输入发证机关:">
+                                    </div>
+                                </div>
+                                <div class="form-group" align="left">
+                                    <label class="col-sm-3 control-label no-padding-right"> 证件有效期：</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="IDCardValidDate"
+                                               placeholder="请输入证件有效期:">
+                                    </div>
+                                </div>
+                                <div class="form-group" align="left">
+                                    <label class="col-sm-3 control-label no-padding-right"> 姓名：</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="residentName"
+                                               placeholder="请输入住户姓名:">
+                                    </div>
+                                </div>
+                                <div class="form-group" align="left">
+                                    <label class="col-sm-3 control-label no-padding-right"> 照片：</label>
+                                    <div class="col-sm-7">
+                                        <input type="file" class="form-control" name="residentPhoto" />
+                                    </div>
+                                </div>
+                                <div class="form-group" align="left">
+                                    <label class="col-sm-3 control-label no-padding-right"> 性别：</label>
+                                    <div class="col-sm-7">
+                                        <select name="residentSex" class="form-control">
+                                            <option value="-1" selected="selected">请选择住户性别:</option>
+                                            <option value="1">男</option>
+                                            <option value="2">女</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" align="left">
+                                    <label class="col-sm-3 control-label no-padding-right"> 出生日期：</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="residentBirthday"
+                                               placeholder="请输入出生日期:">
+                                    </div>
+                                </div>
+                                <div class="form-group" align="left">
+                                    <label class="col-sm-3 control-label no-padding-right"> 民族：</label>
+                                    <div class="col-sm-7">
+                                        <select name="residentNation" class="form-control">
+                                            <option value="-1" selected="selected">请选择国籍地区:</option>
+                                            <option value="1">中国</option>
+                                            <option value="2">香港</option>
+                                            <option value="3">澳门</option>
+                                            <option value="4">台湾</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" align="left">
+                                    <label class="col-sm-3 control-label no-padding-right"> 户籍地行政区划代码：</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="adminDivisionCode"
+                                               placeholder="请选择户籍地行政区划代码:">
+                                    </div>
+                                    <div class="col-sm-2" style="vertical-align: center">
+                                        <a href="#modal-select-adminArea" data-toggle="modal" onclick="getAdminAreaList()">&nbsp;选择<br />行政区划</a>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label no-padding-right"> 户籍详细地址：</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="domicilePlace"
+                                               placeholder="请输入户籍详细地址:">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label no-padding-right"> 工作单位/学校：</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="companyOrSchool"
+                                               placeholder="请输入工作单位/学校:">
+                                    </div>
+                                </div>
+                                <div class="form-group" align="left">
+                                    <label class="col-sm-3 control-label no-padding-right"> 状态: </label>
+                                    <div class="col-sm-7">
+                                        <select name="status" class="form-control">
+                                            <option value="-1" selected="selected">请选择状态:</option>
+                                            <option value="1">正常</option>
+                                            <option value="2">禁用</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" align="left">
+                                    <label class="col-sm-3 control-label no-padding-right"> 类别: </label>
+                                    <div class="col-sm-7">
+                                        <select name="residentType" class="form-control">
+                                            <option value="-1" selected="selected">请选择类别:</option>
+                                            <option value="1">住户</option>
+                                            <option value="2">租客</option>
+                                            <option value="3">其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" align="left">
+                                    <label class="col-sm-3 control-label no-padding-right"> 属性: </label>
+                                    <div class="col-sm-7">
+                                        <select name="residentAttribute" class="form-control">
+                                            <option value="-1" selected="selected">请选择属性:</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                            <option value="9">9</option>
+                                            <option value="10">10</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group" align="left">
+                                    <label class="col-sm-3 control-label no-padding-right"> 联系电话：</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="residentPhone"
+                                               placeholder="请输入联系电话:">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label no-padding-right"> 备注：</label>
+                                    <div class="col-sm-7">
+									<textarea class="form-control" name="residentRemark" rows="4"
+                                              placeholder="请输入备注:"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                            <!--
                             <input id="searchResident" type="text" class="form-control search-query"
                                    style="margin-left: 4px; width: 160px; float: left;" placeholder="身份证号/姓名/住户类型" />
                             <span class="input-group-btn">
@@ -795,14 +1084,14 @@
                                     <i class="icon-search icon-on-right bigger-110"></i>
                                 </button>
                             </span>
-                        </div>
-                        <div>
-                            <!--
-                            <table id="residentTable" class="nowrap dataTable hover display cell-border">
                             -->
+                        </div>
+                        <!--
+                        <div>
                             <table class="residentTable nowrap dataTable hover display cell-border">
                             </table>
                         </div>
+                        -->
                     </div><!--modal body ends-->
                     <div class="modal-footer" style="background-color: white;">
                         <button class="btn btn-primary btn-sm" onclick="selectResident()">提交</button>
@@ -826,7 +1115,7 @@
                     <!--modal body begins-->
                     <div class="modal-body" style="font-size: 12px;">
                         <div>
-                            <input id="searchTerminal" type="text" class="form-control search-query"
+                            <input type="text" class="searchTerminal form-control search-query"
                                    style="width: 160px; float: left;" placeholder="地址码/终端别名/联机状态" />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-purple btn-sm" onclick="searchTerminal()">
@@ -850,15 +1139,321 @@
             </div>
         </div><!--select terminal modal ends-->
 
-        <!-- basic scripts -->
+        <!-- quick add terminal modal starts-->
+        <div class="modal fade" id="modal-quick-add-terminal" tabindex="-2" role="dialog" >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <!--modal header begins-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 class="modal-title">选择终端</h5>
+                    </div>
+                    <!--modal header ends-->
+                    <!--modal body begins-->
+                    <div class="modal-body" style="font-size: 12px;">
+                        <form class="form-horizontal" id="frm-quick-add-terminal">
+                            <div>
+                                <input type="text" class="searchTerminal form-control search-query"
+                                       style="width: 160px; float: left;" placeholder="地址码/终端别名/联机状态" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-purple btn-sm" onclick="searchTerminal()">
+                                        查询
+                                        <i class="icon-search icon-on-right bigger-110"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <hr />
+                            <div>
+                                <table class="terminalTable nowrap dataTable hover display cell-border">
+                                </table>
+                            </div>
+                            <hr />
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 地址编码：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="addressCode"
+                                           placeholder="请输入地址编码:">
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 地址编码授权码：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="addressCodeAuthCode"
+                                           placeholder="请输入地址编码授权码:">
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> SIM卡号：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="SIMNumber"
+                                           placeholder="请输入SIM卡号:">
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 终端别名：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="terminalAlias"
+                                           placeholder="请输入终端别名:">
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 型号: </label>
+                                <div class="col-sm-7">
+                                    <select name="residentType" class="form-control">
+                                        <option value="-1" selected="selected">请选择型号:</option>
+                                        <option value="1.00">社区版V1</option>
+                                        <option value="2.00">社区版V2</option>
+                                        <option value="3.00">社区版V3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right"> 所属建筑：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="terminalCommunity"
+                                           placeholder="请输入所属建筑:">
+                                </div>
+                                <div class="col-sm-2" style="vertical-align: center">
+                                    <a href="#modal-select-building" data-toggle="modal" onclick="getBuildingList()">选择建筑</a>
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 安装日期：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="terminalAlias"
+                                           placeholder="请输入安装日期:">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right"> 门禁信息：</label>
+                                <div class="col-sm-8">
+                                    <table class="doorTable nowrap dataTable hover display cell-border">
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div><!--modal body ends-->
+                    <div class="modal-footer" style="background-color: white;">
+                        <button class="btn btn-primary btn-sm" onclick="selectTerminal()">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div><!--quick add terminal modal ends-->
 
-		<!--[if !IE]> -->
-		<script type="text/javascript">
-			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
-		</script>
-		<!-- <![endif]-->
+		<!--add-room modal start-->
+		<div class="modal fade" id="modal-quick-add-room" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content" style="width: 650px;">
+					<!--modal header begins-->
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h5 class="modal-title">添加房间</h5>
+					</div>
+					<!--modal header ends-->
+					<!--modal body begins-->
+					<div class="modal-body">
+						<form class="form-horizontal" id="frm-quick-add-room">
+							<div class="form-group">
+								<label class="col-sm-2 control-label no-padding-right"> 所在建筑：</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="roomBuilding"
+										   placeholder="请输入建筑地址:">
+								</div>
+								<div class="col-sm-2" style="vertical-align: center">
+									<a href="#modal-select-building" data-toggle="modal" onclick="getBuildingList()">选择建筑</a>
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-2 control-label no-padding-right"> 座号：</label>
+								<div class="col-sm-8">
+									<select name="seatNumber" class="form-control">
+										<option value="-1" selected="selected">请选择座号:</option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-2 control-label no-padding-right"> 房间号：</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="roomName"
+										   placeholder="请输入房间号:">
+								</div>
+                                <div class="col-sm-2" style="vertical-align: center">
+                                    <button class="btn btn-success btn-sm" onclick="getRoomList()">查看</button>
+                                </div>
+							</div>
+                            <hr />
+                                <table id="roomTable" class="nowrap dataTable hover display cell-border">
+                                </table>
+                            <hr />
+							<div class="form-group" align="left">
+								<label class="col-sm-2 control-label no-padding-right"> 房屋编码：</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="houseId"
+										   placeholder="请输入房屋编码:">
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-2 control-label no-padding-right"> 房屋编码授权码：</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="houseIdAuthCode"
+										   placeholder="请输入房屋编码授权码:">
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-2 control-label no-padding-right"> 业主：</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="roomResident"
+										   placeholder="请输入住户姓名:">
+								</div>
+								<div class="col-sm-2" style="vertical-align: center">
+									<a href="#modal-select-user" data-toggle="modal" onclick="getUserList()">选择用户</a>
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-2 control-label no-padding-right"> 状态：</label>
+								<div class="col-sm-8">
+									<select name="status" class="form-control">
+										<option value="-1" selected="selected">请选择状态:</option>
+										<option value="0">正常</option>
+										<option value="1">禁用</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-2 control-label no-padding-right"> 户型：</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="houseType"
+										   placeholder="请输入户型:">
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-2 control-label no-padding-right"> 面积：</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="houseArea"
+										   placeholder="请输入面积:">
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-2 control-label no-padding-right"> 附属设施：</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="affiliatedFacilities"
+										   placeholder="请输入附属设施:">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label no-padding-right"> 备注：</label>
+								<div class="col-sm-8">
+									<textarea class="form-control" name="roomRemark" rows="4"
+											  placeholder="请输入备注:"></textarea>
+								</div>
+							</div>
+							<div class="form-group" align="right">
+								<input type="submit" class="btn btn-sm btn-primary" value="提交" />
+								<input type="reset" class="btn btn-sm btn-warning" value="重置" />
+							</div>
+						</form>
+					</div><!--modal body ends-->
+				</div>
+			</div>
+		</div><!-- quick add room modal ends-->
 
-		<!--[if IE]>
+        <!--select building modal start-->
+        <div class="modal fade" id="modal-select-building" tabindex="-2" role="dialog" >
+            <div class="modal-dialog" role="document" style="width: 950px;">
+                <div class="modal-content">
+                    <!--modal header begins-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 class="modal-title">选择建筑</h5>
+                    </div>
+                    <!--modal header ends-->
+                    <!--modal body begins-->
+                    <div class="modal-body" style="font-size: 12px;">
+                        <div>
+                            <input id="searchBuilding" type="text" class="form-control search-query"
+                                   style="width: 160px; float: left;" placeholder="建筑编号/建筑地址/所属社区" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-purple btn-sm" onclick="searchBuilding()">
+                                    查询
+                                    <i class="icon-search icon-on-right bigger-110"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div>
+                            <table id="buildingTable" class="nowrap dataTable hover display cell-border">
+                            </table>
+                        </div>
+                    </div><!--modal body ends-->
+                    <div class="modal-footer" style="background-color: white;">
+                        <button class="btn btn-primary btn-sm" onclick="selectBuilding()">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div><!--select building modal end-->
+
+        <!--select user modal start-->
+        <div class="modal fade" id="modal-select-user" tabindex="-2" role="dialog" >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <!--modal header begins-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 class="modal-title">选择用户</h5>
+                    </div>
+                    <!--modal header ends-->
+                    <!--modal body begins-->
+                    <div class="modal-body" style="font-size: 12px;">
+                        <div>
+                            <input id="searchUser" type="text" class="form-control search-query"
+                                   style="margin-left: 4px; width: 160px; float: left;" placeholder="用户账号/姓名/证件号码" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-purple btn-sm" onclick="searchResident()">
+                                    查询
+                                    <i class="icon-search icon-on-right bigger-110"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div>
+                            <!--
+                            <table id="residentTable" class="nowrap dataTable hover display cell-border">
+                            -->
+                            <table id="userTable" class="nowrap dataTable hover display cell-border">
+                            </table>
+                        </div>
+                    </div><!--modal body ends-->
+                    <div class="modal-footer" style="background-color: white;">
+                        <button class="btn btn-primary btn-sm" onclick="selectResident()">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div><!--select user modal end-->
+
+		<!-- basic scripts -->
+
+        <!--[if !IE]> -->
+        <script type="text/javascript">
+            window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
+        </script>
+        <!-- <![endif]-->
+
+        <!--[if IE]>
         <script type="text/javascript">
              window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
         </script>
@@ -895,6 +1490,8 @@
             $(function() {
                 getCardList();
                 initOwnerSelect2();
+                getDoorList();
+                getRoomList();
             });
 
             /**
@@ -962,14 +1559,20 @@
             }
 
             <!--select resident table script begins-->
+            function searchResident() {
+                var IDCardNum = $('#frm-select-resident input[name="IDCardNum"]').val();
+                getResidentList(IDCardNum);
+            }
             /**
              * 获取住户列表数据
              */
-            function getResidentList() {
+            function getResidentList(IDCardNum) {
                 var param = {
                     type : "get",
                     url : "data/residentList.json",
-                    successCall : initResidentTable,
+                    successCall : function(data) {
+                        initResidentTable(data, IDCardNum);
+                    },
                     errorCall : function() {
                         showCommonTip("加载住户列表失败！");
                     }
@@ -981,7 +1584,7 @@
              * 初始化住户列表
              * @param data
              */
-            function initResidentTable(data) {
+            function initResidentTable(data, IDCardNum) {
                 residentTable = $('.residentTable').DataTable({
                     "data": data,
                     "deferRender": true,
@@ -1011,6 +1614,13 @@
                     ],
                     "order": [[1, "asc"]]
                 });
+                //过滤多余的数据
+                residentTable.search(IDCardNum).draw();
+                //获取dataTables中的第一行的数据以及当前显示的行数
+                var data = residentTable.row().data();
+                var info = residentTable.page.info();
+                if(1 == info.recordsDisplay)
+                    fillResidentForm(data);
             }
 
             /**
@@ -1024,6 +1634,26 @@
                     $('#modal-add-card input[name="cardOwner"]').val(text);
                     $('#modal-select-resident').modal("hide");
                 });
+            }
+
+            function fillResidentForm(data) {
+                $("#frm-select-resident input[name='certType']").val(1);
+                $("#frm-select-resident input[name='residentName']").val(data.name);
+                if(data.sex == '男') {
+                    $("#frm-select-resident input[name='residentSex']").val(1);
+                } else {
+                    $("#frm-select-resident input[name='residentSex']").val(2);
+                }
+                $("#frm-select-resident input[name='residentBirthday']").val(data.birthday);
+                $("#frm-select-resident input[name='status']").val(1);
+                $("#frm-select-resident input[name='residentType']").val(1);
+                $("#frm-select-resident input[name='residentAttribute']").val(data.attribute);
+                $("#frm-select-resident input[name='residentRemark']").val(data.remark);
+                $("#frm-select-resident input").prop("disabled", true);
+                $("#frm-select-resident select").prop("disabled", true);
+                $("#frm-select-resident textarea").prop("disabled", true);
+                $("#frm-select-resident input[name='IDCardNum']").prop("disabled", false);
+                $("#frm-select-resident #watchResident").prop("disabled", false);
             }
             <!--select resident table script ends-->
 
@@ -1140,7 +1770,8 @@
                         {
                             data: 'uuid', render: function(data, type,row) {
                             return '<input id="radio_' + data + '" name="terminalRadio" value="'
-                                + data + '" type="radio" onclick="checkBoxClick(\'terminalRadio\',\'all-terminal-checkbox\')">';
+                                + data + '" type="radio"' +
+                                'onclick="clickTerminalRadio()">';
                         }},
                         {title: "地址码", data: "addressCode"},
                         {title: "终端别称", data: "terminalAlias"},
@@ -1163,6 +1794,17 @@
                     getDoorList();
                     $('#modal-select-terminal').modal("hide");
                 });
+            }
+
+            /**
+             * 点击建筑列表的单选框
+             */
+            function clickTerminalRadio() {
+                $('#frm-quick-add-terminal input').prop("disabled", true);
+                $('#frm-quick-add-terminal select').prop("disabled", true);
+                $('#frm-quick-add-terminal .searchTerminal').prop("disabled", false);
+                $('#frm-quick-add-terminal input[name="terminalRadio"]').prop("disabled", false);
+                $('.doorTable').DataTable().clear().draw();
             }
             <!-- select terminal script ends -->
 
@@ -1234,6 +1876,253 @@
             }
             <!-- renew card valid date script ends -->
 
-		</script>
+            <!-- fill door script begins -->
+            /**
+             * 获取出口列表数据
+             */
+            function getDoorList() {
+                var param = {
+                    type : "get",
+                    url : "data/doorList.json",
+                    successCall : initDoorTable,
+                    errorCall : function() {
+                        showCommonTip("加载住户列表失败！");
+                    }
+                };
+                ajax(param);
+            }
+
+            /**
+             * 初始化终端列表
+             * @param data
+             */
+            function initDoorTable(data) {
+                doorTable = $('.doorTable').DataTable({
+                    "data": data,
+                    "deferRender": true,
+                    "bProcessing": true,
+                    "lengthChange": false,
+                    "ordering":false,
+                    "bRetrieve": true,
+                    "createdRow": function( row, data, dataIndex ) {
+                        $('td', row).attr("class","text-center");
+                        $(row).css("cursor","pointer");
+                    },
+                    "language": {
+                        "url":"assets/js/jquery-dataTables-zh.json"
+                    },
+                    "columns": [
+                        {
+                            data: 'uuid', render: function(data, type,row) {
+                            return '<input id="ckb_' + data + '" name="doorCkb" value="'
+                                + data + '" type="checkbox" onclick="checkBoxClick(\'doorCkb\',\'all-door-checkbox\')">';
+                        }},
+                        {title: "终端别名", data: "blank"},
+                        {title: "地址码", data: "blank"},
+                        {title: "门禁别名", data: "doorAlias"}
+                    ],
+                    "order": [[1, "asc"]]
+                });
+            }
+            <!-- fill door script ends -->
+
+            <!--select building table script begins-->
+            /**
+             * 获取建筑列表数据
+             */
+            function getBuildingList() {
+                var param = {
+                    type : "get",
+                    url : "data/buildingList.json",
+                    successCall : initBuildingTable,
+                    errorCall : function() {
+                        showCommonTip("加载用户列表失败！");
+                    }
+                };
+                ajax(param);
+            }
+
+            /**
+             * 初始化建筑列表
+             * @param data
+             */
+            function initBuildingTable(data) {
+                buildingTable = $('#buildingTable').DataTable({
+                    "data": data,
+                    "deferRender": true,
+                    "bProcessing": true,
+                    "lengthChange": false,
+                    "ordering":false,
+                    "bRetrieve": true,
+                    "createdRow": function( row, data, dataIndex ) {
+                        $('td', row).attr("class","text-center");
+                        $(row).css("cursor","pointer");
+                    },
+                    "language": {
+                        "url":"assets/js/jquery-dataTables-zh.json"
+                    },
+                    "columns": [
+                        {
+                            data: 'uuid', render: function(data, type, row) {
+                            return '<input id="radio_' + data + '" name="buildingRadio" value="'
+                                + data + '" type="radio">';
+                        }},
+                        {title: '建筑编号', data: "buildingId"},
+                        {title: '建筑地址', data: "buildingAddress"},
+                        {title: '所在社区', data: "communityAddress"},
+                        {title: '所在警务区', data: "policeArea"},
+                        {title: '备注', data: "remark"}
+                    ],
+                    "order": [[1, "asc"]]
+                });
+            }
+
+            /**
+             * 选择建筑
+             */
+            function selectBuilding() {
+                $('input[name="buildingRadio"]:checked').each(function(i, item) {
+                    var parent = $(item).parents("tr")[0];
+                    var child = $(parent).children("td")[2];
+                    var text = $(child).text();
+                    $('#modal-add-room input[name="roomBuilding"]').val(text);
+                    $('#modal-select-building').modal("hide");
+                });
+            }
+            <!--select building table script ends-->
+
+            <!-- select user table script starts -->
+            /**
+             * 获取用户列表
+             */
+            function getUserList() {
+                var param = {
+                    type: "get",
+                    url: "data/userListNew.json",
+                    successCall: initUserTable,
+                    errorCall: function () {
+                        showCommonTip("加载用户列表失败！");
+                    }
+                };
+                ajax(param);
+            }
+
+            /**
+             * 初始化用户列表表格
+             */
+            function initUserTable(data) {
+                userTable = $('#userTable').DataTable({
+                    "data": data,
+                    "deferRender": true,
+                    "bProcessing": true,
+                    "lengthChange": false,
+                    "ordering": false,
+                    "createdRow": function (row, data, dataIndex) {
+                        $('td', row).attr("class", "text-center");
+                        $(row).css("cursor", "pointer");
+                    },
+                    "language": {
+                        "url": "assets/js/jquery-dataTables-zh.json"
+                    },
+                    "columns": [
+                        {
+                            title: '<input id="all-user-checkbox" type="checkbox" name="radios" />',
+                            data: 'uuid', render: function (data, type, row) {
+                            return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
+                        }, className: "dt-center",
+                        },
+                        {title: '用户账号', data: "name", className: "dt-center",},
+                        {title: '姓名', data: "username", className: "dt-center",},
+                        {
+                            title: '状态', data: "status", className: "dt-center", render: function (data, type, row) {
+                            if (data == '1') {
+                                return '已启用';
+                            } else {
+                                return '未启用';
+                            }
+                        }
+                        },
+                        {title: '证件号码', data: "idNum", className: "dt-center",},
+                        {title: '权限角色', data: "role", className: "dt-center",},
+                    ],
+                    "order": [[1, "asc"]]
+                });
+            }
+            <!-- select user table script ends -->
+
+            <!-- add room table script begins -->
+            /**
+             * 获取房间列表
+             */
+            function getRoomList() {
+                var param = {
+                    type : "get",
+                    url : "data/roomList.json",
+                    successCall : initRoomTable,
+                    errorCall : function() {
+                        showCommonTip("加载房间列表失败！");
+                    }
+                };
+                ajax(param);
+            }
+
+            /**
+             * 初始化房间列表表格
+             */
+            function initRoomTable(data) {
+                roomTable = $('#roomTable').DataTable({
+                    "data": data,
+                    "deferRender": true,
+                    "bProcessing": true,
+                    "lengthChange": false,
+                    "ordering":false,
+                    "createdRow": function( row, data, dataIndex ) {
+                        $('td', row).attr("class","text-center");
+                        $(row).css("cursor","pointer");
+                    },
+                    "language": {
+                        "url":"assets/js/jquery-dataTables-zh.json"
+                    },
+                    "columns": [
+                        {
+                            /*
+                            title: '<div style="text-align:center;">'
+                            + '<input type="checkbox" id="all-room-checkbox" onclick="selectAllCheckBox(\'roomCkb\')" name="allRoomCheckBox" />'
+                            + '</div>',
+                            */
+                            data: 'uuid', render: function(data, type,row) {
+                            return '<input id="radio_' + data + '" name="roomRadio" value="'
+                                + data + '" type="radio" onclick="radioClick(\'roomRadio\')">';
+                        }},
+                        {title: '房间编号', data: "roomId"},
+                        {title: '所属建筑', data: "buildingAddress"},
+                        {title: '房间号', data: 'roomId'},
+                        {title: '住户', data: 'resident'},
+                        /*
+                        {title: '创建人', data: "createUser"},
+                        {title: '创建时间', data: "createTime"},
+                        {title: '修改人', data: "updateUser"},
+                        {title: '修改时间', data: "updateTime"},
+                        {title: '备注', data: "remark"}
+                        */
+                    ],
+                    "order": [[1, "asc"]]
+                });
+            }
+
+            function radioClick(target) {
+                var len = $("input[name=" + target + "]:checkbox").length;
+                if(len >= 0) {
+                    $("#modal-quick-add-room input").prop("disabled", true);
+                    $("#modal-quick-add-room select").prop("disabled", true);
+                    $("#modal-quick-add-room textarea").prop("disabled", true);
+                    $("#modal-quick-add-room input[name='roomRadio']").prop("disabled", false);
+                    $("#modal-quick-add-room input[type='submit']").prop("disabled", false);
+                    $("#modal-quick-add-room input[type='reset']").prop("disabled", false);
+                }
+            }
+            <!-- add room table script ends -->
+
+        </script>
 </body>
 </html>

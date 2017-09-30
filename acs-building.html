@@ -505,8 +505,8 @@
 					<div class="modal-body">
 						<form class="form-horizontal" id="frm-add-building">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label no-padding-right"> 所在社区：</label>
-                                <div class="col-sm-8">
+                                <label class="col-sm-3 control-label no-padding-right"> 所在社区：</label>
+                                <div class="col-sm-7">
                                     <input type="text" class="form-control" name="buildingCommunity"
                                            placeholder="请输入建筑所在社区:">
                                 </div>
@@ -524,15 +524,36 @@
 							</div>
 							-->
 							<div class="form-group" align="left">
-								<label class="col-sm-2 control-label no-padding-right"> 建筑名称：</label>
-								<div class="col-sm-8">
+								<label class="col-sm-3 control-label no-padding-right"> 建筑名称：</label>
+								<div class="col-sm-7">
 									<input type="text" class="form-control" name="buildingName"
 										   placeholder="请输入建筑名称:">
 								</div>
 							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-3 control-label no-padding-right"> 流管编码：</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" name="floatPopulationManagement"
+										   placeholder="请输入流管编码:">
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-3 control-label no-padding-right"> 房东姓名：</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" name="landlordName"
+										   placeholder="请输入房东名称:">
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-3 control-label no-padding-right"> 房东联系方式：</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" name="landlordName"
+										   placeholder="请输入房东联系方式:">
+								</div>
+							</div>
 							<div class="form-group">
-								<label class="col-sm-2 control-label no-padding-right"> 备注：</label>
-								<div class="col-sm-8">
+								<label class="col-sm-3 control-label no-padding-right"> 备注：</label>
+								<div class="col-sm-7">
 									<textarea class="form-control" name="buildingRemark" rows="4"
 										   placeholder="请输入备注:"></textarea>
 								</div>
@@ -561,6 +582,7 @@
                     <!--modal header ends-->
                     <!--modal body begins-->
                     <div class="modal-body" style="font-size: 12px;">
+                        <!--
 						<form class="form-horizontal" id="frm-select-community">
                             <div>
                                 <input id="searchCommunity" type="text" class="form-control search-query"
@@ -577,6 +599,17 @@
                                 </table>
                             </div>
 						</form>
+						-->
+                        <div class="widget-box">
+                            <!--<div class="widget-header header-color-blue2">-->
+                            <!--<h4 class="lighter smaller">选择社区</h4>-->
+                            <!--</div>-->
+                            <div class="widget-body">
+                                <div class="widget-main padding-8">
+                                    <div id="community_tree" class="tree"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div><!--modal body ends-->
                     <div class="modal-footer" style="background-color: white;">
                         <button class="btn btn-primary btn-sm" onclick="selectCommunity()">提交</button>
@@ -677,6 +710,14 @@
 		<!-- custom scripts -->
 		<script src="js/acs-util.js"></script>
 
+        <!-- ace script -->
+        <script src="assets/js/fuelux/data/fuelux.tree-sampledata.js"></script>
+        <script src="assets/js/fuelux/fuelux.tree.min.js"></script>
+        <script src="assets/js/ace-elements.min.js"></script>
+        <script src="assets/js/ace.min.js"></script>
+
+        <script src="js/communityTreeData.js"></script>
+
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
             try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
@@ -686,6 +727,7 @@
             $(function() {
                 getBuildingList();
                 initCommunitySelect2();
+                community_assign_tree();
             });
 
             /**
@@ -817,6 +859,19 @@
                     var text = $(child).text();
                     $('#modal-add-building input[name="buildingCommunity"]').val(text);
                     $('#modal-select-community').modal("hide");
+                });
+            }
+
+            function community_assign_tree() {
+                $('#community_tree').ace_tree({
+                    dataSource: ad_division_tree_data ,
+                    multiSelect:true,
+                    loadingHTML:'<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
+                    'open-icon' : 'icon-minus',
+                    'close-icon' : 'icon-plus',
+                    'selectable' : true,
+                    'selected-icon' : 'icon-ok',
+                    'unselected-icon' : 'icon-remove'
                 });
             }
             <!--select community table script ends-->
