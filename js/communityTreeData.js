@@ -58,6 +58,7 @@ wuguishan_tree_node['additionalParameters'] = {
         /*
         'changmingshui': {name: '<span class="tree-item"><i class="icon-remove"></i></span>长命水村', type: 'folder'},
         */
+        'dongsheng': {name: '东升镇', type: "folder"},
         'changmingshui': {name: '长命水村', type: 'item'},
         'longtang': {name: '龙塘村', type: 'item'},
         'guinan': {name: '桂南村', type: 'item'},
@@ -77,6 +78,48 @@ changmingshui_tree_node['additionalParameters'] = {
 */
 
 var community_tree_data = new DataSourceTree({data: community_tree_data});
+
+/** 终端设备 **/
+var terminal_tree_data = {
+    'Zhongshan': {name: '<span class="tree-item"><i class="icon-remove"></i></span>中山市', type: 'folder'}
+}
+
+terminal_tree_data['Zhongshan']['additionalParameters'] = {
+    'children': {
+        '0': {name: '<span class="tree-item"><i class="icon-remove"></i></span>五桂山', type: 'folder'},
+        '1': {name: '东升镇', type: 'item'},
+        '2': {name: '黄圃镇', type: 'item'},
+        '3': {name: '古镇', type: 'item'},
+        '4': {name: '小榄', type: 'item'},
+        '5': {name: '坦洲', type: 'item'},
+        '6': {name: '南头', type: 'item'},
+        '7': {name: '西区', type: 'item'},
+        '8': {name: '神湾', type: 'item'},
+    }
+}
+var wuguishan_terminal_tree_node = terminal_tree_data['Zhongshan']['additionalParameters']['children']['0'];
+wuguishan_terminal_tree_node['additionalParameters'] = {
+    'children': {
+        /*
+        'changmingshui': {name: '<span class="tree-item"><i class="icon-remove"></i></span>长命水村', type: 'folder'},
+        */
+        'dongsheng': {name: '东升镇', type: "folder"},
+        'changmingshui': {name: '长命水村', type: 'item'},
+        'longtang': {name: '龙塘村', type: 'item'},
+        'guinan': {name: '桂南村', type: 'item'},
+        'shigu': {name: '石鼓村', type: 'item'},
+    }
+}
+
+var terminal_tree_node = wuguishan_terminal_tree_node['additionalParameters']['children']['dongsheng'];
+terminal_tree_node['additionalParameters'] = {
+    'children': {
+        '0': {name: '广东省中山市东升镇东升村惠东路80号', type: 'item'},
+        '1': {name: '广东省中山市东升镇东升村惠东路81号', type: 'item'},
+        '2': {name: '广东省中山市东升镇东升村惠东路82号', type: 'item'}
+    }
+}
+var terminal_tree_data = new DataSourceTree({data: terminal_tree_data});
 
 /**行政区划树**/
 var ad_division_tree_data = {

@@ -476,8 +476,8 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h5 class="modal-title">添加卡片</h5>
-                    </div>
+                        <h5 class="modal-title">快速发卡</h5>
+				</div>
                     <!--modal header ends-->
                     <!--modal body begins-->
                     <div class="modal-body">
@@ -531,20 +531,50 @@
                                     <!--
                                     <a href="#modal-quick-add-terminal" data-toggle="modal" onclick="getTerminalList('wallMachine')" >选择终端</a>
                                     -->
-									<a href="#modal-auth-card" data-toggle="modal" >选择终端</a>
+									<a href="#modal-quick-auth-card" data-toggle="modal" >选择终端</a>
                                 </div>
                             </div>
-                            <!--
                             <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 卡片授权：</label>
+                                <div class="col-sm-7">
+                                    <select name="authType" class="form-control">
+                                        <option value="-1" selected="selected">请选择授权类型:</option>
+                                        <option value="1">普通卡</option>
+                                        <option value="2">管理卡</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 有效期：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="validDate"
+                                           placeholder="请输入有效期:">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right"> 座号：</label>
+                                <div class="col-sm-7">
+                                    <select name="seatNumber" class="form-control">
+                                        <option value="-1">请选择座号:</option>
+                                        <option value="0" selected >0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right"> 房间号：</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="OwnerIDCardNum" disabled>
+                                    <input type="text" class="form-control" name="roomNumber"
+                                           placeholder="请输入房间号:">
                                 </div>
                                 <div class="col-sm-2" style="vertical-align: center">
-                                    <a href="#modal-select-room" data-toggle="modal" >选择房间号</a>
+                                    <a href="#modal-quick-add-room" data-toggle="modal">选择房间号</a>
                                 </div>
                             </div>
-                            -->
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right"> 备注：</label>
                                 <div class="col-sm-7">
@@ -561,6 +591,55 @@
                 </div>
             </div>
         </div><!--quick add modal end-->
+
+        <!-- authentication card modal start-->
+        <div class="modal fade" id="modal-quick-auth-card" tabindex="-2" role="dialog" >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <!--modal header begins-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 class="modal-title">卡片授权</h5>
+                    </div>
+                    <!--modal header ends-->
+                    <!--modal body begins-->
+                    <div class="modal-body" style="font-size: 12px;">
+                        <form class="form-horizontal" id="frm-quick-auth-card">
+                            <div class="form-group" align="left">
+                                <label class="col-sm-2 control-label no-padding-right"> 围墙机：</label>
+                                <div class="col-sm-8">
+                                    <div class="widget-box">
+                                        <div class="widget-body">
+                                            <div class="widget-main padding-8">
+                                                <div class="terminal_tree tree"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-2 control-label no-padding-right"> 单元机：</label>
+                                <div class="col-sm-8">
+                                    <div class="widget-box">
+                                        <div class="widget-body">
+                                            <div class="widget-main padding-8">
+                                                <div class="terminal_tree tree"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" align="right">
+                                <input type="submit" class="btn btn-sm btn-primary" value="提交" />
+                                <input type="reset" class="btn btn-sm btn-warning" value="重置" />
+                            </div>
+                        </form>
+                    </div><!--modal body ends-->
+                </div>
+            </div>
+        </div><!-- quick authentication card modal start-->
 
         <!--add-card modal start-->
 		<div class="modal fade" id="modal-add-card" tabindex="-1" role="dialog">
@@ -791,8 +870,8 @@
                                 <label class="col-sm-2 control-label no-padding-right"> 座号：</label>
                                 <div class="col-sm-8">
                                     <select name="seatNumber" class="form-control">
-                                        <option value="-1" selected="selected">请选择座号:</option>
-                                        <option value="0">0</option>
+                                        <option value="-1">请选择座号:</option>
+                                        <option value="0" selected >0</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
@@ -1445,7 +1524,7 @@
             </div>
         </div><!--select user modal end-->
 
-		<!-- basic scripts -->
+        <!-- basic scripts -->
 
         <!--[if !IE]> -->
         <script type="text/javascript">
@@ -1480,6 +1559,12 @@
 		<!-- custom scripts -->
 		<script src="js/acs-util.js"></script>
 
+        <!-- ace script -->
+        <script src="assets/js/fuelux/data/fuelux.tree-sampledata.js"></script>
+        <script src="assets/js/fuelux/fuelux.tree.min.js"></script>
+
+        <script src="js/communityTreeData.js"></script>
+
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
             try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
@@ -1492,6 +1577,7 @@
                 initOwnerSelect2();
                 getDoorList();
                 getRoomList();
+                terminal_assign_tree();
             });
 
             /**
@@ -1782,7 +1868,7 @@
             }
 
             /**
-             * 选择住户
+             * 选择设备
              */
             function selectTerminal() {
                 $('input[name="terminalRadio"]:checked').each(function(i, item) {
@@ -1793,6 +1879,20 @@
                     //显示出口列表
                     getDoorList();
                     $('#modal-select-terminal').modal("hide");
+                });
+            }
+
+            function terminal_assign_tree() {
+                var test = terminal_tree_data;
+                $('.terminal_tree').ace_tree({
+                    dataSource: terminal_tree_data,//ad_division_tree_data ,
+                    multiSelect:true,
+                    loadingHTML:'<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
+                    'open-icon' : 'icon-minus',
+                    'close-icon' : 'icon-plus',
+                    'selectable' : true,
+                    'selected-icon' : 'icon-ok',
+                    'unselected-icon' : 'icon-remove'
                 });
             }
 

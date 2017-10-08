@@ -465,6 +465,7 @@
 												</form>
 											</td>
 											<td align="right" style="padding-right: 3px;" id="f_building_more">
+												<button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-add-terminal" onclick="getDoorList()">添加终端</button>
 												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-add-building">添加</button>
 												<button class="btn btn-sm btn-primary" data-toggle="modal" onclick="updateBuildingModal()" >修改</button>
 												<button class="btn btn-sm btn-danger">删除</button>
@@ -601,9 +602,6 @@
 						</form>
 						-->
                         <div class="widget-box">
-                            <!--<div class="widget-header header-color-blue2">-->
-                            <!--<h4 class="lighter smaller">选择社区</h4>-->
-                            <!--</div>-->
                             <div class="widget-body">
                                 <div class="widget-main padding-8">
                                     <div id="community_tree" class="tree"></div>
@@ -674,6 +672,130 @@
                 </div>
             </div>
         </div><!--update-product modal use select2 end-->
+
+		<!--add-terminal modal start-->
+		<div class="modal fade" id="modal-add-terminal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<!--modal header begins-->
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h5 class="modal-title">添加终端</h5>
+					</div>
+					<!--modal header ends-->
+					<!--modal body begins-->
+					<div class="modal-body">
+						<form class="form-horizontal" id="frm-add-terminal">
+							<div class="form-group" align="left">
+								<label class="col-sm-3 control-label no-padding-right"> 地址编码：</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" name="addressCode"
+										   placeholder="请输入地址编码:">
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-3 control-label no-padding-right"> 地址编码授权码：</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" name="addressCodeAuthCode"
+										   placeholder="请输入地址编码授权码:">
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-3 control-label no-padding-right"> SIM卡号：</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" name="SIMNumber"
+										   placeholder="请输入SIM卡号:">
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-3 control-label no-padding-right"> 终端别名：</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" name="terminalAlias"
+										   placeholder="请输入终端别名:">
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-3 control-label no-padding-right"> 型号: </label>
+								<div class="col-sm-7">
+									<select name="residentType" class="form-control">
+										<option value="-1" selected="selected">请选择型号:</option>
+										<option value="1.00">社区版V1</option>
+										<option value="2.00">社区版V2</option>
+										<option value="3.00">社区版V3</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right"> 所属建筑：</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" name="terminalCommunity"
+										   placeholder="请输入所属建筑:">
+								</div>
+								<div class="col-sm-2" style="vertical-align: center">
+									<a href="#modal-select-building" data-toggle="modal" onclick="getSelectBuildingList()">选择建筑</a>
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-3 control-label no-padding-right"> 安装日期：</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" name="terminalAlias"
+										   placeholder="请输入安装日期:">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right"> 门禁信息：</label>
+								<div class="col-sm-8">
+									<table class="doorTable nowrap dataTable hover display cell-border">
+									</table>
+								</div>
+							</div>
+							<div class="form-group" align="right">
+								<input type="submit" class="btn btn-sm btn-primary" onclick="addTerminal()" value="提交" />
+								<input type="reset" class="btn btn-sm btn-warning" value="重置" />
+							</div>
+						</form>
+					</div><!--modal body ends-->
+				</div>
+			</div>
+		</div><!--add-product modal end-->
+
+		<!--select building modal start-->
+		<div class="modal fade" id="modal-select-building" tabindex="-2" role="dialog" >
+			<div class="modal-dialog" role="document" style="width: 850px;">
+				<div class="modal-content">
+					<!--modal header begins-->
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h5 class="modal-title">选择建筑</h5>
+					</div>
+					<!--modal header ends-->
+					<!--modal body begins-->
+					<div class="modal-body" style="font-size: 12px;">
+						<div>
+							<input id="searchBuilding" type="text" class="form-control search-query"
+								   style="width: 160px; float: left;" placeholder="建筑编号/建筑地址/所属社区" />
+							<span class="input-group-btn">
+                                <button type="button" class="btn btn-purple btn-sm" onclick="searchBuilding()">
+                                    查询
+                                    <i class="icon-search icon-on-right bigger-110"></i>
+                                </button>
+                            </span>
+						</div>
+						<div>
+							<table id="selectBuildingTable" class="nowrap dataTable hover display cell-border">
+							</table>
+						</div>
+					</div><!--modal body ends-->
+					<div class="modal-footer" style="background-color: white;">
+						<button class="btn btn-primary btn-sm" onclick="selectBuilding()">提交</button>
+					</div>
+				</div>
+			</div>
+		</div><!--select building modal end-->
 
 		<!-- basic scripts -->
 
@@ -938,6 +1060,122 @@
                 }
             }
             <!-- updaate building script ends -->
+
+            <!-- fill door script begins -->
+            /**
+             * 获取出口列表数据
+             */
+            function getDoorList() {
+                var param = {
+                    type : "get",
+                    url : "data/doorList.json",
+                    successCall : initDoorTable,
+                    errorCall : function() {
+                        showCommonTip("加载住户列表失败！");
+                    }
+                };
+                ajax(param);
+            }
+
+            /**
+             * 初始化终端列表
+             * @param data
+             */
+            function initDoorTable(data) {
+                doorTable = $('.doorTable').DataTable({
+                    "data": data,
+                    "deferRender": true,
+                    "bProcessing": true,
+                    "lengthChange": false,
+                    "ordering":false,
+                    "bRetrieve": true,
+                    "createdRow": function( row, data, dataIndex ) {
+                        $('td', row).attr("class","text-center");
+                        $(row).css("cursor","pointer");
+                    },
+                    "language": {
+                        "url":"assets/js/jquery-dataTables-zh.json"
+                    },
+                    "columns": [
+                        {
+                            data: 'uuid', render: function(data, type,row) {
+                            return '<input id="ckb_' + data + '" name="doorCkb" value="'
+                                + data + '" type="checkbox" onclick="checkBoxClick(\'doorCkb\',\'all-door-checkbox\')">';
+                        }},
+                        {title: "终端别名", data: "blank"},
+                        {title: "地址码", data: "blank"},
+                        {title: "门禁别名", data: "doorAlias"}
+                    ],
+                    "order": [[1, "asc"]]
+                });
+            }
+            <!-- fill door script ends -->
+
+            <!--select building table script begins-->
+            /**
+             * 获取建筑列表数据
+             */
+            function getSelectBuildingList() {
+                var param = {
+                    type : "get",
+                    url : "data/buildingList.json",
+                    successCall : initSelectBuildingTable,
+                    errorCall : function() {
+                        showCommonTip("加载用户列表失败！");
+                    }
+                };
+                ajax(param);
+            }
+
+            /**
+             * 初始化建筑列表
+             * @param data
+             */
+            function initSelectBuildingTable(data) {
+                buildingTable = $('#selectBuildingTable').DataTable({
+                    "data": data,
+                    "deferRender": true,
+                    "bProcessing": true,
+                    "lengthChange": false,
+                    "ordering":false,
+                    "bRetrieve": true,
+                    "createdRow": function( row, data, dataIndex ) {
+                        $('td', row).attr("class","text-center");
+                        $(row).css("cursor","pointer");
+                    },
+                    "language": {
+                        "url":"assets/js/jquery-dataTables-zh.json"
+                    },
+                    "columns": [
+                        {
+                            data: 'uuid', render: function(data, type, row) {
+                            return '<input id="radio_' + data + '" name="buildingRadio" value="'
+                                + data + '" type="radio">';
+                        }},
+                        {title: '建筑编号', data: "buildingId"},
+                        {title: '建筑地址', data: "buildingAddress"},
+                        {title: '所在社区', data: "communityAddress"},
+                        {title: '所在警务区', data: "policeArea"},
+                        {title: '备注', data: "remark"}
+                    ],
+                    "order": [[1, "asc"]]
+                });
+            }
+
+            /**
+             * 选择建筑
+             */
+            function selectBuilding() {
+                $('input[name="buildingRadio"]:checked').each(function(i, item) {
+                    var parent = $(item).parents("tr")[0];
+                    var child = $(parent).children("td")[2];
+                    var text = $(child).text();
+                    $('#modal-add-room input[name="roomBuilding"]').val(text);
+                    $('#modal-select-building').modal("hide");
+                });
+            }
+
+            <!-- fill door script begins -->
 		</script>
 </body>
 </html>
