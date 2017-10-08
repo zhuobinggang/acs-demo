@@ -55,12 +55,16 @@ community_tree_data['Zhongshan']['additionalParameters'] = {
 var wuguishan_tree_node = community_tree_data['Zhongshan']['additionalParameters']['children']['0'];
 wuguishan_tree_node['additionalParameters'] = {
     'children': {
+        /*
         'changmingshui': {name: '<span class="tree-item"><i class="icon-remove"></i></span>长命水村', type: 'folder'},
+        */
+        'changmingshui': {name: '长命水村', type: 'item'},
         'longtang': {name: '龙塘村', type: 'item'},
         'guinan': {name: '桂南村', type: 'item'},
         'shigu': {name: '石鼓村', type: 'item'},
     }
 }
+/*
 var changmingshui_tree_node = wuguishan_tree_node['additionalParameters']['children']['changmingshui'];
 changmingshui_tree_node['additionalParameters'] = {
     'children': {
@@ -70,6 +74,7 @@ changmingshui_tree_node['additionalParameters'] = {
         '4': {name: '长命水村北门', type: 'item'},
     }
 }
+*/
 
 var community_tree_data = new DataSourceTree({data: community_tree_data});
 
