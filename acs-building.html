@@ -465,7 +465,7 @@
 												</form>
 											</td>
 											<td align="right" style="padding-right: 3px;" id="f_building_more">
-												<button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-add-terminal" onclick="getDoorList()">添加终端</button>
+												<button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-add-terminal" onclick="getSelectBuilding()">添加终端</button>
 												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-add-building">添加</button>
 												<button class="btn btn-sm btn-primary" data-toggle="modal" onclick="updateBuildingModal()" >修改</button>
 												<button class="btn btn-sm btn-danger">删除</button>
@@ -728,14 +728,16 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"> 所属建筑：</label>
+								<label class="col-sm-3 control-label no-padding-right"> 所属建筑编号：</label>
 								<div class="col-sm-7">
-									<input type="text" class="form-control" name="terminalCommunity"
+									<input type="text" class="form-control" name="buildingCode"
 										   placeholder="请输入所属建筑:">
 								</div>
+                                <!--
 								<div class="col-sm-2" style="vertical-align: center">
 									<a href="#modal-select-building" data-toggle="modal" onclick="getSelectBuildingList()">选择建筑</a>
 								</div>
+								-->
 							</div>
 							<div class="form-group" align="left">
 								<label class="col-sm-3 control-label no-padding-right"> 安装日期：</label>
@@ -744,6 +746,7 @@
 										   placeholder="请输入安装日期:">
 								</div>
 							</div>
+                            <!--
 							<div class="form-group">
 								<label class="col-sm-3 control-label no-padding-right"> 门禁信息：</label>
 								<div class="col-sm-8">
@@ -751,6 +754,7 @@
 									</table>
 								</div>
 							</div>
+							-->
 							<div class="form-group" align="right">
 								<input type="submit" class="btn btn-sm btn-primary" onclick="addTerminal()" value="提交" />
 								<input type="reset" class="btn btn-sm btn-warning" value="重置" />
@@ -1176,6 +1180,19 @@
             }
 
             <!-- fill door script begins -->
+
+            function getSelectBuilding() {
+                //showCommonTip("tset");
+                var ids = getCheckedBox("buildingCkb");
+                if(ids.length > 1)
+                    alert("当前勾选了多个建筑");
+                else {
+                    var checkBox = $("#ckb_" + ids[0]);
+                    var parent = $(checkBox).parents("tr")[0];
+                    var buildingAddressCode = $($(parent).children("td")[1]).text();
+                    $("#modal-add-terminal input[name='buildingCode']").val(buildingAddressCode);
+                }
+            }
 		</script>
 </body>
 </html>

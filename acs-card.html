@@ -485,17 +485,17 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right"> 卡号：</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="cardBuilding"
+                                    <input type="text" class="form-control" name="cardNumber"
                                            placeholder="请输入卡号:">
                                 </div>
                                 <div class="col-sm-2" style="vertical-align: center">
-                                    <a href="#">读取</a>
+                                    <a onclick="readCard()">读取</a>
                                 </div>
                             </div>
                             <div class="form-group" align="left">
                                 <label class="col-sm-3 control-label no-padding-right"> 类型：</label>
                                 <div class="col-sm-7">
-                                    <select name="residentSex" class="form-control">
+                                    <select name="cardType" class="form-control">
                                         <option value="-1" selected="selected">请选择类型:</option>
                                         <option value="1">身份证</option>
                                         <option value="2">IC卡</option>
@@ -505,7 +505,7 @@
                             <div class="form-group" align="left">
                                 <label class="col-sm-3 control-label no-padding-right"> 状态：</label>
                                 <div class="col-sm-7">
-                                    <select name="residentSex" class="form-control">
+                                    <select name="cardStatus" class="form-control">
                                         <option value="-1" selected="selected">请选择状态:</option>
                                         <option value="1">正常</option>
                                         <option value="2">禁用</option>
@@ -516,16 +516,16 @@
                             <div class="form-group" align="left">
                                 <label class="col-sm-3 control-label no-padding-right"> 持卡人：</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="OwnerIDCardNum" disabled>
+                                    <input type="text" class="form-control" name="owner" disabled>
                                 </div>
-                                <div class="col-sm-2" style="vertical-align: center">
-                                    <a href="#modal-select-resident" data-toggle="modal" >选择持卡人</a>
+                                <div class="col-sm-2" style="vertical-align: center;" id="addResident">
+                                    <a href="#modal-add-resident" data-toggle="modal">&nbsp;添加<br />住户信息</a>
                                 </div>
                             </div>
                             <div class="form-group" align="left">
                                 <label class="col-sm-3 control-label no-padding-right"> 终端：</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="OwnerIDCardNum" disabled>
+                                    <input type="text" class="form-control" name="terminal" disabled>
                                 </div>
                                 <div class="col-sm-2" style="vertical-align: center">
                                     <!--
@@ -571,9 +571,11 @@
                                     <input type="text" class="form-control" name="roomNumber"
                                            placeholder="请输入房间号:">
                                 </div>
+                                <!--
                                 <div class="col-sm-2" style="vertical-align: center">
                                     <a href="#modal-quick-add-room" data-toggle="modal">选择房间号</a>
                                 </div>
+                                -->
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right"> 备注：</label>
@@ -601,39 +603,22 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h5 class="modal-title">卡片授权</h5>
+                        <h5 class="modal-title">选择终端</h5>
                     </div>
                     <!--modal header ends-->
                     <!--modal body begins-->
                     <div class="modal-body" style="font-size: 12px;">
                         <form class="form-horizontal" id="frm-quick-auth-card">
-                            <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> 围墙机：</label>
-                                <div class="col-sm-8">
-                                    <div class="widget-box">
-                                        <div class="widget-body">
-                                            <div class="widget-main padding-8">
-                                                <div class="terminal_tree tree"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> 单元机：</label>
-                                <div class="col-sm-8">
-                                    <div class="widget-box">
-                                        <div class="widget-body">
-                                            <div class="widget-main padding-8">
-                                                <div class="terminal_tree tree"></div>
-                                            </div>
-                                        </div>
+                            <div class="widget-box">
+                                <div class="widget-body">
+                                    <div class="widget-main padding-8">
+                                        <div class="terminal_tree tree"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group" align="right">
-                                <input type="submit" class="btn btn-sm btn-primary" value="提交" />
-                                <input type="reset" class="btn btn-sm btn-warning" value="重置" />
+                                <input type="button" class="btn btn-sm btn-primary" value="提交" />
+                                <input type="button" class="btn btn-sm btn-warning" value="取消" />
                             </div>
                         </form>
                     </div><!--modal body ends-->
@@ -655,7 +640,7 @@
 					<!--modal header ends-->
 					<!--modal body begins-->
 					<div class="modal-body">
-						<form class="form-horizontal" id="frm-add-product">
+						<form class="form-horizontal" id="frm-add-card">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right"> 卡号：</label>
                                 <div class="col-sm-7">
@@ -1524,6 +1509,224 @@
             </div>
         </div><!--select user modal end-->
 
+        <!--add-resident modal start-->
+        <div class="modal fade" id="modal-add-resident" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <!--modal header begins-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 class="modal-title">添加住户</h5>
+                    </div>
+                    <!--modal header ends-->
+                    <!--modal body begins-->
+                    <div class="modal-body">
+                        <form class="form-horizontal" id="frm-add-product">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right"> 证件号码：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="residentIDCardNum"
+                                           placeholder="请输入证件号码:">
+                                </div>
+                                <div class="col-sm-2" style="vertical-align: center">
+                                    <a href="#">读取</a>
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 证件种类：</label>
+                                <div class="col-sm-7">
+                                    <select name="residentType" class="form-control">
+                                        <option value="-1" selected="selected">请选择证件种类:</option>
+                                        <option value="1">身份证</option>
+                                        <option value="2">外交护照</option>
+                                        <option value="3">公务护照</option>
+                                        <option value="4">因公普通护照</option>
+                                        <option value="5">护照</option>
+                                        <option value="6">其它</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 发证机关：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="department"
+                                           placeholder="请输入发证机关:">
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 证件有效期：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="IDCardValidDate"
+                                           placeholder="请输入证件有效期:">
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 姓名：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="residentName"
+                                           placeholder="请输入住户姓名:">
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 照片：</label>
+                                <div class="col-sm-7">
+                                    <input type="file" class="form-control" name="residentPhoto" />
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 性别：</label>
+                                <div class="col-sm-7">
+                                    <select name="residentSex" class="form-control">
+                                        <option value="-1" selected="selected">请选择住户性别:</option>
+                                        <option value="1">男</option>
+                                        <option value="2">女</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 出生日期：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="residentBirthday"
+                                           placeholder="请输入出生日期:">
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 民族：</label>
+                                <div class="col-sm-7">
+                                    <select name="residentNation" class="form-control">
+                                        <option value="-1" selected="selected">请选择国籍地区:</option>
+                                        <option value="1">中国</option>
+                                        <option value="2">香港</option>
+                                        <option value="3">澳门</option>
+                                        <option value="4">台湾</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 户籍地行政区划代码：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="adminDivisionCode"
+                                           placeholder="请选择户籍地行政区划代码:">
+                                </div>
+                                <div class="col-sm-2" style="vertical-align: center">
+                                    <a href="#modal-select-adminArea" data-toggle="modal" onclick="getAdminAreaList()">&nbsp;选择<br />行政区划</a>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right"> 户籍详细地址：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="domicilePlace"
+                                           placeholder="请输入户籍详细地址:">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right"> 工作单位/学校：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="companyOrSchool"
+                                           placeholder="请输入工作单位/学校:">
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 状态: </label>
+                                <div class="col-sm-7">
+                                    <select name="status" class="form-control">
+                                        <option value="-1" selected="selected">请选择状态:</option>
+                                        <option value="1">正常</option>
+                                        <option value="2">禁用</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 类别: </label>
+                                <div class="col-sm-7">
+                                    <select name="residentType" class="form-control">
+                                        <option value="-1" selected="selected">请选择类别:</option>
+                                        <option value="1">住户</option>
+                                        <option value="2">租客</option>
+                                        <option value="3">其他</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 属性: </label>
+                                <div class="col-sm-7">
+                                    <select name="residentAttribute" class="form-control">
+                                        <option value="-1" selected="selected">请选择属性:</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" align="left">
+                                <label class="col-sm-3 control-label no-padding-right"> 联系电话：</label>
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" name="residentPhone"
+                                           placeholder="请输入联系电话:">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label no-padding-right"> 备注：</label>
+                                <div class="col-sm-7">
+									<textarea class="form-control" name="residentRemark" rows="4"
+                                              placeholder="请输入备注:"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group" align="right">
+                                <input type="submit" class="btn btn-sm btn-primary" value="提交" />
+                                <input type="reset" class="btn btn-sm btn-warning" value="重置" />
+                            </div>
+                        </form>
+                    </div><!--modal body ends-->
+                </div>
+            </div>
+        </div><!--add-product modal end-->
+
+        <!-- select administrative area modal start -->
+        <div class="modal fade" id="modal-select-adminArea" tabindex="-2" role="dialog" >
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="width: 280px;margin-left: auto; margin-right: auto;">
+                    <!--modal header begins-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h5 class="modal-title">选择行政划区</h5>
+                    </div>
+                    <!--modal header ends-->
+                    <!--modal body begins-->
+                    <div class="modal-body" style="font-size: 12px;">
+                        <div>
+                            <input id="searchResident" type="text" class="form-control search-query"
+                                   style="width: 160px; float: left;" placeholder="行政区划代码/名称" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-purple btn-sm" onclick="searchAdminArea()">
+                                    查询
+                                    <i class="icon-search icon-on-right bigger-110"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <div>
+                            <table id="adminAreaTable" class="nowrap dataTable hover display cell-border">
+                            </table>
+                        </div>
+                    </div><!--modal body ends-->
+                    <div class="modal-footer" style="background-color: white;">
+                        <button class="btn btn-primary btn-sm" onclick="selectResident()">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div><!-- select administrative area modal end -->
+
         <!-- basic scripts -->
 
         <!--[if !IE]> -->
@@ -2222,6 +2425,63 @@
                 }
             }
             <!-- add room table script ends -->
+
+            <!-- read card script begins -->
+            function readCard() {
+                $("#frm-quick-add input[name='cardNumber']").val('44162xxxxxxxxxxxx');
+                $("#frm-quick-add select[name='cardType']").val('1');
+                $("#frm-quick-add select[name='cardStatus']").val('1');
+                $("#frm-quick-add input[name='owner']").val('张三');
+                $("#addResident").hide();
+            }
+            <!-- read card script ends -->
+
+            <!-- select admin place modal starts -->
+            /**
+             * 获取行政划区列表
+             */
+            function getAdminAreaList() {
+                var param = {
+                    type : "get",
+                    url : "data/adminAreaList.json",
+                    successCall : initAdminAreaTable,
+                    errorCall : function() {
+                        showCommonTip("加载住户列表失败！");
+                    }
+                };
+                ajax(param);
+            }
+
+            /**
+             * 初始化住户列表表格
+             */
+            function initAdminAreaTable(data) {
+                residentTable = $('#adminAreaTable').DataTable({
+                    "data": data,
+                    "deferRender": true,
+                    "bProcessing": true,
+                    "lengthChange": false,
+                    "ordering":false,
+                    "createdRow": function( row, data, dataIndex ) {
+                        $('td', row).attr("class","text-center");
+                        $(row).css("cursor","pointer");
+                    },
+                    "language": {
+                        "url":"assets/js/jquery-dataTables-zh.json"
+                    },
+                    "columns": [
+                        {
+                            data: 'code', render: function(data, type,row) {
+                            return '<input id="radio_' + data + '" name="adminAreaRadio" value="'
+                                + data + '" type="radio">';
+                        }},
+                        {title: "行政区划代码", data: "code"},
+                        {title: "名称", data: "address"},
+                    ],
+                    "order": [[1, "asc"]]
+                });
+            }
+            <!-- select admin place modal ends -->
 
         </script>
 </body>
