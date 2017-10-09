@@ -34,7 +34,7 @@
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
     <![endif]-->
-    <link rel="stylesheet" href="css/acs.css" />
+    <link rel="stylesheet" href="css/acs.css"/>
 
     <!-- inline styles related to this page -->
 
@@ -424,12 +424,14 @@
                                     <td align="right" style="padding-right: 3px;" id="f_user_more">
                                         <!--<button class="btn btn-sm btn-primary">分配权限</button>-->
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                                data-target="#modal-select-community" >分配管辖群组</button>
+                                                data-target="#modal-select-community">分配管辖群组
+                                        </button>
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                 data-target="#modal-add-product">添加
                                         </button>
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                                data-target="#modal-modify">修改</button>
+                                                data-target="#modal-modify">修改
+                                        </button>
                                         <button class="btn btn-sm btn-danger">删除</button>
                                     </td>
                                 </tr>
@@ -463,7 +465,7 @@
 </div><!-- /.main-container -->
 
 <!--add-product modal start-->
-<div class="modal fade"  id="modal-add-product" tabindex="-1" role="dialog">
+<div class="modal fade" id="modal-add-product" tabindex="-1" role="dialog">
     <div class="modal-dialog" style="width: 700px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -477,9 +479,9 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">机构类型</label>
                         <div class="col-sm-8">
-                            <select  >
-                                <option value ="volvo">小区/建筑群</option>
-                                <option value ="saab">居委会/村委会</option>
+                            <select>
+                                <option value="volvo">小区/建筑群</option>
+                                <option value="saab">居委会/村委会</option>
                                 <option value="opel">公安局/派出所</option>
                                 <option value="opel">海辰分公司/部门</option>
                             </select>
@@ -506,11 +508,11 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">详细地址</label>
                         <div class="col-sm-8">
-                            <input type="url" class="form-control" name="buyLink"
+                            <input type="url" class="form-control" name="buyLink" id="detailAddress"
                                    placeholder="">
                         </div>
                         <div class="col-sm-2">
-                            <a href="#modal-select-address" data-toggle="modal">地图选址</a>
+                            <a onclick="selectAddress()" href="#modal-select-address" data-toggle="modal">地图选址</a>
                         </div>
                     </div>
 
@@ -543,7 +545,7 @@
         </div>
     </div>
 </div><!--add-product modal end-->
-<div class="modal fade"  id="modal-modify" tabindex="-1" role="dialog">
+<div class="modal fade" id="modal-modify" tabindex="-1" role="dialog">
     <div class="modal-dialog" style="width: 700px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -557,9 +559,9 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">机构类型</label>
                         <div class="col-sm-8">
-                            <select  >
-                                <option value ="volvo">小区/建筑群</option>
-                                <option value ="saab">居委会/村委会</option>
+                            <select>
+                                <option value="volvo">小区/建筑群</option>
+                                <option value="saab">居委会/村委会</option>
                                 <option value="opel">公安局/派出所</option>
                                 <option value="opel">海辰分公司/部门</option>
                             </select>
@@ -628,22 +630,22 @@
             <!--modal body begins-->
             <div class="modal-body" style="font-size: 12px;">
                 <!--<div>-->
-                    <!--<input id="searchCommunity" type="text" class="form-control search-query"-->
-                           <!--style="margin-left: 70px; width: 160px; float: left;" placeholder="社区编号/社区名称/社区地址"/>-->
-                    <!--<span class="input-group-btn">-->
-                                <!--<button type="button" class="btn btn-purple btn-sm" onclick="searchCommunity()">-->
-                                    <!--查询-->
-                                    <!--<i class="icon-search icon-on-right bigger-110"></i>-->
-                                <!--</button>-->
-                            <!--</span>-->
+                <!--<input id="searchCommunity" type="text" class="form-control search-query"-->
+                <!--style="margin-left: 70px; width: 160px; float: left;" placeholder="社区编号/社区名称/社区地址"/>-->
+                <!--<span class="input-group-btn">-->
+                <!--<button type="button" class="btn btn-purple btn-sm" onclick="searchCommunity()">-->
+                <!--查询-->
+                <!--<i class="icon-search icon-on-right bigger-110"></i>-->
+                <!--</button>-->
+                <!--</span>-->
                 <!--</div>-->
                 <!--<div>-->
-                    <!--<table id="communityTable" class="nowrap dataTable hover display cell-border">-->
-                    <!--</table>-->
+                <!--<table id="communityTable" class="nowrap dataTable hover display cell-border">-->
+                <!--</table>-->
                 <!--</div>-->
                 <div class="widget-box">
                     <!--<div class="widget-header header-color-blue2">-->
-                        <!--<h4 class="lighter smaller">选择社区</h4>-->
+                    <!--<h4 class="lighter smaller">选择社区</h4>-->
                     <!--</div>-->
 
                     <div class="widget-body">
@@ -660,6 +662,36 @@
     </div>
 </div><!--select community modal end-->
 
+<!-- baidu map modal start -->
+<div class="modal fade" id="modal-map-marker" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" style="width:80%">
+        <div class="modal-content">
+            <!--modal header begins-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">地图选址</h5>
+            </div>
+            <!--modal header ends-->
+            <!--modal body begins-->
+            <div class="modal-body">
+                <div id="map-canvas" style="min-height: 500px; width:100%;"></div>
+
+            </div><!--modal body ends-->
+
+            <div class="form-group" style="min-height: 30px; margin-top:10px">
+                <div class="col-sm-10">
+                    <button type="button" class="btn btn-primary btn-sm" id="btn-marker-reset">重新定位</button>
+                    <button type="button" class="btn btn-primary btn-sm disabled" id="btn-marker-confirm">确认</button>
+                    <img class="hidden processing" src="img/processing.gif"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- baidu map modal end -->
+
 <!-- basic scripts -->
 <script src="https://cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script>
 
@@ -671,7 +703,8 @@
 <script type="text/javascript">
     if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
 </script>
-<script src="assets/js/bootstrap.min.js"></script>
+<!--<script src="assets/js/bootstrap.min.js"></script>-->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="assets/js/typeahead-bs2.min.js"></script>
 
 <!-- page specific plugin scripts -->
@@ -694,6 +727,13 @@
 <script src="assets/js/ace.min.js"></script>
 
 <script src="js/communityTreeData.js"></script>
+
+<!--Baidu Map Api-->
+<script src="http://api.map.baidu.com/api?v=2.0&ak=zSrwwQpoWFZFa9Rk03iyzT2O"></script>
+
+<!--Confirmation Api-->
+<script src="https://cdn.bootcss.com/bootstrap-confirmation/1.0.5/bootstrap-confirmation.js"></script>
+
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
     try {
@@ -746,10 +786,10 @@
                     return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
                 }
                 },
-                {title: '机构名称', data: "organization",className: "dt-center",},
-                {title: '管辖群组', data: "communities",className: "dt-center",},
-                {title: '机构类型', data: "remark",className: "dt-center",},
-                {title: '创建日期', data: "ctime",className: "dt-center",},
+                {title: '机构名称', data: "organization", className: "dt-center",},
+                {title: '管辖群组', data: "communities", className: "dt-center",},
+                {title: '机构类型', data: "remark", className: "dt-center",},
+                {title: '创建日期', data: "ctime", className: "dt-center",},
 //                {
 //                    title: '创建日期', data: "ctime",className: "dt-center", render: function (data, type, row) {
 //                    return new Date(data).toString("yyyy-MM-dd");
@@ -826,10 +866,10 @@
     //select community begin
     function getCommunityList() {
         var param = {
-            type : "get",
-            url : "data/communityList.json",
-            successCall : initCommunityTable,
-            errorCall : function() {
+            type: "get",
+            url: "data/communityList.json",
+            successCall: initCommunityTable,
+            errorCall: function () {
                 showCommonTip("加载用户列表失败！");
             }
         };
@@ -846,31 +886,32 @@
             "deferRender": true,
             "bProcessing": true,
             "lengthChange": false,
-            "ordering":false,
+            "ordering": false,
             "bRetrieve": true,
-            "createdRow": function( row, data, dataIndex ) {
-                $('td', row).attr("class","text-center");
-                $(row).css("cursor","pointer");
+            "createdRow": function (row, data, dataIndex) {
+                $('td', row).attr("class", "text-center");
+                $(row).css("cursor", "pointer");
             },
             "language": {
-                "url":"assets/js/jquery-dataTables-zh.json"
+                "url": "assets/js/jquery-dataTables-zh.json"
             },
             "columns": [
                 {
-                    data: 'uuid', render: function(data, type, row) {
+                    data: 'uuid', render: function (data, type, row) {
                     return '<input id="radio_' + data + '" name="communityRadio" value="'
                         + data + '" type="radio">';
-                }},
+                }
+                },
                 {title: "社区编号", data: "communityCode"},
                 {title: '社区名称', data: "communityName"},
-                {title: '社区地址', data: "communityAddress",className: "dt-center",},
+                {title: '社区地址', data: "communityAddress", className: "dt-center",},
             ],
             "order": [[1, "asc"]]
         });
     }
 
     function selectCommunity() {
-        $('input[name="communityRadio"]:checked').each(function(i, item) {
+        $('input[name="communityRadio"]:checked').each(function (i, item) {
 //            var parent = $(item).parents("tr")[0];
 //            var child = $(parent).children("td")[2];
 //            var text = $(child).text();
@@ -878,22 +919,141 @@
             $('#modal-select-community').modal("hide");
         });
     }
+
     //select community end
     //community modal init start
     function community_assign_tree() {
         $('#community_tree').ace_tree({
-            dataSource: community_tree_data ,
-            multiSelect:true,
-            loadingHTML:'<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
-            'open-icon' : 'icon-minus',
-            'close-icon' : 'icon-plus',
-            'selectable' : true,
-            'selected-icon' : 'icon-ok',
-            'unselected-icon' : 'icon-remove'
+            dataSource: community_tree_data,
+            multiSelect: true,
+            loadingHTML: '<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
+            'open-icon': 'icon-minus',
+            'close-icon': 'icon-plus',
+            'selectable': true,
+            'selected-icon': 'icon-ok',
+            'unselected-icon': 'icon-remove'
         });
     }
+
     //community modal init end
 
+
+    /**
+     * Select address 百度地图API功能
+     */
+    var door = {
+        "uuid": "655bdd7b-2dab-4131-af40-86f25ed85690",
+        "community": "宏珠公寓",
+        "name": "宏珠公寓东门",
+        "code": "4404020010010010101",
+        "status": true,
+        "terminal": "01234567890001",
+        "longitude": 113.606669,
+        "latitude": 22.365022
+    }
+    var map = null
+    var newMapPoint = null
+
+    function showMap() {
+        if (map) return
+
+        // 百度地图API功能
+        map = new BMap.Map("map-canvas");  // 创建Map实例
+        map.enableScrollWheelZoom(); // 启用滚轮放大缩小
+        map.addControl(new BMap.NavigationControl()); // 左上角，添加默认缩放平移控件
+
+
+        //Clear all overlays
+        map.clearOverlays()
+
+        //Init point
+        var point = new BMap.Point(door.longitude, door.latitude);
+        var marker = new BMap.Marker(point);
+        map.addOverlay(marker);
+        map.centerAndZoom(point, 20);
+
+//        var content = "门禁别名：" + door.name;
+        var content = "";
+
+        content += "<br/>经度: " + door.longitude;
+        content += "<br/>纬度：" + door.latitude;
+        addClickHandler(content, marker);
+    }
+
+    function addClickHandler(content, marker) {
+        marker.addEventListener("click", function (e) {
+                openInfo(content, e)
+            }
+        );
+    }
+
+    function openInfo(content, e) {
+        var p = e.target;
+        var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+        var infoWindow = new BMap.InfoWindow(content, opts);  // 创建信息窗口对象
+        map.openInfoWindow(infoWindow, point); //开启信息窗口
+    }
+
+
+    function selectAddress() {
+        console.log('Select address click!');
+        $("#modal-map-marker").modal('show');
+        setTimeout(function () {
+            showMap();
+        }, 200);
+    }
+
+    function reMarkOnMap(e) {
+        map.clearOverlays()
+        newMapPoint = new BMap.Point(e.point.lng, e.point.lat);
+        var marker = new BMap.Marker(newMapPoint);
+        map.addOverlay(marker);
+    }
+
+    //重新定位
+    $('#btn-marker-reset').click(function () {
+        $('#btn-marker-confirm').removeClass('disabled');
+        map.addEventListener("click", reMarkOnMap);
+    });
+
+    //Confirm map point change
+    $('#btn-marker-confirm').confirmation({
+        title: "请确认",
+        animation: true,
+        placement: 'top',
+//                    singleton: true,
+        btnOkIcon: 'icon-ok',
+        btnOkLabel: '重新定位',
+        btnCancelIcon: 'icon-remove',
+        btnCancelLabel: '取消',
+        onConfirm: function () {
+            console.log('Confirm clicked!')
+            //Fill input bar
+            fillAddressInput()
+            map.removeEventListener("click", reMarkOnMap);
+            //修改门禁坐标
+            door.latitude = newMapPoint.latitude;
+            door.longitude = newMapPoint.longitude;
+            $('#btn-marker-confirm').addClass('disabled');
+            $('#modal-map-marker').modal('hide');
+
+        },
+        onCancel: function () {
+            //TODO: marker回到原来的位置
+            console.log('取消');
+        }
+    });
+
+    function fillAddressInput() {
+        var point = new BMap.Point(door.longitude, door.latitude)
+        var gc = new BMap.Geocoder()
+        gc.getLocation(point, function(rs){
+//            var addComp = rs.addressComponents;
+//            console.info(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber)
+            console.info(rs.address)
+            $('#detailAddress').val(rs.address)
+        });
+    }
 </script>
 </body>
 </html>

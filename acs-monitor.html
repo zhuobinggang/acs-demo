@@ -1492,9 +1492,8 @@
 
         var newMapPoint;
 
-        $('#btn-marker-reset').click(function () {
-            $('#btn-marker-confirm').removeClass('disabled');
-            map.addEventListener("click", function (e) {
+        //Remark on map when click
+        var reMark = function (e) {
                 var allOverlay = map.getOverlays();
                 for (var i = 0; i < allOverlay.length; i++) {
                     map.removeOverlay(allOverlay[i]);
@@ -1502,7 +1501,11 @@
                 newMapPoint = new BMap.Point(e.point.lng, e.point.lat);
                 var marker = new BMap.Marker(newMapPoint);
                 map.addOverlay(marker);
-            });
+        }
+
+        $('#btn-marker-reset').click(function () {
+            $('#btn-marker-confirm').removeClass('disabled');
+            map.addEventListener("click", reMark);
         });
 
         $('#btn-marker-confirm').confirmation({
@@ -1515,7 +1518,7 @@
             btnCancelIcon: 'icon-remove',
             btnCancelLabel: '取消',
             onConfirm: function () {
-                map.removeEventListener("click");
+                map.removeEventListener("click",reMark);
                 //修改门禁坐标
                 door.latitude = newMapPoint.latitude;
                 door.longitude = newMapPoint.longitude;
@@ -1558,6 +1561,8 @@
     };
 
     function showMap() {
+        if(map)return
+
         // 百度地图API功能
         map = new BMap.Map("map-canvas");  // 创建Map实例
         map.enableScrollWheelZoom(); // 启用滚轮放大缩小
