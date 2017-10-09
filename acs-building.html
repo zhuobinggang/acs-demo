@@ -509,7 +509,7 @@
                                 <label class="col-sm-3 control-label no-padding-right"> 所在社区：</label>
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="buildingCommunity"
-                                           placeholder="请输入建筑所在社区:">
+                                           placeholder="请选择建筑所属社区:">
                                 </div>
                                 <div class="col-sm-2" style="vertical-align: center">
                                     <a href="#modal-select-community" data-toggle="modal" onclick="getCommunityList()">选择社区</a>
@@ -529,6 +529,16 @@
 								<div class="col-sm-7">
 									<input type="text" class="form-control" name="buildingName"
 										   placeholder="请输入建筑名称:">
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-3 control-label no-padding-right"> 建筑地址：</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" name="floatPopulationManagement"
+										   placeholder="请输入建筑地址:">
+								</div>
+								<div class="col-sm-2" style="vertical-align: center">
+									<a href="#modal-select-community" data-toggle="modal" onclick="getMapAddress()"> 地图定位</a>
 								</div>
 							</div>
 							<div class="form-group" align="left">
@@ -688,25 +698,23 @@
 					<!--modal body begins-->
 					<div class="modal-body">
 						<form class="form-horizontal" id="frm-add-terminal">
-							<div class="form-group" align="left">
-								<label class="col-sm-3 control-label no-padding-right"> 地址编码：</label>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right"> 所属建筑编号：</label>
 								<div class="col-sm-7">
-									<input type="text" class="form-control" name="addressCode"
-										   placeholder="请输入地址编码:">
+									<input type="text" class="form-control" name="buildingCode"
+										   placeholder="请输入所属建筑:">
 								</div>
+								<!--
+                                <div class="col-sm-2" style="vertical-align: center">
+                                    <a href="#modal-select-building" data-toggle="modal" onclick="getSelectBuildingList()">选择建筑</a>
+                                </div>
+                                -->
 							</div>
 							<div class="form-group" align="left">
-								<label class="col-sm-3 control-label no-padding-right"> 地址编码授权码：</label>
+								<label class="col-sm-3 control-label no-padding-right"> 终端编号：</label>
 								<div class="col-sm-7">
-									<input type="text" class="form-control" name="addressCodeAuthCode"
-										   placeholder="请输入地址编码授权码:">
-								</div>
-							</div>
-							<div class="form-group" align="left">
-								<label class="col-sm-3 control-label no-padding-right"> SIM卡号：</label>
-								<div class="col-sm-7">
-									<input type="text" class="form-control" name="SIMNumber"
-										   placeholder="请输入SIM卡号:">
+									<input type="text" class="form-control" name="code"
+										   placeholder="请输入终端编号:">
 								</div>
 							</div>
 							<div class="form-group" align="left">
@@ -716,6 +724,22 @@
 										   placeholder="请输入终端别名:">
 								</div>
 							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-3 control-label no-padding-right"> 地址编码：</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" name="addressCode"
+										   placeholder="请输入终端物理地址编码:">
+								</div>
+							</div>
+
+							<div class="form-group" align="left">
+								<label class="col-sm-3 control-label no-padding-right"> SIM卡号：</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" name="SIMNumber"
+										   placeholder="请输入SIM卡号:">
+								</div>
+							</div>
+
 							<div class="form-group" align="left">
 								<label class="col-sm-3 control-label no-padding-right"> 型号: </label>
 								<div class="col-sm-7">
@@ -727,22 +751,11 @@
 									</select>
 								</div>
 							</div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"> 所属建筑编号：</label>
-								<div class="col-sm-7">
-									<input type="text" class="form-control" name="buildingCode"
-										   placeholder="请输入所属建筑:">
-								</div>
-                                <!--
-								<div class="col-sm-2" style="vertical-align: center">
-									<a href="#modal-select-building" data-toggle="modal" onclick="getSelectBuildingList()">选择建筑</a>
-								</div>
-								-->
-							</div>
+
 							<div class="form-group" align="left">
 								<label class="col-sm-3 control-label no-padding-right"> 安装日期：</label>
 								<div class="col-sm-7">
-									<input type="text" class="form-control" name="terminalAlias"
+									<input type="text" class="form-control" name="setupDate"
 										   placeholder="请输入安装日期:">
 								</div>
 							</div>
@@ -896,6 +909,7 @@
                                 + data + '" type="checkbox" onclick="checkBoxClick(\'buildingCkb\',\'all-building-checkbox\')">';
                         }},
                         {title: '建筑编号', data: "buildingId"},
+                        {title: '建筑名称', data: "name"},
                         {title: '建筑地址', data: "buildingAddress"},
                         {title: '所在社区', data: "communityAddress"},
                         {title: '所在警务区', data: "policeArea"},
@@ -903,8 +917,8 @@
                         {title: '创建人', data: "createUser"},
                         {title: '创建时间', data: "createTime"},
                         */
-                        {title: '修改人', data: "updateUser"},
-                        {title: '修改时间', data: "updateTime"},
+//                        {title: '修改人', data: "updateUser"},
+//                        {title: '修改时间', data: "updateTime"},
                         {title: '备注', data: "remark"}
                     ],
                     "order": [[1, "asc"]]
@@ -1191,6 +1205,9 @@
                     var parent = $(checkBox).parents("tr")[0];
                     var buildingAddressCode = $($(parent).children("td")[1]).text();
                     $("#modal-add-terminal input[name='buildingCode']").val(buildingAddressCode);
+                    $("#modal-add-terminal input[name='code']").val(buildingAddressCode + "01");
+                    var buildingName = $($(parent).children("td")[2]).text();
+                    $("#modal-add-terminal input[name='terminalAlias']").val(buildingName + "01号门");
                 }
             }
 		</script>

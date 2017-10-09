@@ -1,14 +1,31 @@
 [
   {
-    "uuid":"1",
+    "uuid":"0",
     "name": "小区管理员",
-    "organization": "康乐大街6号",
-    "resourceGroup": "广东省中山市五桂山长命水康乐大街6号",
+    "organization": "海辰公司中山分公司",
+    "resourceGroup": "广东省中山市",
     "communities": "石岐区社区",
+    "contact": "xxxxx",
+    "phone": "13xxxxxxxxx",
     "ctime": 1501837059487,
     "createUser": "超级管理员",
     "createTime": "2015/4/13 15:21:56",
-    "remark": "社区"
+    "organizationType":"分公司/部门",
+    "remark": "xxxxx"
+  },
+  {
+    "uuid":"1",
+    "name": "小区管理员",
+    "organization": "五桂山长命水村委会",
+    "resourceGroup": "广东省中山市五桂山长命水村",
+    "communities": "石岐区社区",
+    "contact": "xxxxx",
+    "phone": "13xxxxxxxxx",
+    "ctime": 1501837059487,
+    "createUser": "超级管理员",
+    "createTime": "2015/4/13 15:21:56",
+    "organizationType":"居委会/村委会",
+    "remark": "xxxxx"
   },
   {
     "uuid":"2",
@@ -16,10 +33,13 @@
     "organization": "东升分局荣兴派出所",
     "resourceGroup": "广东省中山市东升镇裕民村",
     "communities": "东升社区",
+    "contact": "xxxxx",
+    "phone": "13xxxxxxxxx",
     "ctime": 1501837059487,
     "createUser": "超级管理员",
     "createTime": "2014/12/4 13:21:09",
-    "remark": "公安局"
+    "organizationType":"公安局/派出所",
+    "remark": "xxxx"
   },
   {
     "uuid":"3",
@@ -27,21 +47,27 @@
     "organization": "五桂山长命水派出所",
     "resourceGroup": "广东省中山市五桂山长命水村",
     "communities": "黄圃社区",
+    "contact": "xxxxx",
+    "phone": "13xxxxxxxxx",
     "createUser": "超级管理员",
     "ctime": 1501837059487,
     "createTime": "2014/9/29 15:40:25",
-    "remark": "公安局"
+    "organizationType":"公安局/派出所",
+    "remark": "xxxx"
   },
   {
     "uuid":"4",
     "name": "警察",
-    "organization": "五桂山公安局",
+    "organization": "五桂山分局",
     "resourceGroup": "广东省中山市五桂山",
     "communities": "东升社区",
+    "contact": "xxxx",
+    "phone": "13xxxxxxxxx",
     "ctime": 1501837059487,
-    "createUser": "数据录入员",
+    "createUser": "超级管理员",
     "createTime": "2014/9/29 16:03:05",
-    "remark": "公安局"
+    "organizationType":"公安局/派出所",
+    "remark": "xxxxx"
   },
   {
     "uuid":"5",
@@ -49,9 +75,12 @@
     "organization": "联心路29号",
     "resourceGroup": "广东省中山市古镇冈东村联心路29号",
     "communities": "古镇社区",
+    "contact": "xxxx",
+    "phone": "13xxxxxxxxx",
     "createUser": "数据录入员",
     "ctime": 1501837059487,
     "createTime": "2014/9/29 15:49:54",
-    "remark": "社区"
+    "organizationType":"小区/建筑群",
+    "remark": "xxxx"
   }
 ]

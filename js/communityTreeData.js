@@ -58,11 +58,11 @@ wuguishan_tree_node['additionalParameters'] = {
         /*
         'changmingshui': {name: '<span class="tree-item"><i class="icon-remove"></i></span>长命水村', type: 'folder'},
         */
-        'dongsheng': {name: '东升镇', type: "folder"},
-        'changmingshui': {name: '长命水村', type: 'item'},
-        'longtang': {name: '龙塘村', type: 'item'},
-        'guinan': {name: '桂南村', type: 'item'},
-        'shigu': {name: '石鼓村', type: 'item'},
+        'wuguishan': {name: '五桂山社区居民委员会', type: 'item'},
+        'changmingshui': {name: '龙石村民委员会', type: 'item'},
+        'longtang': {name: '长命水村民委员会', type: 'item'},
+        'guinan': {name: '桂南村民委员会', type: 'item'},
+        'shigu': {name: '南桥村民委员会', type: 'item'},
     }
 }
 /*
@@ -101,11 +101,26 @@ terminal_tree_data['Zhongshan']['additionalParameters'] = {
 var terminal_tree_node = terminal_tree_data['Zhongshan']['additionalParameters']['children']['0'];
 terminal_tree_node['additionalParameters'] = {
     'children': {
-        '0': {name: '广东省中山市东升镇东升村惠东路80号', type: 'item'},
-        '1': {name: '广东省中山市东升镇东升村惠东路81号', type: 'item'},
-        '2': {name: '广东省中山市东升镇东升村惠东路82号', type: 'item'}
+        '0': {name: '东升社区', type: 'folder'},
+        '1': {name: '利生社区', type: 'item'},
+        '2': {name: '裕民社区', type: 'item'}
     }
 }
+terminal_tree_node['additionalParameters']['children']['0']['additionalParameters'] = {
+    'children': {
+        '0': {name: '惠东路80号', type: 'folder'},
+        '1': {name: '惠东路81号', type: 'item'},
+        '2': {name: '惠东路82号', type: 'item'}
+    }
+}
+terminal_tree_node['additionalParameters']['children']['0']['additionalParameters']['children']['0']['additionalParameters'] = {
+    'children': {
+        '0': {name: '1号门终端', type: 'item'},
+        '1': {name: '2号门终端', type: 'item'},
+        '2': {name: '3号门终端', type: 'item'}
+    }
+}
+
 var terminal_tree_data = new DataSourceTree({data: terminal_tree_data});
 
 /**行政区划树**/
@@ -140,7 +155,7 @@ guangdong_tree_node['additionalParameters'] = {
     'children': {
         '0': {name: '广州市', type: 'item'},
         '1': {name: '深圳市', type: 'item'},
-        '2': {name: '中山市', type: 'item'},
+        '2': {name: '中山市', type: 'folder'},
         '3': {name: '珠海市', type: 'item'},
         '4': {name: '佛山市', type: 'item'},
         '5': {name: '惠州市', type: 'item'},
@@ -190,10 +205,17 @@ var role_authority_tree = {
 
 role_authority_tree['0']['additionalParameters'] = {
     'children': {
-        '0': {name: '用户管理', type: 'item'},
+        '0': {name: '用户管理', type: 'folder'},
         '1': {name: '角色管理', type: 'item'},
         '2': {name: '机构管理', type: 'item'},
         '3': {name: '权限管理', type: 'item'},
+    }
+}
+role_authority_tree['0']['additionalParameters']['children']['0']['additionalParameters'] = {
+    'children': {
+        '0': {name: '增加', type: 'item'},
+        '1': {name: '修改', type: 'item'},
+        '2': {name: '删除', type: 'item'}
     }
 }
 role_authority_tree['1']['additionalParameters'] = {
