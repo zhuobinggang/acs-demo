@@ -518,11 +518,11 @@
                                 <div class="col-sm-7">
                                     <input type="text" class="form-control" name="owner" disabled>
                                 </div>
-                                <div class="col-sm-2" style="vertical-align: center;" id="addResident">
-                                    <a href="#modal-add-resident" data-toggle="modal">&nbsp;添加住户信息</a>
+                                <div class="col-sm-2 hidden" style="vertical-align: center;" id="addResident">
+                                    <a href="#modal-add-resident" data-toggle="modal">&nbsp;添加信息</a>
                                 </div>
-								<div class="col-sm-2" style="vertical-align: center;" id="updateResident">
-									<a href="#modal-add-resident" data-toggle="modal">&nbsp;查看住户信息</a>
+								<div class="col-sm-2 hidden" style="vertical-align: center;" id="updateResident">
+									<a href="#modal-add-resident" data-toggle="modal">&nbsp;查看信息</a>
 								</div>
                             </div>
                             <div class="form-group" align="left">
@@ -2442,14 +2442,14 @@
                     $("#frm-quick-add input[name='cardNumber']").val('xxxxxxxxxx3242');
                     $("#frm-quick-add select[name='cardType']").val('1');
                     $("#frm-quick-add input[name='owner']").val('未登记的住户，请添加住户信息');
-                    $("#addResident").addClass('hidden');
-                    $("#updateResident").removeClass('hidden');
+                    $("#updateResident").addClass('hidden');
+                    $("#addResident").removeClass('hidden');
 				} else {
                     $("#frm-quick-add input[name='cardNumber']").val('DF34443DF');
                     $("#frm-quick-add select[name='cardType']").val('2');
                     $("#frm-quick-add input[name='owner']").val('请选择住户');
-                    $("#addResident").addClass('hidden');
-                    $("#updateResident").removeClass('hidden');
+                    $("#updateResident").addClass('hidden');
+                    $("#addResident").removeClass('hidden');
 				}
 
             }
