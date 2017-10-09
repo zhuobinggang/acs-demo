@@ -293,10 +293,10 @@
 
 					<ul class="nav nav-list">
 						<!-- terminal admin begin -->
-						<li class="active open">
+						<li class="">
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-lock"></i>
-								<span class="menu-text"> 门禁管理 </span>
+								<span class="menu-text"> 门禁监控 </span>
 								<b class="arrow icon-angle-down"></b>
 							</a>
 							<ul class="submenu">
@@ -312,23 +312,24 @@
 										<span class="menu-text"> 监控视图 </span>
 									</a>
 								</li>
+
+							</ul>
+						</li>
+						<!-- terminal admin end -->
+						<!-- community admin begin -->
+						<li class="active open">
+							<a href="#" class="dropdown-toggle">
+								<i class="icon-cloud"></i>
+								<span class="menu-text"> 门禁管理 </span>
+								<b class="arrow icon-angle-down"></b>
+							</a>
+							<ul class="submenu">
 								<li class="active">
 									<a href="acs-terminal.html">
 										<i class="icon-th-list"></i>
 										<span class="menu-text">  终端管理 </span>
 									</a>
 								</li>
-							</ul>
-						</li>
-						<!-- terminal admin end -->
-						<!-- community admin begin -->
-						<li class="">
-							<a href="#" class="dropdown-toggle">
-								<i class="icon-cloud"></i>
-								<span class="menu-text"> 社区管理 </span>
-								<b class="arrow icon-angle-down"></b>
-							</a>
-							<ul class="submenu">
 								<li class="">
 									<a href="acs-building.html">
 										<i class="icon-building"></i>
@@ -410,9 +411,9 @@
 
 						<ul class="breadcrumb">
 							<li>
-								社区管理
+								门禁管理
 							</li>
-							<li class="active">楼宇管理</li>
+							<li class="active">终端管理</li>
 						</ul><!-- .breadcrumb -->
 
 					</div>
@@ -442,9 +443,7 @@
 												</form>
 											</td>
 											<td align="right" style="padding-right: 3px;" id="f_terminal_more">
-												<!--
 												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-add-terminal" onclick="getDoorList()">添加</button>
-												-->
 												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-update-terminal-select2" onclick="getDoorList()">修改</button>
 												<button class="btn btn-sm btn-danger">删除</button>
 											</td>
@@ -539,13 +538,13 @@
                                            placeholder="请输入安装日期:">
                                 </div>
                             </div>
-							<div class="form-group">
-								<label class="col-sm-3 control-label no-padding-right"> 门禁信息：</label>
-								<div class="col-sm-8">
-                                    <table class="doorTable nowrap dataTable hover display cell-border">
-                                    </table>
-								</div>
-							</div>
+							<!--<div class="form-group">-->
+								<!--<label class="col-sm-3 control-label no-padding-right"> 门禁信息：</label>-->
+								<!--<div class="col-sm-8">-->
+                                    <!--<table class="doorTable nowrap dataTable hover display cell-border">-->
+                                    <!--</table>-->
+								<!--</div>-->
+							<!--</div>-->
                             <div class="form-group" align="right">
                                 <input type="submit" class="btn btn-sm btn-primary" onclick="addTerminal()" value="提交" />
                                 <input type="reset" class="btn btn-sm btn-warning" value="重置" />
@@ -662,13 +661,13 @@
                                            placeholder="请输入安装日期:">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label no-padding-right"> 门禁信息：</label>
-                                <div class="col-sm-8">
-                                    <table class="doorTable nowrap dataTable hover display cell-border">
-                                    </table>
-                                </div>
-                            </div>
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-sm-2 control-label no-padding-right"> 门禁信息：</label>-->
+                                <!--<div class="col-sm-8">-->
+                                    <!--<table class="doorTable nowrap dataTable hover display cell-border">-->
+                                    <!--</table>-->
+                                <!--</div>-->
+                            <!--</div>-->
                             <div class="form-group" align="right">
                                 <input type="submit" class="btn btn-sm btn-primary" onclick="addTerminal()" value="提交" />
                                 <input type="reset" class="btn btn-sm btn-warning" value="重置" />
