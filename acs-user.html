@@ -941,12 +941,13 @@
                 <form class="form-horizontal">
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">选择角色</label>
-                        <div class="col-sm-8">
-                            <select>
-                                <option value="volvo">小区管理员</option>
-                                <option value="saab">物业安保人员</option>
-                                <option value="opel">物业管理人员</option>
-                                <option value="audi">保安</option>
+                        <div  class="col-sm-8">
+                            <select id="roleSelector">
+                                <!--注释掉模拟数据-->
+                                <!--<option value="volvo">小区管理员</option>-->
+                                <!--<option value="saab">物业安保人员</option>-->
+                                <!--<option value="opel">物业管理人员</option>-->
+                                <!--<option value="audi">保安</option>-->
                             </select>
                         </div>
                     </div>
@@ -1599,8 +1600,14 @@
     var userTable;
 
     $(function () {
-//        getUserListMock();
+        //请求用户列表
+        //getUserListMock();
         initUserTableServerSide()
+
+        //TODO: 填充角色下拉框
+        fillRoleSelector()
+
+        //设置社区树
         community_assign_tree();
     });
 
@@ -1708,6 +1715,26 @@
             ],
             "order": [[1, "asc"]]
         })
+    }
+
+    function fillRoleSelector() {
+        $.ajax({
+            url: '/role/list',
+            dataType: 'JSON',
+            success: function (res) {
+                var roles = res.resultData
+
+                for(var i = roles.length-1;i>=0;i--){
+                    $('#roleSelector').append(myRoleFormat(roles[i]))
+                }
+            },
+            error: function () {
+                alert('Request for role fail!')
+            }
+        })
+    }
+    function myRoleFormat(role) {
+        return '<option value="'+role.id+'">'+role.name+'</option>'
     }
 
     function search() {
