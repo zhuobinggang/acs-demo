@@ -423,8 +423,9 @@
                                         </form>
                                     </td>
                                     <td align="right" style="padding-right: 3px;" id="f_user_more">
-                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                                data-target="#modal-set-role">设置角色
+                                        <!--<button class="btn btn-sm btn-primary" data-toggle="modal"-->
+                                        <!--data-target="#modal-set-role">设置角色-->
+                                        <button class="btn btn-sm btn-primary" onclick="setRole()">设置角色
                                         </button>
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                 data-target="#modal-set-organization">设置机构
@@ -941,7 +942,7 @@
                 <form class="form-horizontal">
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">选择角色</label>
-                        <div  class="col-sm-8">
+                        <div class="col-sm-8">
                             <select id="roleSelector">
                                 <!--注释掉模拟数据-->
                                 <!--<option value="volvo">小区管理员</option>-->
@@ -965,7 +966,8 @@
 
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
+                            <button type="button" onclick="roleSelected()" class="btn btn-primary btn-sm"
+                                    data-dismiss="modal"
                             >确认
                             </button>
                             <img class="hidden processing" src="img/processing.gif"/>
@@ -1598,6 +1600,10 @@
     }
     var userList;
     var userTable;
+    var myData = {
+        roles: [],
+        checkedIds: []
+    }
 
     $(function () {
         //请求用户列表
@@ -1672,6 +1678,7 @@
             "order": [[1, "asc"]]
         });
     }
+
     function initUserTableServerSide() {
         userTable = $('#userTable').DataTable({
             serverSide: true,
@@ -1717,6 +1724,22 @@
         })
     }
 
+    /**
+     * About Set role
+     */
+    function setRole() {
+        var ids = getCheckedBox('userCkb')
+
+        if(ids.length < 1){
+            alert('You must check users')
+            return
+        }
+
+        //Save checked ids
+        myData.checkedIds = ids
+
+        $('#modal-set-role').modal('show')
+    }
     function fillRoleSelector() {
         $.ajax({
             url: '/role/list',
@@ -1724,8 +1747,14 @@
             success: function (res) {
                 var roles = res.resultData
 
-                for(var i = roles.length-1;i>=0;i--){
-                    $('#roleSelector').append(myRoleFormat(roles[i]))
+                for (var i = roles.length - 1; i >= 0; i--) {
+                    var role = roles[i]
+
+                    //Show
+                    $('#roleSelector').append(myRoleFormat(role))
+
+                    //Save data
+                    myData.roles.push({id: role.id, name: role.name})
                 }
             },
             error: function () {
@@ -1733,8 +1762,34 @@
             }
         })
     }
+
     function myRoleFormat(role) {
-        return '<option value="'+role.id+'">'+role.name+'</option>'
+        return '<option value="' + role.id + '">' + role.name + '</option>'
+    }
+
+    function roleSelected() {
+        try {
+            var checkedIds = myData.checkedIds
+            var selectedRole = myData.roles[$('#roleSelector').get(0).selectedIndex].id
+            $.ajax({
+                traditional: true,
+                url: '/user/setRole',
+                dataType: 'JSON',
+                method: 'POST',
+                data: {
+                    ids: checkedIds,
+                    roleId: selectedRole
+                },
+                success: function (res) {
+                    console.log('Success: '+res)
+                },
+                error: function (res) {
+                    alert('Request for set role error')
+                }
+            })
+        }catch (e){
+            alert('设置角色出错，检查选项是否渲染错误')
+        }
     }
 
     function search() {
@@ -1745,14 +1800,14 @@
 
     function community_assign_tree() {
         $('#community_tree').ace_tree({
-            dataSource: ad_division_tree_data ,
-            multiSelect:true,
-            loadingHTML:'<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
-            'open-icon' : 'icon-minus',
-            'close-icon' : 'icon-plus',
-            'selectable' : true,
-            'selected-icon' : 'icon-ok',
-            'unselected-icon' : 'icon-remove'
+            dataSource: ad_division_tree_data,
+            multiSelect: true,
+            loadingHTML: '<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
+            'open-icon': 'icon-minus',
+            'close-icon': 'icon-plus',
+            'selectable': true,
+            'selected-icon': 'icon-ok',
+            'unselected-icon': 'icon-remove'
         });
     }
 
