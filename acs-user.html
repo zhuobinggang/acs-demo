@@ -425,11 +425,8 @@
                                     <td align="right" style="padding-right: 3px;" id="f_user_more">
                                         <!--<button class="btn btn-sm btn-primary" data-toggle="modal"-->
                                         <!--data-target="#modal-set-role">设置角色-->
-                                        <button class="btn btn-sm btn-primary" onclick="setRole()">设置角色
-                                        </button>
-                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                                data-target="#modal-set-organization">设置机构
-                                        </button>
+                                        <button class="btn btn-sm btn-primary" onclick="setRole()">设置角色</button>
+                                        <button class="btn btn-sm btn-primary" onclick="setOrganization()">设置机构</button>
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                 data-target="#modal-set-pass">密码重置
                                         </button>
@@ -966,7 +963,7 @@
 
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <button type="button" onclick="roleSelected()" class="btn btn-primary btn-sm"
+                            <button type="button" onclick="confirmSetRole()" class="btn btn-primary btn-sm"
                                     data-dismiss="modal"
                             >确认
                             </button>
@@ -993,25 +990,24 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">选择机构</label>
                         <div class="col-sm-8">
-                            <select>
-                                <option value="volvo">五桂山公安局</option>
-                                <option value="saab">康乐大街6号</option>
-                                <option value="opel">日华花园</option>
-                                <option value="audi">银石雅园</option>
-                                <option value="audi">豪华住宿</option>
-                                <option value="audi">祥和二巷3号A、B座</option>
-                                <option value="audi">海河街9号</option>
-                                <option value="audi">水拥坑</option>
-                                <option value="audi">香洲区朝阳路44号</option>
-                                <option value="audi">婆石村</option>
+                            <select id="organizationSelector">
+                                <!--<option value="volvo">五桂山公安局</option>-->
+                                <!--<option value="saab">康乐大街6号</option>-->
+                                <!--<option value="opel">日华花园</option>-->
+                                <!--<option value="audi">银石雅园</option>-->
+                                <!--<option value="audi">豪华住宿</option>-->
+                                <!--<option value="audi">祥和二巷3号A、B座</option>-->
+                                <!--<option value="audi">海河街9号</option>-->
+                                <!--<option value="audi">水拥坑</option>-->
+                                <!--<option value="audi">香洲区朝阳路44号</option>-->
+                                <!--<option value="audi">婆石村</option>-->
                             </select>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
-                            >确认
+                            <button type="button" onclick="confirmSetOrganization()" class="btn btn-primary btn-sm" data-dismiss="modal">确认
                             </button>
                             <img class="hidden processing" src="img/processing.gif"/>
                         </div>
@@ -1601,8 +1597,9 @@
     var userList;
     var userTable;
     var myData = {
+        checkedIds: [],
         roles: [],
-        checkedIds: []
+        organizations: [],
     }
 
     $(function () {
@@ -1610,8 +1607,11 @@
         //getUserListMock();
         initUserTableServerSide()
 
-        //TODO: 填充角色下拉框
+        //填充角色下拉框
         fillRoleSelector()
+
+        //填充机构下拉框
+        fillOrganizationSelector()
 
         //设置社区树
         community_assign_tree();
@@ -1725,20 +1725,29 @@
     }
 
     /**
-     * About Set role
+     *
      */
-    function setRole() {
+    function checkIfUserCheckedThenSave(){
+        //Check ids and save them
         var ids = getCheckedBox('userCkb')
 
         if(ids.length < 1){
             alert('You must check users')
-            return
+            return false
         }
 
         //Save checked ids
         myData.checkedIds = ids
+        return true
+    }
 
-        $('#modal-set-role').modal('show')
+    /**
+     * About Set role
+     */
+    function setRole() {
+        if(checkIfUserCheckedThenSave()){
+            $('#modal-set-role').modal('show')
+        }
     }
     function fillRoleSelector() {
         $.ajax({
@@ -1762,12 +1771,10 @@
             }
         })
     }
-
     function myRoleFormat(role) {
         return '<option value="' + role.id + '">' + role.name + '</option>'
     }
-
-    function roleSelected() {
+    function confirmSetRole() {
         try {
             var checkedIds = myData.checkedIds
             var selectedRole = myData.roles[$('#roleSelector').get(0).selectedIndex].id
@@ -1788,9 +1795,68 @@
                 }
             })
         }catch (e){
+            alert('设置机构出错，检查选项是否渲染错误')
+        }
+    }
+
+    /**
+     * About set organization
+     */
+    function setOrganization(){
+        if(checkIfUserCheckedThenSave()){
+            $('#modal-set-organization').modal('show')
+        }
+    }
+    function fillOrganizationSelector() {
+        $.ajax({
+            url: '/organization/list',
+            dataType: 'JSON',
+            success: function (res) {
+                var ogs = res.resultData
+
+                for (var i = ogs.length - 1; i >= 0; i--) {
+                    var og = ogs[i]
+
+                    //Show
+                    $('#organizationSelector').append(myOGFormat(og))
+
+                    //Save data
+                    myData.organizations.push({id: og.id, name: og.name})
+                }
+            },
+            error: function () {
+                alert('Request for role fail!')
+            }
+        })
+    }
+    function myOGFormat(og) {
+        return '<option value="' + og.id + '">' + og.name + '</option>'
+    }
+    function confirmSetOrganization() {
+        try {
+            var checkedIds = myData.checkedIds
+            var selectedOg = myData.organizations[$('#organizationSelector').get(0).selectedIndex].id
+            $.ajax({
+                traditional: true,
+                url: '/user/setOrganization',
+                dataType: 'JSON',
+                method: 'POST',
+                data: {
+                    ids: checkedIds,
+                    organizationId: selectedOg
+                },
+                success: function (res) {
+                    console.log('Success: '+res)
+                },
+                error: function (res) {
+                    alert('Request for set role error')
+                }
+            })
+        }catch (e){
             alert('设置角色出错，检查选项是否渲染错误')
         }
     }
+
 
     function search() {
         var keyword = $('#search_bar').val();
