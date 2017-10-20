@@ -427,9 +427,7 @@
                                         <!--data-target="#modal-set-role">设置角色-->
                                         <button class="btn btn-sm btn-primary" onclick="setRole()">设置角色</button>
                                         <button class="btn btn-sm btn-primary" onclick="setOrganization()">设置机构</button>
-                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                                data-target="#modal-set-pass">密码重置
-                                        </button>
+                                        <button class="btn btn-sm btn-primary" onclick="resetPassword()">密码重置</button>
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                 data-target="#modal-add-product">添加
                                         </button>
@@ -1028,25 +1026,25 @@
                 <h5 class="modal-title">修改密码</h5>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="reset_password">
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">新密码</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control focus" name="name" placeholder="新密码"
+                            <input type="password" class="form-control focus" name="pass" placeholder="新密码"
                                    required="required">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">再次输入新密码</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control focus" name="name" placeholder="再次输入新密码"
+                            <input type="password" class="form-control focus" name="passRepeat" placeholder="再次输入新密码"
                                    required="required">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
+                            <button type="button" onclick="confirmSetPassword()" class="btn btn-primary btn-sm" data-dismiss="modal"
                             >确认
                             </button>
                             <img class="hidden processing" src="img/processing.gif"/>
@@ -1855,6 +1853,43 @@
         }catch (e){
             alert('设置角色出错，检查选项是否渲染错误')
         }
+    }
+
+    /**
+     * Reset password about
+     */
+    function resetPassword() {
+        if(checkIfUserCheckedThenSave()){
+            $('#modal-set-pass').modal('show')
+        }
+    }
+    function confirmSetPassword(){
+        var formData = $('#reset_password').serializeArray()
+        var pass = formData[0].value
+        var passRepeat = formData[1].value
+
+        //Check if pass not repeat
+        if(pass != passRepeat){
+            alert('Pass repeat error')
+            return
+        }
+
+        //Can only set pass for one
+        $.ajax({
+            url: '/user/updatePass',
+            method: 'POST',
+            dataType: 'JSON',
+            data: {
+                id: myData.checkedIds[0],
+                pass: pass
+            },
+            success: function (res) {
+                alert(JSON.stringify(res))
+            },
+            error: function (res){
+                alert("update Error!")
+            }
+        })
     }
 
 
