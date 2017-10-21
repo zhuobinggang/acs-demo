@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test js tree</title>
+    <link href="https://cdn.bootcss.com/jstree/3.3.4/themes/default/style.min.css" rel="stylesheet">
+</head>
+<body>
+<div id="container">
+    <ul>
+        <li>Root node
+            <ul>
+                <li>Child node 1</li>
+                <li>Child node 2</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jstree/3.3.4/jstree.min.js"></script>
+<!--Rap mock data-->
+<!--<script src="http://rap.fuwu178.cn/rap.plugin.js?projectId=2"></script>-->
+<script>
+    $(function () {
+        function format(res) {
+            var result = []
+            for(var i = res.resultData.length - 1;i>=0;i--){
+                var item = res.resultData[i]
+                result.push({
+                    id: item.id,
+                    text: item.name,
+                    children: true,
+                })
+            }
+            return result
+        }
+
+        function request(id,cb) {
+            $.ajax({
+                url: '/user/divisionList',
+                method: 'POST',
+                data: {id: id},
+                success: function (res) {
+                    console.log(JSON.stringify(res))
+                    cb(format(res))
+                },
+            })
+        }
+
+        $('#container').jstree({
+            "plugins": ["checkbox"],
+            core: {
+                data: function (node, cb) {
+                    if (node.id === '#') {//Root
+                        request('S',cb)
+                    }else {
+                        request(node.id,cb)
+                    }
+                }
+            }
+        })
+    })
+</script>
+</body>
+</html>

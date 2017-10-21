@@ -428,8 +428,7 @@
                                         <button class="btn btn-sm btn-primary" onclick="setRole()">设置角色</button>
                                         <button class="btn btn-sm btn-primary" onclick="setOrganization()">设置机构</button>
                                         <button class="btn btn-sm btn-primary" onclick="resetPassword()">密码重置</button>
-                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                                data-target="#modal-add-product">添加
+                                        <button class="btn btn-sm btn-primary" onclick="addUser()">添加
                                         </button>
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                 data-target="#modal-modify">修改
@@ -497,7 +496,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">证件号码</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control focus" name="name" placeholder="证件号码"
+                            <input type="text" class="form-control focus" name="certNum" placeholder="证件号码"
                                    required="required">
                         </div>
 
@@ -512,23 +511,23 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">真实姓名</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control focus" name="name" placeholder="真实姓名"
+                            <input type="text" class="form-control focus" name="realname" placeholder="真实姓名"
                                    required="required">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">性别</label>
                         <div class="col-sm-8">
-                            <select>
-                                <option value="volvo">男</option>
-                                <option value="saab">女</option>
+                            <select name="sex">
+                                <option value="1">男</option>
+                                <option value="2">女</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">民族</label>
                         <div class="col-sm-8">
-                            <select name="ctl00$CPH_Content$DDT_Folk$DropDownList_Type"
+                            <select name="nation"
                                     id="CPH_Content_DDT_Folk_DropDownList_Type">
                                 <option selected="selected" value="01">汉族</option>
                                 <option value="02">蒙古族</option>
@@ -594,8 +593,8 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">国籍地区</label>
                         <div class="col-sm-8">
-                            <select name="ctl00$CPH_Content$DDT_Country$DropDownList_Type"
-                                    id="CPH_Content_DDT_Country_DropDownList_Type">
+                            <select name="nationArea"
+                                    id="nationArea">
                                 <option selected="selected" value="CHN">中国</option>
                                 <option value="HKG">香港</option>
                                 <option value="MAC">澳门</option>
@@ -851,7 +850,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">户籍行政区划代码</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control focus" name="name" placeholder="户籍行政区划代码"
+                            <input type="text" class="form-control focus" name="adminDivisionCode" placeholder="户籍行政区划代码"
                                    required="required">
                         </div>
                         <div class="col-sm-2">
@@ -861,28 +860,28 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">户籍详细地址</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control focus" name="name" placeholder="户籍详细地址"
+                            <input type="text" class="form-control focus" name="householdRegisterAddress" placeholder="户籍详细地址"
                                    required="required">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">联系电话</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control focus" name="name" placeholder="联系电话"
+                            <input type="text" class="form-control focus" name="phone" placeholder="联系电话"
                                    required="required">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">工作单位</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control focus" name="name" placeholder="工作单位"
+                            <input type="text" class="form-control focus" name="company" placeholder="工作单位"
                                    required="required">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">用户状态</label>
                         <div class="col-sm-8">
-                            <select>
+                            <select name="status">
                                 <option value="volvo">正常</option>
                                 <option value="saab">禁用</option>
                             </select>
@@ -903,7 +902,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">备注信息</label>
                         <div class="col-sm-8">
-                            <input type="url" class="form-control" name="buyLink"
+                            <input type="url" class="form-control" name="remark"
                                    placeholder="">
                         </div>
                     </div>
@@ -912,7 +911,7 @@
                     <div class="form-group">
                         <div class="col-sm-10">
                             <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
-                                    id="btn-save-product">确认
+                                    id="btn-save-product" onclick="confirmAddUser()">确认
                             </button>
                             <img class="hidden processing" src="img/processing.gif"/>
                         </div>
@@ -1598,6 +1597,9 @@
         checkedIds: [],
         roles: [],
         organizations: [],
+        divisions: [],
+        nations: [],
+        nationAreas: [],
     }
 
     $(function () {
@@ -1890,6 +1892,17 @@
                 alert("update Error!")
             }
         })
+    }
+
+    /**
+     * Add user
+     */
+    function addUser() {
+        $('#modal-add-product').modal('show')
+    }
+    function confirmAddUser() {
+        var formData = $('#frm-add-product').serializeArray()
+        console.log(JSON.stringify(formData))
     }
 
 
