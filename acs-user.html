@@ -1959,8 +1959,16 @@
         $('#modal-add-product').modal('show')
     }
     function confirmAddUser() {
-        var formData = $('#frm-add-product').serializeArray()
-        console.log(JSON.stringify(formData))
+//        var formData = $('#frm-add-product').serializeArray()
+//        console.log(JSON.stringify(formData))
+        $.ajax({
+            url: '/user/add',
+            method: 'POST',
+            data: $('#frm-add-product').serialize(),
+            error: function (res) {
+                alert('添加用户失败!')
+            }
+        })
     }
 
     /**
