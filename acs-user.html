@@ -428,7 +428,7 @@
                                         <button class="btn btn-sm btn-primary" onclick="resetPassword()">密码重置</button>
                                         <button class="btn btn-sm btn-primary" onclick="addUser()">添加</button>
                                         <button class="btn btn-sm btn-primary" onclick="updateUser()">修改</button>
-                                        <button class="btn btn-sm btn-danger">删除</button>
+                                        <button class="btn btn-sm btn-danger" onclick="deleteUsers()">删除</button>
                                     </td>
                                 </tr>
                             </table>
@@ -1448,7 +1448,7 @@
                                    required="required">
                         </div>
                         <div class="col-sm-2">
-                            <a href="#modal-select-community" data-toggle="modal">选择行政区划</a>
+                            <a onclick="selectDivision()">选择行政区划</a>
                         </div>
                     </div>
                     <div class="form-group">
@@ -1980,7 +1980,14 @@
         }
     }
     function confirmUpdateUser(){
-        console.log('确定修改用户还未完工')
+        $.ajax({
+            url: '/user/update',
+            method: 'POST',
+            data: $('#frm-update-product').serialize(),
+            error: function (res) {
+                alert('添加用户失败!')
+            }
+        })
     }
 
     /**
@@ -2075,7 +2082,25 @@
         }
 
         var id = (myData.jsTreeInstance.get_top_selected())[0]
-        $('#division_input').val(id)
+//        $('#division_input').val(id)
+        $('input[name="adminDivisionCode"]').val(id)
+    }
+
+    /**
+     * 删除用户
+     */
+    function deleteUsers(){
+        if(checkIfUserCheckedThenSave()){
+            $.ajax({
+                url: '/user/delete',
+                method: 'POST',
+                traditional: true,
+                data: {ids: myData.checkedIds},
+                error: function(res){
+                    alert('删除用户失败')
+                }
+            })
+        }
     }
 
 
