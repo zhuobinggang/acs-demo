@@ -31,10 +31,6 @@
     <!-- jquery plugin styles -->
     <link rel="stylesheet" href="assets/css/jquery.dataTables.css"/>
 
-    <!--[if lte IE 8]>
-    <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
-    <![endif]-->
-
     <!-- inline styles related to this page -->
 
     <!-- ace settings handler -->
@@ -43,11 +39,12 @@
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
-    <!--[if lt IE 9]>
-    <script src="assets/js/html5shiv.js"></script>
-    <script src="assets/js/respond.min.js"></script>
-    <![endif]-->
     <link rel="stylesheet" href="css/acs.css"/>
+
+
+    <!--JsTree style-->
+    <link href="https://cdn.bootcss.com/jstree/3.3.4/themes/default/style.min.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -422,8 +419,7 @@
                                         </form>
                                     </td>
                                     <td align="right" style="padding-right: 3px;" id="f_user_more">
-                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                                data-target="#modal-assign-authority">分配权限
+                                        <button class="btn btn-sm btn-primary" onclick="assign_authority()">分配权限
                                         </button>
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                 data-target="#modal-add-product">添加
@@ -585,7 +581,8 @@
 
                             <div class="widget-body">
                                 <div class="widget-main padding-8">
-                                    <div id="community_tree" class="tree"></div>
+                                    <!--<div id="community_tree" class="tree"></div>-->
+                                    <div id="authority_tree" class="tree"></div>
                                 </div>
                             </div>
                         </div>
@@ -593,7 +590,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">确认
+                            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="confirmAssignAuthority()">确认
                             </button>
                             <img class="hidden processing" src="img/processing.gif"/>
                         </div>
@@ -671,6 +668,8 @@
 <script src="js/acs-util.js"></script>
 <script src="js/communityTreeData.js"></script>
 
+<!--Js Tree-->
+<script src="https://cdn.bootcss.com/jstree/3.3.4/jstree.min.js"></script>
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
@@ -682,8 +681,12 @@
     var userTable;
 
     $(function () {
+        //获取角色列表
         getUserList();
-        community_assign_tree();
+
+        //显示权限树
+        //community_assign_tree();
+        fillAuthorityAssignTree()
     });
 
     /**
@@ -821,6 +824,126 @@
     }
     //community modal init end
 
+    /**
+     * 2017/10/22 实现页面功能
+     */
+    var myData = {
+        authorities: [],//储存处理后的树形数据
+        checkedIds: [],
+    }
+
+
+    /**
+     * 显示权限树
+     */
+    function fillAuthorityAssignTree() {
+        //获取权限列表
+        $.ajax({
+            url: '/authority/list',
+            method: 'POST',
+        }).then(function success(res){
+            var authorities = res.resultData
+            console.log(JSON.stringify(authorities))
+
+            //将数据处理成树形结构
+            //1. 按id排入数组
+            var listById = {}
+            for(var i=authorities.length-1;i>=0;i--){
+                var authority = authorities[i]
+                authority.children = []//加入孩子数组
+
+                listById[authority.id] = authority//排入数组
+            }
+            //2. 遍历 在父节点加入自己的引用
+            for(var i=authorities.length-1;i>=0;i--){
+                var authority = authorities[i]
+                if(authority.parentAuthorityId != -1){//如果有父权限
+                    //将自己加入到父节点的孩子数组里
+                    listById[authority.parentAuthorityId].children.push(authority)
+                }
+            }
+            //3. 只留下顶级父节点
+            var resultList = []
+            for(var property in listById){
+                var authority = listById[property]
+                if(authority.parentAuthorityId == -1){//如果是顶级父节点
+                    resultList.push(authority)
+                }
+            }
+
+            myData.authorities = resultList
+        },function error(){
+            alert('获取权限列表失败')
+        }).then(function showByJstree() {
+            //将数据处理成Jstree的格式
+            var tree = []
+
+            //递归format
+            function deepFormat(node) {
+                var result = {
+                    id: node.id,
+                    text: node.name,
+                    children: []
+                }
+
+                //深度填充子节点
+                for(var i=node.children.length-1;i>=0;i--){
+                    result.children.push(deepFormat(node.children[i]))
+                }
+
+                return result
+            }
+
+            for(var i = myData.authorities.length-1;i>=0;i--){
+                tree.push(deepFormat(myData.authorities[i]))
+            }
+
+            $('#authority_tree').jstree({
+                plugins: ["checkbox"],
+                core:{
+                    data: tree
+                }
+            })
+        })
+    }
+
+    //如果选中用户就保存到myData里面
+    function checkIfUserCheckedThenSave(){
+        //Check ids and save them
+        var ids = getCheckedBox('userCkb')
+
+        if(ids.length < 1){
+            alert('You must check users')
+            return false
+        }
+
+        //Save checked ids
+        myData.checkedIds = ids
+        return true
+    }
+
+    //分配权限按钮
+    function assign_authority() {
+        if(checkIfUserCheckedThenSave()){
+            $('#modal-assign-authority').modal('show')
+        }
+    }
+
+    //确认分配权限
+    function confirmAssignAuthority() {
+        var ids = $('#authority_tree').jstree(true).get_top_selected()
+
+        $.ajax({
+            traditional: true,
+            url: '/role/assignAuthority',
+            method: 'POST',
+            data: {ids: ids}
+        }).then(function success() {
+
+        },function error() {
+            alert('为角色分配权限失败')
+        })
+    }
 </script>
 
 </body>
