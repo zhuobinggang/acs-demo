@@ -45,10 +45,8 @@
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
-    <!--[if lt IE 9]>
-    <script src="assets/js/html5shiv.js"></script>
-    <script src="assets/js/respond.min.js"></script>
-    <![endif]-->
+    <!--JsTree Style-->
+    <link href="https://cdn.bootcss.com/jstree/3.3.4/themes/default/style.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -847,11 +845,12 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">户籍行政区划代码</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control focus" name="adminDivisionCode" placeholder="户籍行政区划代码"
+                            <input id="division_input" type="text" class="form-control focus" name="adminDivisionCode" placeholder="户籍行政区划代码"
                                    required="required">
                         </div>
                         <div class="col-sm-2">
-                            <a href="#modal-select-community" data-toggle="modal">选择行政区划</a>
+                            <!--<a href="#modal-select-community" data-toggle="modal">选择行政区划</a>-->
+                            <a onclick="selectDivision()">选择行政区划</a>
                         </div>
                     </div>
                     <div class="form-group">
@@ -1551,6 +1550,40 @@
     </div>
 </div><!--select community modal end-->
 
+<!--选择行政区划-->
+<div class="modal fade" id="modal-select-division" tabindex="-2" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!--modal header begins-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">选择行政区划</h5>
+            </div>
+            <!--modal header ends-->
+            <!--modal body begins-->
+            <div class="modal-body" style="font-size: 12px;">
+
+                <div class="widget-box">
+                    <!--<div class="widget-header header-color-blue2">-->
+                    <!--<h4 class="lighter smaller">选择社区</h4>-->
+                    <!--</div>-->
+
+                    <div class="widget-body">
+                        <div class="widget-main padding-8">
+                            <div id="division_tree"></div>
+                        </div>
+                    </div>
+                </div>
+            </div><!--modal body ends-->
+            <div class="modal-footer" style="background-color: white;">
+                <button class="btn btn-primary btn-sm" data-dismiss="modal" onclick="confirmSelectDivision()">提交</button>
+            </div>
+        </div>
+    </div>
+</div><!--select community modal end-->
+
 
 <!-- basic scripts -->
 <!--jQuery-->
@@ -1594,7 +1627,11 @@
 <script src="js/communityTreeData.js"></script>
 
 <!--Rap-->
-<script src="http://rap.fuwu178.cn/rap.plugin.js?projectId=2"></script>
+<!--<script src="http://rap.fuwu178.cn/rap.plugin.js?projectId=2"></script>-->
+
+<!--JsTree-->
+<!--<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
+<script src="https://cdn.bootcss.com/jstree/3.3.4/jstree.min.js"></script>
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
@@ -1611,6 +1648,7 @@
         divisions: [],
         nations: [],
         nationAreas: [],
+        jsTreeInstance: null,//行政区划树实例保存为全局变量
     }
 
     $(function () {
@@ -1630,8 +1668,11 @@
         //填充民族下拉框
         fillNationSelector()
 
-        //设置社区树
-        community_assign_tree();
+//        设置社区树
+//        community_assign_tree();
+
+        //填充行政区划树
+        fillDivisionSelector()
     });
 
     /**
@@ -1974,6 +2015,59 @@
                 alert('获取民族列表失败')
             }
         })
+    }
+
+    /**
+     * 填充行政区划树
+     */
+    function fillDivisionSelector(){
+        //使用 JsTree 异步请求数据
+        $('#division_tree').jstree({
+            plugins: ['checkbox'],
+            core:{
+                data: function(node,cb){
+                    if(node.id === '#'){
+                        divisionRequest('S',cb)
+                    }else{
+                        divisionRequest(node.id,cb)
+                    }
+                }
+            }
+        })
+    }
+    function divisionRequest(id,cb){
+        $.ajax({
+            url: '/user/divisionList',
+            method: 'POST',
+            data: {id: id},
+            success: function (res) {
+                console.log(JSON.stringify(res))
+                cb(divisionFormat(res))
+            },
+        })
+    }
+    function divisionFormat(res){
+        var result = []
+        for(var i = res.resultData.length - 1;i>=0;i--){
+            var item = res.resultData[i]
+            result.push({
+                id: item.id,
+                text: item.name,
+                children: true,
+            })
+        }
+        return result
+    }
+    function selectDivision() {
+        $('#modal-select-division').modal('show')
+    }
+    function confirmSelectDivision() {
+        if(!myData.jsTreeInstance){
+            myData.jsTreeInstance = $('#division_tree').jstree(true)
+        }
+
+        var id = (myData.jsTreeInstance.get_top_selected())[0]
+        $('#division_input').val(id)
     }
 
 
