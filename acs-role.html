@@ -423,10 +423,9 @@
                                         </button>
                                         <button class="btn btn-sm btn-primary" onclick="createRole()">添加
                                         </button>
-                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                                data-target="#modal-modify">修改
+                                        <button class="btn btn-sm btn-primary" onclick="updateRole()">修改
                                         </button>
-                                        <button class="btn btn-sm btn-danger">删除</button>
+                                        <button class="btn btn-sm btn-danger" onclick="deleteRole()">删除</button>
                                     </td>
                                 </tr>
                             </table>
@@ -513,7 +512,7 @@
 </div><!--add-product modal end-->
 
 <!--modify modal start-->
-<div class="modal fade" id="modal-modify" tabindex="-1" role="dialog">
+<div class="modal fade" id="modal-modify-role" tabindex="-1" role="dialog">
     <div class="modal-dialog" style="width: 700px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -523,7 +522,7 @@
                 <h5 class="modal-title">修改角色</h5>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal">
+                <form class="form-horizontal" id="frm-modify-role">
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">角色名称</label>
                         <div class="col-sm-8">
@@ -534,11 +533,11 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">所属机构类型</label>
                         <div class="col-sm-8">
-                            <select>
-                                <option value="volvo">小区/建筑群</option>
-                                <option value="saab">居委会/村委会</option>
-                                <option value="opel">公安局/派出所</option>
-                                <option value="opel">海辰分公司/部门</option>
+                            <select name="organizationTypeId">
+                                <!--<option value="volvo">小区/建筑群</option>-->
+                                <!--<option value="saab">居委会/村委会</option>-->
+                                <!--<option value="opel">公安局/派出所</option>-->
+                                <!--<option value="opel">海辰分公司/部门</option>-->
                             </select>
                         </div>
                     </div>
@@ -553,7 +552,7 @@
                     <!--confirm button-->
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">确认
+                            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="confirmUpdateRole()">确认
                             </button>
                             <img class="hidden processing" src="img/processing.gif"/>
                         </div>
@@ -992,6 +991,54 @@
         })
     }
 
+    /**
+     * 更新角色
+     */
+    function updateRole(){
+        if(checkIfUserCheckedThenSave()){
+            $('#modal-modify-role').modal('show')
+        }
+    }
+
+    function confirmUpdateRole() {
+        //获取选中角色,只选取第一个选中的角色
+        var ids = myData.checkedIds
+
+        //给传给服务端的数据加上选中的id
+        var formData = $('#frm-modify-role').serializeArray()
+        var data = {ids: ids}
+        for(var item of formData){
+            data[item.name] = item.value
+        }
+
+        console.log('确认更新角色: '+JSON.stringify(data))
+        $.ajax({
+            url:'/role/update',
+            method: 'POST',
+            data: data,
+        }).then(function success(){
+
+        },function error(){
+            alert('更新角色失败')
+        })
+    }
+
+    /**
+     * 删除角色
+     */
+    function deleteRole(){
+        if(checkIfUserCheckedThenSave()){
+            $.ajax({
+                url:'/role/delete',
+                method: 'POST',
+                data: {ids:myData.checkedIds}
+            }).then(function success() {
+
+            },function error() {
+                alert('删除角色失败')
+            })
+        }
+    }
 </script>
 
 </body>
