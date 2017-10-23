@@ -744,7 +744,9 @@
     var userTable;
 
     $(function () {
-        getUserList();
+//        getUserList();
+        //获取机构列表
+        getOGList()
         community_assign_tree();
     });
 
@@ -804,21 +806,6 @@
         var keyword = $('#inputUserName').val();
         console.log(userTable);
         userTable.search(keyword);
-    }
-
-    /**
-     * 获取用户列表
-     */
-    function getUserList() {
-        var param = {
-            type: "get",
-            url: "data/organizationList.json",
-            successCall: initUserTable,
-            errorCall: function () {
-                showCommonTip("加载角色列表失败！");
-            }
-        };
-        ajax(param);
     }
 
     /**
@@ -1053,6 +1040,28 @@
             console.info(rs.address)
             $('#detailAddress').val(rs.address)
         });
+    }
+
+    /**
+     * 2017/10/23 实际功能实现
+     */
+
+    var myData = {
+
+    }
+
+    /**
+     * 获取机构列表
+     */
+    function getOGList(){
+        $.ajax({
+            url: '/organization/list',
+            method: 'POST',
+        }).then(function success(res){
+            initUserTable(res.resultData)
+        },function error(){
+            alert('获取机构列表失败')
+        })
     }
 </script>
 </body>
