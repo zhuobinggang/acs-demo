@@ -426,8 +426,7 @@
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                 data-target="#modal-select-community">分配管辖群组
                                         </button>
-                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                                data-target="#modal-add-product">添加
+                                        <button class="btn btn-sm btn-primary" onclick="addOrganization()">添加
                                         </button>
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                 data-target="#modal-modify">修改
@@ -465,7 +464,7 @@
 </div><!-- /.main-container -->
 
 <!--add-product modal start-->
-<div class="modal fade" id="modal-add-product" tabindex="-1" role="dialog">
+<div class="modal fade" id="modal-add-organization" tabindex="-1" role="dialog">
     <div class="modal-dialog" style="width: 700px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -479,11 +478,11 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">机构类型</label>
                         <div class="col-sm-8">
-                            <select>
-                                <option value="volvo">小区/建筑群</option>
-                                <option value="saab">居委会/村委会</option>
-                                <option value="opel">公安局/派出所</option>
-                                <option value="opel">海辰分公司/部门</option>
+                            <select name="organizationType">
+                                <!--<option value="volvo">小区/建筑群</option>-->
+                                <!--<option value="saab">居委会/村委会</option>-->
+                                <!--<option value="opel">公安局/派出所</option>-->
+                                <!--<option value="opel">海辰分公司/部门</option>-->
                             </select>
                         </div>
                     </div>
@@ -559,11 +558,11 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">机构类型</label>
                         <div class="col-sm-8">
-                            <select>
-                                <option value="volvo">小区/建筑群</option>
-                                <option value="saab">居委会/村委会</option>
-                                <option value="opel">公安局/派出所</option>
-                                <option value="opel">海辰分公司/部门</option>
+                            <select name="organizationType">
+                                <!--<option value="volvo">小区/建筑群</option>-->
+                                <!--<option value="saab">居委会/村委会</option>-->
+                                <!--<option value="opel">公安局/派出所</option>-->
+                                <!--<option value="opel">海辰分公司/部门</option>-->
                             </select>
                         </div>
                     </div>
@@ -747,6 +746,10 @@
 //        getUserList();
         //获取机构列表
         getOGList()
+
+        //填充机构类型列表
+        fillOrganizationTypeList()
+
         community_assign_tree();
     });
 
@@ -1047,7 +1050,7 @@
      */
 
     var myData = {
-
+        OGTypes: [],//机构类型列表
     }
 
     /**
@@ -1063,6 +1066,27 @@
             alert('获取机构列表失败')
         })
     }
+
+    function addOrganization() {
+        $('#modal-add-organization').modal('show')
+    }
+
+    function fillOrganizationTypeList() {
+        $.ajax({
+            url: '/organization/typeList',
+            method: 'POST',
+        }).then(function success(res) {
+            myData.OGTypes = res.resultData
+            for(item of myData.OGTypes){
+                $('select[name="organizationType"]').append(
+                    '<option value="'+item.id+'">'+item.name+'</option>'
+                )
+            }
+        },function error(){
+            alert('请求机构类型列表失败')
+        })
+    }
+    //<!--<option value="volvo">小区/建筑群</option>-->
 </script>
 </body>
 </html>
