@@ -421,8 +421,7 @@
                                     <td align="right" style="padding-right: 3px;" id="f_user_more">
                                         <button class="btn btn-sm btn-primary" onclick="assign_authority()">分配权限
                                         </button>
-                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                                data-target="#modal-add-product">添加
+                                        <button class="btn btn-sm btn-primary" onclick="createRole()">添加
                                         </button>
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                 data-target="#modal-modify">修改
@@ -460,7 +459,7 @@
 </div><!-- /.main-container -->
 
 <!--add-product modal start-->
-<div class="modal fade" id="modal-add-product" tabindex="-1" role="dialog">
+<div class="modal fade" id="modal-create-role" tabindex="-1" role="dialog">
     <div class="modal-dialog" style="width: 700px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -470,7 +469,7 @@
                 <h5 class="modal-title">添加角色</h5>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="frm-add-product">
+                <form class="form-horizontal" id="frm-create-role">
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">角色名称</label>
                         <div class="col-sm-8">
@@ -481,18 +480,18 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">所属机构类型</label>
                         <div class="col-sm-8">
-                            <select>
-                                <option value ="volvo">小区/建筑群</option>
-                                <option value ="saab">居委会/村委会</option>
-                                <option value="opel">公安局/派出所</option>
-                                <option value="opel">海辰分公司/部门</option>
+                            <select name="organizationTypeId">
+                                <!--<option value ="volvo">小区/建筑群</option>-->
+                                <!--<option value ="saab">居委会/村委会</option>-->
+                                <!--<option value="opel">公安局/派出所</option>-->
+                                <!--<option value="opel">海辰分公司/部门</option>-->
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">备注信息</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="buildingCommunity"
+                            <input type="text" class="form-control" name="remark"
                                    placeholder="">
                         </div>
                     </div>
@@ -501,7 +500,7 @@
                     <div class="form-group">
                         <div class="col-sm-10">
                             <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
-                                    id="btn-save-product">确认
+                                    id="btn-save-product" onclick="confirmCreateRole()">确认
                             </button>
                             <img class="hidden processing" src="img/processing.gif"/>
                         </div>
@@ -536,8 +535,8 @@
                         <label class="col-sm-2 control-label no-padding-right">所属机构类型</label>
                         <div class="col-sm-8">
                             <select>
-                                <option value ="volvo">小区/建筑群</option>
-                                <option value ="saab">居委会/村委会</option>
+                                <option value="volvo">小区/建筑群</option>
+                                <option value="saab">居委会/村委会</option>
                                 <option value="opel">公安局/派出所</option>
                                 <option value="opel">海辰分公司/部门</option>
                             </select>
@@ -590,7 +589,8 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="confirmAssignAuthority()">确认
+                            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
+                                    onclick="confirmAssignAuthority()">确认
                             </button>
                             <img class="hidden processing" src="img/processing.gif"/>
                         </div>
@@ -687,6 +687,9 @@
         //显示权限树
         //community_assign_tree();
         fillAuthorityAssignTree()
+
+        //填充机构类型下拉框
+        fillOrganizationTypeSelector()
     });
 
     /**
@@ -807,6 +810,7 @@
             $('#modal-select-community').modal("hide");
         });
     }
+
     //select community end
 
     //community modal init start
@@ -822,6 +826,7 @@
             'unselected-icon': 'icon-remove'
         });
     }
+
     //community modal init end
 
     /**
@@ -830,6 +835,7 @@
     var myData = {
         authorities: [],//储存处理后的树形数据
         checkedIds: [],
+        organizationTypes: [],//机构类型列表：{id,name}
     }
 
 
@@ -841,38 +847,38 @@
         $.ajax({
             url: '/authority/list',
             method: 'POST',
-        }).then(function success(res){
+        }).then(function success(res) {
             var authorities = res.resultData
             console.log(JSON.stringify(authorities))
 
             //将数据处理成树形结构
             //1. 按id排入数组
             var listById = {}
-            for(var i=authorities.length-1;i>=0;i--){
+            for (var i = authorities.length - 1; i >= 0; i--) {
                 var authority = authorities[i]
                 authority.children = []//加入孩子数组
 
                 listById[authority.id] = authority//排入数组
             }
             //2. 遍历 在父节点加入自己的引用
-            for(var i=authorities.length-1;i>=0;i--){
+            for (var i = authorities.length - 1; i >= 0; i--) {
                 var authority = authorities[i]
-                if(authority.parentAuthorityId != -1){//如果有父权限
+                if (authority.parentAuthorityId) {//如果有父权限(存在即可)
                     //将自己加入到父节点的孩子数组里
                     listById[authority.parentAuthorityId].children.push(authority)
                 }
             }
             //3. 只留下顶级父节点
             var resultList = []
-            for(var property in listById){
+            for (var property in listById) {
                 var authority = listById[property]
-                if(authority.parentAuthorityId == -1){//如果是顶级父节点
+                if (!authority.parentAuthorityId) {//如果是顶级父节点(父权限ID不存在)
                     resultList.push(authority)
                 }
             }
 
             myData.authorities = resultList
-        },function error(){
+        }, function error() {
             alert('获取权限列表失败')
         }).then(function showByJstree() {
             //将数据处理成Jstree的格式
@@ -887,20 +893,20 @@
                 }
 
                 //深度填充子节点
-                for(var i=node.children.length-1;i>=0;i--){
+                for (var i = node.children.length - 1; i >= 0; i--) {
                     result.children.push(deepFormat(node.children[i]))
                 }
 
                 return result
             }
 
-            for(var i = myData.authorities.length-1;i>=0;i--){
+            for (var i = myData.authorities.length - 1; i >= 0; i--) {
                 tree.push(deepFormat(myData.authorities[i]))
             }
 
             $('#authority_tree').jstree({
                 plugins: ["checkbox"],
-                core:{
+                core: {
                     data: tree
                 }
             })
@@ -908,11 +914,11 @@
     }
 
     //如果选中用户就保存到myData里面
-    function checkIfUserCheckedThenSave(){
+    function checkIfUserCheckedThenSave() {
         //Check ids and save them
         var ids = getCheckedBox('userCkb')
 
-        if(ids.length < 1){
+        if (ids.length < 1) {
             alert('You must check users')
             return false
         }
@@ -924,7 +930,7 @@
 
     //分配权限按钮
     function assign_authority() {
-        if(checkIfUserCheckedThenSave()){
+        if (checkIfUserCheckedThenSave()) {
             $('#modal-assign-authority').modal('show')
         }
     }
@@ -940,10 +946,52 @@
             data: {ids: ids}
         }).then(function success() {
 
-        },function error() {
+        }, function error() {
             alert('为角色分配权限失败')
         })
     }
+
+    /**
+     * Create role
+     */
+    function createRole() {
+        $('#modal-create-role').modal('show')
+    }
+
+    function confirmCreateRole() {
+        //直接把表单发ajax请求
+        $.ajax({
+            url: '/role/add',
+            method: 'POSt',
+            data: $('#frm-create-role').serialize(),
+        }).then(function success() {
+
+        }, function error() {
+            console.log('创建角色失败')
+        })
+    }
+
+    /**
+     * 填充机构类型下拉框
+     */
+    function fillOrganizationTypeSelector() {
+        //获取机构类型列表
+        $.ajax({
+            url: '/organization/typeList',
+            method: 'POST',
+        }).then(function success(res) {
+            //填充
+            for (var i = res.resultData.length - 1; i >= 0; i--) {
+                var type = res.resultData[i]
+                $('select[name="organizationTypeId"]').append(
+                    '<option value="' + type.id + '">' + type.name + '</option>'
+                )
+            }
+        }, function error() {
+            console.log('获取机构类型列表失败')
+        })
+    }
+
 </script>
 
 </body>
