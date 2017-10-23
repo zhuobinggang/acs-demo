@@ -681,7 +681,8 @@
 
     $(function () {
         //获取角色列表
-        getUserList();
+//        getUserList();
+        getRoleList()
 
         //显示权限树
         //community_assign_tree();
@@ -704,6 +705,17 @@
             }
         };
         ajax(param);
+    }
+    function getRoleList() {
+        $.ajax({
+            url: '/role/list',
+            method: 'POST',
+        }).then(function success(res) {
+            var roles = res.resultData
+            initUserTable(roles)
+        },function error(){
+            alert('获取角色列表失败')
+        })
     }
 
     /**
