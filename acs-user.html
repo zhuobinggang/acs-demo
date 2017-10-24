@@ -1996,7 +1996,7 @@
     function fillNationAreaSelector() {
         $.ajax({
             url: '/user/nationAreaList',
-            method: 'POST',
+            method: 'GET',
             success: function (res) {
                 myData.nationAreas = res.resultData
 
@@ -2015,7 +2015,7 @@
     function fillNationSelector() {
         $.ajax({
             url: '/user/nationList',
-            method: 'POST',
+            method: 'GET',
             success: function (res) {
                 myData.nations = res.resultData
 
@@ -2053,7 +2053,7 @@
     function divisionRequest(id,cb){
         $.ajax({
             url: '/user/divisionList',
-            method: 'POST',
+            method: 'GET',
             data: {id: id},
             success: function (res) {
                 console.log(JSON.stringify(res))

@@ -1069,7 +1069,7 @@
     function getOGList(){
         $.ajax({
             url: '/organization/list',
-            method: 'POST',
+            method: 'GET',
         }).then(function success(res){
             initUserTable(res.resultData)
         },function error(){
@@ -1084,7 +1084,7 @@
     function fillOrganizationTypeList() {
         $.ajax({
             url: '/organization/typeList',
-            method: 'POST',
+            method: 'GET',
         }).then(function success(res) {
             myData.OGTypes = res.resultData
             for(item of myData.OGTypes){
@@ -1119,7 +1119,7 @@
     function requestOGGroup(id,cb) {
         $.ajax({
             url: '/organization/groupList',
-            method: 'POST',
+            method: 'GET',
             data: {id: id},
         }).then(function success(res) {
             cb(oGFormat(res.resultData))
