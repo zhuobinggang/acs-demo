@@ -426,14 +426,13 @@
                                     </td>
                                     <td align="right" style="padding-right: 3px;" id="f_user_more">
                                         <!--<button class="btn btn-sm btn-primary">分配权限</button>-->
-                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                                data-target="#modal-select-community">分配管辖群组
+                                        <button class="btn btn-sm btn-primary" onclick="assignGroup()">分配管辖群组
                                         </button>
                                         <button class="btn btn-sm btn-primary" onclick="addOrganization()">添加
                                         </button>
                                         <button class="btn btn-sm btn-primary" onclick="updateOrganization()">修改
                                         </button>
-                                        <button class="btn btn-sm btn-danger">删除</button>
+                                        <button class="btn btn-sm btn-danger" onclick="deleteOrganization()">删除</button>
                                     </td>
                                 </tr>
                             </table>
@@ -606,6 +605,43 @@
                         <div class="col-sm-10">
                             <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
                                     onclick="confirmUpdateOrganization()">确认
+                            </button>
+                            <img class="hidden processing" src="img/processing.gif"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div><!--add-product modal end-->
+
+<div class="modal fade" id="assign-group" tabindex="-1" role="dialog">
+    <div class="modal-dialog" style="width: 700px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">修改机构</h5>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="frm-assign-group">
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right">管辖群组</label>
+                        <div class="col-sm-8">
+                            <input type="text" disabled class="form-control focus" name="groupIdList" placeholder="选择群组"
+                                   required="required">
+                        </div>
+                        <div class="col-sm-2">
+                            <a href="#modal-select-community" data-toggle="modal">选择群组</a>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
+                                    onclick="confirmAssignGroup()">确认
                             </button>
                             <img class="hidden processing" src="img/processing.gif"/>
                         </div>
@@ -1255,6 +1291,48 @@
         },function error() {
             alert('添加机构失败!')
         })
+    }
+
+    /**
+     * 分配管辖群组
+     */
+    function assignGroup() {
+        if(checkIfUserCheckedThenSave()){
+            $('#assign-group').modal('show')
+        }
+    }
+    function confirmAssignGroup(){
+//        $('#frm-assign-group').serialize()
+        var groupIds = []
+        for(var item of myData.groupList){
+            groupIds.push(item.id)
+        }
+
+        $.ajax({
+            traditional: true,
+            url: '/organization/setGroup',
+            data: {groupIdList: groupIds,ids: myData.checkedIds},
+            method: 'POST',
+        }).then(function success(res) {
+
+        },function error() {
+            alert('分配管辖群组失败')
+        })
+    }
+
+    function deleteOrganization() {
+        if(checkIfUserCheckedThenSave()){
+            $.ajax({
+                traditional: true,
+                url: '/organization/delete',
+                data: {ids: myData.checkedIds},
+                method: 'POST',
+            }).then(function success() {
+
+            },function error() {
+                alert('删除失败!')
+            })
+        }
     }
 </script>
 </body>
