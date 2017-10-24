@@ -845,7 +845,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">户籍行政区划代码</label>
                         <div class="col-sm-8">
-                            <input id="division_input" type="text" class="form-control focus" name="adminDivisionCode" placeholder="户籍行政区划代码"
+                            <input id="division_input" disabled type="text" class="form-control focus" name="adminDivisionCode" placeholder="户籍行政区划代码"
                                    required="required">
                         </div>
                         <div class="col-sm-2">
@@ -1444,7 +1444,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">户籍行政区划代码</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control focus" name="adminDivisionCode" placeholder="户籍行政区划代码"
+                            <input type="text" disabled class="form-control focus" name="adminDivisionCode" placeholder="户籍行政区划代码"
                                    required="required">
                         </div>
                         <div class="col-sm-2">
@@ -2052,7 +2052,8 @@
     }
     function divisionRequest(id,cb){
         $.ajax({
-            url: '/user/divisionList',
+//            url: '/user/divisionList',
+            url: '/sysAreas/sysAreaList',
             method: 'GET',
             data: {id: id},
             success: function (res) {

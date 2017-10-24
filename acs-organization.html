@@ -477,7 +477,7 @@
                 <h5 class="modal-title">添加机构</h5>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="frm-add-product">
+                <form class="form-horizontal" id="frm-add-organization">
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">机构类型</label>
                         <div class="col-sm-8">
@@ -605,7 +605,8 @@
 
                     <div class="form-group">
                         <div class="col-sm-10">
-                            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" onclick="confirmUpdateOrganization()">确认
+                            <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
+                                    onclick="confirmUpdateOrganization()">确认
                             </button>
                             <img class="hidden processing" src="img/processing.gif"/>
                         </div>
@@ -1046,7 +1047,7 @@
     function fillAddressInput() {
         var point = new BMap.Point(door.longitude, door.latitude)
         var gc = new BMap.Geocoder()
-        gc.getLocation(point, function(rs){
+        gc.getLocation(point, function (rs) {
 //            var addComp = rs.addressComponents;
 //            console.info(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber)
             console.info(rs.address)
@@ -1066,13 +1067,13 @@
     /**
      * 获取机构列表
      */
-    function getOGList(){
+    function getOGList() {
         $.ajax({
             url: '/organization/list',
             method: 'GET',
-        }).then(function success(res){
+        }).then(function success(res) {
             initUserTable(res.resultData)
-        },function error(){
+        }, function error() {
             alert('获取机构列表失败')
         })
     }
@@ -1087,12 +1088,12 @@
             method: 'GET',
         }).then(function success(res) {
             myData.OGTypes = res.resultData
-            for(item of myData.OGTypes){
+            for (item of myData.OGTypes) {
                 $('select[name="organizationtypeid"]').append(
-                    '<option value="'+item.id+'">'+item.name+'</option>'
+                    '<option value="' + item.id + '">' + item.name + '</option>'
                 )
             }
-        },function error(){
+        }, function error() {
             alert('请求机构类型列表失败')
         })
     }
@@ -1100,15 +1101,15 @@
     /**
      * 填充管辖群组树
      */
-    function fillOrganizationGroupTree(){
+    function fillOrganizationGroupTree() {
         $('#organization_group_tree').jstree({
             plugins: ['checkbox'],
-            core:{
+            core: {
                 data: function (node, cb) {
-                    if(node.id == '#'){
-                        requestOGGroup('S',cb)
-                    }else{
-                        requestOGGroup(node.id,cb)
+                    if (node.id == '#') {
+                        requestOGGroup('S', cb)
+                    } else {
+                        requestOGGroup(node.id, cb)
                     }
                 }
             }
@@ -1116,14 +1117,14 @@
     }
 
     //负责发送ajax请求管辖区域
-    function requestOGGroup(id,cb) {
+    function requestOGGroup(id, cb) {
         $.ajax({
-            url: '/organization/groupList',
+            url: '/sysAreas/sysAreaList',
             method: 'GET',
             data: {id: id},
         }).then(function success(res) {
             cb(oGFormat(res.resultData))
-        },function error(){
+        }, function error() {
             alert('请求管辖区域失败')
         })
     }
@@ -1131,7 +1132,7 @@
     //把数据格式化成js tree的数据
     function oGFormat(data) {
         var result = []
-        for(item of data){
+        for (item of data) {
             result.push({
                 id: item.id,
                 text: item.name,
@@ -1144,12 +1145,12 @@
     /**
      * 确认选择管辖群组
      */
-    function selectOGGroup(){
+    function selectOGGroup() {
         //获取选中的节点并且储存到全局变量中
         var result = []
 
         var selectedNodes = $('#organization_group_tree').jstree(true).get_top_selected(true)
-        for(var node of selectedNodes){
+        for (var node of selectedNodes) {
             result.push({
                 id: node.id,
                 name: node.text
@@ -1159,16 +1160,45 @@
 
         //显示在input框上
         var showText = ''
-        for(var item of myData.groupList){
-            showText += (item.name+',')
+        for (var item of myData.groupList) {
+            showText += (item.name + ',')
         }
-        showText = showText.substr(0,showText.length-1)
+        showText = showText.substr(0, showText.length - 1)
         $('input[name="groupIdList"]').val(showText)
     }
 
     //确认添加
     function confirmAddOrganization() {
-        //TODO: 确认添加
+        var data = {};
+
+        //对data.groupIdList进行处理
+        (function formatFormdata() {
+            var formData = $('#frm-add-organization').serializeArray()
+
+
+            for (var item of formData) {
+                data[item.name] = item.value
+            }
+
+            var groupIds = []
+            for (var item of myData.groupList) {
+                groupIds.push(item.id)
+            }
+
+            data.groupIdList = groupIds
+        })()
+
+
+        $.ajax({
+            traditional: true,
+            url: '/organization/add',
+            method: 'POST',
+            data: data
+        }).then(function success(res) {
+
+        },function error() {
+            alert('添加机构失败!')
+        })
     }
 
     //确认修改
