@@ -48,6 +48,9 @@
     <script src="assets/js/html5shiv.js"></script>
     <script src="assets/js/respond.min.js"></script>
     <![endif]-->
+
+    <!--Js tree-->
+    <link href="https://cdn.bootcss.com/jstree/3.3.4/themes/default/style.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -649,13 +652,14 @@
 
                     <div class="widget-body">
                         <div class="widget-main padding-8">
-                            <div id="community_tree" class="tree"></div>
+                            <!--<div id="community_tree" class="tree"></div>-->
+                            <div id="organization_group_tree"></div>
                         </div>
                     </div>
                 </div>
             </div><!--modal body ends-->
             <div class="modal-footer" style="background-color: white;">
-                <button class="btn btn-primary btn-sm" onclick="selectCommunity()">提交</button>
+                <button class="btn btn-primary btn-sm" onclick="selectOGGroup()">提交</button>
             </div>
         </div>
     </div>
@@ -733,6 +737,9 @@
 <!--Confirmation Api-->
 <script src="https://cdn.bootcss.com/bootstrap-confirmation/1.0.5/bootstrap-confirmation.js"></script>
 
+<!--JS Tree-->
+<script src="https://cdn.bootcss.com/jstree/3.3.4/jstree.min.js"></script>
+
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
     try {
@@ -750,7 +757,9 @@
         //填充机构类型列表
         fillOrganizationTypeList()
 
-        community_assign_tree();
+        //填充管辖区域树
+        //community_assign_tree();
+        fillOrganizationGroupTree()
     });
 
     /**
@@ -1086,7 +1095,53 @@
             alert('请求机构类型列表失败')
         })
     }
-    //<!--<option value="volvo">小区/建筑群</option>-->
+
+    /**
+     * 填充管辖群组树
+     */
+    function fillOrganizationGroupTree(){
+        $('#organization_group_tree').jstree({
+            core:{
+                data: function (node, cb) {
+                    if(node.id == '#'){
+                        requestOGGroup('S',cb)
+                    }else{
+                        requestOGGroup(node.id,cb)
+                    }
+                }
+            }
+        })
+    }
+
+    //负责发送ajax请求管辖区域
+    function requestOGGroup(id,cb) {
+        $.ajax({
+            url: '/organization/groupList',
+            method: 'POST',
+            data: {id: id},
+        }).then(function success(res) {
+            cb(oGFormat(res.resultData))
+        },function error(){
+            alert('请求管辖区域失败')
+        })
+    }
+
+    //把数据格式化成js tree的数据
+    function oGFormat(data) {
+        var result = []
+        for(item of data){
+            result.push({
+                id: item.id,
+                text: item.name,
+                children: true
+            })
+        }
+        return result
+    }
+
+    /**
+     * 选择管辖群组
+     */
 </script>
 </body>
 </html>
