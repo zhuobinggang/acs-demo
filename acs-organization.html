@@ -431,8 +431,7 @@
                                         </button>
                                         <button class="btn btn-sm btn-primary" onclick="addOrganization()">添加
                                         </button>
-                                        <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                                data-target="#modal-modify">修改
+                                        <button class="btn btn-sm btn-primary" onclick="updateOrganization()">修改
                                         </button>
                                         <button class="btn btn-sm btn-danger">删除</button>
                                     </td>
@@ -557,7 +556,7 @@
                 <h5 class="modal-title">修改机构</h5>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="frm-modify-product">
+                <form class="form-horizontal" id="frm-modify-organization">
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">机构类型</label>
                         <div class="col-sm-8">
@@ -1062,6 +1061,21 @@
     var myData = {
         OGTypes: [],//机构类型列表
         groupList: [],
+        checkedIds: [],
+    }
+
+    function checkIfUserCheckedThenSave(){
+        //Check ids and save them
+        var ids = getCheckedBox('userCkb')
+
+        if(ids.length < 1){
+            alert('You must check users')
+            return false
+        }
+
+        //Save checked ids
+        myData.checkedIds = ids
+        return true
     }
 
     /**
@@ -1201,9 +1215,46 @@
         })
     }
 
+    //修改机构
+    function updateOrganization() {
+        if(checkIfUserCheckedThenSave()){
+            $('#modal-modify').modal('show')
+        }
+    }
+
     //确认修改
     function confirmUpdateOrganization() {
-        //TODO: 确认更新
+        var data = {};
+
+        //对data.groupIdList进行处理
+        (function formatFormdata() {
+            var formData = $('#frm-modify-organization').serializeArray()
+
+
+            for (var item of formData) {
+                data[item.name] = item.value
+            }
+
+            var groupIds = []
+            for (var item of myData.groupList) {
+                groupIds.push(item.id)
+            }
+
+            data.groupIdList = groupIds
+            data.ids = myData.checkedIds
+        })()
+
+
+        $.ajax({
+            traditional: true,
+            url: '/organization/update',
+            method: 'POST',
+            data: data
+        }).then(function success(res) {
+
+        },function error() {
+            alert('添加机构失败!')
+        })
     }
 </script>
 </body>
