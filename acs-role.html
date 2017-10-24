@@ -709,7 +709,7 @@
     function getRoleList() {
         $.ajax({
             url: '/role/list',
-            method: 'POST',
+            method: 'GET',
         }).then(function success(res) {
             var roles = res.resultData
             initUserTable(roles)
@@ -857,7 +857,7 @@
         //获取权限列表
         $.ajax({
             url: '/authority/list',
-            method: 'POST',
+            method: 'GET',
         }).then(function success(res) {
             var authorities = res.resultData
             console.log(JSON.stringify(authorities))
@@ -989,7 +989,7 @@
         //获取机构类型列表
         $.ajax({
             url: '/organization/typeList',
-            method: 'POST',
+            method: 'GET',
         }).then(function success(res) {
             //填充
             for (var i = res.resultData.length - 1; i >= 0; i--) {
