@@ -782,13 +782,14 @@
         ace.settings.check('sidebar', 'collapsed')
     } catch (e) {
     }
-    var userList;
-    var userTable;
+    var userTable;//遗留数据
+    var organizationTable
 
     $(function () {
 //        getUserList();
         //获取机构列表
-        getOGList()
+        //getOGList()
+        getOGListServerSide()
 
         //填充机构类型列表
         fillOrganizationTypeList()
@@ -1125,6 +1126,62 @@
             initUserTable(res.resultData)
         }, function error() {
             alert('获取机构列表失败')
+        })
+    }
+    function getOGListServerSide() {
+        organizationTable = $('#userTable').DataTable({
+            serverSide: true,
+            ajax: '/organization/list',
+            "deferRender": true,
+            "bProcessing": true,
+            "lengthChange": false,
+            "ordering": false,
+            "createdRow": function (row, data, dataIndex) {
+                $('td', row).attr("class", "text-center");
+                $(row).css("cursor", "pointer");
+            },
+            "language": {
+                "url": "assets/js/jquery-dataTables-zh.json"
+            },
+            "columns": [
+//                {
+//                    title: '<input id="all-user-checkbox" type="checkbox" name="radios" />',
+//                    data: 'uuid', render: function (data, type, row) {
+//                    return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
+//                }, className: "dt-center",
+//                },
+//                {title: '用户账号', data: "name", className: "dt-center",},
+//                {title: '姓名', data: "username", className: "dt-center",},
+//                {title: '性别', data: "sex", className: "dt-center",},
+//                {title: '出生日期', data: "birth", className: "dt-center",},
+//                {
+//                    title: '状态', data: "status", className: "dt-center", render: function (data, type, row) {
+//                    if (data == '1') {
+//                        return '已启用';
+//                    } else {
+//                        return '未启用';
+//                    }
+//                }
+//                },
+//                {title: '证件号码', data: "idNum", className: "dt-center",},
+//                {title: '权限角色', data: "role", className: "dt-center",},
+//                {title: '所属机构', data: "resourceGroup", className: "dt-center",},
+////                {title: '创建人', data: "createUser", className: "dt-center",},
+////                {title: '创建时间', data: "createTime", className: "dt-center",},
+                {
+                    title: '<input id="all-user-checkbox" type="checkbox" name="radios" />',
+                    data: 'uuid', render: function (data, type, row) {
+                    return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
+                }, className: "dt-center",
+                },
+                {title: '机构名称', data: "organization", className: "dt-center",},
+                {title: '机构类型', data: "organizationType", className: "dt-center",},
+                {title: '管辖群组', data: "resourceGroup", className: "dt-center",},
+                {title: '详细地址', data: "contact", className: "dt-center",},
+                {title: '联系电话', data: "phone", className: "dt-center",},
+                {title: '备注', data: "remark", className: "dt-center",},
+            ],
+            "order": [[1, "asc"]]
         })
     }
 
