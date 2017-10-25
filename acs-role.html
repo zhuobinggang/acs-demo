@@ -665,6 +665,7 @@
 
 <!-- custom scripts -->
 <script src="js/acs-util.js"></script>
+<script src="js/acs-util-new.js"></script>
 <script src="js/communityTreeData.js"></script>
 
 <!--Js Tree-->
@@ -859,36 +860,7 @@
             url: '/authority/list',
             method: 'GET',
         }).then(function success(res) {
-            var authorities = res.resultData
-            console.log(JSON.stringify(authorities))
-
-            //将数据处理成树形结构
-            //1. 按id排入数组
-            var listById = {}
-            for (var i = authorities.length - 1; i >= 0; i--) {
-                var authority = authorities[i]
-                authority.children = []//加入孩子数组
-
-                listById[authority.id] = authority//排入数组
-            }
-            //2. 遍历 在父节点加入自己的引用
-            for (var i = authorities.length - 1; i >= 0; i--) {
-                var authority = authorities[i]
-                if (authority.parentAuthorityId) {//如果有父权限(存在即可)
-                    //将自己加入到父节点的孩子数组里
-                    listById[authority.parentAuthorityId].children.push(authority)
-                }
-            }
-            //3. 只留下顶级父节点
-            var resultList = []
-            for (var property in listById) {
-                var authority = listById[property]
-                if (!authority.parentAuthorityId) {//如果是顶级父节点(父权限ID不存在)
-                    resultList.push(authority)
-                }
-            }
-
-            myData.authorities = resultList
+            myData.authorities = listToTree(res.resultData,'id','parentAuthorityId')
         }, function error() {
             alert('获取权限列表失败')
         }).then(function showByJstree() {

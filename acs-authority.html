@@ -585,6 +585,7 @@
 
 <!-- custom scripts -->
 <script src="js/acs-util.js"></script>
+<script src="js/acs-util-new.js"></script>
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
@@ -673,14 +674,39 @@
      * 2017/10/25 ACS项目补完
      */
     var myData = {
-
+        authoritiesTree: [],//权限树.children属性存放子节点
     }
 
     function getAuthorityList() {
         $.ajax({
             url: '/authority/list',
         }).then(function success(res) {
-            initUserTable(res.resultData)
+            //处理结果
+            myData.authoritiesTree = listToTree(res.resultData,'id','parentAuthorityId')
+
+            return myData.authoritiesTree
+        },function error() {
+            alert('获取权限列表失败')
+        }).then(data => {//将树形结构转换成table能识别的结构
+            var result = []
+
+            function deepResolveTree(node,parentName) {
+                //加上传下来的父节点名字
+                var data = Object.assign({},node,{
+                    parentName: parentName,
+                    uuid: node.id
+                })
+                result.push(data)
+
+                for(var item of node.children){
+                    deepResolveTree(item,node.name)
+                }
+            }
+            for(var item of data){
+                deepResolveTree(item,'')
+            }
+
+            initUserTable(result)
         })
     }
 
