@@ -596,7 +596,9 @@
     var userTable;
 
     $(function () {
-        getUserList();
+        //获取权限列表
+        //getUserList();
+        getAuthorityList()
     });
 
     /**
@@ -665,6 +667,21 @@
         var keyword = $('#search_bar').val();
 //        console.log(userTable);
         userTable.search(keyword).draw();
+    }
+
+    /**
+     * 2017/10/25 ACS项目补完
+     */
+    var myData = {
+
+    }
+
+    function getAuthorityList() {
+        $.ajax({
+            url: '/authority/list',
+        }).then(function success(res) {
+            initUserTable(res.resultData)
+        })
     }
 
 </script>
