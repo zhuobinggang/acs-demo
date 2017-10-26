@@ -833,6 +833,9 @@
             },
             "columns": [
                 {
+                    title: '<div style="text-align:center;">'
+                    + '<input type="checkbox" id="all-user-checkbox" onclick="selectAllCheckBox(\'userCkb\')" name="all-user-checkbox" />'
+                    + '</div>',
                     data: 'uuid', render: function (data, type, row) {
                     return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
                 }
@@ -1169,7 +1172,10 @@
 ////                {title: '创建人', data: "createUser", className: "dt-center",},
 ////                {title: '创建时间', data: "createTime", className: "dt-center",},
                 {
-                    title: '<input id="all-user-checkbox" type="checkbox" name="radios" />',
+//                    title: '<input id="all-user-checkbox" type="checkbox" name="radios" />',
+                    title: '<div style="text-align:center;">'
+                    + '<input type="checkbox" id="all-user-checkbox" onclick="selectAllCheckBox(\'userCkb\')" name="allUserCheckbox" />'
+                    + '</div>',
                     data: 'uuid', render: function (data, type, row) {
                     return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
                 }, className: "dt-center",
