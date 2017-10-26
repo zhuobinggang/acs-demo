@@ -427,8 +427,8 @@
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                 data-target="#modal-add-product">添加
                                         </button>
-                                        <button class="btn btn-sm btn-primary">启用</button>
-                                        <button class="btn btn-sm btn-danger">停用</button>
+                                        <button class="btn btn-sm btn-primary" onclick="enableAuthority()">启用</button>
+                                        <button class="btn btn-sm btn-danger" onclick="disableAuthority()">停用</button>
                                     </td>
                                 </tr>
                             </table>
@@ -471,7 +471,7 @@
                 <h5 class="modal-title">添加权限</h5>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" id="frm-add-product">
+                <form class="form-horizontal" id="frm-add-authority">
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">权限名称</label>
                         <div class="col-sm-9">
@@ -490,23 +490,23 @@
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">备注信息</label>
                         <div class="col-sm-9">
-                            <input type="url" class="form-control" name="buyLink"
+                            <input type="url" class="form-control" name="remark"
                                    placeholder="">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">权限URL</label>
                         <div class="col-sm-9">
-                            <input type="url" class="form-control" name="buyLink"
+                            <input type="url" class="form-control" name="url"
                                    placeholder="例: system/user/create">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-3 control-label no-padding-right">父权限</label>
                         <div class="col-sm-9">
-                            <select>
-                                <option value="volvo">系统管理</option>
-                                <option value="saab">社区管理</option>
+                            <select id="parentSelector" name="parentId">
+                                <!--<option value="volvo">系统管理</option>-->
+                                <!--<option value="saab">社区管理</option>-->
                             </select>
                         </div>
                     </div>
@@ -550,7 +550,7 @@
                     <div class="form-group">
                         <div class="col-sm-10">
                             <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal"
-                                    id="btn-save-product">确认
+                                    id="btn-save-product" onclick="confirmAddAuthority()">确认
                             </button>
                             <img class="hidden processing" src="img/processing.gif"/>
                         </div>
@@ -674,7 +674,23 @@
      * 2017/10/25 ACS项目补完
      */
     var myData = {
-        authoritiesTree: [],//权限树.children属性存放子节点
+        authoritiesList: [],//权限列表
+        authoritiesTree: [],//权限树,children属性存放子节点,用来获取父权限名
+        checkedIds: [],
+    }
+
+    function checkIfUserCheckedThenSave(){
+        //Check ids and save them
+        var ids = getCheckedBox('userCkb')
+
+        if(ids.length < 1){
+            alert('You must check users')
+            return false
+        }
+
+        //Save checked ids
+        myData.checkedIds = ids
+        return true
     }
 
     function getAuthorityList() {
@@ -691,7 +707,7 @@
             var result = []
 
             function deepResolveTree(node,parentName) {
-                //加上传下来的父节点名字
+                //为node加上parentName属性
                 var data = Object.assign({},node,{
                     parentName: parentName,
                     uuid: node.id
@@ -707,7 +723,56 @@
             }
 
             initUserTable(result)
+
+            return result
+        }).then(list => {//填充父机构选择框
+            for(var item of list){
+                $('#parentSelector').append('<option value="'+item.id+'">'+item.name+'</option>')
+            }
         })
+    }
+
+    function confirmAddAuthority() {
+        var data = $('#frm-add-authority').serialize()
+        $.ajax({
+            url: '/authority/add',
+            data: data,
+            method: 'POST'
+        }).then(function success() {
+
+        },function error() {
+            alert('添加权限失败')
+        })
+    }
+
+    function enableAuthority() {
+        if(checkIfUserCheckedThenSave()){
+            $.ajax({
+                traditional: true,
+                url: '/authority/enable`',
+                data: myData.checkedIds,
+                method: 'POST',
+            }).then(res => {
+
+            },err => {
+                alert('启用权限失败')
+            })
+        }
+    }
+
+    function disableAuthority() {
+        if(checkIfUserCheckedThenSave()){
+            $.ajax({
+                traditional: true,
+                url: '/authority/disable`',
+                data: myData.checkedIds,
+                method: 'POST',
+            }).then(res => {
+
+            },err => {
+                alert('禁用权限失败')
+            })
+        }
     }
 
 </script>
