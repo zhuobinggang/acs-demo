@@ -43,18 +43,18 @@
 
                                     <div class="space-6"></div>
 
-                                    <form>
+                                    <form id="frm_login">
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="用户名" />
+															<input type="text" name="username" class="form-control" placeholder="用户名" />
 															<i class="icon-user"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="密码" />
+															<input type="password" name="password" class="form-control" placeholder="密码" />
 															<i class="icon-lock"></i>
 														</span>
                                             </label>
@@ -67,7 +67,9 @@
                                                     <span class="lbl">记住我</span>
                                                 </label>
 
-                                                <button type="button" class="width-35 pull-right btn btn-sm btn-primary">
+                                                <button type="button"
+                                                        onclick="login()"
+                                                        class="width-35 pull-right btn btn-sm btn-primary">
                                                     <i class="icon-key"></i>
                                                     登陆
                                                 </button>
@@ -127,17 +129,17 @@
                                         输入您的邮箱以获取密码
                                     </p>
 
-                                    <form>
+                                    <form id="frm_get_password">
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="邮箱" />
+															<input type="email" name="email" class="form-control" placeholder="邮箱" />
 															<i class="icon-envelope"></i>
 														</span>
                                             </label>
 
                                             <div class="clearfix">
-                                                <button type="button" class="width-35 pull-right btn btn-sm btn-danger">
+                                                <button type="button" class="width-35 pull-right btn btn-sm btn-danger" onclick="getPass()">
                                                     <i class="icon-lightbulb"></i>
                                                     发送
                                                 </button>
@@ -166,32 +168,32 @@
                                     <div class="space-6"></div>
                                     <p> 请输入您的信息: </p>
 
-                                    <form>
+                                    <form id="frm_register">
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="email" class="form-control" placeholder="邮箱" />
+															<input type="email" name="email" class="form-control" placeholder="邮箱" />
 															<i class="icon-envelope"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="用户名" />
+															<input type="text" name="username" class="form-control" placeholder="用户名" />
 															<i class="icon-user"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="密码" />
+															<input type="password" name="password" class="form-control" placeholder="密码" />
 															<i class="icon-lock"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="重置密码" />
+															<input type="password" class="form-control" placeholder="再次输入密码" />
 															<i class="icon-retweet"></i>
 														</span>
                                             </label>
@@ -213,7 +215,7 @@
                                                     重置
                                                 </button>
 
-                                                <button type="button" class="width-65 pull-right btn btn-sm btn-success">
+                                                <button type="button" class="width-65 pull-right btn btn-sm btn-success" onclick="register()">
                                                     注册
                                                     <i class="icon-arrow-right icon-on-right"></i>
                                                 </button>
@@ -256,6 +258,41 @@
         jQuery('.widget-box.visible').removeClass('visible');
         jQuery('#'+id).addClass('visible');
     }
+
+    function login() {
+        $.ajax({
+            url: '/user/login',
+            method: 'POST',
+            data: $('#frm_login').serialize(),
+        }).then(res => {
+
+        },err => {
+            alert('用户登陆失败')
+        })
+    }
+    function register() {
+        $.ajax({
+            url: '/user/register',
+            method: 'POST',
+            data: $('#frm_register').serialize(),
+        }).then(res => {
+
+        },err => {
+            alert('用户注册失败')
+        })
+    }
+    function getPass() {
+        $.ajax({
+            url: '/user/getPass',
+            method: 'POST',
+            data: $('#frm_get_password').serialize(),
+        }).then(res => {
+
+        },err => {
+            alert('获取密码失败')
+        })
+    }
+
 </script>
 <!--<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>-->
 </body>
