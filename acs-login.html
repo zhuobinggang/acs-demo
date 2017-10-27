@@ -193,13 +193,13 @@
 
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="password" class="form-control" placeholder="再次输入密码" />
+															<input type="password" name="pass_repeat" class="form-control" placeholder="再次输入密码" />
 															<i class="icon-retweet"></i>
 														</span>
                                             </label>
 
                                             <label class="block">
-                                                <input type="checkbox" class="ace" />
+                                                <input type="checkbox" class="ace" id="agree_protocol"/>
                                                 <span class="lbl">
 															<!--I accept the-->
 															<!--<a href="#">User Agreement</a>-->
@@ -271,10 +271,29 @@
         })
     }
     function register() {
+        var formData = $('#frm_register').serializeArray()
+        var data = {}
+        for(var item of formData){
+            data[item.name] = item.value
+        }
+
+        //Check if unchecked user protocol
+        if(!$('#agree_protocol').prop('checked')){
+            alert('您必须同意用户协议')
+            return
+        }
+
+        //Check if password repeated
+        if(data.password != data.pass_repeat){
+            alert('重复输入密码错误')
+            return
+        }
+        delete data.pass_repeat
+
         $.ajax({
             url: '/user/register',
             method: 'POST',
-            data: $('#frm_register').serialize(),
+            data: data,
         }).then(res => {
 
         },err => {
