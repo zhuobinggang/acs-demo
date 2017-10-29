@@ -481,10 +481,10 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">证件种类</label>
                         <div class="col-sm-8">
-                            <select>
-                                <option value="volvo">身份证</option>
-                                <option value="saab">护照</option>
-                                <option value="opel">其他</option>
+                            <select name="certType">
+                                <option value="0">身份证</option>
+                                <option value="1">工作证</option>
+                                <!--<option value="2">其他</option>-->
                             </select>
                         </div>
                     </div>
@@ -1990,12 +1990,20 @@
         }
     }
     function confirmUpdateUser(){
+        //加上id字段
+        var formData = $('#frm-update-product').serializeArray()
+        var data = {}
+        for(var item of formData){
+            data[item.name] = item.value
+        }
+        data = Object.assign({id:myData.checkedIds[0]},data)
+
         $.ajax({
             url: '/user/update',
             method: 'POST',
-            data: $('#frm-update-product').serialize(),
+            data: data,
             error: function (res) {
-                alert('添加用户失败!')
+                alert('修改用户失败!')
             }
         })
     }
