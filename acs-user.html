@@ -473,8 +473,22 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">用户密码</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control focus" name="pass" placeholder="用户密码"
+                            <input type="text" class="form-control focus" name="password" placeholder="用户密码"
                                    required="required">
+                        </div>
+                    </div>
+
+                    <!--2017/10/29 Add Organization selector and Role selector-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right">选择机构</label>
+                        <div class="col-sm-8">
+                            <select name="organizationId"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right">选择角色</label>
+                        <div class="col-sm-8">
+                            <select name="roleId"></select>
                         </div>
                     </div>
 
@@ -933,7 +947,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">选择角色</label>
                         <div class="col-sm-8">
-                            <select id="roleSelector">
+                            <select name="roleId" id="roleSelector">
                                 <!--注释掉模拟数据-->
                                 <!--<option value="volvo">小区管理员</option>-->
                                 <!--<option value="saab">物业安保人员</option>-->
@@ -983,7 +997,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">选择机构</label>
                         <div class="col-sm-8">
-                            <select id="organizationSelector">
+                            <select name="organizationId" id="organizationSelector">
                                 <!--<option value="volvo">五桂山公安局</option>-->
                                 <!--<option value="saab">康乐大街6号</option>-->
                                 <!--<option value="opel">日华花园</option>-->
@@ -1072,8 +1086,22 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">用户密码</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control focus" name="pass" placeholder="用户密码"
+                            <input type="text" class="form-control focus" name="password" placeholder="用户密码"
                                    required="required">
+                        </div>
+                    </div>
+
+                    <!--2017/10/29 Add Organization selector and Role selector-->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right">选择机构</label>
+                        <div class="col-sm-8">
+                            <select name="organizationId"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label no-padding-right">选择角色</label>
+                        <div class="col-sm-8">
+                            <select name="roleId"></select>
                         </div>
                     </div>
 
@@ -1822,7 +1850,8 @@
                     var role = roles[i]
 
                     //Show
-                    $('#roleSelector').append(myRoleFormat(role))
+//                    $('#roleSelector').append(myRoleFormat(role))
+                    $('select[name="roleId"]').append(myRoleFormat(role))
 
                     //Save data
                     myData.roles.push({id: role.id, name: role.name})
@@ -1840,6 +1869,7 @@
         try {
             var checkedIds = myData.checkedIds
             var selectedRole = myData.roles[$('#roleSelector').get(0).selectedIndex].id
+//            var selectedRole = myData.roles[$('select[name="roleId"]')[0].get(0).selectedIndex].id
             $.ajax({
                 traditional: true,
                 url: '/user/setRole',
@@ -1886,7 +1916,8 @@
                     var og = ogs[i]
 
                     //Show
-                    $('#organizationSelector').append(myOGFormat(og))
+//                    $('#organizationSelector').append(myOGFormat(og))
+                    $('select[name="organizationId"]').append(myOGFormat(og))
 
                     //Save data
                     myData.organizations.push({id: og.id, name: og.name})
@@ -1903,7 +1934,8 @@
     function confirmSetOrganization() {
         try {
             var checkedIds = myData.checkedIds
-            var selectedOg = myData.organizations[$('#organizationSelector').get(0).selectedIndex].id
+//            var selectedOg = myData.organizations[$('#organizationSelector').get(0).selectedIndex].id
+            var selectedOg = myData.organizations[$('select[name="organizationId"]')[0].get(0).selectedIndex].id
             $.ajax({
                 traditional: true,
                 url: '/user/setOrganization',
