@@ -479,10 +479,20 @@
                     </div>
 
                     <!--2017/10/29 Add Organization selector and Role selector-->
+                    <!--<div class="form-group">-->
+                        <!--<label class="col-sm-2 control-label no-padding-right">选择机构</label>-->
+                        <!--<div class="col-sm-8">-->
+                            <!--<select name="organizationId"></select>-->
+                        <!--</div>-->
+                    <!--</div>-->
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">选择机构</label>
                         <div class="col-sm-8">
-                            <select name="organizationId"></select>
+                            <input type="text" name="organizationId" class="form-control focus" placeholder="organizationId"
+                                   required="required">
+                        </div>
+                        <div class="col-sm-2">
+                            <a onclick="showOrganizationSelectModal()">选择机构</a>
                         </div>
                     </div>
                     <div class="form-group">
@@ -859,7 +869,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">户籍行政区划代码</label>
                         <div class="col-sm-8">
-                            <input id="division_input" disabled type="text" class="form-control focus" name="adminDivisionCode" placeholder="户籍行政区划代码"
+                            <input id="division_input" type="text" class="form-control focus" name="adminDivisionCode" placeholder="户籍行政区划代码"
                                    required="required">
                         </div>
                         <div class="col-sm-2">
@@ -995,21 +1005,7 @@
             <div class="modal-body">
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label no-padding-right">选择机构</label>
-                        <div class="col-sm-8">
-                            <select name="organizationId" id="organizationSelector">
-                                <!--<option value="volvo">五桂山公安局</option>-->
-                                <!--<option value="saab">康乐大街6号</option>-->
-                                <!--<option value="opel">日华花园</option>-->
-                                <!--<option value="audi">银石雅园</option>-->
-                                <!--<option value="audi">豪华住宿</option>-->
-                                <!--<option value="audi">祥和二巷3号A、B座</option>-->
-                                <!--<option value="audi">海河街9号</option>-->
-                                <!--<option value="audi">水拥坑</option>-->
-                                <!--<option value="audi">香洲区朝阳路44号</option>-->
-                                <!--<option value="audi">婆石村</option>-->
-                            </select>
-                        </div>
+                        <table name="organizationTable"></table>
                     </div>
 
                     <div class="form-group">
@@ -1092,10 +1088,20 @@
                     </div>
 
                     <!--2017/10/29 Add Organization selector and Role selector-->
+                    <!--<div class="form-group">-->
+                        <!--<label class="col-sm-2 control-label no-padding-right">选择机构</label>-->
+                        <!--<div class="col-sm-8">-->
+                            <!--<select name="organizationId"></select>-->
+                        <!--</div>-->
+                    <!--</div>-->
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">选择机构</label>
                         <div class="col-sm-8">
-                            <select name="organizationId"></select>
+                            <input type="text" name="organizationId" class="form-control focus" placeholder="organizationId"
+                                   required="required">
+                        </div>
+                        <div class="col-sm-2">
+                            <a onclick="showOrganizationSelectModal()">选择机构</a>
                         </div>
                     </div>
                     <div class="form-group">
@@ -1472,7 +1478,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right">户籍行政区划代码</label>
                         <div class="col-sm-8">
-                            <input type="text" disabled class="form-control focus" name="adminDivisionCode" placeholder="户籍行政区划代码"
+                            <input type="text" class="form-control focus" name="adminDivisionCode" placeholder="户籍行政区划代码"
                                    required="required">
                         </div>
                         <div class="col-sm-2">
@@ -1612,6 +1618,70 @@
     </div>
 </div><!--select community modal end-->
 
+<!--选择Organization-->
+<div class="modal fade" id="organizationSelectModal" tabindex="-2" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!--modal header begins-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">选择行政区划</h5>
+            </div>
+
+            <div class="modal-body" style="font-size: 12px;">
+
+                <div class="widget-box">
+
+
+                    <div class="widget-body">
+                        <div class="widget-main padding-8">
+                            <table name="organizationTable"></table>
+                        </div>
+                    </div>
+                </div>
+            </div><!--modal body ends-->
+            <div class="modal-footer" style="background-color: white;">
+                <button class="btn btn-primary btn-sm" data-dismiss="modal" onclick="confirmSelectOrganization()">确认选择</button>
+            </div>
+        </div>
+    </div>
+</div><!--Select organization modal end-->
+<!--Set Organization-->
+<div class="modal fade" id="organizationSetModal" tabindex="-2" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!--modal header begins-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">选择行政区划</h5>
+            </div>
+            <!--modal header ends-->
+            <!--modal body begins-->
+            <div class="modal-body" style="font-size: 12px;">
+
+                <div class="widget-box">
+                    <!--<div class="widget-header header-color-blue2">-->
+                    <!--<h4 class="lighter smaller">选择社区</h4>-->
+                    <!--</div>-->
+
+                    <div class="widget-body">
+                        <div class="widget-main padding-8">
+                            <table name="organizationTable"></table>
+                        </div>
+                    </div>
+                </div>
+            </div><!--modal body ends-->
+            <div class="modal-footer" style="background-color: white;">
+                <button class="btn btn-primary btn-sm" data-dismiss="modal" onclick="confirmSetOrganization()">确认</button>
+            </div>
+        </div>
+    </div>
+</div><!--Set organization modal end-->
+
 
 <!-- basic scripts -->
 <!--jQuery-->
@@ -1679,7 +1749,7 @@
         jsTreeInstance: null,//行政区划树实例保存为全局变量
     }
 
-    $(function () {
+    $(function init() {
         //请求用户列表
         //getUserListMock();
         initUserTableServerSide()
@@ -1701,6 +1771,9 @@
 
         //填充行政区划树
         fillDivisionSelector()
+
+        //Fill organization table
+        fillOrganizationTable()
     });
 
     /**
@@ -1895,8 +1968,8 @@
      * About set organization
      */
     function setOrganization(){
-        alert('该功能无法使用！')
-        return
+//        alert('该功能无法使用！')
+//        return
 
         if(checkIfUserCheckedThenSave()){
             $('#modal-set-organization').modal('show')
@@ -1932,29 +2005,16 @@
         return '<option value="' + og.id + '">' + og.name + '</option>'
     }
     function confirmSetOrganization() {
-        try {
-            var checkedIds = myData.checkedIds
-//            var selectedOg = myData.organizations[$('#organizationSelector').get(0).selectedIndex].id
-            var selectedOg = myData.organizations[$('select[name="organizationId"]')[0].get(0).selectedIndex].id
-            $.ajax({
-                traditional: true,
-                url: '/user/setOrganization',
-                dataType: 'JSON',
-                method: 'POST',
-                data: {
-                    ids: checkedIds,
-                    organizationId: selectedOg
-                },
-                success: function (res) {
-                    console.log('Success: '+res)
-                },
-                error: function (res) {
-                    alert('Request for set role error')
-                }
-            })
-        }catch (e){
-            alert('设置角色出错，检查选项是否渲染错误')
-        }
+        var ids = myData.checkedIds
+        var ogId = $($('#modal-set-organization input[name="ogCkb"]:checked')[0]).val()
+
+        $.ajax({
+            url:'/user/setOrganization',
+            data: {ids:ids,organizationId:ogId},
+            method: 'POST',
+        }).then(res=>{},err=>{
+            alert('设置机构失败')
+        })
     }
 
     /**
@@ -2172,6 +2232,54 @@
             'selected-icon': 'icon-ok',
             'unselected-icon': 'icon-remove'
         });
+    }
+
+    /**
+     * Set organization
+     */
+    function showOrganizationSelectModal() {
+        $('#organizationSelectModal').modal('show')
+    }
+    function confirmSelectOrganization() {
+        var ogId = $($('#organizationSelectModal input[name="ogCkb"]:checked')[0]).val()
+        $('input[name="organizationId"]').val(ogId)
+    }
+    function fillOrganizationTable() {
+//        $('#organizationTable').DataTable({
+        $('table[name="organizationTable"]').DataTable({
+            serverSide: true,
+            ajax: '/organization/list',
+            "deferRender": true,
+            "bProcessing": true,
+            "lengthChange": false,
+            "ordering": false,
+            "createdRow": function (row, data, dataIndex) {
+                $('td', row).attr("class", "text-center");
+                $(row).css("cursor", "pointer");
+            },
+            "language": {
+                "url": "assets/js/jquery-dataTables-zh.json"
+            },
+            "columns": [
+                {
+//                    title: '<div style="text-align:center;">'
+//                    + '<input type="checkbox" id="all-user-checkbox" onclick="selectAllCheckBox(\'userCkb\')" name="allUserCheckbox" />'
+//                    + '</div>',
+                    title: '',
+                    data: 'id', render: function (data, type, row) {
+//                    return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
+                    return '<input id="ckb_' + data + '" name="ogCkb" value="' + data + '" type="radio">'
+                }, className: "dt-center",
+                },
+                {title: '机构名称', data: "name", className: "dt-center",},
+                {title: '机构类型', data: "organizationTypeName", className: "dt-center",},
+                {title: '管辖群组', data: "resourceGroup", className: "dt-center",},
+//                {title: '详细地址', data: "contact", className: "dt-center",},
+                {title: '联系电话', data: "phone", className: "dt-center",},
+//                {title: '备注', data: "remark", className: "dt-center",},
+            ],
+            "order": [[1, "asc"]]
+        })
     }
 
 </script>

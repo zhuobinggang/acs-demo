@@ -785,7 +785,7 @@
     var userTable;//遗留数据
     var organizationTable
 
-    $(function () {
+    $(function init() {
 //        getUserList();
         //获取机构列表
         //getOGList()
@@ -1176,7 +1176,7 @@
                     title: '<div style="text-align:center;">'
                     + '<input type="checkbox" id="all-user-checkbox" onclick="selectAllCheckBox(\'userCkb\')" name="allUserCheckbox" />'
                     + '</div>',
-                    data: 'uuid', render: function (data, type, row) {
+                    data: 'id', render: function (data, type, row) {
                     return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
                 }, className: "dt-center",
                 },
