@@ -443,7 +443,8 @@
 												</form>
 											</td>
 											<td align="right" style="padding-right: 3px;" id="f_terminal_more">
-												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-add-terminal" onclick="getDoorList()">添加</button>
+												<!--<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-add-terminal" onclick="getDoorList()">添加</button>-->
+												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-add-terminal">添加</button>
 												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-update-terminal-select2" onclick="getDoorList()">修改</button>
 												<button class="btn btn-sm btn-danger">删除</button>
 											</td>
@@ -492,39 +493,38 @@
                             <div class="form-group" align="left">
                                 <label class="col-sm-3 control-label no-padding-right"> 地址编码授权码：</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="addressCodeAuthCode"
+                                    <input type="text" class="form-control" name="	addressAuthCode"
                                            placeholder="请输入地址编码授权码:">
                                 </div>
                             </div>
                             <div class="form-group" align="left">
                                 <label class="col-sm-3 control-label no-padding-right"> SIM卡号：</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="SIMNumber"
+                                    <input type="text" class="form-control" name="simCardNum"
                                            placeholder="请输入SIM卡号:">
                                 </div>
                             </div>
                             <div class="form-group" align="left">
                                 <label class="col-sm-3 control-label no-padding-right"> 终端别名：</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="terminalAlias"
+                                    <input type="text" class="form-control" name="alias"
                                            placeholder="请输入终端别名:">
                                 </div>
                             </div>
                             <div class="form-group" align="left">
                                 <label class="col-sm-3 control-label no-padding-right"> 型号: </label>
                                 <div class="col-sm-7">
-                                    <select name="residentType" class="form-control">
-                                        <option value="-1" selected="selected">请选择型号:</option>
-                                        <option value="1.00">社区版V1</option>
-                                        <option value="2.00">社区版V2</option>
-                                        <option value="3.00">社区版V3</option>
+                                    <select name="versionId" class="form-control">
+                                        <option value="1">社区版V1</option>
+                                        <option value="2">社区版V2</option>
+                                        <option value="3">社区版V3</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right"> 所属建筑：</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="terminalCommunity"
+                                    <input type="text" class="form-control" name="buildingId"
                                            placeholder="请输入所属建筑:">
                                 </div>
                                 <div class="col-sm-2" style="vertical-align: center">
@@ -534,7 +534,7 @@
                             <div class="form-group" align="left">
                                 <label class="col-sm-3 control-label no-padding-right"> 安装日期：</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="terminalAlias"
+                                    <input type="text" class="form-control" name="installDate"
                                            placeholder="请输入安装日期:">
                                 </div>
                             </div>
@@ -546,7 +546,7 @@
 								<!--</div>-->
 							<!--</div>-->
                             <div class="form-group" align="right">
-                                <input type="submit" class="btn btn-sm btn-primary" onclick="addTerminal()" value="提交" />
+                                <input class="btn btn-sm btn-primary" data-dismiss="modal" onclick="confirmAddTerminal()" value="提交" />
                                 <input type="reset" class="btn btn-sm btn-warning" value="重置" />
                             </div>
 						</form>
@@ -669,7 +669,7 @@
                                 <!--</div>-->
                             <!--</div>-->
                             <div class="form-group" align="right">
-                                <input type="submit" class="btn btn-sm btn-primary" onclick="addTerminal()" value="提交" />
+                                <input class="btn btn-sm btn-primary" onclick="confirmUpdateTerminal()" value="提交" />
                                 <input type="reset" class="btn btn-sm btn-warning" value="重置" />
                             </div>
                         </form>
@@ -1012,6 +1012,17 @@
                 });
             }
             <!-- building select2 script ends -->
+
+			function confirmAddTerminal(){
+                var formData = $('#frm-add-terminal').serialize()
+				$.ajax({
+					url:'/terminal/add',
+					method: 'POST',
+					data: formData,
+				}).then(res=>{},err=>{
+				    alert('添加终端失败')
+				})
+			}
 
 		</script>
 </body>
