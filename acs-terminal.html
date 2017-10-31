@@ -445,7 +445,8 @@
 											<td align="right" style="padding-right: 3px;" id="f_terminal_more">
 												<!--<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-add-terminal" onclick="getDoorList()">添加</button>-->
 												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-add-terminal">添加</button>
-												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-update-terminal-select2" onclick="getDoorList()">修改</button>
+												<!--<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-update-terminal-select2" onclick="getDoorList()">修改</button>-->
+												<button class="btn btn-sm btn-primary" data-toggle="modal"  onclick="updateTerminal()">修改</button>
 												<button class="btn btn-sm btn-danger">删除</button>
 											</td>
 										</tr>
@@ -600,79 +601,79 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h5 class="modal-title">修改建筑信息</h5>
+                        <h5 class="modal-title">修改终端信息</h5>
                     </div>
                     <!--modal header ends-->
                     <!--modal body begins-->
                     <div class="modal-body">
-                        <form class="form-horizontal" id="frm-update-terminal">
-                            <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> 地址编码：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="addressCode"
-                                           placeholder="请输入地址编码:">
-                                </div>
-                            </div>
-                            <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> 地址编码授权码：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="addressCodeAuthCode"
-                                           placeholder="请输入地址编码授权码:">
-                                </div>
-                            </div>
-                            <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> SIM卡号：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="SIMNumber"
-                                           placeholder="请输入SIM卡号:">
-                                </div>
-                            </div>
-                            <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> 终端别名：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="terminalAlias"
-                                           placeholder="请输入终端别名:">
-                                </div>
-                            </div>
-                            <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> 型号: </label>
-                                <div class="col-sm-8">
-                                    <select name="residentType" class="form-control">
-                                        <option value="-1" selected="selected">请选择型号:</option>
-                                        <option value="1.00">社区版V1</option>
-                                        <option value="2.00">社区版V2</option>
-                                        <option value="3.00">社区版V3</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label no-padding-right"> 所在建筑：</label>
-                                <div class="col-sm-8">
-                                    <select name="roomBuilding" class="building-select2 form-control select2-hidden-accessible"
-                                            tabindex="-1" aria-hidden="true" style="width: 100%;">
-                                        <option value="-1" selected="selected">请输入建筑编号/建筑地址/所在社区</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> 安装日期：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="terminalAlias"
-                                           placeholder="请输入安装日期:">
-                                </div>
-                            </div>
-                            <!--<div class="form-group">-->
-                                <!--<label class="col-sm-2 control-label no-padding-right"> 门禁信息：</label>-->
-                                <!--<div class="col-sm-8">-->
-                                    <!--<table class="doorTable nowrap dataTable hover display cell-border">-->
-                                    <!--</table>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <div class="form-group" align="right">
-                                <input class="btn btn-sm btn-primary" onclick="confirmUpdateTerminal()" value="提交" />
-                                <input type="reset" class="btn btn-sm btn-warning" value="重置" />
-                            </div>
-                        </form>
+						<form class="form-horizontal" id="frm-update-terminal">
+							<div class="form-group" align="left">
+								<label class="col-sm-3 control-label no-padding-right"> 地址编码：</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" name="addressCode"
+										   placeholder="请输入地址编码:">
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-3 control-label no-padding-right"> 地址编码授权码：</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" name="addressAuthCode"
+										   placeholder="请输入地址编码授权码:">
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-3 control-label no-padding-right"> SIM卡号：</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" name="simCardNum"
+										   placeholder="请输入SIM卡号:">
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-3 control-label no-padding-right"> 终端别名：</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" name="alias"
+										   placeholder="请输入终端别名:">
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-3 control-label no-padding-right"> 型号: </label>
+								<div class="col-sm-7">
+									<select name="versionId" class="form-control">
+										<option value="1">社区版V1</option>
+										<option value="2">社区版V2</option>
+										<option value="3">社区版V3</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right"> 所属建筑：</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" name="buildingId"
+										   placeholder="请输入所属建筑:">
+								</div>
+								<div class="col-sm-2" style="vertical-align: center">
+									<a href="#modal-select-building" data-toggle="modal" onclick="getBuildingList()">选择建筑</a>
+								</div>
+							</div>
+							<div class="form-group" align="left">
+								<label class="col-sm-3 control-label no-padding-right"> 安装日期：</label>
+								<div class="col-sm-7">
+									<input type="text" class="form-control" name="installDate"
+										   placeholder="请输入安装日期:">
+								</div>
+							</div>
+							<!--<div class="form-group">-->
+							<!--<label class="col-sm-3 control-label no-padding-right"> 门禁信息：</label>-->
+							<!--<div class="col-sm-8">-->
+							<!--<table class="doorTable nowrap dataTable hover display cell-border">-->
+							<!--</table>-->
+							<!--</div>-->
+							<!--</div>-->
+							<div class="form-group" align="right">
+								<input class="btn btn-sm btn-primary" data-dismiss="modal" onclick="confirmModifyTerminal()" value="提交" />
+								<input type="reset" class="btn btn-sm btn-warning" value="重置" />
+							</div>
+						</form>
                     </div><!--modal body ends-->
                 </div>
             </div>
@@ -719,7 +720,11 @@
             var terminalTable;
             var doorTable;
 
-            $(function() {
+            var myData = {
+                checkedIds: [],
+			}
+
+            $(function init() {
 //                getTerminalList();
                 getTerminalListServerSide();
                 initBuildingSelect2();
@@ -1021,6 +1026,35 @@
 					data: formData,
 				}).then(res=>{},err=>{
 				    alert('添加终端失败')
+				})
+			}
+
+			function updateTerminal(){
+                var ids = getCheckedBox("terminalCkb")
+                if(ids.length < 1){
+                    alert('请勾选终端')
+                    return
+				}
+				myData.checkedIds = ids
+
+				$('#modal-update-terminal-select2').modal('show')
+			}
+
+			function confirmModifyTerminal(){
+			    var formData = $('#frm-update-terminal').serializeArray()
+				var data = {ids: myData.checkedIds}
+
+				for(var item of formData){
+			        data[item.name] = item.value
+				}
+
+				$.ajax({
+					url: '/terminal/update',
+					method: 'POST',
+					data: data,
+					traditional: true,
+				}).then(res=>{},err=>{
+				    alert('修改终端失败')
 				})
 			}
 
