@@ -445,8 +445,8 @@
                                                 <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-auth-card">授权</button>
                                                 <button class="btn btn-sm btn-success" data-toggle="modal" onclick="renewCardValidDate()" >续期</button>
 												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-add-card">添加</button>
-												<button class="btn btn-sm btn-primary" data-toggle="modal" onclick="updateCardModal()">修改</button>
-												<button class="btn btn-sm btn-danger">删除</button>
+												<button class="btn btn-sm btn-primary" data-toggle="modal" onclick="updateCard()">修改</button>
+												<button class="btn btn-sm btn-danger" onclick="deleteCard()">删除</button>
 											</td>
 										</tr>
 									</table>
@@ -648,7 +648,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right"> 卡号：</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="cardBuilding"
+                                    <input type="text" class="form-control" name="cardNum"
                                            placeholder="请输入卡号:">
                                 </div>
                                 <div class="col-sm-2" style="vertical-align: center">
@@ -658,8 +658,8 @@
 							<div class="form-group" align="left">
 								<label class="col-sm-3 control-label no-padding-right"> 类型：</label>
 								<div class="col-sm-7">
-									<select name="residentSex" class="form-control">
-										<option value="-1" selected="selected">请选择类型:</option>
+									<select name="type" class="form-control">
+										<!--<option value="-1" selected="selected">请选择类型:</option>-->
 										<option value="1">身份证</option>
 										<option value="2">IC卡</option>
 									</select>
@@ -668,7 +668,7 @@
                             <div class="form-group" align="left">
                                 <label class="col-sm-3 control-label no-padding-right"> 状态：</label>
                                 <div class="col-sm-7">
-                                    <select name="residentSex" class="form-control">
+                                    <select name="status" class="form-control">
                                         <option value="-1" selected="selected">请选择状态:</option>
                                         <option value="1">正常</option>
                                         <option value="2">禁用</option>
@@ -679,7 +679,7 @@
                             <div class="form-group" align="left">
                                 <label class="col-sm-3 control-label no-padding-right"> 持卡人：</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="OwnerIDCardNum" disabled>
+                                    <input type="text" class="form-control" name="ownerId">
                                 </div>
                                 <div class="col-sm-2" style="vertical-align: center">
                                     <a href="#modal-select-resident" data-toggle="modal" >选择持卡人</a>
@@ -699,12 +699,12 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label no-padding-right"> 备注：</label>
 								<div class="col-sm-7">
-									<textarea class="form-control" name="cardRemark" rows="4"
+									<textarea class="form-control" name="remark" rows="4"
 										   placeholder="请输入备注:"></textarea>
 								</div>
 							</div>
                             <div class="form-group" align="right">
-                                <input type="submit" class="btn btn-sm btn-primary" value="提交" />
+                                <input onclick="confirmAddCard()" data-dismiss="modal" class="btn btn-sm btn-primary" value="提交" />
                                 <input type="reset" class="btn btn-sm btn-warning" value="重置" />
                             </div>
 						</form>
@@ -727,11 +727,11 @@
                     <!--modal header ends-->
                     <!--modal body begins-->
                     <div class="modal-body">
-                        <form class="form-horizontal" id="frm-add-product-select2">
+                        <form class="form-horizontal" id="frm-update-card">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label no-padding-right"> 卡号：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="cardId"
+                                    <input type="text" class="form-control" name="cardNum"
                                            placeholder="请输入卡号:">
                                 </div>
                                 <div class="col-sm-2" style="vertical-align: center">
@@ -741,8 +741,8 @@
                             <div class="form-group" align="left">
                                 <label class="col-sm-2 control-label no-padding-right"> 类型：</label>
                                 <div class="col-sm-8">
-                                    <select name="cardType" class="form-control">
-                                        <option value="-1" selected="selected">请选择类型:</option>
+                                    <select name="type" class="form-control">
+                                        <!--<option value="-1" selected="selected">请选择类型:</option>-->
                                         <option value="1">身份证</option>
                                         <option value="2">IC卡</option>
                                     </select>
@@ -764,7 +764,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label no-padding-right"> 持卡人：</label>
                                 <div class="col-sm-8">
-                                    <select name="cardOwner" class="owner-select2 form-control select2-hidden-accessible"
+                                    <select name="ownerId" class="owner-select2 form-control select2-hidden-accessible"
                                             tabindex="-1" aria-hidden="true" style="width: 100%;">
                                         <option value="-1" selected="selected">请输入住户姓名/证件号码/住户类型</option>
                                     </select>
@@ -773,12 +773,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label no-padding-right"> 备注：</label>
                                 <div class="col-sm-8">
-									<textarea class="form-control" name="cardRemark" rows="4"
-                                              placeholder="请输入备注:"></textarea>
+									<!--<textarea class="form-control" name="cardRemark" rows="4"-->
+                                              <!--placeholder="请输入备注:"></textarea>-->
+                                    <input name="remark" type="text" class="form-control" placeholder="备注" />
                                 </div>
                             </div>
                             <div class="form-group" align="right">
-                                <input type="submit" class="btn btn-sm btn-primary" value="提交" />
+                                <input onclick="confirmUpdateCard()" data-dismiss="modal" class="btn btn-sm btn-primary" value="提交" />
                                 <input type="reset" class="btn btn-sm btn-warning" value="重置" />
                             </div>
                         </form>
@@ -1779,7 +1780,11 @@
             var terminalTable;
             var whichMachine;
 
-            $(function() {
+            var myData = {
+                checkedIds: [],
+			}
+
+            $(function init() {
 //                getCardList();
                 getCardListServerSide()
 
@@ -2063,6 +2068,16 @@
                     $("#modal-update-card-select2 textarea[name='cardRemark']").val(remark);
                     $("#modal-update-card-select2").modal('show');
                 }
+            }
+            function updateCard() {
+                var ids = getCheckedBox("cardCkb")
+                if(ids.length < 1){
+                    alert("未勾选住户")
+                    return
+				}
+
+				myData.checkedIds = ids
+                $("#modal-update-card-select2").modal('show');
             }
             <!-- update card script ends -->
 
@@ -2546,6 +2561,65 @@
             }
             <!-- select admin place modal ends -->
 
+            /**
+			 * 2017/10/31 万圣节 功能实现
+             */
+            function confirmAddCard() {
+				var formData =  $('#frm-add-card').serialize()
+				$.ajax({
+					url:'/card/add',
+					method: 'POST',
+                    data: formData,
+				}).then(res=>{},err=>{
+				    alert('增加卡片失败')
+				})
+            }
+
+            function confirmUpdateCard() {
+                var formData = $('#frm-update-card').serializeArray()
+				var data = {ids:myData.checkedIds}
+
+				for(var item of formData){
+                    data[item.name] = item.value
+				}
+
+				$.ajax({
+					traditional: true,
+					url:'/card/update',
+					method: 'POST',
+					data: data,
+				}).then(res=>{},err=>{
+				    alert('更新卡片失败')
+				})
+            }
+
+            function updateCard(){
+                var ids = getCheckedBox("cardCkb");
+                if(ids.length < 1){
+                    alert('请勾选卡片')
+					return
+				}
+
+				myData.checkedIds = ids
+				$('#modal-update-card-select2').modal('show')
+			}
+
+			function deleteCard() {
+				var ids = getCheckedBox("cardCkb");
+                if(ids.length < 1){
+                    alert('请勾选卡片')
+					return
+				}
+
+				$.ajax({
+					traditional: true,
+					url:'/card/delete',
+					method:'POST',
+					data: {ids:ids},
+				}).then(res => {},err=>{
+				    alert('删除卡片失败')
+				})
+            }
         </script>
 </body>
 </html>
