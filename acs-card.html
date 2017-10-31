@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>数聚智能门禁信息管理系统-房间管理</title>
+		<title>数聚智能门禁信息管理系统-卡片管理</title>
 		<meta name="keywords" content="Bootstrap模版,Bootstrap模版下载,Bootstrap教程,Bootstrap中文" />
 		<meta name="description" content="站长素材提供Bootstrap模版,Bootstrap教程,Bootstrap中文翻译等相关Bootstrap插件下载" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1780,7 +1780,9 @@
             var whichMachine;
 
             $(function() {
-                getCardList();
+//                getCardList();
+                getCardListServerSide()
+
                 initOwnerSelect2();
                 getDoorList();
                 getRoomList();
@@ -1801,6 +1803,47 @@
                 };
                 ajax(param);
             }
+            function getCardListServerSide(){
+                var cardTable = $('#cardTable').DataTable({
+                    serverSide: true,
+                    ajax: '/card/list',
+                    "deferRender": true,
+                    "bProcessing": true,
+                    "lengthChange": false,
+                    "ordering": false,
+                    "createdRow": function (row, data, dataIndex) {
+                        $('td', row).attr("class", "text-center");
+                        $(row).css("cursor", "pointer");
+                    },
+                    "language": {
+                        "url": "assets/js/jquery-dataTables-zh.json"
+                    },
+                    "columns": [
+                        {
+                            title: '<div style="text-align:center;">'
+                            + '<input type="checkbox" id="all-card-checkbox" onclick="selectAllCheckBox(\'cardCkb\')" name="allCardCheckBox" />'
+                            + '</div>',
+                            data: 'id', render: function(data, type,row) {
+                            return '<input id="ckb_' + data + '" name="cardCkb" value="'
+                                + data + '" type="checkbox" onclick="checkBoxClick(\'cardCkb\',\'all-card-checkbox\')">';
+                        }},
+                        {title: '卡号', data: "cardNum"},
+//                        {title: '卡类型', data: "type"},
+                        {title: '持卡人', data: 'ownerName'},
+                        {title: '使用范围', data: 'useRangeName'},
+                        {title: '有效期', data: "validDate"},
+                        /*
+                        {title: '创建人', data: "createUser"},
+                        {title: '创建时间', data: "createTime"},
+                        */
+                        {title: '修改人', data: "updateUserName"},
+                        {title: '修改时间', data: "updateTime"},
+                        {title: '备注', data: "remark"}
+                    ],
+                    "order": [[1, "asc"]]
+                })
+			}
+
 
             /**
              * 初始化房间列表表格
