@@ -720,7 +720,8 @@
             var doorTable;
 
             $(function() {
-                getTerminalList();
+//                getTerminalList();
+                getTerminalListServerSide();
                 initBuildingSelect2();
             });
 
@@ -738,6 +739,56 @@
                 };
                 ajax(param);
             }
+
+            function getTerminalListServerSide(){
+                var terminalTable = $('#terminalTable').DataTable({
+                    serverSide: true,
+                    ajax: '/terminal/list',
+                    "deferRender": true,
+                    "bProcessing": true,
+                    "lengthChange": false,
+                    "ordering": false,
+                    "createdRow": function (row, data, dataIndex) {
+                        $('td', row).attr("class", "text-center");
+                        $(row).css("cursor", "pointer");
+                    },
+                    "language": {
+                        "url": "assets/js/jquery-dataTables-zh.json"
+                    },
+                    "columns": [
+                        {
+                            title: '<div style="text-align:center;">'
+                            + '<input type="checkbox" id="all-terminal-checkbox" name="radios" />'
+                            + '</div>',
+                            data: 'id', render: function(data, type,row) {
+                            return '<input id="ckb_' + data + '" name="terminalCkb" value="'
+                                + data + '" type="checkbox" onclick="checkBoxClick(\'terminalCkb\',\'all-terminal-checkbox\')">';
+                        }},
+                        {title: '地址码', data: "addressCode"},
+                        {title: '终端别名', data: "alias"},
+                        {title: '所属建筑', data: "buildingName"},
+//                        {title: '联系电话', data: "phone"},
+                        /*
+                        {title: '创建人', data: "createUser"},
+                        {title: '创建时间', data: "createTime"},
+                        */
+                        {title: '最后联机时间', data: "lastConnectionTime"},
+                        {title: '信号强度', data: "signalIntensity"},
+                        {title: '发卡数量', data: "cardCount"},
+                        {title: '版本号', data: "versionId"},
+                        {title: '启动状态', data: "enableStatus"},
+                        {title: '注册状态', data: "registerStatus"},
+                        {title: '续费状态', data: "renewStatus"},
+                        {title: '续费到期日期', data: "renewDeadline"},
+                        {title: "安装日期", data: "installDate"},
+                        {title: "启用日期", data: "enableDate"},
+                        {title: "验收日期", data: "checkDate"},
+                        {title: "警务区", data: "policeArea"},
+                        {title: "所属辖区", data: "communityAddress"}
+                    ],
+                    "order": [[1, "asc"]]
+                })
+			}
 
             /**
              * 初始化终端列表表格
