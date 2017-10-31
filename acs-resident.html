@@ -499,9 +499,9 @@
                                                 data-target="#modal-add-resident">添加
                                         </button>
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                                onclick="updateResidentModal()">修改
+                                                onclick="updateResident()">修改
                                         </button>
-                                        <button class="btn btn-sm btn-danger">删除</button>
+                                        <button class="btn btn-sm btn-danger" onclick="deleteResident()">删除</button>
                                     </td>
                                 </tr>
                             </table>
@@ -883,7 +883,7 @@
                         </div>
                     </div>
                     <div class="form-group" align="right">
-                        <input onclick="confirmUpdateResident()" class="btn btn-sm btn-primary" value="提交"/>
+                        <input onclick="confirmUpdateResident()" data-dismiss="modal" class="btn btn-sm btn-primary" value="提交"/>
                         <input type="reset" class="btn btn-sm btn-warning" value="重置"/>
                     </div>
                 </form>
@@ -1233,6 +1233,7 @@
         data.ids = myData.checkedIds
 
         $.ajax({
+            traditional: true,
             url: '/resident/update',
             method: 'POST',
             data: data
@@ -1375,6 +1376,26 @@
             data: data
         }).then(res=>{},err=>{
             alert('添加住户失败')
+        })
+    }
+
+    function deleteResident() {
+        var ids = getCheckedBox("residentCkb")
+        if(ids.length < 1){
+            alert('请勾选住户')
+            return
+        }
+
+//        myData.checkedIds = ids
+//        $('#modal-update-resident').modal('show')
+
+        $.ajax({
+            traditional: true,
+            url: '/resident/delete',
+            method: 'POST',
+            data: {ids: ids},
+        }).then(res=>{},err=>{
+            alert('删除用户失败')
         })
     }
 
