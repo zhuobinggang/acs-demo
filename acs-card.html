@@ -443,7 +443,7 @@
 											<td align="right" style="padding-right: 3px;" id="f_card_more">
                                                 <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-quick-add">快速发卡</button>
                                                 <button class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal-auth-card">授权</button>
-                                                <button class="btn btn-sm btn-success" data-toggle="modal" onclick="renewCardValidDate()" >续期</button>
+                                                <button class="btn btn-sm btn-success" data-toggle="modal" onclick="renewCard()" >续期</button>
 												<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modal-add-card">添加</button>
 												<button class="btn btn-sm btn-primary" data-toggle="modal" onclick="updateCard()">修改</button>
 												<button class="btn btn-sm btn-danger" onclick="deleteCard()">删除</button>
@@ -915,16 +915,16 @@
                     <!--modal body begins-->
                     <div class="modal-body" style="font-size: 12px;">
                         <form class="form-horizontal" id="frm-renew-card">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label no-padding-right"> 卡号：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="cardId"
-                                           placeholder="请输入卡号:">
-                                </div>
-                                <div class="col-sm-2" style="vertical-align: center">
-                                    <a href="#modal-select-building" data-toggle="modal">读取</a>
-                                </div>
-                            </div>
+                            <!--<div class="form-group">-->
+                                <!--<label class="col-sm-2 control-label no-padding-right"> 卡号：</label>-->
+                                <!--<div class="col-sm-8">-->
+                                    <!--<input type="text" class="form-control" name="cardId"-->
+                                           <!--placeholder="请输入卡号:">-->
+                                <!--</div>-->
+                                <!--<div class="col-sm-2" style="vertical-align: center">-->
+                                    <!--<a href="#modal-select-building" data-toggle="modal">读取</a>-->
+                                <!--</div>-->
+                            <!--</div>-->
                             <div class="form-group" align="left">
                                 <label class="col-sm-2 control-label no-padding-right"> 有效期：</label>
                                 <div class="col-sm-8">
@@ -936,7 +936,7 @@
                                 <label class="col-sm-2 control-label no-padding-right"> 续期时间：</label>
                                 <div class="col-sm-8">
                                     <select name="renewTime" class="form-control">
-                                        <option value="-1" selected="selected">请选择续期时间:</option>
+                                        <!--<option value="-1" selected="selected">请选择续期时间:</option>-->
                                         <option value="1">一天</option>
                                         <option value="2">两天</option>
                                         <option value="3">三天</option>
@@ -951,7 +951,7 @@
                                 </div>
                             </div>
                             <div class="form-group" align="right">
-                                <input type="submit" class="btn btn-sm btn-primary" onclick="renewCardDate()" value="续期" />
+                                <input onclick="confirmRenewCard()" data-dismiss="modal" class="btn btn-sm btn-primary" value="续期" />
                             </div>
                         </form>
                     </div><!--modal body ends-->
@@ -1831,7 +1831,7 @@
                             title: '<div style="text-align:center;">'
                             + '<input type="checkbox" id="all-card-checkbox" onclick="selectAllCheckBox(\'cardCkb\')" name="allCardCheckBox" />'
                             + '</div>',
-                            data: 'id', render: function(data, type,row) {
+                            data: 'cardNum', render: function(data, type,row) {
                             return '<input id="ckb_' + data + '" name="cardCkb" value="'
                                 + data + '" type="checkbox" onclick="checkBoxClick(\'cardCkb\',\'all-card-checkbox\')">';
                         }},
@@ -2648,6 +2648,35 @@
 				    alert('卡片授权失败')
 				})
             }
+
+            function renewCard(){
+                var ids = getCheckedBox("cardCkb");
+                if(ids.length < 1){
+                    alert('请勾选卡片')
+					return
+				}
+
+				myData.checkedIds = ids
+
+                $("#modal-renew-card").modal('show');
+			}
+
+			function confirmRenewCard(){
+                var dataForm = $('#frm-renew-card').serializeArray()
+                var data = {cardNum: myData.checkedIds[0]}
+
+                for(var item of dataForm){
+                    data[item.name] = item.value
+				}
+
+				$.ajax({
+					url:'/card/renew',
+					method:'POST',
+					data: data,
+				}).then(res=>{},err=>{
+				    alert('续期失败')
+				})
+			}
         </script>
 </body>
 </html>
