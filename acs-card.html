@@ -486,7 +486,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right"> 卡号：</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="cardNumber"
+                                    <input type="text" class="form-control" name="cardNum"
                                            placeholder="请输入卡号:">
                                 </div>
                                 <div class="col-sm-2" style="vertical-align: center">
@@ -496,28 +496,18 @@
                             <div class="form-group" align="left">
                                 <label class="col-sm-3 control-label no-padding-right"> 类型：</label>
                                 <div class="col-sm-7">
-                                    <select name="cardType" class="form-control">
-                                        <option value="-1" selected="selected">请选择类型:</option>
+                                    <select name="type" class="form-control">
+                                        <!--<option value="-1" selected="selected">请选择类型:</option>-->
                                         <option value="1">身份证</option>
                                         <option value="2">IC卡</option>
                                     </select>
                                 </div>
                             </div>
-                            <!--<div class="form-group" align="left">-->
-                                <!--<label class="col-sm-3 control-label no-padding-right"> 状态：</label>-->
-                                <!--<div class="col-sm-7">-->
-                                    <!--<select name="cardStatus" class="form-control">-->
-                                        <!--<option value="-1" selected="selected">请选择状态:</option>-->
-                                        <!--<option value="1">正常</option>-->
-                                        <!--<option value="2">禁用</option>-->
-                                        <!--<option value="3">停用</option>-->
-                                    <!--</select>-->
-                                <!--</div>-->
-                            <!--</div>-->
+
                             <div class="form-group" align="left">
                                 <label class="col-sm-3 control-label no-padding-right"> 持卡人：</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="owner" disabled>
+                                    <input type="text" class="form-control" name="ownerId">
                                 </div>
                                 <div class="col-sm-2 hidden" style="vertical-align: center;" id="addResident">
                                     <a href="#modal-add-resident" data-toggle="modal">&nbsp;添加信息</a>
@@ -529,7 +519,7 @@
                             <div class="form-group" align="left">
                                 <label class="col-sm-3 control-label no-padding-right"> 终端：</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="terminal" disabled>
+                                    <input type="text" class="form-control" name="terminalId">
                                 </div>
                                 <div class="col-sm-2" style="vertical-align: center">
                                     <!--
@@ -538,16 +528,16 @@
 									<a href="#modal-quick-auth-card" data-toggle="modal" >选择终端</a>
                                 </div>
                             </div>
-                            <div class="form-group" align="left">
-                                <label class="col-sm-3 control-label no-padding-right"> 卡片授权：</label>
-                                <div class="col-sm-7">
-                                    <select name="authType" class="form-control">
-                                        <option value="-1" selected="selected">请选择授权类型:</option>
-                                        <option value="1">普通卡</option>
-                                        <option value="2">管理卡</option>
-                                    </select>
-                                </div>
-                            </div>
+                            <!--<div class="form-group" align="left">-->
+                                <!--<label class="col-sm-3 control-label no-padding-right"> 卡片授权：</label>-->
+                                <!--<div class="col-sm-7">-->
+                                    <!--<select name="authType" class="form-control">-->
+                                        <!--&lt;!&ndash;<option value="-1" selected="selected">请选择授权类型:</option>&ndash;&gt;-->
+                                        <!--<option value="1">普通卡</option>-->
+                                        <!--<option value="2">管理卡</option>-->
+                                    <!--</select>-->
+                                <!--</div>-->
+                            <!--</div>-->
                             <div class="form-group" align="left">
                                 <label class="col-sm-3 control-label no-padding-right"> 有效期：</label>
                                 <div class="col-sm-7">
@@ -558,8 +548,8 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right"> 座号：</label>
                                 <div class="col-sm-7">
-                                    <select name="seatNumber" class="form-control">
-                                        <option value="-1">请选择座号:</option>
+                                    <select name="seatNum" class="form-control">
+                                        <!--<option value="-1">请选择座号:</option>-->
                                         <option value="0" selected >0</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -572,7 +562,7 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right"> 房间号：</label>
                                 <div class="col-sm-7">
-                                    <input type="text" class="form-control" name="roomNumber"
+                                    <input type="text" class="form-control" name="roomNum"
                                            placeholder="请输入房间号:">
                                 </div>
                                 <!--
@@ -584,12 +574,12 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right"> 备注：</label>
                                 <div class="col-sm-7">
-									<textarea class="form-control" name="cardRemark" rows="4"
-                                              placeholder="请输入备注:"></textarea>
+									<input class="form-control" name="remark" rows="4"
+                                              placeholder="请输入备注:"></input>
                                 </div>
                             </div>
                             <div class="form-group" align="right">
-                                <input type="submit" class="btn btn-sm btn-primary" value="提交" />
+                                <input onclick="confirmQuickAdd()" data-dismiss="modal" class="btn btn-sm btn-primary" value="提交" />
                                 <input type="reset" class="btn btn-sm btn-warning" value="重置" />
                             </div>
                         </form>
@@ -806,7 +796,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label no-padding-right"> 卡号：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="cardId"
+                                    <input type="text" class="form-control" name="cardNum"
                                            placeholder="请输入卡号:">
                                 </div>
                                 <div class="col-sm-2" style="vertical-align: center">
@@ -823,31 +813,44 @@
                             <div class="form-group" align="left">
                                 <label class="col-sm-2 control-label no-padding-right"> 卡片授权：</label>
                                 <div class="col-sm-8">
-                                    <select name="authType" class="form-control">
-                                        <option value="-1" selected="selected">请选择授权类型:</option>
+                                    <select name="type" class="form-control">
+                                        <!--<option value="-1" selected="selected">请选择授权类型:</option>-->
                                         <option value="1">普通卡</option>
                                         <option value="2">管理卡</option>
                                     </select>
                                 </div>
                             </div>
+                            <!--<div class="form-group" align="left">-->
+                                <!--<label class="col-sm-2 control-label no-padding-right"> 围墙机：</label>-->
+                                <!--<div class="col-sm-8">-->
+                                    <!--<input type="text" class="form-control" name="wallMachine"-->
+                                           <!--placeholder="请输入围墙机:">-->
+                                <!--</div>-->
+                                <!--<div class="col-sm-2" style="vertical-align: center">-->
+                                    <!--&lt;!&ndash;-->
+                                    <!--<a href="#modal-select-terminal" data-toggle="modal" onclick="getTerminalList('wallMachine')">选择终端</a>-->
+                                    <!--&ndash;&gt;-->
+									<!--<a href="#modal-quick-add-terminal" data-toggle="modal" onclick="getTerminalList('wallMachine')">选择终端</a>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="form-group" align="left">-->
+                                <!--<label class="col-sm-2 control-label no-padding-right"> 单元机：</label>-->
+                                <!--<div class="col-sm-8">-->
+                                    <!--<input type="text" class="form-control" name="unitMachine"-->
+                                           <!--placeholder="请输入单元机:">-->
+                                <!--</div>-->
+                                <!--<div class="col-sm-2" style="vertical-align: center">-->
+                                    <!--&lt;!&ndash;-->
+                                    <!--<a href="#modal-select-terminal" data-toggle="modal" onclick="getTerminalList('unitMachine')">选择终端</a>-->
+                                    <!--&ndash;&gt;-->
+									<!--<a href="#modal-quick-add-terminal" data-toggle="modal" onclick="getTerminalList('unitMachine')">选择终端</a>-->
+                                <!--</div>-->
+                            <!--</div>-->
                             <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> 围墙机：</label>
+                                <label class="col-sm-2 control-label no-padding-right"> 终端编号：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="wallMachine"
-                                           placeholder="请输入围墙机:">
-                                </div>
-                                <div class="col-sm-2" style="vertical-align: center">
-                                    <!--
-                                    <a href="#modal-select-terminal" data-toggle="modal" onclick="getTerminalList('wallMachine')">选择终端</a>
-                                    -->
-									<a href="#modal-quick-add-terminal" data-toggle="modal" onclick="getTerminalList('wallMachine')">选择终端</a>
-                                </div>
-                            </div>
-                            <div class="form-group" align="left">
-                                <label class="col-sm-2 control-label no-padding-right"> 单元机：</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="unitMachine"
-                                           placeholder="请输入单元机:">
+                                    <input type="text" class="form-control" name="terminalId"
+                                           placeholder="请输入终端编号:">
                                 </div>
                                 <div class="col-sm-2" style="vertical-align: center">
                                     <!--
@@ -859,8 +862,8 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label no-padding-right"> 座号：</label>
                                 <div class="col-sm-8">
-                                    <select name="seatNumber" class="form-control">
-                                        <option value="-1">请选择座号:</option>
+                                    <select name="seatNum" class="form-control">
+                                        <!--<option value="-1">请选择座号:</option>-->
                                         <option value="0" selected >0</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -873,7 +876,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label no-padding-right"> 房间号：</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="roomNumber"
+                                    <input type="text" class="form-control" name="roomId"
                                            placeholder="请输入房间号:">
                                 </div>
 								<div class="col-sm-2" style="vertical-align: center">
@@ -888,7 +891,7 @@
                                 </div>
                             </div>
                             <div class="form-group" align="right">
-                                <input type="submit" class="btn btn-sm btn-primary" value="提交" />
+                                <input onclick="confirmAuth()" data-dismiss="modal" class="btn btn-sm btn-primary" value="提交" />
                                 <input type="reset" class="btn btn-sm btn-warning" value="重置" />
                             </div>
                         </form>
@@ -2618,6 +2621,31 @@
 					data: {ids:ids},
 				}).then(res => {},err=>{
 				    alert('删除卡片失败')
+				})
+            }
+
+            function confirmQuickAdd(){
+                var formData = $('#frm-quick-add').serialize()
+
+				$.ajax({
+					url:'/card/quickAdd',
+					method: 'POST',
+					data: formData,
+//					traditional: 'true',
+				}).then(res=>{},err=>{
+				    alert('快速发卡错误')
+				})
+			}
+
+			function confirmAuth() {
+                var formData = $('#frm-auth-card').serialize()
+
+				$.ajax({
+					url:'/card/auth',
+					method:'post',
+					data: formData,
+				}).then(res=>{},err=>{
+				    alert('卡片授权失败')
 				})
             }
         </script>
