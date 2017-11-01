@@ -509,7 +509,7 @@
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                 onclick="updateRoom()">修改
                                         </button>
-                                        <button class="btn btn-sm btn-danger">删除</button>
+                                        <button class="btn btn-sm btn-danger" onclick="deleteRoom()">删除</button>
                                     </td>
                                 </tr>
                             </table>
@@ -1443,6 +1443,23 @@
             traditional: true,
         }).then(res=>{},err=>{
             alert('更新房间失败')
+        })
+    }
+
+    function deleteRoom() {
+        var ids = getCheckedBox('roomCkb')
+        if(ids.length < 1){
+            alert('请勾选房间')
+            return
+        }
+
+        $.ajax({
+            url:'/room/delete',
+            method:'POST',
+            data: {ids:ids},
+            traditional: true,
+        }).then(res=>{},err=>{
+            alert('删除房间失败')
         })
     }
 </script>
