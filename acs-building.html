@@ -500,7 +500,7 @@
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                 onclick="updateBuilding()">修改
                                         </button>
-                                        <button class="btn btn-sm btn-danger">删除</button>
+                                        <button class="btn btn-sm btn-danger" onclick="deleteBuilding()">删除</button>
                                     </td>
                                 </tr>
                             </table>
@@ -1374,6 +1374,23 @@
             traditional: true,
         }).then(res=>{},err=>{
             alert('修改建筑失败')
+        })
+    }
+
+    function deleteBuilding() {
+        var ids = getCheckedBox('buildingCkb')
+        if(ids.length < 1){
+            alert('请勾选建筑')
+            return
+        }
+
+        $.ajax({
+            url: '/building/delete',
+            method: 'POST',
+            traditional: true,
+            data: {ids: ids},
+        }).then(res=>{},err=>{
+            alert('删除建筑失败')
         })
     }
 </script>
