@@ -103,3 +103,10 @@ function hideValidateError(element) {
     //消除验证失败标志
     instance.removeClass('validate-error')
 }
+
+/**
+ * 2017/11/1 判断返回结果是否成功
+ */
+function isResultSuccess(res) {
+    return res.result == 'success'
+}

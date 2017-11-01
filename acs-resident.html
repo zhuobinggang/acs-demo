@@ -611,11 +611,11 @@
                         <label class="col-sm-3 control-label no-padding-right"> 民族：</label>
                         <div class="col-sm-7">
                             <select name="nationId" class="form-control">
-                                <option value="-1" selected="selected">请选择国籍地区:</option>
-                                <option value="1">中国</option>
-                                <option value="2">香港</option>
-                                <option value="3">澳门</option>
-                                <option value="4">台湾</option>
+                                <!--<option value="-1" selected="selected">请选择国籍地区:</option>-->
+                                <!--<option value="1">中国</option>-->
+                                <!--<option value="2">香港</option>-->
+                                <!--<option value="3">澳门</option>-->
+                                <!--<option value="4">台湾</option>-->
                             </select>
                         </div>
                     </div>
@@ -795,11 +795,11 @@
                         <label class="col-sm-3 control-label no-padding-right"> 民族：</label>
                         <div class="col-sm-7">
                             <select name="nationId" class="form-control">
-                                <option value="-1" selected="selected">请选择国籍地区:</option>
-                                <option value="1">中国</option>
-                                <option value="2">香港</option>
-                                <option value="3">澳门</option>
-                                <option value="4">台湾</option>
+                                <!--<option value="-1" selected="selected">请选择国籍地区:</option>-->
+                                <!--<option value="1">中国</option>-->
+                                <!--<option value="2">香港</option>-->
+                                <!--<option value="3">澳门</option>-->
+                                <!--<option value="4">台湾</option>-->
                             </select>
                         </div>
                     </div>
@@ -1052,6 +1052,7 @@
 
 <!-- custom scripts -->
 <script src="js/acs-util.js"></script>
+<script src="js/acs-util-new.js"></script>
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
@@ -1069,6 +1070,10 @@
     $(function init() {
 //                getResidentList();
         getResidentListServerSide()
+
+
+        //获取民族列表
+        fillNationList()
     });
 
     /**
@@ -1396,6 +1401,22 @@
             data: {ids: ids},
         }).then(res=>{},err=>{
             alert('删除用户失败')
+        })
+    }
+
+    function fillNationList() {
+        $.ajax({
+            url: '/user/nationList',
+        }).then(res=>{
+            if(isResultSuccess(res)){
+                myData.nations = res.resultData
+
+                for(var item of myData.nations){
+                    //填充
+                    $('select[name="nationId"]').append('<option value="'+item.id+'">'+item.name+'</option>')
+                }
+
+            }
         })
     }
 
