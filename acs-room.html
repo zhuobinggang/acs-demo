@@ -507,7 +507,7 @@
                                                 data-target="#modal-add-room">添加
                                         </button>
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
-                                                onclick="updateRoomModal()">修改
+                                                onclick="updateRoom()">修改
                                         </button>
                                         <button class="btn btn-sm btn-danger">删除</button>
                                     </td>
@@ -642,7 +642,7 @@
                         </div>
                     </div>
                     <div class="form-group" align="right">
-                        <input onclick="confirmAddRoom()" class="btn btn-sm btn-primary" value="提交"/>
+                        <input onclick="confirmAddRoom()" data-dismiss="modal" class="btn btn-sm btn-primary" value="提交"/>
                         <input type="reset" class="btn btn-sm btn-warning" value="重置"/>
                     </div>
                 </form>
@@ -734,7 +734,7 @@
 </div><!-- batch add room modal ends -->
 
 <!--update-room modal use select2 start-->
-<div class="modal fade" id="modal-update-room-select2" role="dialog">
+<div class="modal fade" id="modal-update-room" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <!--modal header begins-->
@@ -747,30 +747,21 @@
             <!--modal header ends-->
             <!--modal body begins-->
             <div class="modal-body">
-                <form class="form-horizontal" id="frm-add-product-select2">
+                <form class="form-horizontal" id="frm-update-room">
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right"> 所在建筑：</label>
                         <div class="col-sm-8">
-                            <select name="roomBuilding" class="building-select2 form-control select2-hidden-accessible"
-                                    tabindex="-1" aria-hidden="true" style="width: 100%;">
-                                <option value="-1" selected="selected">请输入建筑编号/建筑地址/所在社区</option>
-                            </select>
+                            <input type="text" class="form-control" name="buildingId"
+                                   placeholder="请输入建筑地址:">
+                        </div>
+                        <div class="col-sm-2" style="vertical-align: center">
+                            <a href="#modal-select-building" data-toggle="modal" onclick="getBuildingList()">选择建筑</a>
                         </div>
                     </div>
-                    <!--
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label no-padding-right"> 建筑编号：</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control focus" name="roomId" placeholder="请输入建筑编号"
-                                   required="required">
-                        </div>
-                    </div>
-                    -->
                     <div class="form-group" align="left">
                         <label class="col-sm-2 control-label no-padding-right"> 座号：</label>
                         <div class="col-sm-8">
-                            <select name="seatNumber" class="form-control">
-                                <option value="-1" selected="selected">请选择座号:</option>
+                            <select name="seatNum" class="form-control">
                                 <option value="0">0</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -786,73 +777,75 @@
                     <div class="form-group" align="left">
                         <label class="col-sm-2 control-label no-padding-right"> 房间号：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="roomName"
+                            <input type="text" class="form-control" name="roomNum"
                                    placeholder="请输入房间号:">
                         </div>
                     </div>
                     <div class="form-group" align="left">
                         <label class="col-sm-2 control-label no-padding-right"> 房屋编码：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="houseId"
+                            <input type="text" class="form-control" name="houseCode"
                                    placeholder="请输入房屋编码:">
                         </div>
                     </div>
                     <div class="form-group" align="left">
                         <label class="col-sm-2 control-label no-padding-right"> 房屋编码授权码：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="houseIdAuthCode"
+                            <input type="text" class="form-control" name="houseAuthCode"
                                    placeholder="请输入房屋编码:">
                         </div>
                     </div>
-                    <!--
                     <div class="form-group" align="left">
-                        <label class="col-sm-2 control-label no-padding-right"> 住户姓名：</label>
+                        <label class="col-sm-2 control-label no-padding-right"> 业主：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="roomResident"
+                            <input type="text" class="form-control" name="userId"
                                    placeholder="请输入住户姓名:">
                         </div>
                         <div class="col-sm-2" style="vertical-align: center">
-                            <a href="#modal-select-resident" data-toggle="modal" onclick="getResidentList()">选择住户</a>
+                            <a href="#modal-select-user" data-toggle="modal" onclick="getUserList()">选择用户</a>
                         </div>
                     </div>
-                    -->
                     <div class="form-group" align="left">
                         <label class="col-sm-2 control-label no-padding-right"> 状态：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="status"
-                                   placeholder="请输入状态:">
+                            <select name="status" class="form-control">
+                                <option value="0">待出租</option>
+                                <option value="1">已出租</option>
+                                <option value="2">自住</option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group" align="left">
                         <label class="col-sm-2 control-label no-padding-right"> 户型：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="houseType"
+                            <input type="text" class="form-control" name="apartmentLayout"
                                    placeholder="请输入户型:">
                         </div>
                     </div>
                     <div class="form-group" align="left">
                         <label class="col-sm-2 control-label no-padding-right"> 面积：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="houseArea"
+                            <input type="text" class="form-control" name="area"
                                    placeholder="请输入面积:">
                         </div>
                     </div>
                     <div class="form-group" align="left">
                         <label class="col-sm-2 control-label no-padding-right"> 附属设施：</label>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" name="affiliatedFacilities"
+                            <input type="text" class="form-control" name="auxFacilities"
                                    placeholder="请输入附属设施:">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label no-padding-right"> 备注：</label>
                         <div class="col-sm-8">
-									<textarea class="form-control" name="roomRemark" rows="4"
+									<textarea class="form-control" name="remark" rows="4"
                                               placeholder="请输入备注:"></textarea>
                         </div>
                     </div>
+
                     <div class="form-group" align="right">
-                        <input type="submit" class="btn btn-sm btn-primary" value="提交"/>
+                        <input onclick="confirmUpdateRoom()" data-dismiss="modal" class="btn btn-sm btn-primary" value="提交"/>
                         <input type="reset" class="btn btn-sm btn-warning" value="重置"/>
                     </div>
                 </form>
@@ -891,7 +884,7 @@
                 </div>
             </div><!--modal body ends-->
             <div class="modal-footer" style="background-color: white;">
-                <button class="btn btn-primary btn-sm" onclick="selectBuilding()">提交</button>
+                <button class="btn btn-primary btn-sm" data-dismiss="modal" onclick="selectBuilding()">提交</button>
             </div>
         </div>
     </div>
@@ -930,7 +923,7 @@
                 </div>
             </div><!--modal body ends-->
             <div class="modal-footer" style="background-color: white;">
-                <button class="btn btn-primary btn-sm" onclick="selectResident()">提交</button>
+                <button class="btn btn-primary btn-sm" data-dismiss="modal" onclick="selectResident()">提交</button>
             </div>
         </div>
     </div>
@@ -969,7 +962,7 @@
                 </div>
             </div><!--modal body ends-->
             <div class="modal-footer" style="background-color: white;">
-                <button class="btn btn-primary btn-sm" onclick="selectResident()">提交</button>
+                <button class="btn btn-primary btn-sm" data-dismiss="modal" onclick="selectResident()">提交</button>
             </div>
         </div>
     </div>
@@ -1019,6 +1012,10 @@
     var roomTable;
     var buildingTable;
     var residentTable;
+
+    var myData = {
+        checkedIds: [],
+    }
 
     $(function init() {
         //getRoomList();
@@ -1417,6 +1414,35 @@
             traditional: true,
         }).then(res=>{},err=>{
             alert('添加房间失败')
+        })
+    }
+
+    function updateRoom() {
+        var ids = getCheckedBox("roomCkb");
+        if (ids.length < 1) {
+            alert("未勾选房间")
+            return
+        }
+        myData.checkedIds = ids
+
+        $("#modal-update-room").modal('show');
+    }
+
+    function confirmUpdateRoom() {
+        var formData = $('#frm-update-room').serializeArray()
+        var data = {id: myData.checkedIds[0]}
+
+        for(var item of formData){
+            data[item.name] = item.value
+        }
+
+        $.ajax({
+            url: '/room/update',
+            method: 'POST',
+            data: data,
+            traditional: true,
+        }).then(res=>{},err=>{
+            alert('更新房间失败')
         })
     }
 </script>
