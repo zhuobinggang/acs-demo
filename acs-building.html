@@ -862,8 +862,9 @@
             var buildingTable;
             var communityTable;
 
-            $(function() {
-                getBuildingList();
+            $(function init() {
+//                getBuildingList();
+                getBuildingListServerSide();
                 initCommunitySelect2();
                 community_assign_tree();
             });
@@ -881,6 +882,40 @@
                     }
                 };
                 ajax(param);
+            }
+            function getBuildingListServerSide() {
+                var buildingTable = $('#buildingTable').DataTable({
+                    serverSide: true,
+                    ajax: '/building/list',
+                    "deferRender": true,
+                    "bProcessing": true,
+                    "lengthChange": false,
+                    "ordering": false,
+                    "createdRow": function (row, data, dataIndex) {
+                        $('td', row).attr("class", "text-center");
+                        $(row).css("cursor", "pointer");
+                    },
+                    "language": {
+                        "url": "assets/js/jquery-dataTables-zh.json"
+                    },
+                    "columns": [
+                        {
+                            title: '<div style="text-align:center;">'
+                            + '<input type="checkbox" id="all-building-checkbox" onclick="selectAllCheckBox(\'buildingCkb\')" name="allBuildingCheckBox" />'
+                            + '</div>',
+                            data: 'id', render: function(data, type,row) {
+                            return '<input id="ckb_' + data + '" name="buildingCkb" value="'
+                                + data + '" type="checkbox" onclick="checkBoxClick(\'buildingCkb\',\'all-building-checkbox\')">';
+                        }},
+//                        {title: '建筑编号', data: "buildingId"},
+                        {title: '建筑名称', data: "buildingName"},
+                        {title: '建筑地址', data: "address"},
+                        {title: '所在社区', data: "communityName"},
+                        {title: '所在警务区', data: "policeArea"},
+                        {title: '备注', data: "remark"}
+                    ],
+                    "order": [[1, "asc"]]
+                })
             }
 
             /**
