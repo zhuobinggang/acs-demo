@@ -985,8 +985,9 @@
             var buildingTable;
             var residentTable;
 
-            $(function() {
-                getRoomList();
+            $(function init() {
+                //getRoomList();
+                getRoomListServerSide()
                 initBuildingSelect2();
             });
 
@@ -1003,6 +1004,46 @@
                     }
                 };
                 ajax(param);
+            }
+            function getRoomListServerSide() {
+                var roomTable = $('#roomTable').DataTable({
+                    serverSide: true,
+                    ajax: '/room/list',
+                    "deferRender": true,
+                    "bProcessing": true,
+                    "lengthChange": false,
+                    "ordering": false,
+                    "createdRow": function (row, data, dataIndex) {
+                        $('td', row).attr("class", "text-center");
+                        $(row).css("cursor", "pointer");
+                    },
+                    "language": {
+                        "url": "assets/js/jquery-dataTables-zh.json"
+                    },
+                    "columns": [
+                        {
+                            title: '<div style="text-align:center;">'
+                            + '<input type="checkbox" id="all-room-checkbox" onclick="selectAllCheckBox(\'roomCkb\')" name="allRoomCheckBox" />'
+                            + '</div>',
+                            data: 'id', render: function(data, type,row) {
+                            return '<input id="ckb_' + data + '" name="roomCkb" value="'
+                                + data + '" type="checkbox" onclick="checkBoxClick(\'roomCkb\',\'all-room-checkbox\')">';
+                        }},
+                        {title: '房间号', data: "roomNum"},
+                        {title: '所属建筑', data: "buildingName"},
+//                        {title: '房间号', data: 'roomId'},
+                        {title: '住户', data: 'resident'},
+                        {title: '业主', data: 'userName'},
+                        /*
+                        {title: '创建人', data: "createUser"},
+                        {title: '创建时间', data: "createTime"},
+                        */
+                        {title: '修改人', data: "updateUserName"},
+                        {title: '修改时间', data: "updateTime"},
+                        {title: '备注', data: "remark"}
+                    ],
+                    "order": [[1, "asc"]]
+                })
             }
 
             /**
