@@ -491,8 +491,7 @@
                                         </form>
                                     </td>
                                     <td align="right" style="padding-right: 3px;" id="f_building_more">
-                                        <button class="btn btn-sm btn-success" data-toggle="modal"
-                                                data-target="#modal-add-terminal">添加终端
+                                        <button class="btn btn-sm btn-success" data-toggle="modal" onclick="addTerminalToBuilding()">添加终端
                                         </button>
                                         <button class="btn btn-sm btn-primary" data-toggle="modal"
                                                 data-target="#modal-add-building">添加
@@ -762,30 +761,31 @@
             <!--modal header ends-->
             <!--modal body begins-->
             <div class="modal-body">
-                <form class="form-horizontal" id="frm-add-buiding">
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label no-padding-right"> 所属建筑编号：</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" name="buildingCode"
-                                   placeholder="请输入所属建筑:">
-                        </div>
-                        <!--
-                        <div class="col-sm-2" style="vertical-align: center">
-                            <a href="#modal-select-building" data-toggle="modal" onclick="getSelectBuildingList()">选择建筑</a>
-                        </div>
-                        -->
-                    </div>
-                    <div class="form-group" align="left">
-                        <label class="col-sm-3 control-label no-padding-right"> 终端编号：</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control" name="code"
-                                   placeholder="请输入终端编号:">
-                        </div>
-                    </div>
+                <form class="form-horizontal" id="frm-add-terminal">
+                    <!--为选择的建筑添加终端，不需要-->
+                    <!--<div class="form-group">-->
+                        <!--<label class="col-sm-3 control-label no-padding-right"> 所属建筑编号：</label>-->
+                        <!--<div class="col-sm-7">-->
+                            <!--<input type="text" class="form-control" name="buildingCode"-->
+                                   <!--placeholder="请输入所属建筑:">-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash;-->
+                        <!--<div class="col-sm-2" style="vertical-align: center">-->
+                            <!--<a href="#modal-select-building" data-toggle="modal" onclick="getSelectBuildingList()">选择建筑</a>-->
+                        <!--</div>-->
+                        <!--&ndash;&gt;-->
+                    <!--</div>-->
+                    <!--<div class="form-group" align="left">-->
+                        <!--<label class="col-sm-3 control-label no-padding-right"> 终端编号：</label>-->
+                        <!--<div class="col-sm-7">-->
+                            <!--<input type="text" class="form-control" name="code"-->
+                                   <!--placeholder="请输入终端编号:">-->
+                        <!--</div>-->
+                    <!--</div>-->
                     <div class="form-group" align="left">
                         <label class="col-sm-3 control-label no-padding-right"> 终端别名：</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" name="terminalAlias"
+                            <input type="text" class="form-control" name="alias"
                                    placeholder="请输入终端别名:">
                         </div>
                     </div>
@@ -800,7 +800,7 @@
                     <div class="form-group" align="left">
                         <label class="col-sm-3 control-label no-padding-right"> SIM卡号：</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" name="SIMNumber"
+                            <input type="text" class="form-control" name="simCardNum"
                                    placeholder="请输入SIM卡号:">
                         </div>
                     </div>
@@ -808,11 +808,10 @@
                     <div class="form-group" align="left">
                         <label class="col-sm-3 control-label no-padding-right"> 型号: </label>
                         <div class="col-sm-7">
-                            <select name="residentType" class="form-control">
-                                <option value="-1" selected="selected">请选择型号:</option>
-                                <option value="1.00">社区版V1</option>
-                                <option value="2.00">社区版V2</option>
-                                <option value="3.00">社区版V3</option>
+                            <select name="versionId" class="form-control">
+                                <option value="1">社区版V1</option>
+                                <option value="2">社区版V2</option>
+                                <option value="3">社区版V3</option>
                             </select>
                         </div>
                     </div>
@@ -820,7 +819,7 @@
                     <div class="form-group" align="left">
                         <label class="col-sm-3 control-label no-padding-right"> 安装日期：</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control" name="setupDate"
+                            <input type="text" class="form-control" name="installDate"
                                    placeholder="请输入安装日期:">
                         </div>
                     </div>
@@ -834,7 +833,7 @@
                     </div>
                     -->
                     <div class="form-group" align="right">
-                        <input type="submit" class="btn btn-sm btn-primary" onclick="confirmAddBuilding()" value="提交"/>
+                        <input class="btn btn-sm btn-primary" onclick="confirmAddTerminal()" value="提交"/>
                         <input type="reset" class="btn btn-sm btn-warning" value="重置"/>
                     </div>
                 </form>
@@ -1391,6 +1390,36 @@
             data: {ids: ids},
         }).then(res=>{},err=>{
             alert('删除建筑失败')
+        })
+    }
+
+    function addTerminalToBuilding(){
+        var ids = getCheckedBox('buildingCkb')
+        if(ids.length < 1){
+            alert('请勾选建筑')
+            return
+        }
+        myData.checkedIds = ids
+
+        $('#modal-add-terminal').modal('show')
+    }
+
+    function confirmAddTerminal(){
+        //选取的第一个建筑
+        var data = {buildingId: myData.checkedIds[0]}
+
+        var formData = $('#frm-add-terminal').serializeArray()
+        for(var item of formData){
+            data[item.name] = item.value
+        }
+
+        $.ajax({
+            url:'/terminal/add',
+            method:'POST',
+            data: data,
+            traditional: true,
+        }).then(res=>{},err=>{
+            alert('添加终端失败')
         })
     }
 </script>
