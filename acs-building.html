@@ -572,7 +572,7 @@
                                    placeholder="请输入建筑地址:">
                         </div>
                         <div class="col-sm-2" style="vertical-align: center">
-                            <a href="#modal-select-community" data-toggle="modal" onclick="getMapAddress()"> 地图定位</a>
+                            <a href="#modal-map-marker" onclick="selectAddress()" data-toggle="modal"> 地图定位</a>
                         </div>
                     </div>
                     <div class="form-group" align="left">
@@ -708,7 +708,8 @@
                                    placeholder="请输入建筑地址:">
                         </div>
                         <div class="col-sm-2" style="vertical-align: center">
-                            <a href="#modal-select-community" data-toggle="modal" onclick="getMapAddress()"> 地图定位</a>
+                            <!--<a href="#modal-select-community" data-toggle="modal" onclick="getMapAddress()"> 地图定位</a>-->
+                            <a href="#modal-map-marker" onclick="selectAddress()" data-toggle="modal"> 地图定位</a>
                         </div>
                     </div>
                     <div class="form-group" align="left">
@@ -915,6 +916,35 @@
     </div>
 </div><!--select community modal end-->
 
+<!-- Baidu map modal start -->
+<div class="modal fade" id="modal-map-marker" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" style="width:80%">
+        <div class="modal-content">
+            <!--modal header begins-->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title">地图选址</h5>
+            </div>
+            <!--modal header ends-->
+            <!--modal body begins-->
+            <div class="modal-body">
+                <div id="map-canvas" style="min-height: 500px; width:100%;"></div>
+
+            </div><!--modal body ends-->
+
+            <div class="form-group" style="min-height: 30px; margin-top:10px">
+                <div class="col-sm-10">
+                    <button type="button" class="btn btn-primary btn-sm" id="btn-marker-reset">重新定位</button>
+                    <button type="button" class="btn btn-primary btn-sm disabled" id="btn-marker-confirm">确认</button>
+                    <img class="hidden processing" src="img/processing.gif"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- basic scripts -->
 
 <!--[if !IE]> -->
@@ -932,7 +962,8 @@
 <script type="text/javascript">
     if ("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
 </script>
-<script src="assets/js/bootstrap.min.js"></script>
+<!--<script src="assets/js/bootstrap.min.js"></script>-->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="assets/js/typeahead-bs2.min.js"></script>
 
 <!-- page specific plugin scripts -->
@@ -956,9 +987,14 @@
 
 <script src="js/communityTreeData.js"></script>
 
+<!--Baidu Map-->
+<script src="http://api.map.baidu.com/api?v=2.0&ak=zSrwwQpoWFZFa9Rk03iyzT2O"></script>
 
 <!--Jstree-->
 <script src="https://cdn.bootcss.com/jstree/3.3.4/jstree.min.js"></script>
+
+<!--Confirmation Api-->
+<script src="https://cdn.bootcss.com/bootstrap-confirmation/1.0.5/bootstrap-confirmation.js"></script>
 
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
@@ -972,6 +1008,8 @@
     var myData = {
         checkedIds: [],
     }
+
+    var map; //百度地图
 
     $(function init() {
 //                getBuildingList();
@@ -1515,6 +1553,125 @@
             })
         }
         return result
+    }
+
+    /**
+     * 百度地图
+     */
+    function selectAddress() {
+        console.log('Select address click!');
+//        $("#modal-map-marker").modal('show');
+        setTimeout(function () {
+            showMap();
+        }, 200);
+    }
+
+    var door = {
+        "uuid": "655bdd7b-2dab-4131-af40-86f25ed85690",
+        "community": "宏珠公寓",
+        "name": "宏珠公寓东门",
+        "code": "4404020010010010101",
+        "status": true,
+        "terminal": "01234567890001",
+        "longitude": 113.606669,
+        "latitude": 22.365022
+    }
+
+    var newMapPoint
+
+    function showMap() {
+        if (map) return
+
+        // 百度地图API功能
+        map = new BMap.Map("map-canvas");  // 创建Map实例
+        map.enableScrollWheelZoom(); // 启用滚轮放大缩小
+        map.addControl(new BMap.NavigationControl()); // 左上角，添加默认缩放平移控件
+
+
+        //Clear all overlays
+        map.clearOverlays()
+
+        //Init point
+        var point = new BMap.Point(door.longitude, door.latitude);
+        var marker = new BMap.Marker(point);
+        map.addOverlay(marker);
+        map.centerAndZoom(point, 20);
+
+//        var content = "门禁别名：" + door.name;
+        var content = "";
+
+        content += "<br/>经度: " + door.longitude;
+        content += "<br/>纬度：" + door.latitude;
+        addClickHandler(content, marker);
+    }
+
+    /**
+     * 重新定位
+     */
+    function reMarkOnMap(e) {
+        map.clearOverlays()
+        newMapPoint = new BMap.Point(e.point.lng, e.point.lat);
+        var marker = new BMap.Marker(newMapPoint);
+        map.addOverlay(marker);
+    }
+
+    //重新定位
+    $('#btn-marker-reset').click(function () {
+        $('#btn-marker-confirm').removeClass('disabled');
+        map.addEventListener("click", reMarkOnMap);
+    });
+
+    //Confirm map point change
+    $('#btn-marker-confirm').confirmation({
+        title: "请确认",
+        animation: true,
+        placement: 'top',
+//                    singleton: true,
+        btnOkIcon: 'icon-ok',
+        btnOkLabel: '重新定位',
+        btnCancelIcon: 'icon-remove',
+        btnCancelLabel: '取消',
+        onConfirm: function () {
+            console.log('Confirm clicked!')
+            //Fill input bar
+            fillAddressInput()
+            map.removeEventListener("click", reMarkOnMap);
+            //修改门禁坐标
+            door.latitude = newMapPoint.latitude;
+            door.longitude = newMapPoint.longitude;
+            $('#btn-marker-confirm').addClass('disabled');
+            $('#modal-map-marker').modal('hide');
+
+        },
+        onCancel: function () {
+            //TODO: marker回到原来的位置
+            console.log('取消');
+        }
+    });
+
+    function addClickHandler(content, marker) {
+        marker.addEventListener("click", function (e) {
+                openInfo(content, e)
+            }
+        );
+    }
+
+    function openInfo(content, e) {
+        var p = e.target;
+        var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+        var infoWindow = new BMap.InfoWindow(content, opts);  // 创建信息窗口对象
+        map.openInfoWindow(infoWindow, point); //开启信息窗口
+    }
+
+    function fillAddressInput() {
+        var point = new BMap.Point(door.longitude, door.latitude)
+        var gc = new BMap.Geocoder()
+        gc.getLocation(point, function (rs) {
+//            var addComp = rs.addressComponents;
+//            console.info(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber)
+            console.info(rs.address)
+            $('input[name="address"]').val(rs.address)
+        });
     }
 </script>
 </body>
