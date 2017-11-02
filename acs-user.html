@@ -1776,69 +1776,69 @@
         fillOrganizationTable()
     });
 
-    /**
-     * 获取用户列表
-     */
-    function getUserListMock() {
-        var param = {
-            type: "get",
-            url: "data/userListNew.json",
-            successCall: initUserTable,
-            errorCall: function () {
-                showCommonTip("加载用户列表失败！");
-            }
-        };
-        ajax(param);
-    }
-
-    /**
-     * 初始化用户列表表格
-     */
-    function initUserTable(data) {
-        userTable = $('#userTable').DataTable({
-            "data": data,
-            "deferRender": true,
-            "bProcessing": true,
-            "lengthChange": false,
-            "ordering": false,
-            "createdRow": function (row, data, dataIndex) {
-                $('td', row).attr("class", "text-center");
-                $(row).css("cursor", "pointer");
-            },
-            "language": {
-                "url": "assets/js/jquery-dataTables-zh.json"
-            },
-            "columns": [
-                {
-                    title: '<div style="text-align:center;">'
-                    + '<input type="checkbox" id="all-user-checkbox" onclick="selectAllCheckBox(\'userCkb\')" name="allUserCheckbox" />'
-                    + '</div>',
-                    data: 'id', render: function (data, type, row) {
-                    return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
-                }, className: "dt-center",
-                },
-                {title: '用户账号', data: "name", className: "dt-center",},
-                {title: '姓名', data: "username", className: "dt-center",},
-                {title: '性别', data: "sex", className: "dt-center",},
-                {title: '出生日期', data: "birth", className: "dt-center",},
-                {
-                    title: '状态', data: "status", className: "dt-center", render: function (data, type, row) {
-                    if (data == '1') {
-                        return '已启用';
-                    } else {
-                        return '未启用';
-                    }
-                }
-                },
-                {title: '证件号码', data: "certNum", className: "dt-center",},
-                {title: '权限角色', data: "role", className: "dt-center",},
-                {title: '所属机构', data: "resourceGroup", className: "dt-center",},
-//                {title: '创建人', data: "createUser", className: "dt-center",},
-//                {title: '创建时间', data: "createTime", className: "dt-center",},
-            ],
-            "order": [[1, "asc"]]
-        });
-    }
+//    /**
+//     * 获取用户列表
+//     */
+//    function getUserListMock() {
+//        var param = {
+//            type: "get",
+//            url: "data/userListNew.json",
+//            successCall: initUserTable,
+//            errorCall: function () {
+//                showCommonTip("加载用户列表失败！");
+//            }
+//        };
+//        ajax(param);
+//    }
+//
+//    /**
+//     * 初始化用户列表表格
+//     */
+//    function initUserTable(data) {
+//        userTable = $('#userTable').DataTable({
+//            "data": data,
+//            "deferRender": true,
+//            "bProcessing": true,
+//            "lengthChange": false,
+//            "ordering": false,
+//            "createdRow": function (row, data, dataIndex) {
+//                $('td', row).attr("class", "text-center");
+//                $(row).css("cursor", "pointer");
+//            },
+//            "language": {
+//                "url": "assets/js/jquery-dataTables-zh.json"
+//            },
+//            "columns": [
+//                {
+//                    title: '<div style="text-align:center;">'
+//                    + '<input type="checkbox" id="all-user-checkbox" onclick="selectAllCheckBox(\'userCkb\')" name="allUserCheckbox" />'
+//                    + '</div>',
+//                    data: 'id', render: function (data, type, row) {
+//                    return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
+//                }, className: "dt-center",
+//                },
+//                {title: '用户账号', data: "name", className: "dt-center",},
+//                {title: '姓名', data: "username", className: "dt-center",},
+//                {title: '性别', data: "sex", className: "dt-center",},
+//                {title: '出生日期', data: "birth", className: "dt-center",},
+//                {
+//                    title: '状态', data: "status", className: "dt-center", render: function (data, type, row) {
+//                    if (data == '1') {
+//                        return '已启用';
+//                    } else {
+//                        return '未启用';
+//                    }
+//                }
+//                },
+//                {title: '证件号码', data: "certNum", className: "dt-center",},
+//                {title: '权限角色', data: "role", className: "dt-center",},
+//                {title: '所属机构', data: "resourceGroup", className: "dt-center",},
+////                {title: '创建人', data: "createUser", className: "dt-center",},
+////                {title: '创建时间', data: "createTime", className: "dt-center",},
+//            ],
+//            "order": [[1, "asc"]]
+//        });
+//    }
 
     function initUserTableServerSide() {
         userTable = $('#userTable').DataTable({
@@ -1878,7 +1878,7 @@
                 }
                 },
                 {title: '证件号码', data: "certNum", className: "dt-center",},
-                {title: '权限角色', data: "roleName", className: "dt-center",},
+                {title: '权限角色', data: "role", className: "dt-center",},
                 {title: '所属机构', data: "organizationName", className: "dt-center",},
 //                {title: '创建人', data: "createUser", className: "dt-center",},
 //                {title: '创建时间', data: "createTime", className: "dt-center",},
