@@ -1045,6 +1045,9 @@
     function reMarkOnMap(e) {
         map.clearOverlays()
         newMapPoint = new BMap.Point(e.point.lng, e.point.lat);
+
+        console.log('新点的经纬度是: '+e.point.lng+','+e.point.lat)
+
         var marker = new BMap.Marker(newMapPoint);
         map.addOverlay(marker);
     }
@@ -1067,12 +1070,15 @@
         btnCancelLabel: '取消',
         onConfirm: function () {
             console.log('Confirm clicked!')
+
+            //修改门禁坐标
+            door.latitude = newMapPoint.lat;
+            door.longitude = newMapPoint.lng;
+
             //Fill input bar
             fillAddressInput()
             map.removeEventListener("click", reMarkOnMap);
-            //修改门禁坐标
-            door.latitude = newMapPoint.latitude;
-            door.longitude = newMapPoint.longitude;
+
             $('#btn-marker-confirm').addClass('disabled');
             $('#modal-map-marker').modal('hide');
 
@@ -1089,7 +1095,8 @@
         gc.getLocation(point, function (rs) {
 //            var addComp = rs.addressComponents;
 //            console.info(addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber)
-            console.info(rs.address)
+//            console.log('获取地理位置成功: '+JSON.stringify(rs))
+//            console.info(rs.address)
             $('#detailAddress').val(rs.address)
         });
     }
@@ -1200,9 +1207,11 @@
             url: '/organization/typeList',
             method: 'GET',
         }).then(function success(res) {
+//            console.log('确实获取了啊')
             myData.OGTypes = res.resultData
             for (item of myData.OGTypes) {
-                $('select[name="organizationtypeid"]').append(
+
+                $('select[name="organizationTypeId"]').append(
                     '<option value="' + item.id + '">' + item.name + '</option>'
                 )
             }
