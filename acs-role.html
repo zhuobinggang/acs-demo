@@ -741,7 +741,7 @@
                     title: '<div style="text-align:center;">'
                     + '<input type="checkbox" id="all-user-checkbox" onclick="selectAllCheckBox(\'userCkb\')" name="allUserCheckbox" />'
                     + '</div>',
-                    data: 'uuid', render: function (data, type, row) {
+                    data: 'id', render: function (data, type, row) {
                     return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
                 }, className: "dt-center"
                 },
@@ -928,7 +928,7 @@
             traditional: true,
             url: '/role/assignAuthority',
             method: 'POST',
-            data: {ids: ids}
+            data: {id: myData.checkedIds[0],authorityIds: ids}
         }).then(function success() {
 
         }, function error() {
@@ -992,7 +992,7 @@
 
         //给传给服务端的数据加上选中的id
         var formData = $('#frm-modify-role').serializeArray()
-        var data = {ids: ids}
+        var data = {id: ids[0]}
         for(var item of formData){
             data[item.name] = item.value
         }
@@ -1017,7 +1017,8 @@
             $.ajax({
                 url:'/role/delete',
                 method: 'POST',
-                data: {ids:myData.checkedIds}
+                traditional: true,
+                data: {ids:myData.checkedIds},
             }).then(function success() {
 
             },function error() {

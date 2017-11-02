@@ -596,10 +596,10 @@
     var userList;
     var userTable;
 
-    $(function () {
+    $(function init() {
         //获取权限列表
         //getUserList();
-        getAuthorityList()
+        getAuthorityList2()
     });
 
     /**
@@ -639,7 +639,7 @@
                     title: '<div style="text-align:center;">'
                     + '<input type="checkbox" id="all-user-checkbox" onclick="selectAllCheckBox(\'userCkb\')" name="allUserCheckbox" />'
                     + '</div>',
-                    data: 'uuid', render: function (data, type, row) {
+                    data: 'id', render: function (data, type, row) {
                     return '<input id="ckb_' + data + '" name="userCkb" value="' + data + '" type="checkbox" onclick="checkBoxClick(\'userCkb\',\'all-user-checkbox\')">';
                 }, className: "dt-center"
                 },
@@ -700,7 +700,7 @@
             url: '/authority/list',
         }).then(function success(res) {
             //处理结果
-            myData.authoritiesTree = listToTree(res.resultData,'id','parentAuthorityId')
+            myData.authoritiesTree = listToTree(res.resultData,'id','parentName')
 
             return myData.authoritiesTree
         },function error() {
@@ -733,6 +733,22 @@
             }
         })
     }
+    function getAuthorityList2() {
+        $.ajax({
+            url: '/authority/list',
+        }).then(res=>{
+            //Init table
+            initUserTable(res.resultData)
+
+            //Fill selector
+            var list = res.resultData
+            for(var item of list){
+                $('#parentSelector').append('<option value="'+item.id+'">'+item.name+'</option>')
+            }
+        },err=>{
+            alert('获取权限列表失败')
+        })
+    }
 
     function confirmAddAuthority() {
         var data = $('#frm-add-authority').serialize()
@@ -751,7 +767,7 @@
         if(checkIfUserCheckedThenSave()){
             $.ajax({
                 traditional: true,
-                url: '/authority/enable`',
+                url: '/authority/enable',
                 data: myData.checkedIds,
                 method: 'POST',
             }).then(res => {

@@ -2009,6 +2009,7 @@
         var ogId = $($('#modal-set-organization input[name="ogCkb"]:checked')[0]).val()
 
         $.ajax({
+            traditional: true,
             url:'/user/setOrganization',
             data: {ids:ids,organizationId:ogId},
             method: 'POST',
